@@ -13,8 +13,6 @@
   "datamart_name": "vspc_idl",
   "sast_conf": "devops/devsecops-config.yml",
   "emails": "MDLisitsa@sberbank.ru alvmanuylov@sberbank.ru",
-  "gac_tuz_id" : ""
-  "gac_process_id" : ""
   "run_hive_script_sql" : false,
   "jira_task_release" : "VSPC-17"
 }
