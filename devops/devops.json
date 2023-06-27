@@ -1,134 +1,20 @@
 {
-  "version": "012",                                  // Версия витрины (Если используется maven, можно убрать пункт, версия будет браться из pom.xml)
-  "stand_name": "fess",                                  // Какой кластер использовать для dev/st/ift(доступные значения параметра находится ниже на странице)
-  "build": "none",                                      // Система сборки: "sbt", "maven" или "none" если сброка не требуется
- 
-  // Поддержка Nexus3
-  // https://confluence.sberbank.ru/pages/viewpage.action?pageId=8184958577
+  "version": "D-01.200.000",
+  "stand_name": "fess",
+  "build": "none",
+  
   "nexus3" : {
-    "ci_it_service": "CI02619185",                     // КЭ ИТ-Услуга
-    "ci_as_fp": "CI04734132"                           // КЭ АС/ФП/Модуля
+    "ci_it_service": "CI02619185",
+    "ci_as_fp": "CI04734132"
   },
  
-  "block": "BSP",                                       // Блок, к которому относится команда, разрабатывающая витрину
-  "datamart_group": "VSPC",                             // Группа витрины 
-  "datamart_name": "vspc_idl",                              // Имя витрины
-// block, datamart_group, datamart_name - параметры для определения загрузки диструбитва в HDFS.
-// Получаемый путь: /oozie-app/{block}/{datamart_group}/{datamart_name}
-
-
-//  "sq_pr_key": "ru.sberbank.bigdata.datacloud:vspc_idl",    // Ключ проекта в SonarQube, обычно после ":", добавляют название витрины
-//  "sq_pr_name": "vspc_idl",                    // Имя проекта в SonarQube ( https://confluence.delta.sbrf.ru/pages/viewpage.action?pageId=38970453 )
-//  "sq_scan_folder": "vspc_idl/src",                         // Директория витрины для сканирования с помощью SonarQube
-//  "sq_binary_folder": "vspc_idl/target",                    // Директория с собранными бинарными файлами витрины для сканирования с помощью SonarQube
-//  "sq_options" : "",                                   // ОПЦИОНАЛЬНО: ваши дополнительные опции при запуске сканирования SonarQube
-  "sast_conf": "devops/devsecops-config.yml",                 // Расположение файла конфигурации для SAST/CheckMarx, должен находиться в git репозитории витрины ( https://confluence.delta.sbrf.ru/pages/viewpage.action?pageId=219187735 )
-  "emails": "MDLisitsa@sberbank.ru alvmanuylov@sberbank.ru", // Почтовые ящики на которые будет приходит оповещение от Jenkins (разделяются пробелом)
-  "gac_tuz_id" : ""                                    // ОПЦИОНАЛЬНО: Значение получаемое по заявке для подключения проверки GaC к вашей АС. Проверка GaC выполнится если будет заполнено это значение.
-  "gac_process_id" : ""                                // ОПЦИОНАЛЬНО: Значение получаемое по заявке для подключения проверки GaC к вашей АС.
-  "run_hive_script_sql" : false,                       // ОПЦИОНАЛЬНО: Выполнять ваши скрипты для hive из под вашего ТУЗа
- 
-  "jira_task_release" : "VSPC-17"            // ОПЦИОНАЛЬНО: Взаимодействие с Jira релизом, описание смотри ниже на странице
-                                                       // Для ТУЗа "CAB-SA-DVO03929", предоставить доступ к области Jira (где вы создаёте релизы), роль РМК – релиз мастер команда.
-/* 
-  "s2t_confl_url": "https://confluence.delta.sbrf.ru/**", // ОПЦИОНАЛЬНО: Ссылка на файл s2t.xlsx (можно хранить его в git)
-  "sbt": {                                             // ПРИ ИСПОЛЬЗОВАНИИ СБОРЩИКА SCALA BUILD TOOLS
-    "build_sbt_dir": "",                               // Директория в которой находится SBT проект/файл build.sbt (в примере это корневая директория)
-    "build_command": "npl/assembly",                   // Команда сборки для SBT (Scala)
-    "repos_file":    "repositories.txt",               // Файл с репозиториями для SBT, должен находиться в git репозитории витрины
-    "options_sbt":   "-Dsbt.log.noformat=true"         // Дополнительные опции для SBT
-  },
-  "maven": {                                           // ПРИ ИСПОЛЬЗОВАНИИ СБОРЩИКА MAVEN
-    "jdk":         8,                                  // ОПЦИОНАЛЬНО: Использовать при сборке JDK 8 версии
-    "pom_path":    "npl5/kb-monitoring/pom.xml",       // Родительский pom.xml для maven, должен находиться в git репозитории витрины
-    "set_path":    "npl5/kb-monitoring/settings.xml",  // settings.xml для maven, должен находиться в git репозитории витрины.
-                                                       // В файле ("set_path") вместо логина и пароля должны быть '${user}' и '${password}', для nexus3 - '${user.nexus3}' и '${password}' 
-    "options_mvn": "-Psonar-coverage"                  // ОПЦИОНАЛЬНО: Дополнительные опции сборки для maven
-  },
-  "ess": {                                             // ОПЦИОНАЛЬНО: Только для команд ECC
-      "meta": [                                        // Путь до s2t файлов в дистрибутиве в формате json
-        "usl/dsm/cap_dsm_usl.vspc_idl_v012_fw_2.0.9.json",
-        "usl/certification/cap_certification_usl.vspc_idl_v012_fw_2.0.9.json"
-      ]
-  },
- 
-  "distrib_files": [                                   // Состав дистрибутива, всё что записывается в hdfs начинается с "hdfs/", файлы кофигурации ctl записываются в директорию "ctl/*", sql файлы записываются в "sql/"
-    {                                                  // Файлы находящиеся в собранном дистрибутиве, в директории hdfs, будут расположены на кластере HDFS по пути /oozie-app/{ block }/{ datamart_group }/{ datamart_name }/
-      "source": "npl/rollout/ctl/ctl.yml",             // Файл(ы) настроек для CTL, должен(ы) иметь расширение .yml
-      "destination": "ctl/"                            // Обязательно указывается директория 'ctl/', дальше на ваше усмотрение
-    },
-    {
-      "source": "npl/rollout/s2t.xlsx",                // Файл source to target (нужен для тестов) https://confluence.delta.sbrf.ru/pages/viewpage.action?pageId=792073497
-      "destination": "s2t/"                            // Этот параметр константный, изменять его не надо
-    },
-    {
-      "source": "docs/usl.rdm_idl_spark_version.json", // Файл для команд ЕСС
-      "destination": "docs/"
-    },
-    {
-      "source": "common/distr/run-stage.sh",           // Пример файла для записи в HDFS
-      "destination": "hdfs/"                           // Директория "hdfs/" обязательна, всё что в ней будет записано в hdfs
-    },
-    {
-      "source": "npl/target/scala-2.11/*.jar",         // В пути откуда берём файл, можно применять bash "маски" (*.xml и т.д.)
-      "destination": "hdfs/lib/"                       // Куда положить файл в дистрибутиве
-    },
-    {
-      "source": "npl/template.sh",                     // Файл шаблона, расширение может быть любое, расположение тоже
-      "destination": "hdfs/tempalates/"
-    },
-    {
-      "source": "npl/rollout/distr/workflow.xml",      // oozie workflow
-      "destination": "hdfs/"
-    },
-    {
-      "source": "npl/sql/*",                           // Скрипты создания бд, таблиц и т.д. в Hive, запуск идёт в лексикографиском порядке (00_c,01_a,01_b...)
-      "destination": "sql/"                            // Этот параметр константный, изменять его не надо
-    }
-  ],
-  "workflow_to_run_scenario": [                        // ОПЦИОНАЛЬНО: Возможность выборочно запускать потоки и использовать параллельный запуск
-    {                                                  // ВСЕ ВИДЫ ЗАПУСКА ПОТОКОВ: https://confluence.delta.sbrf.ru/display/DOTOOLS/RunDatamart
-      "step": "step-1",
-      "workflows": ["wf-1"]                            // Запускается шаг 'step-1' и ожидается выполнение потока "wf-1"
-    },
-    {
-      "step": "step-2 if step-1 success",              // Запускается шаг 'step-2 if step-1 success' и ожидается выполнение потока "wf-2"
-      "workflows": ["wf-2"]
-    },
-    {
-      "step": "step-3-4-5 parallel if step-2 success", // Запускается шаг step-3-4-5... производиться параллельный запуск трёх потоков "wf-3","wf-4","wf-5" и ожидается их выполнение
-      "workflows": ["wf-3","wf-4","wf-5"]
-    },
-    {
-      "step": "step-6 if step-3-4-5 with all parallel wfs success",       // Запускается шаг step-6... и ожидается выполнение потока "wf-6"
-      "workflows": ["wf-6"]
-    }
-  ],
-  "external_libs": [                                   // ОПЦИОНАЛЬНО: ВНЕШНИЕ ФАЙЛЫ\БИБЛИОТЕКИ
-    {                                                  // Добавление в дистрибутив внешних библиотек
-      "source": "http://url_to_jar/some_lib.jar",      // задается массивом с указанием ссылки на источник (source) и пути, куда следует скачать (destination)
-      "destination": "dest_dir/"
-    }
-  ],
-  "template_files": [                                  // ОПЦИОНАЛЬНО: заполнить шаблонный файл переменными так же как и ctl.yml
-    "hdfs/tempalates/template.sh",                     // В уже собранном дистрибутиве путь до файла шаблона
-    "hdfs/tempalates/template2.sh"                     // см. как собирать дистрибутив ниже в параметре distrib_files
-  ],
-  "hdfs_rewrite": [                                    // ОПЦИОНАЛЬНО: при записи дистрибутива в HDFS обновить\загрузить только часть файлов
-    "hdfs/wf1_get_excel/run.sh",                       // путь до файла в вашем дистрибутиве (поддерживается только директория hdfs)
-    "hdfs/ctl_client.jar"
-  ],
-  "ctl": {                                             // ОПЦИОНАЛЬНО: если есть потребность установки не всех потоков ctl, а только части из них
-    "wf": {                                            // При указании одновременно двух параметров includes + excludes происходит ошибка
-      "includes": [                                    // если список includes задан, то будут развернуты только указанные потоки
-        "TestWf",
-        "AnotherTestWf"
-      ],
-      "excludes": [                                    // если список excludes задан, то будут развернуты все потоки, кроме указанных в excludes
-        "AnotherTestWf",
-        "ThirdTestWf"
-      ]
-    }
-  }
-*/
+  "block": "bsp",
+  "datamart_group": "VSPC",
+  "datamart_name": "vspc_idl",
+  "sast_conf": "devops/devsecops-config.yml",
+  "emails": "MDLisitsa@sberbank.ru alvmanuylov@sberbank.ru",
+  "gac_tuz_id" : ""
+  "gac_process_id" : ""
+  "run_hive_script_sql" : false,
+  "jira_task_release" : "VSPC-17"
 }
