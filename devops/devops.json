@@ -23,8 +23,12 @@
   
   "distrib_files": [
     {
-      "source": "src/main/resources/ctl/ctl_wait4replica_usl_vspc_idl_v012_triv_fw_2.0.9.yaml",
+      "source": "src/main/resources/ctl/*",
       "destination": "ctl/"
+    },
+	{
+      "source": "src/main/resources/hdfs/*",
+      "destination": "hdfs/"
     },
 	{
       "source": "src/main/resources/s2t/*",
