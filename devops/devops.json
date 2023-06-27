@@ -8,11 +8,23 @@
     "ci_as_fp": "CI04734132"
   },
  
+  "sq_pr_key": "ru.sberbank.bigdata.essa.ifrs9:vspc_idl",
+  "sq_pr_name": "vspc_idl",
+  "sq_scan_folder": "src",
+  "sq_binary_folder": "target",
+  "sq_options": "",
   "block": "bsp",
   "datamart_group": "VSPC",
   "datamart_name": "vspc_idl",
   "sast_conf": "devops/devsecops-config.yml",
   "emails": "MDLisitsa@sberbank.ru alvmanuylov@sberbank.ru",
   "run_hive_script_sql" : false,
-  "jira_task_release" : "VSPC-17"
+  "jira_task_release" : "VSPC-17",
+  
+  "distrib_files": [
+    {
+      "source": "src/main/resources/rrm/*",
+      "destination": "usl/rrm/"
+    }
+  ]
 }
