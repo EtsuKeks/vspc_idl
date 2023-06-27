@@ -23,6 +23,10 @@
   
   "distrib_files": [
     {
+      "source": "src/main/resources/s2t/*",
+      "destination": "s2t/"
+    },
+	{
       "source": "src/main/resources/rrm/*",
       "destination": "usl/rrm/"
     }
