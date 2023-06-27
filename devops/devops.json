@@ -22,7 +22,7 @@
 //  "sq_scan_folder": "vspc_idl/src",                         // Директория витрины для сканирования с помощью SonarQube
 //  "sq_binary_folder": "vspc_idl/target",                    // Директория с собранными бинарными файлами витрины для сканирования с помощью SonarQube
 //  "sq_options" : "",                                   // ОПЦИОНАЛЬНО: ваши дополнительные опции при запуске сканирования SonarQube
-  "sast_conf": "devsecops-config.yml",                 // Расположение файла конфигурации для SAST/CheckMarx, должен находиться в git репозитории витрины ( https://confluence.delta.sbrf.ru/pages/viewpage.action?pageId=219187735 )
+  "sast_conf": "devops/devsecops-config.yml",                 // Расположение файла конфигурации для SAST/CheckMarx, должен находиться в git репозитории витрины ( https://confluence.delta.sbrf.ru/pages/viewpage.action?pageId=219187735 )
   "emails": "MDLisitsa@sberbank.ru alvmanuylov@sberbank.ru", // Почтовые ящики на которые будет приходит оповещение от Jenkins (разделяются пробелом)
   "gac_tuz_id" : ""                                    // ОПЦИОНАЛЬНО: Значение получаемое по заявке для подключения проверки GaC к вашей АС. Проверка GaC выполнится если будет заполнено это значение.
   "gac_process_id" : ""                                // ОПЦИОНАЛЬНО: Значение получаемое по заявке для подключения проверки GaC к вашей АС.
