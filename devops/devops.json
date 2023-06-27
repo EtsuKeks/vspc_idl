@@ -8,7 +8,7 @@
     "ci_as_fp": "CI04734132"
   },
  
-  "sq_pr_key": "ru.sberbank.bigdata.essa.ifrs9:vspc_idl",
+  "sq_pr_key": "vspc_idl",
   "sq_pr_name": "vspc_idl",
   "sq_scan_folder": "src",
   "sq_binary_folder": "target",
