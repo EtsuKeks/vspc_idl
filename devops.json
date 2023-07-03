@@ -1,0 +1,59 @@
+{
+  "version": "D-01.200.000",
+  "stand_name": "fess",
+  "build": "maven",
+  "block": "fin",
+  "datamart_group": "VSPC",
+  "datamart_name": "vspc_idl",
+  "datamart_ansible_vars": "vars_all.yml",
+  "sq_pr_key": "ru.sberbank.bigdata.dffess.vspc:vspc_idl",
+  "sq_pr_name": "vspc_idl",
+  "sq_scan_folder": "src",
+  "sq_binary_folder": "target",
+  "sq_options": "",
+  "sast_conf": "devsecops-config.yml",
+  "emails": "MDLisitsa@sberbank.ru alvmanuylov@sberbank.ru",
+  "run_hive_script_sql": true,
+  "jira_task_release" : "VSPC-17",
+  "nexus3" : {
+    "ci_it_service": "CI02619185",
+    "ci_as_fp": "CI04734132"
+  },
+  "maven": {
+    "pom_path": "pom.xml",
+    "set_path": "src/main/resources/devops/ci-settings.xml"
+  },
+  "distrib_files": [
+    {
+      "source": "src/main/resources/devops/ctl.yml",
+      "destination": "ctl/"
+    },
+    {
+      "source": "src/main/resources/devops/ctl_wait4replica_usl_vspc_idl_v012_fw_2.0.9.yaml",
+      "destination": "ctl/"
+    },
+    {
+      "source": "src/main/resources/s2t/*",
+      "destination": "s2t/"
+    },
+    {
+      "source": "src/main/resources/hdfs/*",
+      "destination": "hdfs/"
+    },
+    {
+      "source": "target/*-with-dependencies.jar",
+      "destination": "hdfs/lib/"
+    },
+    {
+      "source": "src/main/resources/hive/*",
+      "destination": "sql/"
+    },
+    {
+      "source": "src/main/resources/rrm/*",
+      "destination": "usl/rrm/"
+    }
+  ],
+  "template_files": [
+    "sql/ddl/ddl.usl.vspc_idl.v012.model.8.22.0_fw_2.0.9.sql"
+  ]
+}

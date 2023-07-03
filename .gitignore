@@ -1,0 +1,17 @@
+*.iml
+*.ipr
+*.iws
+*.ids
+.idea/
+metastore_db/
+/out/
+**/target/
+**/META-INF/context.xml
+*.log
+**/rebel.xml
+**/node_modules/
+**/frontend/version.txt
+metaide.properties
+model/**
+*.zip
+zeromq/**

@@ -1,0 +1,8 @@
+package ru.sberbank.bigdata.dffess.vspc.constant;
+
+public class VpscConstant {
+    public static final String CTL_ENTITY_ID = "801005314";
+    public static final String DATA_PRODUCT = "vspc_idl";
+    public static final int DEPTH_DELTA = 40;
+    public static final String IFRS9_INI_COB_CUTOFF_DATE = "2021-01-01 00:00:00.0";
+}
