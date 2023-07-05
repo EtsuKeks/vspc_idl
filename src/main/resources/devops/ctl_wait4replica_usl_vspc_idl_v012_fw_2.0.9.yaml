@@ -27,7 +27,7 @@ workflows:
         - param:
             # Пользователь под которым запускается процесс
             name: user.name
-            prior_value: "u_{{ cluster_name }}_s_usl_{{ logical_env_prefix }}t_vspc_idl"
+            prior_value: "{{ USER_NAME }}"
         - param:
             # Путь до приложения
             name: oozie.wf.application.path
@@ -35,7 +35,7 @@ workflows:
         - param:
             # Полный путь в HDFS к .keytab-файлу для ТУЗ data-продукта, не включающий имени самого файла и его расширения.
             name: user_keytab_path
-            prior_value: "/keytab/u_{{ cluster_name }}_s_usl_{{ logical_env_prefix }}t_vspc_idl.keytab"
+            prior_value: "/keytab"
         - param:
             # Область (realm) Kerberos.
             name: kerberos_realm
@@ -120,7 +120,7 @@ workflows:
         - param:
             # Пользователь под которым запускается процесс
             name: user.name
-            prior_value: "u_{{ cluster_name }}_s_usl_{{ logical_env_prefix }}t_vspc_idl"
+            prior_value: "{{ USER_NAME }}"
         - param:
             # Путь до приложения
             name: oozie.wf.application.path
@@ -128,7 +128,7 @@ workflows:
         - param:
             # Полный путь в HDFS к .keytab-файлу для ТУЗ data-продукта, не включающий имени самого файла и его расширения.
             name: user_keytab_path
-            prior_value: "/keytab/u_{{ cluster_name }}_s_usl_{{ logical_env_prefix }}t_vspc_idl.keytab"
+            prior_value: "/keytab"
         - param:
             # Область (realm) Kerberos.
             name: kerberos_realm

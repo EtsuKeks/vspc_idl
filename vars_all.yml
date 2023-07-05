@@ -37,7 +37,7 @@ stands:
       <<: *commonVars
       yarnQueue: "{{ YARN_QUEUE }}"
       yarnQueueInit: "{{ YARN_QUEUE }}"
-      USER_NAME: "u_fess_s_usl_t_rdm_idl_spark_espd"
+      USER_NAME: "u_sdpdevfess_s_usl_t_vspc_idl"
       sk_host: "mimi16.dev.df.sbrf.ru"
       sk_logical_env: "da13"
       sk_name_serv: "FESS-DEV"
@@ -48,7 +48,7 @@ stands:
       <<: *commonVars
       yarnQueue: "{{ YARN_QUEUE }}"
       yarnQueueInit: "{{ YARN_QUEUE }}"
-      USER_NAME: "u_fess_s_usl_t_rdm_idl_spark_espd"
+      USER_NAME: "u_sdpiftfess_s_usl_t_vspc_idl"
       sk_host: "mimi16.dev.df.sbrf.ru"
       sk_logical_env: "da13"
       sk_name_serv: "FESS-DEV"
@@ -59,7 +59,7 @@ stands:
       <<: *commonVars
       yarnQueue: "gl"
       yarnQueueInit: "init"
-      USER_NAME: "u_fess_s_usl_t_rdm_idl_spark_espd"
+      USER_NAME: "u_utarnsdpfess_s_usl_t_vspc_idl"
       sk_host: "pplis-fauna1440.cloud.df.sbrf.ru"
       sk_logical_env: "null"
       sk_name_serv: "utarnsdpfess"
@@ -70,7 +70,7 @@ stands:
       <<: *commonVars
       yarnQueue: "gl"
       yarnQueueInit: "init"
-      USER_NAME: "u_fess_s_usl_t_rdm_idl_spark_espd"
+      USER_NAME: "u_arnsdpfess_s_usl_t_vspc_idl"
       sk_host: "domrat10.cloud.df.sbrf.ru"
       sk_logical_env: "null"
       sk_name_serv: "arnsdpfess"
@@ -82,7 +82,7 @@ stands:
       <<: *commonVars
       yarnQueue: "gl"
       yarnQueueInit: "init"
-      USER_NAME: "u_fess_s_usl_t_rdm_idl_spark_espd"
+      USER_NAME: "u_arnsdpfess2_s_usl_t_vspc_idl"
       sk_host: "domrat10.cloud.df.sbrf.ru"
       sk_logical_env: "null"
       sk_name_serv: "arnsdpfess2"
