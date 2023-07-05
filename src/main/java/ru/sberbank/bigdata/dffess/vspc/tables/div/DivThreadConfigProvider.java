@@ -9,6 +9,6 @@ import java.util.Map;
 public class DivThreadConfigProvider extends ThreadConfigProvider {
     @Override
     public ThreadConfiguration provide(Map<String, String> cmdArgs) {
-        return getConfigProvider(TablesName.DIV_);
+        return getConfigProvider(TablesName.DIV);
     }
 }

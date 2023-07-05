@@ -88,17 +88,17 @@ public class MainClass {
 
     private static Map<String,String> getRcrsMap()
     {
-        Map<String,String> map_rcrs = new HashMap<>();
+        Map<String,String> mapRcrs = new HashMap<>();
 
-        map_rcrs.put("ifrsasstbsnsmodeltype","");
-        map_rcrs.put("ifrssubsqntaccmodeltype","");
-        map_rcrs.put("ifrsfairvaloptntype","");
-        map_rcrs.put("ifrssppitestrslttype","");
-        map_rcrs.put("ifrsmrkttestrslttype","");
-        map_rcrs.put("ifrsmrktratecalcdatatype","");
-        map_rcrs.put("ifrsmodfctntype","");
+        mapRcrs.put("ifrsasstbsnsmodeltype","");
+        mapRcrs.put("ifrssubsqntaccmodeltype","");
+        mapRcrs.put("ifrsfairvaloptntype","");
+        mapRcrs.put("ifrssppitestrslttype","");
+        mapRcrs.put("ifrsmrkttestrslttype","");
+        mapRcrs.put("ifrsmrktratecalcdatatype","");
+        mapRcrs.put("ifrsmodfctntype","");
 
-        return map_rcrs;
+        return mapRcrs;
     }
 
 }

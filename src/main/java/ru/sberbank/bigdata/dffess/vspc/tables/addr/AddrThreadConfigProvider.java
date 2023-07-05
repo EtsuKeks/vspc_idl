@@ -9,6 +9,6 @@ import java.util.Map;
 public class AddrThreadConfigProvider extends ThreadConfigProvider {
     @Override
     public ThreadConfiguration provide(Map<String, String> cmdArgs) {
-        return getConfigProvider(TablesName.ADDR_);
+        return getConfigProvider(TablesName.ADDR);
     }
 }
