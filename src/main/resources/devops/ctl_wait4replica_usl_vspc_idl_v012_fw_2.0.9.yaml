@@ -31,7 +31,7 @@ workflows:
         - param:
             # Путь до приложения
             name: oozie.wf.application.path
-            prior_value: "{{ file_path }}usl_vspc_idl.xml"
+            prior_value: "/oozie-app/app/TRiV/trifrunne"
         - param:
             # Полный путь в HDFS к .keytab-файлу для ТУЗ data-продукта, не включающий имени самого файла и его расширения.
             name: user_keytab_path
@@ -124,7 +124,7 @@ workflows:
         - param:
             # Путь до приложения
             name: oozie.wf.application.path
-            prior_value: "{{ file_path }}usl_vspc_idl_init.xml"
+            prior_value: "/oozie-app/app/TRiV/trifrunne"
         - param:
             # Полный путь в HDFS к .keytab-файлу для ТУЗ data-продукта, не включающий имени самого файла и его расширения.
             name: user_keytab_path
