@@ -14,7 +14,6 @@
         <path start="YARN_KILLER"/>
         <path start="MAIN_ACTION"/>
     </fork>
-
     <!--ЗАПУСКАЕМ ПАРАЛЛЕЛЬНЫМ ПРОЦЕССОМ Yarn Killer -->
     <action name="YARN_KILLER">
         <shell xmlns="uri:oozie:shell-action:0.1">
