@@ -25,81 +25,81 @@ workflows:
 
       params:
         - param:
-            # Пользователь под которым запускается процесс
-            name: user.name
-            prior_value: "u_{{ cluster_name }}_s_usl_t_vspc_idl"
+            # Для backup это последний loading_id, а для restore  нужно задать руками
+            name: backupLID
+            prior_value: "blank"
         - param:
-            # Путь до приложения
+            # NameNode claster
+            name: defaultFs
+            prior_value: "{{ hadoop_default_fs_uri }}"
+        - param:
+            # параметр среды для логического окружения
+            name: env
+            prior_value: "blank"
+        - param:
+            #  имя утилиты
+            name: jar_name
+            prior_value: "trif_ess-full-1.1.0.jar"
+        - param:
+            # путь до утилиты
+            name: jars_path
+            prior_value: "/oozie-app/app/TRiV/trifrunne"
+        - param:
+            # Под кем авторизуемся, для Ndl  и IDL  разные
+            name: keytab
+            prior_value: "{{ USER_NAME }}.keytab"
+        - param:
+            # Логи
+            name: logs_path
+            prior_value: "/oozie-app/app/TRiV/trifrunne/log"
+        - param:
+            # Метод запуска
+            name: method
+            prior_value: "backup"
+        - param:
+            # Путь для до workflow.xml
             name: oozie.wf.application.path
-            prior_value: "{{ file_path }}usl_vspc_idl.xml"
+            prior_value: "/oozie-app/app/TRiV/trifrunne"
         - param:
-            # Полный путь в HDFS к .keytab-файлу для ТУЗ data-продукта, не включающий имени самого файла и его расширения.
+            # авторизация в hdfs
+            name: principal
+            prior_value: "{{ principal_alias }}"
+        - param:
+            # Какой дата продукт backup
+            name: productEntityId
+            prior_value: "801{{ logical_env_ctl_entity_logenv_number }}5314"
+        - param:
+            # наименование продукта
+            name: productName
+            prior_value: "vspc_idl"
+        - param:
+            # Диретория в дата продукте которую backup
+            name: sourceDirectory
+            prior_value: "snp;stg"
+        - param:
+            # Очередь задания в oozie
+            name: ss_queue
+            prior_value: ""
+        - param:
+            # имя пользователя под кем запускается backup
+            name: user.name
+            prior_value: "{{ USER_NAME }}"
+        - param:
+            # путь до keytab
             name: user_keytab_path
-            prior_value: "/keytab/u_{{ cluster_name }}_s_usl_t_vspc_idl.keytab"
+            prior_value: "/keytab"
         - param:
-            # Область (realm) Kerberos.
-            name: kerberos_realm
-            prior_value: "{{ kerberos_realm }}"
+            #  путь к location до hdfs
+            name: sourcePath
+            prior_value: "vspc_idl"
         - param:
-            # Код очереди Yarn, в которой запускаются Spark-приложения data-продукта.
-            name: yarn_queue
-            prior_value: "{{ yarn_queue }}"
+            # период расписания  когда производится backup, задаются дни года когда производится  backup
+            name: bkpPeriod
+            prior_value: "m(1,7,14,21)"
         - param:
-            # Отладочный параметр (не может иметь непустое значение на ПРОМ-среде).
-            name: debug_logical_env
-            prior_value: "{{ debug_logical_env }}"
-        - param:
-            # Минимальная дата бизнес-истории, начиная с которой должны загружаться бизнес-историчные данные
-            name: starting_business_date
-            prior_value:  "{{ starting_business_date }}"
-        - param:
-            # Значение идентификатора загрузки, на состояние по завершению которой требуется откатить данные data-продукта после запуска загрузки данного потока
-            name: rollback_loading_id
-            prior_value: ""
-        - param:
-            # Опциональный список кодов независимых сущностей ЛМ ЕСС, для которых требуется запустить инициализацию сервиса суррогатных ключей "с нуля"
-            name: resetted_entities
-            prior_value: "{{ resetted_entities }}"
-        - param:
-            # Определяет режим работы сервиса СК при инициализирующей загрузке
-            name: sk_greenfield
-            prior_value: ""
-        - param:
-            # Список HDFS namespaces для входных data-продуктов
-            name: source_hdfs_namespaces
-            prior_value: "{{ source_hdfs_namespaces }}"
-        - param:
-            # Значение HDFS namespace для кластера HDFS, в который данный data-продукт записывает свои публикуемые данные.
-            name: target_hdfs_namespace
-            prior_value:  "{{ target_hdfs_namespace }}"
-        - param:
-            # Список мнемокодов наборов данных, которые требуется обновить data-продукту при следующем запуске
-            name: data_sets
-            prior_value: "{{ data_sets }}"
-        - param:
-            # Число одновременно запускаемых нитей исполнения в коде data-продукта
-            name: parallel_threads
-            prior_value: "{{ parallel_threads }}"
-        - param:
-            # Число дней, которые хранятся данные в таблице ctl_log
-            name: calc_logs_depth_days
-            prior_value: "{{ calc_logs_depth_days }}"
-        - param:
-            # Значения параметров Spark, которые можно передать в командную строку spark-submit.
-            name: spark_parameters
-            prior_value: "{{ spark_parameters }}"
-        - param:
-            # Содержит полный путь, от корня до имени файла  (без имен файлов) к корневому каталогу дистрибутива data-продукта
-            name: debug_distributive_path
-            prior_value: "{{ debug_distributive_path }}"
-        - param:
-            # Признак (Y/пусто=N) отключения использования сервисов СК.
-            name: debug_sk_off
-            prior_value: "{{ debug_sk_off }}"
-        - param:
-            # Имя запускаемого .jar-файла.
-            name: devops_distributive_jar
-            prior_value: "{{ devops_distributive_jar }}"
+            # Количество хранимых backup
+            name: bkpNumbers
+            prior_value: 2
       notifications:
           - { status: "ERROR", emails: [ "CAB-GD-ADDR-005888@omega.sbrf.ru" ] }
 
@@ -118,81 +118,81 @@ workflows:
           active: false
       params:
         - param:
-            # Пользователь под которым запускается процесс
-            name: user.name
-            prior_value: "u_{{ cluster_name }}_s_usl_t_vspc_idl"
+            # Для backup это последний loading_id, а для restore  нужно задать руками
+            name: backupLID
+            prior_value: "blank"
         - param:
-            # Путь до приложения
+            # NameNode claster
+            name: defaultFs
+            prior_value: "{{ hadoop_default_fs_uri }}"
+        - param:
+            # параметр среды для логического окружения
+            name: env
+            prior_value: "blank"
+        - param:
+            #  имя утилиты
+            name: jar_name
+            prior_value: "trif_ess-full-1.1.0.jar"
+        - param:
+            # путь до утилиты
+            name: jars_path
+            prior_value: "/oozie-app/app/TRiV/trifrunne"
+        - param:
+            # Под кем авторизуемся, для Ndl  и IDL  разные
+            name: keytab
+            prior_value: "{{ USER_NAME }}.keytab"
+        - param:
+            # Логи
+            name: logs_path
+            prior_value: "/oozie-app/app/TRiV/trifrunne/log"
+        - param:
+            # Метод запуска
+            name: method
+            prior_value: "backup"
+        - param:
+            # Путь для до workflow.xml
             name: oozie.wf.application.path
-            prior_value: "{{ file_path }}usl_vspc_idl.xml"
+            prior_value: "/oozie-app/app/TRiV/trifrunne"
         - param:
-            # Полный путь в HDFS к .keytab-файлу для ТУЗ data-продукта, не включающий имени самого файла и его расширения.
-            name: user_keytab_path
-            prior_value: "/keytab/u_{{ cluster_name }}_s_usl_t_vspc_idl.keytab"
+            # авторизация в hdfs
+            name: principal
+            prior_value: "{{ principal_alias }}"
         - param:
-            # Область (realm) Kerberos.
-            name: kerberos_realm
-            prior_value: "{{ kerberos_realm }}"
+            # Какой дата продукт backup
+            name: productEntityId
+            prior_value: "801{{ logical_env_ctl_entity_logenv_number }}5314"
         - param:
-            # Код очереди Yarn, в которой запускаются Spark-приложения data-продукта.
-            name: yarn_queue
-            prior_value: "{{ yarn_queue_init }}"
+            # наименование продукта
+            name: productName
+            prior_value: "vspc_idl"
         - param:
-            # Отладочный параметр (не может иметь непустое значение на ПРОМ-среде).
-            name: debug_logical_env
-            prior_value: "{{ debug_logical_env }}"
+            # Диретория в дата продукте которую backup
+            name: sourceDirectory
+            prior_value: "snp;stg"
         - param:
-            # Минимальная дата бизнес-истории, начиная с которой должны загружаться бизнес-историчные данные
-            name: starting_business_date
-            prior_value:  "{{ starting_business_date }}"
-        - param:
-            # Значение идентификатора загрузки, на состояние по завершению которой требуется откатить данные data-продукта после запуска загрузки данного потока
-            name: rollback_loading_id
+            # Очередь задания в oozie
+            name: ss_queue
             prior_value: ""
         - param:
-            # Опциональный список кодов независимых сущностей ЛМ ЕСС, для которых требуется запустить инициализацию сервиса суррогатных ключей "с нуля"
-            name: resetted_entities
-            prior_value: "{{ resetted_entities }}"
+            # имя пользователя под кем запускается backup
+            name: user.name
+            prior_value: "{{ USER_NAME }}"
         - param:
-            # Определяет режим работы сервиса СК при инициализирующей загрузке
-            name: sk_greenfield
-            prior_value: "{{ sk_greenfield }}"
+            # путь до keytab
+            name: user_keytab_path
+            prior_value: "/keytab"
         - param:
-            # Список HDFS namespaces для входных data-продуктов
-            name: source_hdfs_namespaces
-            prior_value: "{{ source_hdfs_namespaces }}"
+            #  путь к location до hdfs
+            name: sourcePath
+            prior_value: "vspc_idl"
         - param:
-            # Значение HDFS namespace для кластера HDFS, в который данный data-продукт записывает свои публикуемые данные.
-            name: target_hdfs_namespace
-            prior_value:  "{{ target_hdfs_namespace }}"
+            # период расписания  когда производится backup, задаются дни года когда производится  backup
+            name: bkpPeriod
+            prior_value: "m(1,7,14,21)"
         - param:
-            # Список мнемокодов наборов данных, которые требуется обновить data-продукту при следующем запуске
-            name: data_sets
-            prior_value: "{{ data_sets }}"
-        - param:
-            # Число одновременно запускаемых нитей исполнения в коде data-продукта
-            name: parallel_threads
-            prior_value: "{{ parallel_threads }}"
-        - param:
-            # Число дней, которые хранятся данные в таблице ctl_log
-            name: calc_logs_depth_days
-            prior_value: "{{ calc_logs_depth_days }}"
-        - param:
-            # Значения параметров Spark, которые можно передать в командную строку spark-submit.
-            name: spark_parameters
-            prior_value: "{{ spark_parameters }}"
-        - param:
-            # Содержит полный путь, от корня до имени файла  (без имен файлов) к корневому каталогу дистрибутива data-продукта
-            name: debug_distributive_path
-            prior_value: "{{ debug_distributive_path }}"
-        - param:
-            # Признак (Y/пусто=N) отключения использования сервисов СК.
-            name: debug_sk_off
-            prior_value: "{{ debug_sk_off }}"
-        - param:
-            # Имя запускаемого .jar-файла.
-            name: devops_distributive_jar
-            prior_value: "{{ devops_distributive_jar }}"
+            # Количество хранимых backup
+            name: bkpNumbers
+            prior_value: 2
       notifications:
           - { status: "ERROR", emails: [ "CAB-GD-ADDR-005888@omega.sbrf.ru" ] }
 

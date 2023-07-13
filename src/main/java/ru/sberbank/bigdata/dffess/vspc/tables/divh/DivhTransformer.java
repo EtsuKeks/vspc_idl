@@ -24,16 +24,14 @@ public class DivhTransformer implements EntityTransformer {
         Dataset<Row> divh = dmBuilder.getDataset(transformConfiguration.getSrcSchemaSnp(), TablesName.EBX_REP_M_SFS_0002_SFSDIVISION);
         divh = divh
                 .select(
-                        /*col(ColumnsName.CODE).as(ColumnsName.BSNS_MODEL_TYPE_CODE),
-                        col(ColumnsName.NAME00).as(ColumnsName.BSNS_MODEL_TYPE_NAME),
-                        col(ColumnsName.DESCRIPTION).as(ColumnsName.BSNS_MODEL_TYPE_TXT),
-                        lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.IFRS_ASST_BSNS_MODEL_TYPE_DP_CODE),
-                        col(ColumnsName.CODE).as(ColumnsName.IFRS_ASST_BSNS_MODEL_TYPE_SK),
-                        col(ColumnsName.CODE).as(ColumnsName.SID),
-                        lit(false).as(ColumnsName.DIRTY_FLAG)*/
+                        col(ColumnsName.FULLNAME).as(ColumnsName.DIV_H_NAME),
+                        col(ColumnsName.CLOSEDATE).as(ColumnsName.DIV_CLOSEDATE),
+                        col(ColumnsName.OPENDATE).as(ColumnsName.DIV_OPENDATE),
+                        col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_CODE),
+                        lit(false).as(ColumnsName.DIRTY_FLAG)
                 );
 
-        divh = skClientWrapper.generateSk(divh, transformConfiguration.getStgTable(), transformConfiguration.getLoadMode(), transformConfiguration);
+        divh = skClientWrapper.incrementSk(divh, transformConfiguration.getStgTable(),  transformConfiguration);
 
         return divh;
     }

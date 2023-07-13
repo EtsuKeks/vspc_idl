@@ -1,5 +1,5 @@
 {
-  "version": "D-01.200.000",
+  "version": "D-01.200.001",
   "stand_name": "fess",
   "build": "maven",
   "block": "bsp",
@@ -14,8 +14,8 @@
   "sast_conf": "devsecops-config.yml",
   "emails": "MDLisitsa@sberbank.ru alvmanuylov@sberbank.ru",
   "run_hive_script_sql": true,
-  "jira_task_release" : "VSPC-17",
-  "nexus3" : {
+  "jira_task_release": "VSPC-17",
+  "nexus3": {
     "ci_it_service": "CI02619185",
     "ci_as_fp": "CI04734132"
   },
@@ -25,11 +25,11 @@
   },
   "distrib_files": [
     {
-      "source": "src/main/resources/devops/ctl.yml",
+      "source": "src/main/resources/ctl/ctl.yml",
       "destination": "ctl/"
     },
     {
-      "source": "src/main/resources/devops/ctl_wait4replica_usl_vspc_idl_v012_fw_2.0.9.yaml",
+      "source": "src/main/resources/ctl/ctl_wait4replica_usl_vspc_idl_v012_fw_2.0.9.yaml",
       "destination": "ctl/"
     },
     {
@@ -45,12 +45,20 @@
       "destination": "hdfs/lib/"
     },
     {
-      "source": "src/main/resources/hive/*",
+      "source": "src/main/resources/sql/*",
       "destination": "sql/"
     },
     {
-      "source": "src/main/resources/rrm/*",
+      "source": "src/main/resources//usl/rrm/*",
       "destination": "usl/rrm/"
+    },
+    {
+      "source": "src/main/resources//usl/certification/*",
+      "destination": "usl/certification/"
+    },
+    {
+      "source": "src/main/resources//usl/dsm/*",
+      "destination": "usl/dsm/"
     }
   ],
   "template_files": [

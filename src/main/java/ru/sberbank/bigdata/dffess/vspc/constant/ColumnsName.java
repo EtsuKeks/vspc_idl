@@ -28,6 +28,14 @@ public final class ColumnsName {
     public static final String ID = "id";
     public static final String ADDINFORMATION = "address_addrfact_addinformation";
     public static final String SYSTEM_ID = "address_addrfact_propertymanagmentsystemid";
+    public static final String FULLDIVCODE = "fulldivcode";
+    public static final String DIV_CODE = "code";
+    public static final String CLOSEDATE = "closedate";
+    public static final String DIV_CLOSEDATE = "div_close_dt";
+    public static final String OPENDATE = "opendate";
+    public static final String DIV_OPENDATE = "div_open_dt";
+    public static final String FULLNAME = "fullname";
+    public static final String DIV_H_NAME = "div_name";
 
 
     private ColumnsName() {

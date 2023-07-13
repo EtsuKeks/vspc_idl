@@ -8,7 +8,7 @@
 # GIT_PROJECT: DFFESS
 # GIR_REPO: vspc_idl
 # GIT_BRANCH: develop
-# DEVOPS_CONFIG: devops.json
+# DEVOPS_CONFIG: ctl.json
 #
 # !!!! Все URL указывать без конечного знака - "/"
 #
