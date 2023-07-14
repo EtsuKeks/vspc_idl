@@ -33,6 +33,10 @@
       "destination": "docs/s2t/"
     },
     {
+      "source": "src/main/resources/s2t/*",
+      "destination": "s2t/"
+    },
+    {
       "source": "src/main/resources/docs/*",
       "destination": "docs/"
     },
