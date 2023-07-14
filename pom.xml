@@ -6,7 +6,7 @@
 
     <groupId>ru.sberbank.bigdata.dffess.vspc</groupId>
     <artifactId>vspc_idl</artifactId>
-    <version>D-01.201.001</version>
+    <version>D-01.201.002</version>
 
     <properties>
         <java.version>1.8</java.version>
