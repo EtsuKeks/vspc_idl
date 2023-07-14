@@ -25,17 +25,18 @@
   },
   "distrib_files": [
     {
-      "source": "src/main/resources/ctl/ctl.yml",
-      "destination": "ctl/"
-    },
-    {
-      "source": "src/main/resources/ctl/ctl_wait4replica_usl_vspc_idl_v012_fw_2.0.9.yaml",
+      "source": "src/main/resources/ctl/*",
       "destination": "ctl/"
     },
     {
       "source": "src/main/resources/s2t/*",
-      "destination": "s2t/"
+      "destination": "docs/s2t/"
     },
+    {
+      "source": "src/main/resources/docs/*",
+      "destination": "docs/"
+    },
+
     {
       "source": "src/main/resources/hdfs/*",
       "destination": "hdfs/"
@@ -49,17 +50,18 @@
       "destination": "sql/"
     },
     {
-      "source": "src/main/resources//usl/rrm/*",
+      "source": "src/main/resources/usl/rrm/*",
       "destination": "usl/rrm/"
     },
     {
-      "source": "src/main/resources//usl/certification/*",
+      "source": "src/main/resources/usl/certification/*",
       "destination": "usl/certification/"
     },
     {
-      "source": "src/main/resources//usl/dsm/*",
+      "source": "src/main/resources/usl/dsm/*",
       "destination": "usl/dsm/"
     }
+
   ],
   "template_files": [
     "sql/ddl/ddl.usl.vspc_idl.v012.model.8.22.0_fw_2.0.9.sql"
