@@ -13,7 +13,7 @@ entities:
       storage: "HDFS"
       parent-id: 904000000
 workflows:
-  - "{{ logical_env_prefix }}USL_VSPC_IDL_INIT":
+  - "{{ logical_env_prefix }}USL_VSPC_IDL_TRIV_BACKUP":
       name: "{{ logical_env_prefix }}USL_VSPC_IDL_INIT"
       category: "{{ logical_env_prefix }}USL_IDL"
       profile: "{{ CTL_PROFILE_NAME }}"
@@ -29,13 +29,13 @@ workflows:
       params:
         - param:
             name: debug_distributive_path
-            prior_value: /oozie-app/fin/DFESS/VSPC_IDL/lib
+            prior_value: /oozie-app/bsp/VSPC/VSPC_IDL/lib
         - param:
             name: devops_distributive_jar
             prior_value: "vspc_idl-D-01.201.002-jar-with-dependencies"
         - param:
             name: data_sets
-            prior_value: div_h, div, addr_, addr_h
+            prior_value: div_h, div_, addr, addr_h
         - param:
             name: parallel_threads
             prior_value: 1
@@ -50,7 +50,7 @@ workflows:
             prior_value: "{{ logical_env }}"
         - param:
             name: oozie.wf.application.path
-            prior_value: /oozie-app/fin/ESSA/VSPC_IDL/init
+            prior_value: /oozie-app/bsp/VSPC/VSPC_IDL/init
         - param:
             name: user.name
             prior_value: "{{ USER_NAME }}"
@@ -66,7 +66,7 @@ workflows:
         - param:
             name: debug_sk_off
             prior_value: "ON"
-  - "{{ logical_env_prefix }}USL_VSPC_IDL":
+  - "{{ logical_env_prefix }}USL_VSPC_USL_TRIV_RESTORE":
       name: "{{ logical_env_prefix }}USL_VSPC_IDL"
       category: "{{ logical_env_prefix }}USL_IDL"
       profile: "{{ CTL_PROFILE_NAME }}"
@@ -103,7 +103,7 @@ workflows:
             prior_value: "{{ logical_env }}"
         - param:
             name: oozie.wf.application.path
-            prior_value: /oozie-app/fin/DFFESS/VSPC_IDL/init
+            prior_value: /oozie-app/bsp/VSPC/VSPC_IDL/init
         - param:
             name: user.name
             prior_value: "{{ USER_NAME }}"
