@@ -31,7 +31,7 @@ public class MainClass {
 
         List<String> tmp = Stream.of(cmdArgs.get(launcherList).split(",")).collect(Collectors.toCollection(ArrayList::new));
         Map<String,String> mainThreads = getRcrsMap();
-        List<Triple<String, ThreadConfiguration, Class>> launcherTriplesRcrs = generateTriples(tmp,mainThreads,"ru.sberbank.bigdata.essa.ifrs9.tables.", cmdArgs);
+        List<Triple<String, ThreadConfiguration, Class>> launcherTriplesRcrs = generateTriples(tmp,mainThreads,"ru.sberbank.bigdata.dffess.vspc.tables.", cmdArgs);
 
         List<Triple<String,ThreadConfiguration, Class>> launcherTriples  = launcherTriplesRcrs ;
 
@@ -90,14 +90,10 @@ public class MainClass {
     {
         Map<String,String> mapRcrs = new HashMap<>();
 
-        mapRcrs.put("ifrsasstbsnsmodeltype","");
-        mapRcrs.put("ifrssubsqntaccmodeltype","");
-        mapRcrs.put("ifrsfairvaloptntype","");
-        mapRcrs.put("ifrssppitestrslttype","");
-        mapRcrs.put("ifrsmrkttestrslttype","");
-        mapRcrs.put("ifrsmrktratecalcdatatype","");
-        mapRcrs.put("ifrsmodfctntype","");
-
+        mapRcrs.put("div_","");
+        mapRcrs.put("div_h","");
+        mapRcrs.put("addr","");
+        mapRcrs.put("addr_h","");
         return mapRcrs;
     }
 
