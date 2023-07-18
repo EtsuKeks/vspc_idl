@@ -55,7 +55,7 @@ workflows:
         - param:
             # путь до утилиты
             name: jars_path
-            prior_value: "/oozie-app/app/TRiV/trifrunne"
+            prior_value: "/oozie-app/app/TRiV/trifrunner"
         - param:
             # Под кем авторизуемся, для Ndl  и IDL  разные
             name: keytab
@@ -71,7 +71,7 @@ workflows:
         - param:
             # Путь для до workflow.xml
             name: oozie.wf.application.path
-            prior_value: "/oozie-app/app/TRiV/trifrunne"
+            prior_value: "/oozie-app/app/TRiV/trifrunner"
         - param:
             # авторизация в hdfs
             name: principal
@@ -140,7 +140,7 @@ workflows:
         - param:
             # путь до утилиты
             name: jars_path
-            prior_value: "/oozie-app/app/TRiV/trifrunne"
+            prior_value: "/oozie-app/app/TRiV/trifrunner"
         - param:
             # Под кем авторизуемся, для Ndl  и IDL  разные
             name: keytab
@@ -156,7 +156,7 @@ workflows:
         - param:
             # Путь для до workflow.xml
             name: oozie.wf.application.path
-            prior_value: "/oozie-app/app/TRiV/trifrunne"
+            prior_value: "/oozie-app/app/TRiV/trifrunner"
         - param:
             # авторизация в hdfs
             name: principal
