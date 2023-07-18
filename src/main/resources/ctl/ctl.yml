@@ -121,5 +121,5 @@ workflows:
             prior_value: "ON"
             # Привязка нотификаций
       notifications:
-        - { status: "ERROR", emails: [ "MDLisitsa@sberbank.ru", " alvmanuylov@sberbank.ru"] }
+        - { status: "ERROR", emails: [ "MDLisitsa@sberbank.ru", " alvmanuylov@sberbank.ru" ] }
         - { status: "SUCCESS", emails: [ "MDLisitsa@sberbank.ru", " alvmanuylov@sberbank.ru" ] }

@@ -5,9 +5,9 @@ categories:
       action: "USL"
       deleted: false
 workflows:
-############################################################Spark CTL Yaml ############################################################
-# docs sigma https://confluence.sberbank.ru/display/USL/CAP+process+flow+control+service
-############################################################One Instance CTL Yaml #####################################################
+  ############################################################Spark CTL Yaml ############################################################
+  # docs sigma https://confluence.sberbank.ru/display/USL/CAP+process+flow+control+service
+  ############################################################One Instance CTL Yaml #####################################################
   - "{{ logical_env_prefix }}USL_VSPC_IDL":
       name: "{{ logical_env_prefix }}USL_VSPC_IDL"
       category: "{{ logical_env_prefix }}USL_IDL"
@@ -120,7 +120,7 @@ workflows:
             prior_value: "ON"
         # Привязка нотификаций
       notifications:
-          - { status: "ERROR", emails: [ "CAB-GD-ADDR-005888@omega.sbrf.ru" ] }
+        - { status: "ERROR", emails: [ "CAB-GD-ADDR-005888@omega.sbrf.ru" ] }
 
 entities:
   - entity:
