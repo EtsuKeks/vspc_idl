@@ -118,7 +118,7 @@ workflows:
         - param:
             name: debug_sk_off
             prior_value: "ON"
-            # Привязка нотификаций
+        # Привязка нотификаций
       notifications:
           - { status: "ERROR", emails: [ "CAB-GD-ADDR-005888@omega.sbrf.ru" ] }
 
