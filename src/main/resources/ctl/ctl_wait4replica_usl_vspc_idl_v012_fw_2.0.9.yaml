@@ -22,85 +22,47 @@ workflows:
           expression: "* * * * *"
           active: false
         entities:
-
       params:
         - param:
-            # Для backup это последний loading_id, а для restore  нужно задать руками
-            name: backupLID
-            prior_value: "blank"
+            name: debug_distributive_path
+            prior_value: /oozie-app/fin/DFESS/VSPC_IDL/lib
         - param:
-            # NameNode claster
-            name: defaultFs
-            prior_value: "{{ hadoop_default_fs_uri }}"
+            name: devops_distributive_jar
+            prior_value: "vspc_idl-D-01.201.002-jar-with-dependencies"
         - param:
-            # параметр среды для логического окружения
-            name: env
-            prior_value: "blank"
+            name: data_sets
+            prior_value: div_h, div, addr_, addr_h
         - param:
-            #  имя утилиты
-            name: jar_name
-            prior_value: "trif_ess-full-1.1.0.jar"
+            name: parallel_threads
+            prior_value: 1
         - param:
-            # путь до утилиты
-            name: jars_path
-            prior_value: "/oozie-app/app/TRiV/trifrunner"
+            name: spark_parameters
+            prior_value: "{{ sparkConf }}"
         - param:
-            # Под кем авторизуемся, для Ndl  и IDL  разные
-            name: keytab
-            prior_value: "{{ USER_NAME }}.keytab"
+            name: hms_src_schema
+            prior_value: "{{ src_schema }}"
         - param:
-            # Логи
-            name: logs_path
-            prior_value: "/oozie-app/app/TRiV/trifrunne/log"
+            name: debug_logical_env
+            prior_value: "{{ logical_env }}"
         - param:
-            # Метод запуска
-            name: method
-            prior_value: "backup"
-        - param:
-            # Путь для до workflow.xml
             name: oozie.wf.application.path
-            prior_value: "/oozie-app/app/TRiV/trifrunner"
+            prior_value: /oozie-app/fin/ESSA/VSPC_IDL/init
         - param:
-            # авторизация в hdfs
-            name: principal
-            prior_value: "{{ principal_alias }}"
-        - param:
-            # Какой дата продукт backup
-            name: productEntityId
-            prior_value: "801{{ logical_env_ctl_entity_logenv_number }}5314"
-        - param:
-            # наименование продукта
-            name: productName
-            prior_value: "vspc_idl"
-        - param:
-            # Диретория в дата продукте которую backup
-            name: sourceDirectory
-            prior_value: "snp;stg"
-        - param:
-            # Очередь задания в oozie
-            name: ss_queue
-            prior_value: ""
-        - param:
-            # имя пользователя под кем запускается backup
             name: user.name
             prior_value: "{{ USER_NAME }}"
         - param:
-            # путь до keytab
             name: user_keytab_path
-            prior_value: "/keytab"
+            prior_value: "/keytab/{{ USER_NAME }}.keytab"
         - param:
-            #  путь к location до hdfs
-            name: sourcePath
-            prior_value: "vspc_idl"
+            name: kerberos_realm
+            prior_value: "{{ REALM }}"
         - param:
-            # период расписания  когда производится backup, задаются дни года когда производится  backup
-            name: bkpPeriod
-            prior_value: "m(1,7,14,21)"
+            name: yarn_queue
+            prior_value: "{{ yarnQueueInit }}"
         - param:
-            # Количество хранимых backup
-            name: bkpNumbers
-            prior_value: 2
-      notifications:
+            name: debug_sk_off
+            prior_value: "ON"
+        notifications:
           - { status: "ERROR", emails: [ "CAB-GD-ADDR-005888@omega.sbrf.ru" ] }
 
   - "{{ logical_env_prefix }}USL_VSPC_IDL_INIT":
@@ -118,81 +80,45 @@ workflows:
           active: false
       params:
         - param:
-            # Для backup это последний loading_id, а для restore  нужно задать руками
-            name: backupLID
-            prior_value: "blank"
+            name: debug_distributive_path
+            prior_value: /oozie-app/fin/ESSA/VSPC_IDL/lib
         - param:
-            # NameNode claster
-            name: defaultFs
-            prior_value: "{{ hadoop_default_fs_uri }}"
+            name: devops_distributive_jar
+            prior_value: "vspc_idl-D-01.201.002-jar-with-dependencies"
         - param:
-            # параметр среды для логического окружения
-            name: env
-            prior_value: "blank"
+            name: data_sets
+            prior_value: div_h, div, addr_, addr_h
         - param:
-            #  имя утилиты
-            name: jar_name
-            prior_value: "trif_ess-full-1.1.0.jar"
+            name: parallel_threads
+            prior_value: 1
         - param:
-            # путь до утилиты
-            name: jars_path
-            prior_value: "/oozie-app/app/TRiV/trifrunner"
+            name: spark_parameters
+            prior_value: "{{ sparkConf }}"
         - param:
-            # Под кем авторизуемся, для Ndl  и IDL  разные
-            name: keytab
-            prior_value: "{{ USER_NAME }}.keytab"
+            name: hms_src_schema
+            prior_value: "{{ src_schema }}"
         - param:
-            # Логи
-            name: logs_path
-            prior_value: "/oozie-app/app/TRiV/trifrunne/log"
+            name: debug_logical_env
+            prior_value: "{{ logical_env }}"
         - param:
-            # Метод запуска
-            name: method
-            prior_value: "backup"
-        - param:
-            # Путь для до workflow.xml
             name: oozie.wf.application.path
-            prior_value: "/oozie-app/app/TRiV/trifrunner"
+            prior_value: /oozie-app/fin/DFFESS/VSPC_IDL/init
         - param:
-            # авторизация в hdfs
-            name: principal
-            prior_value: "{{ principal_alias }}"
-        - param:
-            # Какой дата продукт backup
-            name: productEntityId
-            prior_value: "801{{ logical_env_ctl_entity_logenv_number }}5314"
-        - param:
-            # наименование продукта
-            name: productName
-            prior_value: "vspc_idl"
-        - param:
-            # Диретория в дата продукте которую backup
-            name: sourceDirectory
-            prior_value: "snp;stg"
-        - param:
-            # Очередь задания в oozie
-            name: ss_queue
-            prior_value: ""
-        - param:
-            # имя пользователя под кем запускается backup
             name: user.name
             prior_value: "{{ USER_NAME }}"
         - param:
-            # путь до keytab
             name: user_keytab_path
-            prior_value: "/keytab"
+            prior_value: "/keytab/{{ USER_NAME }}.keytab"
         - param:
-            #  путь к location до hdfs
-            name: sourcePath
-            prior_value: "vspc_idl"
+            name: kerberos_realm
+            prior_value: "{{ REALM }}"
         - param:
-            # период расписания  когда производится backup, задаются дни года когда производится  backup
-            name: bkpPeriod
-            prior_value: "m(1,7,14,21)"
+            name: yarn_queue
+            prior_value: "{{ yarnQueue }}"
         - param:
-            # Количество хранимых backup
-            name: bkpNumbers
-            prior_value: 2
+            name: debug_sk_off
+            prior_value: "ON"
+            # Привязка нотификаций
       notifications:
           - { status: "ERROR", emails: [ "CAB-GD-ADDR-005888@omega.sbrf.ru" ] }
 
