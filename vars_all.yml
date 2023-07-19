@@ -22,7 +22,7 @@ vars: &commonVars
   logical_env: ""
   logical_env_prefix_with_slash: ""
   src_schema: "usl_{{ logical_env_prefix }}vspc_idl_in_snp"
-  ooziePath: "/oozie-app/bsp/vspc/vspc_idl"
+  ooziePath: "/oozie-app/bsp/VSPC/vspc_idl"
   userName: "{{ USER_NAME }}"
   keytabPath: "/keytab/{{ userName }}.keytab"
   principal_alias: "{{ userName }}@{{ REALM }}"
