@@ -90,10 +90,10 @@ public class MainClass {
     {
         Map<String,String> mapRcrs = new HashMap<>();
 
-        mapRcrs.put("div_","");
-        mapRcrs.put("div_h","");
+        mapRcrs.put("div","");
+        mapRcrs.put("divh","");
         mapRcrs.put("addr","");
-        mapRcrs.put("addr_h","");
+        mapRcrs.put("addrh","");
         return mapRcrs;
     }
 

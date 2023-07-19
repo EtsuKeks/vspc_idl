@@ -2,19 +2,19 @@ package ru.sberbank.bigdata.dffess.vspc.tables.addrh;
 
 import ru.sberbank.bigdata.dffess.vspc.impl.VspcDmStgClass;
 
-public class AddrhStgClass extends VspcDmStgClass {
-    public AddrhStgClass() {
-        moduleConfiguration = new AddrhStgConfigClass(this.moduleConfiguration);
+public class ADDRHStgClass extends VspcDmStgClass {
+    public ADDRHStgClass() {
+        moduleConfiguration = new ADDRHStgConfigClass(this.moduleConfiguration);
     }
 
-    public AddrhStgClass(String moduleName) {
-        moduleConfiguration = new AddrhStgConfigClass(this.moduleConfiguration);
+    public ADDRHStgClass(String moduleName) {
+        moduleConfiguration = new ADDRHStgConfigClass(this.moduleConfiguration);
         this.moduleName = moduleName;
-        this.entityTransformer = new AddrhTransformer();
+        this.entityTransformer = new AddrHTransformer();
     }
 
     public static void main(String[] args) throws Exception {
-        AddrhStgClass stgClass = new AddrhStgClass("");
+        ADDRHStgClass stgClass = new ADDRHStgClass("");
         stgClass.run(args);
     }
 }

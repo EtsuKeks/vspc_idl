@@ -6,7 +6,7 @@ import ru.sberbank.hermes.core.dmbuilder.config.ThreadConfiguration;
 
 import java.util.Map;
 
-public class DivThreadConfigProvider extends ThreadConfigProvider {
+public class DIVThreadConfigProvider extends ThreadConfigProvider {
     @Override
     public ThreadConfiguration provide(Map<String, String> cmdArgs) {
         return getConfigProvider(TablesName.DIV);

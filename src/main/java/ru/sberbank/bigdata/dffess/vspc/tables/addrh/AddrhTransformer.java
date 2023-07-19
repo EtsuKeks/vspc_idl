@@ -17,7 +17,7 @@ import ru.sberbank.hermes.core.dmbuilder.services.logger.loggers.Logger;
 import static org.apache.spark.sql.functions.col;
 import static org.apache.spark.sql.functions.lit;
 
-public class AddrhTransformer implements EntityTransformer {
+public class AddrHTransformer implements EntityTransformer {
     @Override
     public Dataset<Row> transformData(DmBuilder dmBuilder, SkClientWrapper skClientWrapper, HdfsHelper hdfsHelper, CtlStatisticHelper ctlStatisticHelper, TransformConfiguration transformConfiguration, EntityProxyRelation entityProxyRelation, Logger logger) {
 

@@ -2,19 +2,19 @@ package ru.sberbank.bigdata.dffess.vspc.tables.divh;
 
 import ru.sberbank.bigdata.dffess.vspc.impl.VspcDmStgClass;
 
-public class DivhStgClass extends VspcDmStgClass {
-    public DivhStgClass() {
-        moduleConfiguration = new DivhStgConfigClass(this.moduleConfiguration);
+public class DIVHStgClass extends VspcDmStgClass {
+    public DIVHStgClass() {
+        moduleConfiguration = new DIVHStgConfigClass(this.moduleConfiguration);
     }
 
-    public DivhStgClass(String moduleName) {
-        moduleConfiguration = new DivhStgConfigClass(this.moduleConfiguration);
+    public DIVHStgClass(String moduleName) {
+        moduleConfiguration = new DIVHStgConfigClass(this.moduleConfiguration);
         this.moduleName = moduleName;
-        this.entityTransformer = new DivhTransformer();
+        this.entityTransformer = new DivHTransformer();
     }
 
     public static void main(String[] args) throws Exception {
-        DivhStgClass stgClass = new DivhStgClass("");
+        DIVHStgClass stgClass = new DIVHStgClass("");
         stgClass.run(args);
     }
 }

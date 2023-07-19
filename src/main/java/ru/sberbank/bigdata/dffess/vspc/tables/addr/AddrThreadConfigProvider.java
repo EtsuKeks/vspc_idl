@@ -6,7 +6,7 @@ import ru.sberbank.hermes.core.dmbuilder.config.ThreadConfiguration;
 
 import java.util.Map;
 
-public class AddrThreadConfigProvider extends ThreadConfigProvider {
+public class ADDRThreadConfigProvider extends ThreadConfigProvider {
     @Override
     public ThreadConfiguration provide(Map<String, String> cmdArgs) {
         return getConfigProvider(TablesName.ADDR);
