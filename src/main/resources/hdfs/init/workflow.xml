@@ -34,7 +34,7 @@
             <env-var>update_rate=30000</env-var>
             <env-var>oozie_job_id=${wf:id()}</env-var>
             <env-var>oozie_job_action=MAIN_ACTION</env-var>
-            <file>/oozie-app/fin/DFESS/vspc_idl/yarn_killer.sh</file>
+            <file>/oozie-app/bsp/VSPC/vspc_idl/yarn_killer.sh</file>
         </shell>
         <ok to="joining"/>
         <error to="KILL_ERROR"/>

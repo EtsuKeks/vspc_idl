@@ -29,7 +29,7 @@ workflows:
       params:
         - param:
             name: debug_distributive_path
-            prior_value: /oozie-app/bsp/VSPC/VSPC_IDL/lib
+            prior_value: /oozie-app/bsp/VSPC/vspc_idl/lib
         - param:
             name: devops_distributive_jar
             prior_value: "vspc_idl-D-01.201.002-jar-with-dependencies"
@@ -82,13 +82,13 @@ workflows:
       params:
         - param:
             name: debug_distributive_path
-            prior_value: /oozie-app/fin/ESSA/VSPC_IDL/lib
+            prior_value: /oozie-app/bsp/VSPC/vspc_idl/lib
         - param:
             name: devops_distributive_jar
             prior_value: "vspc_idl-D-01.201.002-jar-with-dependencies"
         - param:
             name: data_sets
-            prior_value: div_h, div, addr_, addr_h
+            prior_value: div_h, div_, addr, addr_h
         - param:
             name: parallel_threads
             prior_value: 1
