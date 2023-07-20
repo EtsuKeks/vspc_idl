@@ -12,9 +12,9 @@
 
 -- Адрес: hub table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_stg.addr;
+drop table if exists usl_vspc_idl_stg.addr;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_stg.addr (
+create external table usl_vspc_idl_stg.addr (
     addr_dp_code STRING,
     addr_sk BIGINT,
     city_name STRING,
@@ -35,15 +35,15 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.addr (
 )
 
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/addr';
+location '/data/usl/vspc_idl/stg/addr';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.addr;
+msck repair table usl_vspc_idl_stg.addr;
 
 -- Адрес: satellite table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_stg.addr_h;
+drop table if exists usl_vspc_idl_stg.addr_h;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_stg.addr_h (
+create external table usl_vspc_idl_stg.addr_h (
     addr_dp_code STRING,
     addr_sk BIGINT,
     ctl_loading BIGINT,
@@ -54,15 +54,15 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.addr_h (
 )
 partitioned by (p1day STRING)
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/addr_h';
+location '/data/usl/vspc_idl/stg/addr_h';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.addr_h;
+msck repair table usl_vspc_idl_stg.addr_h;
 
 -- Подразделение территориальной структуры: hub table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_stg.div_;
+drop table if exists usl_vspc_idl_stg.div_;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_stg.div_ (
+create external table usl_vspc_idl_stg.div_ (
     code STRING,
     ctl_loading BIGINT,
     ctl_validfrom TIMESTAMP,
@@ -81,15 +81,15 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.div_ (
 )
 
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/div_';
+location '/data/usl/vspc_idl/stg/div_';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.div_;
+msck repair table usl_vspc_idl_stg.div_;
 
 -- Подразделение территориальной структуры: satellite table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_stg.div_h;
+drop table if exists usl_vspc_idl_stg.div_h;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_stg.div_h (
+create external table usl_vspc_idl_stg.div_h (
     ctl_loading BIGINT,
     ctl_validfrom TIMESTAMP,
     div_dp_code STRING,
@@ -104,7 +104,7 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.div_h (
 )
 partitioned by (p1day STRING)
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/div_h';
+location '/data/usl/vspc_idl/stg/div_h';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.div_h;
+msck repair table usl_vspc_idl_stg.div_h;
 
