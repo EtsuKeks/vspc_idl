@@ -52,6 +52,7 @@ stands:
       sk_host: "mimi16.dev.df.sbrf.ru"
       sk_logical_env: "da13"
       sk_name_serv: "FESS-DEV"
+      sparkConf: "--conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=5G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=5 --conf spark.dynamicAllocation.maxExecutors=40 --conf spark.driver.memory=5G"
 
   # RDT
   - stand_inventory: utarnsdpfess
