@@ -89,11 +89,10 @@ public class MainClass {
     private static Map<String,String> getRcrsMap()
     {
         Map<String,String> mapRcrs = new HashMap<>();
-
-        mapRcrs.put("div","");
-        mapRcrs.put("divh","");
         mapRcrs.put("addr","");
         mapRcrs.put("addrh","");
+        mapRcrs.put("div","");
+        mapRcrs.put("divh","");
         return mapRcrs;
     }
 
