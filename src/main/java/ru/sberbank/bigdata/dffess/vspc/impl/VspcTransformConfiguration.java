@@ -18,7 +18,7 @@ public class VspcTransformConfiguration extends TransformConfiguration {
 
     private String stgPath;
 
-    public VspcTransformConfiguration(ModuleConfiguration moduleConfiguration) {
+    public  VspcTransformConfiguration(ModuleConfiguration moduleConfiguration) {
         super(moduleConfiguration);
         stgPath = moduleConfiguration.getValue(STG_PATH);
     }

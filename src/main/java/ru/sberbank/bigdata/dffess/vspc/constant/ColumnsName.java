@@ -36,6 +36,8 @@ public final class ColumnsName {
     public static final String DIV_OPENDATE = "div_open_dt";
     public static final String FULLNAME = "fullname";
     public static final String DIV_H_NAME = "div_name";
+    public static final String ADDR_SK = "addr_sk";
+    public static final String DIV_SK = "div_sk";
 
 
     private ColumnsName() {
