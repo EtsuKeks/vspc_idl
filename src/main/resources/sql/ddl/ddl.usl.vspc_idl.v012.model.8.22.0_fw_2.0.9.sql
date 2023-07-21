@@ -52,7 +52,7 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_snp.addr_h (
     standard_addr_txt STRING,
     start_dt DATE
 )
-partitioned by (p1day STRING)
+partitioned by (p1month STRING)
 stored as parquet
 location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/snp/addr_h';
 
@@ -102,7 +102,7 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_snp.div_h (
     fact_addr_sk BIGINT,
     start_dt DATE
 )
-partitioned by (p1day STRING)
+partitioned by (p1month STRING)
 stored as parquet
 location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/snp/div_h';
 
@@ -152,7 +152,7 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_diff.addr_h (
     ctl_action STRING,
     ctl_validfrom TIMESTAMP,
     end_dt DATE,
-    p1day STRING,
+    p1month STRING,
     standard_addr_txt STRING,
     start_dt DATE
 )
@@ -204,7 +204,7 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_diff.div_h (
     end_dt DATE,
     fact_addr_dp_code STRING,
     fact_addr_sk BIGINT,
-    p1day STRING,
+    p1month STRING,
     start_dt DATE
 )
 partitioned by (ctl_loading BIGINT, ctl_do STRING)
@@ -288,7 +288,7 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.addr_h (
     standard_addr_txt STRING,
     start_dt DATE
 )
-partitioned by (p1day STRING)
+partitioned by (p1month STRING)
 stored as parquet
 location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/addr_h';
 
@@ -338,7 +338,7 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.div_h (
     fact_addr_sk BIGINT,
     start_dt DATE
 )
-partitioned by (p1day STRING)
+partitioned by (p1month STRING)
 stored as parquet
 location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/div_h';
 
