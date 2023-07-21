@@ -65,7 +65,7 @@ workflows:
             prior_value: "{{ yarnQueueInit }}"
         - param:
             name: debug_sk_off
-            prior_value: "ON"
+            prior_value: "OFF"
   - "{{ logical_env_prefix }}USL_VSPC_USL_TRIV_RESTORE":
       name: "{{ logical_env_prefix }}USL_VSPC_IDL"
       category: "{{ logical_env_prefix }}USL_IDL"
@@ -118,7 +118,7 @@ workflows:
             prior_value: "{{ yarnQueue }}"
         - param:
             name: debug_sk_off
-            prior_value: "ON"
+            prior_value: "OFF"
             # Привязка нотификаций
       notifications:
         - { status: "ERROR", emails: [ "MDLisitsa@sberbank.ru", " alvmanuylov@sberbank.ru"] }
