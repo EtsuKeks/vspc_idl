@@ -3,8 +3,8 @@ package ru.sberbank.bigdata.dffess.vspc.constant;
 public class TablesName {
 
     //target
-    public static final String ADDRH = "addr_H";
-    public static final String ADDR = "addr_";
+    public static final String ADDRH = "addr_h";
+    public static final String ADDR = "addr";
     public static final String DIVH = "div_h";
     public static final String DIV = "div_";
 
