@@ -13,10 +13,6 @@ import static ru.sberbank.bigdata.essa.common.constant.CommonConst.PARTITION_MON
 public class DIVThreadConfigProvider extends ThreadConfigProvider {
     @Override
     public ThreadConfiguration provide(Map<String, String> cmdArgs) {
-        ThreadConfiguration threadConfiguration=  getConfigProvider(TablesName.DIVH);
-        DateTimeFormatter formatterToStr = DateTimeFormatter.ofPattern(PARTITION_MONTH_FORMAT);
-        String cutMonth = LocalDate.now().format(formatterToStr);
-        threadConfiguration.setValue("mtp_Default_truncateIncFilterList", String.format("%s->p1month>=%s", TablesName.DIVH, cutMonth));
-        return threadConfiguration;
+        return getConfigProvider(TablesName.DIV);
     }
 }
