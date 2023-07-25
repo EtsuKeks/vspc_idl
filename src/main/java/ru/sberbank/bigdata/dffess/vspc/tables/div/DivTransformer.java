@@ -27,7 +27,6 @@ public class DivTransformer implements EntityTransformer {
                         col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_CODE),
                         col(ColumnsName.CLOSEDATE).as(ColumnsName.DIV_CLOSEDATE),
                         col(ColumnsName.OPENDATE).as(ColumnsName.DIV_OPENDATE),
-                        col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_CODE),
                         lit(false).as(ColumnsName.DIRTY_FLAG)
                 );
 
