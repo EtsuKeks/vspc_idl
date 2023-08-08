@@ -24,6 +24,7 @@ public class AddrTransformer implements EntityTransformer {
         Dataset<Row> addr = dmBuilder.getDataset(transformConfiguration.getSrcSchemaSnp(), TablesName.EBX_REP_M_SFS_0002_SFSDIVISION);
         addr = addr
                 .select(
+                        col(ColumnsName.ID).as(ColumnsName.SID),
                         col(ColumnsName.ADDINFORMATION).as(ColumnsName.ADDR_SRC_TEXT),
                         col(ColumnsName.ADDRESS_ADDRFACT_ADDRCITY_CITYNAME).as(ColumnsName.ADDR_CITY_NAME),
                         col(ColumnsName.ADDRESS_ADDRFACT_FIASCODE).as(ColumnsName.ADDR_FIAS_CODE),

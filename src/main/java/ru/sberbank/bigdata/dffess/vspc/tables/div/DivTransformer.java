@@ -24,6 +24,7 @@ public class DivTransformer implements EntityTransformer {
         Dataset<Row> div = dmBuilder.getDataset(transformConfiguration.getSrcSchemaSnp(), TablesName.EBX_REP_M_SFS_0002_SFSDIVISION);
         div = div
                 .select(
+                        col(ColumnsName.ID).as(ColumnsName.SID),
                         col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_CODE),
                         col(ColumnsName.CLOSEDATE).as(ColumnsName.DIV_CLOSEDATE),
                         col(ColumnsName.OPENDATE).as(ColumnsName.DIV_OPENDATE),
