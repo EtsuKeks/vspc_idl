@@ -55,7 +55,7 @@ public class VspcTransformConfiguration extends TransformConfiguration {
 
     @Override
     public Column getInitCutOffDate() {
-        return lit(IFRS9_INI_COB_CUTOFF_DATE).cast(DATE);
+        return lit(VSPC_IDL_CUTOFF_DATE).cast(DATE);
     }
 
     @Override

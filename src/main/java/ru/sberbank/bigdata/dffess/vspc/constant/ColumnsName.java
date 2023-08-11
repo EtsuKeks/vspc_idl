@@ -6,9 +6,6 @@ public final class ColumnsName {
 
     public static final String DIRTY_FLAG = "dirty_flag";
 
-    public static final String IFRS_ASST_BSNS_MODEL_TYPE_SK = "ifrs_asst_bsns_model_type_sk";
-    public static final String IFRS_ASST_BSNS_MODEL_TYPE_DP_CODE = "ifrs_asst_bsns_model_type_dp_code";
-    public static final String IFRS_SUBSQNT_ACC_MODEL_TYPE_SK = "ifrs_subsqnt_acc_model_type_sk";
 
     public static final String ADDR_CITY_NAME = "city_name";
     public static final String ADDR_FIAS_CODE = "fias_code";
