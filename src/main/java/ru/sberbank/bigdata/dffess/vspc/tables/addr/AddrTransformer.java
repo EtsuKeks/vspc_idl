@@ -25,6 +25,7 @@ public class AddrTransformer implements EntityTransformer {
         addr = addr
                 .select(
                         col(ColumnsName.ID).as(ColumnsName.SID),
+                        col(ColumnsName.ID).as(ColumnsName.ADDR_SK),
                         col(ColumnsName.ADDINFORMATION).as(ColumnsName.ADDR_SRC_TEXT),
                         col(ColumnsName.ADDRESS_ADDRFACT_ADDRCITY_CITYNAME).as(ColumnsName.ADDR_CITY_NAME),
                         col(ColumnsName.ADDRESS_ADDRFACT_FIASCODE).as(ColumnsName.ADDR_FIAS_CODE),

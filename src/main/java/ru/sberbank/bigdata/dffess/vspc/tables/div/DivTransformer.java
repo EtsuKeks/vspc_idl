@@ -25,6 +25,7 @@ public class DivTransformer implements EntityTransformer {
         div = div
                 .select(
                         col(ColumnsName.ID).as(ColumnsName.SID),
+                        col(ColumnsName.ID).as(ColumnsName.DIV_SK),
                         col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_CODE),
                         col(ColumnsName.CLOSEDATE).as(ColumnsName.DIV_CLOSEDATE),
                         col(ColumnsName.OPENDATE).as(ColumnsName.DIV_OPENDATE),
