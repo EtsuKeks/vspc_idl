@@ -35,6 +35,8 @@ public final class ColumnsName {
     public static final String DIV_H_NAME = "div_name";
     public static final String ADDR_SK = "addr_sk";
     public static final String DIV_SK = "div_sk";
+    public static final String ADDR_DP_CODE = "addr_dp_code";
+    public static final String DIV_DP_CODE = "div_dp_code";
 
 
     private ColumnsName() {

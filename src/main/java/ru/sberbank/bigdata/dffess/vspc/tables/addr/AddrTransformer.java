@@ -33,7 +33,7 @@ public class AddrTransformer implements EntityTransformer {
                         col(ColumnsName.ADDRESS_ADDRFACT_ADDRSTREET_STREETNAME).as(ColumnsName.ADDR_STREET_NAME),
                         col(ColumnsName.ADDRESS_LOCATIONADDRESS).as(ColumnsName.ADDR_LOCTY_NAME),
                         col(ColumnsName.SYSTEM_ID).as(ColumnsName.ADDR_RUS_FED_SUBJ_SK),
-                        lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.ADDR_REG_FED_SUBJ_DP_CODE),
+                        lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.ADDR_DP_CODE),
                         lit(false).as(ColumnsName.DIRTY_FLAG)
                 );
 

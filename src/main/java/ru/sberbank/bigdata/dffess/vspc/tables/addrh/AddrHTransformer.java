@@ -24,6 +24,8 @@ public class AddrHTransformer implements EntityTransformer {
         Dataset<Row> addrh = dmBuilder.getDataset(transformConfiguration.getSrcSchemaSnp(), TablesName.EBX_REP_M_SFS_0002_SFSDIVISION);
         addrh = addrh
                 .select(
+                        col(ColumnsName.ID).as(ColumnsName.ADDR_SK),
+                        lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.ADDR_REG_ADDR_NAME)
                         /*col(ColumnsName.CODE).as(ColumnsName.BSNS_MODEL_TYPE_CODE),
                         col(ColumnsName.NAME00).as(ColumnsName.BSNS_MODEL_TYPE_NAME),
                         col(ColumnsName.DESCRIPTION).as(ColumnsName.BSNS_MODEL_TYPE_TXT),
@@ -33,8 +35,7 @@ public class AddrHTransformer implements EntityTransformer {
                         lit(false).as(ColumnsName.DIRTY_FLAG)*/
                 );
 
-        addrh = skClientWrapper.generateSk(addrh, transformConfiguration.getStgTable(), transformConfiguration.getLoadMode(), transformConfiguration);
-
+        addrh = skClientWrapper.incrementSk(addrh, transformConfiguration.getStgTable(), transformConfiguration);
         return addrh;
     }
 }
