@@ -27,7 +27,7 @@ public class AddrHTransformer implements EntityTransformer {
                         col(ColumnsName.ID).as(ColumnsName.ADDR_SK),
                         col(ColumnsName.ID).as(ColumnsName.SID),
                         lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.ADDR_DP_CODE),
-                        lit(ColumnsName.ADDRESS_LOCATIONADDRESS).as(ColumnsName.ADDR_STANDART_ADDRESS_TXT),
+                        col(ColumnsName.ADDRESS_LOCATIONADDRESS).as(ColumnsName.ADDR_STANDART_ADDRESS_TXT),
                         lit(false).as(ColumnsName.DIRTY_FLAG)
                 );
 

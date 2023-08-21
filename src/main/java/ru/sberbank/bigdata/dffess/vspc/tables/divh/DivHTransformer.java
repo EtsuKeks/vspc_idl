@@ -24,12 +24,16 @@ public class DivHTransformer implements EntityTransformer {
         Dataset<Row> divh = dmBuilder.getDataset(transformConfiguration.getSrcSchemaSnp(), TablesName.EBX_REP_M_SFS_0002_SFSDIVISION);
         divh = divh
                 .select(
-                        col(ColumnsName.ID).as(ColumnsName.DIV_SK),
+                        col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_SK),
                         col(ColumnsName.FULLNAME).as(ColumnsName.DIV_H_NAME),
                         col(ColumnsName.CLOSEDATE).as(ColumnsName.DIV_CLOSEDATE),
                         col(ColumnsName.OPENDATE).as(ColumnsName.DIV_OPENDATE),
                         col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_CODE),
                         lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.DIV_DP_CODE),
+                        lit(VpscConstant.RDM_IDL_SPARK).as(ColumnsName.DIV_UPS_PAY_SYS_PRTCPNT_DP_CODE),
+                        col(ColumnsName.REQUSITEDIVISION_BIC).as(ColumnsName.DIV_UPS_PAY_SYS_PRTCPNT_SK),
+                        col(VpscConstant.DATA_PRODUCT).as(ColumnsName.DIV_FACT_ADDR_DP_CODE),
+                        col(ColumnsName.ID).as(ColumnsName.DIV_FACT_ADDR_SK),
                         lit(false).as(ColumnsName.DIRTY_FLAG)
                 );
 

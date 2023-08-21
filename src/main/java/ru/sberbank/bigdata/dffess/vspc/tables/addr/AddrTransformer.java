@@ -26,13 +26,17 @@ public class AddrTransformer implements EntityTransformer {
                 .select(
                         col(ColumnsName.ID).as(ColumnsName.SID),
                         col(ColumnsName.ID).as(ColumnsName.ADDR_SK),
-                        col(ColumnsName.ADDINFORMATION).as(ColumnsName.ADDR_SRC_TEXT),
+                        col(ColumnsName.ADDRESS_ADDRFACT_ADDRAREA_AREANAME).as(ColumnsName.ADDR_DISTRICT_NAME),
+                        col(ColumnsName.ADDRESS_ADDRFACT_ADDPLACE_PLACENAME).as(ColumnsName.ADDR_LOCTY_NAME),
+                        col(ColumnsName.ADDRESS_SUBJECTCODE).as(ColumnsName.ADDR_REG_ADDR_NAME),
+                        col(ColumnsName.ADDRESS_LOCATIONADDRESS).as(ColumnsName.ADDR_SRC_TEXT),
                         col(ColumnsName.ADDRESS_ADDRFACT_ADDRCITY_CITYNAME).as(ColumnsName.ADDR_CITY_NAME),
                         col(ColumnsName.ADDRESS_ADDRFACT_FIASCODE).as(ColumnsName.ADDR_FIAS_CODE),
                         col(ColumnsName.ADDRESS_ADDRFACT_ADDRSTREET_HOUSENUMBERS).as(ColumnsName.ADDR_HOUSE_NUM),
                         col(ColumnsName.ADDRESS_ADDRFACT_ADDRSTREET_STREETNAME).as(ColumnsName.ADDR_STREET_NAME),
-                        col(ColumnsName.ADDRESS_LOCATIONADDRESS).as(ColumnsName.ADDR_LOCTY_NAME),
                         lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.ADDR_DP_CODE),
+                        col(ColumnsName.ADDRESS_SUBJECTCODE).as(ColumnsName.ADDR_RUS_FED_SUBJ_SK),
+                        col(VpscConstant.RDM_IDL_SPARK).as(ColumnsName.ADDR_REG_FED_SUBJ_DP_CODE),
                         lit(false).as(ColumnsName.DIRTY_FLAG)
                 );
 
