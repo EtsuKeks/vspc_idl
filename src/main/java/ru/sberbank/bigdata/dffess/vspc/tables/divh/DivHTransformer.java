@@ -14,6 +14,9 @@ import ru.sberbank.bigdata.essa.common.utils.HdfsHelper;
 import ru.sberbank.hermes.core.dmbuilder.modules.stg.builder.DmBuilder;
 import ru.sberbank.hermes.core.dmbuilder.services.logger.loggers.Logger;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.apache.spark.sql.functions.col;
 import static org.apache.spark.sql.functions.lit;
 
@@ -37,7 +40,12 @@ public class DivHTransformer implements EntityTransformer {
                         lit(false).as(ColumnsName.DIRTY_FLAG)
                 );
 
-        divh = skClientWrapper.incrementSk(divh, transformConfiguration.getStgTable(),  transformConfiguration);
+        Map<String, String> columnEntities = new HashMap<>();
+        columnEntities.put(ColumnsName.DIV_UPS_PAY_SYS_PRTCPNT_SK, "pay_sys_prtcpnt");
+        columnEntities.put(ColumnsName.DIV_FACT_ADDR_SK, TablesName.ADDR);
+
+
+        divh = skClientWrapper.incrementSk(divh, transformConfiguration.getStgTable(), columnEntities,  transformConfiguration);
 
         return divh;
     }

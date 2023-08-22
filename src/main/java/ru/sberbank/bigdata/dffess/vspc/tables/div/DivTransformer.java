@@ -14,9 +14,7 @@ import ru.sberbank.bigdata.essa.common.utils.HdfsHelper;
 import ru.sberbank.hermes.core.dmbuilder.modules.stg.builder.DmBuilder;
 import ru.sberbank.hermes.core.dmbuilder.services.logger.loggers.Logger;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.apache.spark.sql.functions.col;
 import static org.apache.spark.sql.functions.lit;
@@ -40,12 +38,17 @@ public class DivTransformer implements EntityTransformer {
                         col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_SUBBRANCH_CODE),
                         col(ColumnsName.HEADDIVISIONCODE).as(ColumnsName.DIV_PARENT_DIV_SK),
                         col(VpscConstant.DATA_PRODUCT).as(ColumnsName.DIV_PARENT_DIV_DP_CODE),
-                        col(VpscConstant.DATA_PRODUCT).as(ColumnsName.DIV_LEGAL_ADDR_DP_CODE),
                         col(ColumnsName.ID).as(ColumnsName.DIV_LEGAL_ADDR_SK),
+                        col(VpscConstant.DATA_PRODUCT).as(ColumnsName.DIV_LEGAL_ADDR_DP_CODE),
                         lit(false).as(ColumnsName.DIRTY_FLAG)
                 );
 
-        div = skClientWrapper.generateSk(div, transformConfiguration.getStgTable(), transformConfiguration.getLoadMode(), transformConfiguration);
+        Map<String, String> columnEntities = new HashMap<>();
+        columnEntities.put(ColumnsName.DIV_PARENT_DIV_SK, TablesName.DIV);
+        columnEntities.put(ColumnsName.DIV_LEGAL_ADDR_SK, TablesName.ADDR);
+
+
+        div = skClientWrapper.generateSk(div, transformConfiguration.getStgTable(), transformConfiguration.getLoadMode(), columnEntities, transformConfiguration);
         return div;
     }
 

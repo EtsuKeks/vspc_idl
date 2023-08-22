@@ -14,6 +14,9 @@ import ru.sberbank.bigdata.essa.common.utils.HdfsHelper;
 import ru.sberbank.hermes.core.dmbuilder.modules.stg.builder.DmBuilder;
 import ru.sberbank.hermes.core.dmbuilder.services.logger.loggers.Logger;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.apache.spark.sql.functions.col;
 import static org.apache.spark.sql.functions.lit;
 
@@ -39,6 +42,10 @@ public class AddrTransformer implements EntityTransformer {
                         col(VpscConstant.RDM_IDL_SPARK).as(ColumnsName.ADDR_REG_FED_SUBJ_DP_CODE),
                         lit(false).as(ColumnsName.DIRTY_FLAG)
                 );
+
+        Map<String, String> columnEntities = new HashMap<>();
+        columnEntities.put(ColumnsName.ADDR_RUS_FED_SUBJ_SK, "rus_fed_subj");
+
 
         addr = skClientWrapper.generateSk(addr, transformConfiguration.getStgTable(), transformConfiguration.getLoadMode(), transformConfiguration);
 
