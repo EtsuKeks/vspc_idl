@@ -35,7 +35,7 @@ public class DivHTransformer implements EntityTransformer {
                         lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.DIV_DP_CODE),
                         lit(VpscConstant.RDM_IDL_SPARK).as(ColumnsName.DIV_UPS_PAY_SYS_PRTCPNT_DP_CODE),
                         col(ColumnsName.REQUSITEDIVISION_BIC).as(ColumnsName.DIV_UPS_PAY_SYS_PRTCPNT_SK),
-                        col(VpscConstant.DATA_PRODUCT).as(ColumnsName.DIV_FACT_ADDR_DP_CODE),
+                        lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.DIV_FACT_ADDR_DP_CODE),
                         col(ColumnsName.ID).as(ColumnsName.DIV_FACT_ADDR_SK),
                         lit(false).as(ColumnsName.DIRTY_FLAG)
                 );
