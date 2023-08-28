@@ -18,6 +18,7 @@ import java.util.*;
 
 import static org.apache.spark.sql.functions.col;
 import static org.apache.spark.sql.functions.lit;
+import static org.apache.spark.sql.functions.concat;
 import static ru.sberbank.bigdata.essa.common.constant.DmBuilderConst.LEFT_JOIN;
 
 public class DivTransformer implements EntityTransformer {
@@ -35,7 +36,7 @@ public class DivTransformer implements EntityTransformer {
                         col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_CODE),
                         col(ColumnsName.CLOSEDATE).as(ColumnsName.DIV_CLOSEDATE),
                         col(ColumnsName.OPENDATE).as(ColumnsName.DIV_OPENDATE),
-                        col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_SUBBRANCH_CODE),
+                        concat(lit("0"),col(ColumnsName.FULLDIVCODE)).as(ColumnsName.DIV_SUBBRANCH_CODE),
                         col(ColumnsName.HEADDIVISIONCODE).as(ColumnsName.DIV_PARENT_DIV_SK),
                         lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.DIV_PARENT_DIV_DP_CODE),
                         col(ColumnsName.ID).as(ColumnsName.DIV_LEGAL_ADDR_SK),

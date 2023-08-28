@@ -14,7 +14,7 @@ public final class ColumnsName {
     public static final String ADDR_REG_ADDR_NAME = "reg_addr_name";
     public static final String ADDR_REG_FED_SUBJ_DP_CODE = "rus_fed_subj_dp_code";
     public static final String ADDR_RUS_FED_SUBJ_SK = "rus_fed_subj_sk";
-    public static final String ADDR_SRC_TEXT = "src_text";
+    public static final String ADDR_SRC_TXT = "src_txt";
     public static final String ADDR_STREET_NAME = "street_name";
     public static final String ADDR_STANDART_ADDRESS_TXT = "standard_addr_txt";
     //source

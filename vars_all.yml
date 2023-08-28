@@ -35,8 +35,8 @@ stands:
   - stand_inventory: sdpdevfess
     vars:
       <<: *commonVars
-      yarnQueue: "root.usl.vspc"
-      yarnQueueInit: "root.usl.vspc"
+      yarnQueue: "vspc"
+      yarnQueueInit: "vspc"
       USER_NAME: "u_sklsdpfess_s_usl_t_vspc_idl"
       sk_host: "mimi16.dev.df.sbrf.ru"
       sk_logical_env: "da13"

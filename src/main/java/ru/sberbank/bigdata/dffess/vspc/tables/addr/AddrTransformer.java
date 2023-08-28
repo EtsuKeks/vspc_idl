@@ -32,7 +32,7 @@ public class AddrTransformer implements EntityTransformer {
                         col(ColumnsName.ADDRESS_ADDRFACT_ADDRAREA_AREANAME).as(ColumnsName.ADDR_DISTRICT_NAME),
                         col(ColumnsName.ADDRESS_ADDRFACT_ADDPLACE_PLACENAME).as(ColumnsName.ADDR_LOCTY_NAME),
                         col(ColumnsName.ADDRESS_SUBJECTCODE).as(ColumnsName.ADDR_REG_ADDR_NAME),
-                        col(ColumnsName.ADDRESS_LOCATIONADDRESS).as(ColumnsName.ADDR_SRC_TEXT),
+                        col(ColumnsName.ADDRESS_LOCATIONADDRESS).as(ColumnsName.ADDR_SRC_TXT),
                         col(ColumnsName.ADDRESS_ADDRFACT_ADDRCITY_CITYNAME).as(ColumnsName.ADDR_CITY_NAME),
                         col(ColumnsName.ADDRESS_ADDRFACT_FIASCODE).as(ColumnsName.ADDR_FIAS_CODE),
                         col(ColumnsName.ADDRESS_ADDRFACT_ADDRSTREET_HOUSENUMBERS).as(ColumnsName.ADDR_HOUSE_NUM),
@@ -47,7 +47,7 @@ public class AddrTransformer implements EntityTransformer {
         columnEntities.put(ColumnsName.ADDR_RUS_FED_SUBJ_SK, "rus_fed_subj");
 
 
-        addr = skClientWrapper.generateSk(addr, transformConfiguration.getStgTable(), transformConfiguration.getLoadMode(), transformConfiguration);
+        addr = skClientWrapper.generateSk(addr, transformConfiguration.getStgTable(), transformConfiguration.getLoadMode(),  columnEntities, transformConfiguration);
 
         return addr;
     }
