@@ -1,7 +1,7 @@
 package ru.sberbank.bigdata.dffess.vspc.impl;
 
-import ru.sberbank.bigdata.essa.common.structure.MetadataKeeper;
 import ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName;
+import ru.sberbank.bigdata.essa.common.structure.MetadataKeeper;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,9 +13,9 @@ import static ru.sberbank.bigdata.essa.common.constant.CommonColumnName.*;
 public class VspcMetadataKeeper extends MetadataKeeper {
     @Override
     public void build() {
-        addTable(ADDR, Collections.singletonList(ColumnsName.ADDR_SK),null, Collections.EMPTY_LIST);
-        addTable(ADDRH, Collections.singletonList(ColumnsName.ADDR_SK),col(END_DT), Arrays.asList(START_DT, END_DT, PARTITION_COLUMN_MONTH));
-        addTable(DIV, Collections.singletonList(ColumnsName.DIV_SK),null, Collections.EMPTY_LIST);
+        addTable(ADDR, Collections.singletonList(ColumnsName.ADDR_SK), null, Collections.EMPTY_LIST);
+        addTable(ADDRH, Collections.singletonList(ColumnsName.ADDR_SK), col(END_DT), Arrays.asList(START_DT, END_DT, PARTITION_COLUMN_MONTH));
+        addTable(DIV, Collections.singletonList(ColumnsName.DIV_SK), null, Collections.EMPTY_LIST);
         addTable(DIVH, Collections.singletonList(ColumnsName.DIV_SK), col(END_DT), Arrays.asList(START_DT, END_DT, PARTITION_COLUMN_MONTH));
 
     }

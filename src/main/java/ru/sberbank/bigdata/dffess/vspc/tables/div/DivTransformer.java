@@ -14,12 +14,10 @@ import ru.sberbank.bigdata.essa.common.utils.HdfsHelper;
 import ru.sberbank.hermes.core.dmbuilder.modules.stg.builder.DmBuilder;
 import ru.sberbank.hermes.core.dmbuilder.services.logger.loggers.Logger;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-import static org.apache.spark.sql.functions.col;
-import static org.apache.spark.sql.functions.lit;
-import static org.apache.spark.sql.functions.concat;
-import static ru.sberbank.bigdata.essa.common.constant.DmBuilderConst.LEFT_JOIN;
+import static org.apache.spark.sql.functions.*;
 
 public class DivTransformer implements EntityTransformer {
 
@@ -28,7 +26,7 @@ public class DivTransformer implements EntityTransformer {
 
         Dataset<Row> div = dmBuilder.getDataset(transformConfiguration.getSrcSchemaSnp(), TablesName.EBX_REP_M_SFS_0002_SFSDIVISION);
 
-      div = div
+        div = div
                 .select(
                         col(ColumnsName.FULLDIVCODE).as(ColumnsName.SID),
                         col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_SK),
@@ -36,7 +34,7 @@ public class DivTransformer implements EntityTransformer {
                         col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_CODE),
                         col(ColumnsName.CLOSEDATE).as(ColumnsName.DIV_CLOSEDATE),
                         col(ColumnsName.OPENDATE).as(ColumnsName.DIV_OPENDATE),
-                        concat(lit("0"),col(ColumnsName.FULLDIVCODE)).as(ColumnsName.DIV_SUBBRANCH_CODE),
+                        concat(lit("0"), col(ColumnsName.FULLDIVCODE)).as(ColumnsName.DIV_SUBBRANCH_CODE),
                         col(ColumnsName.HEADDIVISIONCODE).as(ColumnsName.DIV_PARENT_DIV_SK),
                         lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.DIV_PARENT_DIV_DP_CODE),
                         col(ColumnsName.ID).as(ColumnsName.DIV_LEGAL_ADDR_SK),
@@ -52,7 +50,6 @@ public class DivTransformer implements EntityTransformer {
         div = skClientWrapper.generateSk(div, transformConfiguration.getStgTable(), transformConfiguration.getLoadMode(), columnEntities, transformConfiguration);
         return div;
     }
-
 
 
 }

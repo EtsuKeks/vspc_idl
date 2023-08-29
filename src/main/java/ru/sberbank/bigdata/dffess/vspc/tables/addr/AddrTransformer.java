@@ -47,7 +47,7 @@ public class AddrTransformer implements EntityTransformer {
         columnEntities.put(ColumnsName.ADDR_RUS_FED_SUBJ_SK, "rus_fed_subj");
 
 
-        addr = skClientWrapper.generateSk(addr, transformConfiguration.getStgTable(), transformConfiguration.getLoadMode(),  columnEntities, transformConfiguration);
+        addr = skClientWrapper.generateSk(addr, transformConfiguration.getStgTable(), transformConfiguration.getLoadMode(), columnEntities, transformConfiguration);
 
         return addr;
     }

@@ -19,8 +19,8 @@ public class VspcEntityProxyRelation implements EntityProxyRelation {
 
     @Override
     public String getSrcTableByProxy(String tableName) {
-        for (Map.Entry<String,String> entry : relationMap.entrySet()){
-            if(entry.getValue().equals(tableName)){
+        for (Map.Entry<String, String> entry : relationMap.entrySet()) {
+            if (entry.getValue().equals(tableName)) {
                 return entry.getKey();
             }
         }
