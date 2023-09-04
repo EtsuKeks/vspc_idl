@@ -17,8 +17,7 @@ import ru.sberbank.hermes.core.dmbuilder.services.logger.loggers.Logger;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.apache.spark.sql.functions.col;
-import static org.apache.spark.sql.functions.lit;
+import static org.apache.spark.sql.functions.*;
 
 public class DivHTransformer implements EntityTransformer {
     @Override
@@ -29,8 +28,8 @@ public class DivHTransformer implements EntityTransformer {
                 .select(
                         col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_SK),
                         col(ColumnsName.FULLNAME).as(ColumnsName.DIV_H_NAME),
-                        col(ColumnsName.CLOSEDATE).as(ColumnsName.DIV_CLOSEDATE),
-                        col(ColumnsName.OPENDATE).as(ColumnsName.DIV_OPENDATE),
+                        to_date(col(ColumnsName.CLOSEDATE)).as(ColumnsName.DIV_CLOSEDATE),
+                        to_date(col(ColumnsName.OPENDATE)).as(ColumnsName.DIV_OPENDATE),
                         col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_CODE),
                         lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.DIV_DP_CODE),
                         lit(VpscConstant.RDM_IDL_SPARK).as(ColumnsName.DIV_UPS_PAY_SYS_PRTCPNT_DP_CODE),
