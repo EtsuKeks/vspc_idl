@@ -1,0 +1,9 @@
+model_type_code;model_type_name;model_type_txt;ifrs_subsqnt_acc_model_type_dp_code;ifrs_subsqnt_acc_model_type_sk;sid;dirty_flag;deleted_flag
+AMS_EPS;АмС - ЭПС;Учет по амортизированной стоимости с начислением процентов по методу эффективной процентной ставки;spr_ifrs9_idl;AMS_EPS;AMS_EPS;FALSE;FALSE
+AMS_LIN;АмС - Линейный;Учет по амортизированной стоимости с начислением процентов линейным методом;spr_ifrs9_idl;AMS_LIN;AMS_LIN;FALSE;FALSE
+SS_OPU_EPS;СС-ОПУ - ЭПС;Учет по справедливой стоимости через прибыль или убыток с начислением процентов по методу эффективной процентной ставки;spr_ifrs9_idl;SS_OPU_EPS;SS_OPU_EPS;FALSE;FALSE
+SS_OPU_LIN;СС-ОПУ - Линейная;Учет по справедливой стоимости через прибыль или убыток с начислением процентов линейным методом (1);spr_ifrs9_idl;SS_OPU_LIN;SS_OPU_LIN;FALSE;FALSE
+SS_PSD_EPS;СС-ПСД - ЭПС (1);Учет по справедливой стоимости через прочий совокупный доход с начислением процентов по методу эффективной процентной ставки;spr_ifrs9_idl;SS_PSD_EPS;SS_PSD_EPS;FALSE;FALSE
+SS_PSD_LIN;СС-ПСД - Линейная;Учет по справедливой стоимости через прочий совокупный доход с начислением процентов линейным методом;spr_ifrs9_idl;SS_PSD_LIN;SS_PSD_LIN;FALSE;FALSE
+INSERT;INSERT;Вставка новой записи;spr_ifrs9_idl;INSERT;INSERT;FALSE;FALSE
+TEST;TEST;Физическое удаление;spr_ifrs9_idl;TEST;TEST;FALSE;TRUE

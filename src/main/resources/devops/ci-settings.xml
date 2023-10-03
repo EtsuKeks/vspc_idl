@@ -1,0 +1,83 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+		  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                      http://maven.apache.org/xsd/settings-1.0.0.xsd">
+	<servers>
+		<server>
+			<id>client4d_snapshot</id>
+			<username>${user}</username>
+			<password>${password}</password>
+		</server>
+		<server>
+			<id>client4d</id>
+			<username>${user}</username>
+			<password>${password}</password>
+		</server>
+		<server>
+			<id>Atlassian_proxy</id>
+			<username>${user}</username>
+			<password>${password}</password>
+		</server>
+		<server>
+			<id>Bigdata_release</id>
+			<username>${user}</username>
+			<password>${password}</password>
+		</server>
+		<server>
+			<id>Bigdata_snapshot</id>
+			<username>${user}</username>
+			<password>${password}</password>
+		</server>
+		<server>
+			<id>Corp_snapshot</id>
+			<username>${user}</username>
+			<password>${password}</password>
+		</server>
+		<server>
+			<id>central</id>
+			<username>${user}</username>
+			<password>${password}</password>
+		</server>
+		<server>
+			<id>bigdata.nexus.alpha.sbrf.ru</id>
+			<username>${user}</username>
+			<password>${password}</password>
+		</server>
+	</servers>
+
+
+	<mirrors>
+		<mirror>
+			<id>nexus.delta.sbrf.ru</id>
+			<name>Sigma Nexus</name>
+			<url>https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/central/</url>
+			<mirrorOf>central</mirrorOf>
+		</mirror>
+		<mirror>
+			<id>nexus.client4d_group</id>
+			<name>Mirror of central client4d_group</name>
+			<url>https://sbtnexus.delta.sbrf.ru/nexus/content/groups/client4d_group/</url>
+			<mirrorOf>client4d-alpha-snapshots,client4d-alpha-releases,client4d-alpha-thirdparty</mirrorOf>
+		</mirror>
+	</mirrors>
+
+
+	<pluginGroups>
+		<pluginGroup>org.sonarsource.scanner.maven</pluginGroup>
+	</pluginGroups>
+	<profiles>
+		<profile>
+			<id>sonar</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+
+			<properties>
+				<sonar.host.url>https://sonar.ca.sbrf.ru/sonar</sonar.host.url>
+				<sonar.projectName>ru.sberbank.bigdata.dffess:vspc:feature/develop</sonar.projectName>
+				<sonar.language>java</sonar.language>
+			</properties>
+		</profile>
+	</profiles>
+
+</settings>

@@ -1,0 +1,81 @@
+<workflow-app name="VSPC.VSPC_IDL" xmlns="uri:oozie:workflow:0.5">
+    <global>
+        <configuration>
+            <property>
+                <name>mapred.job.queue.name</name>
+                <value>${yarn_queue}</value>
+            </property>
+            <property>
+                <name>mapreduce.map.memory.mb</name>
+                <value>16384</value>
+            </property>
+            <property>
+                <name>yarn.app.mapreduce.am.resource.mb</name>
+                <value>16384</value>
+            </property>
+        </configuration>
+    </global>
+
+    <start to="forking"/>
+
+    <fork name="forking">
+        <path start="YARN_KILLER"/>
+        <path start="MAIN_ACTION"/>
+    </fork>
+    <!--ЗАПУСКАЕМ ПАРАЛЛЕЛЬНЫМ ПРОЦЕССОМ Yarn Killer -->
+    <action name="YARN_KILLER">
+        <shell xmlns="uri:oozie:shell-action:0.1">
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <exec>yarn_killer.sh</exec>
+            <env-var>loading_id=${loading_id}</env-var>
+            <env-var>wf_name=${wf:name()}</env-var>
+            <env-var>queue=${yarn_queue}</env-var>
+            <env-var>jar_name=yarnkiller-1.1-jar-with-dependencies.jar</env-var>
+            <env-var>jars_path=/dp-resources/yarn-killer-rb</env-var>
+            <env-var>user_principal=${wf:conf('user.name')}@${kerberos_realm}</env-var>
+            <env-var>nameNode=${nameNode}</env-var>
+            <env-var>user_keytab_path=${user_keytab_path}</env-var>
+            <env-var>ctl_url=${ctl}</env-var>
+            <env-var>ctl_entity_id=801005366</env-var>
+            <env-var>ctl_stat_id=15</env-var>
+            <env-var>update_rate=30000</env-var>
+            <env-var>oozie_job_id=${wf:id()}</env-var>
+            <env-var>oozie_job_action=MAIN_ACTION</env-var>
+            <file>/oozie-app/bsp/VSPC/vspc_idl/yarn_killer.sh</file>
+        </shell>
+        <ok to="joining"/>
+        <error to="KILL_ERROR"/>
+    </action>
+
+    <action name="MAIN_ACTION" cred='howlauth'>
+        <shell xmlns="uri:oozie:shell-action:0.1">
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <exec>StartLauncher.sh</exec>
+            <argument>${loading_id}</argument>                   <!-- 1 -->
+            <argument>${wf:conf('user.name')}@${kerberos_realm}</argument>               <!-- 2 -->
+            <argument>${ctl}</argument>                          <!-- 3 -->
+            <argument>${user_keytab_path}</argument>         <!-- 4 -->
+            <argument>${nameNode}</argument>             <!-- 5 -->
+            <argument>${debug_distributive_path}</argument>             <!-- 6 -->
+            <argument>${devops_distributive_jar}</argument>             <!-- 7 -->
+            <argument>${data_sets}</argument>             <!-- 8-->
+            <argument>${parallel_threads}</argument>         <!-- 9 -->
+            <argument>${firstNotNull(wf:conf('debug_logical_env'),' ')}</argument>     <!-- 10 -->
+            <argument>${debug_sk_off}</argument>     <!-- 11 -->
+
+            <file>StartLauncher.sh#StartLauncher.sh</file>
+        </shell>
+        <ok to="joining"/>
+        <error to="KILL_ERROR"/>
+    </action>
+    <join name="joining" to="End"/>
+
+    <kill name="KILL_ERROR">
+        <message>Action failed, error message[${wf:errorMessage(wf:lastErrorNode())}]</message>
+    </kill>
+
+    <end name="End"/>
+
+</workflow-app>
