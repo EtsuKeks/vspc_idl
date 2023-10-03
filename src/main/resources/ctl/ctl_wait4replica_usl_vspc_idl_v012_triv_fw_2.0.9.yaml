@@ -32,7 +32,7 @@ workflows:
             prior_value: /oozie-app/bsp/VSPC/vspc_idl/lib
         - param:
             name: devops_distributive_jar
-            prior_value: "vspc_idl-D-01.201.004-jar-with-dependencies.jar"
+            prior_value: "vspc_idl-D-01.201.005-jar-with-dependencies.jar"
         - param:
             name: data_sets
             prior_value: addr,addrh,div,divh
@@ -65,7 +65,7 @@ workflows:
             prior_value: "{{ yarnQueueInit }}"
         - param:
             name: debug_sk_off
-            prior_value: "OFF"
+            prior_value: "ON"
   - "{{ logical_env_prefix }}USL_VSPC_USL_TRIV_RESTORE":
       name: "{{ logical_env_prefix }}USL_VSPC_IDL"
       category: "{{ logical_env_prefix }}USL_IDL"
@@ -85,7 +85,7 @@ workflows:
             prior_value: /oozie-app/bsp/VSPC/vspc_idl/lib
         - param:
             name: devops_distributive_jar
-            prior_value: "vspc_idl-D-01.201.004-jar-with-dependencies.jar"
+            prior_value: "vspc_idl-D-01.201.005-jar-with-dependencies.jar"
         - param:
             name: data_sets
             prior_value: addr,addrh,div,divh
@@ -118,7 +118,7 @@ workflows:
             prior_value: "{{ yarnQueue }}"
         - param:
             name: debug_sk_off
-            prior_value: "OFF"
+            prior_value: "ON"
             # Привязка нотификаций
       notifications:
         - { status: "ERROR", emails: [ "MDLisitsa@sberbank.ru", " alvmanuylov@sberbank.ru"] }
