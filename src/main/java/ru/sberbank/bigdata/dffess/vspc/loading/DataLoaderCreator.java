@@ -8,10 +8,10 @@ import ru.sberbank.bigdata.essa.common.loading.DataLoaderHubSnp;
 
 public class DataLoaderCreator {
     public static DataLoader getDataLoader(String tableName) {
-        if (tableName.equals(TablesName.DIVH) || tableName.equals(TablesName.ADDRH)) {
+        if (tableName.equals(TablesName.DIVH) || tableName.equals(TablesName.ADDRH) || tableName.equals(TablesName.DIVTYPE)) {
             return new DataLoaderHist();
         }
-        if (tableName.equals(TablesName.DIV) || tableName.equals(TablesName.ADDR)) {
+        if (tableName.equals(TablesName.DIV) || tableName.equals(TablesName.ADDR) || tableName.equals(TablesName.TERRDIVTYPE) ) {
             return new DataLoaderHubSnp();
         }
         return new DataLoaderHubDiff();

@@ -32,6 +32,7 @@ public class DivTransformer implements EntityTransformer {
                         col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_SK),
                         lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.DIV_DP_CODE),
                         col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_CODE),
+                        col(ColumnsName.SHORTDIVCODE).as(ColumnsName.DIV_SHORT_DIV_CODE),
                         to_date(col(ColumnsName.CLOSEDATE)).as(ColumnsName.DIV_CLOSEDATE),
                         to_date(col(ColumnsName.OPENDATE)).as(ColumnsName.DIV_OPENDATE),
                         concat(lit("0"), col(ColumnsName.FULLDIVCODE)).as(ColumnsName.DIV_SUBBRANCH_CODE),

@@ -71,7 +71,7 @@ stands:
       <<: *commonVars
       yarnQueue: "gl"
       yarnQueueInit: "init"
-      USER_NAME: "u_arnsdpfess_s_usl_t_vspc_idl"
+      USER_NAME: "u_arn5sdpfess_s_usl_t_self_srv_devices_ndl_parus"
       sk_host: "domrat10.cloud.df.sbrf.ru"
       sk_logical_env: "null"
       sk_name_serv: "arnsdpfess"
