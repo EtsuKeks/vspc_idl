@@ -27,7 +27,7 @@ public class TerrDivTypeTransformer implements EntityTransformer {
         Dataset<Row> terrdivtype = dmBuilder.getDataset(transformConfiguration.getSrcSchemaSnp(), TablesName.EBX_REP_M_SFS_0002_SFSDIVISION);
         terrdivtype = terrdivtype
                 .select(
-                        col(ColumnsName.TERR_DIV_TYPE).as(ColumnsName.SID),
+                        col(ColumnsName.DIVISIONTYPE00).as(ColumnsName.SID),
                         lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.DIV_TYPE_DP_CODE),
                         col(ColumnsName.DIVISIONTYPE00).as(ColumnsName.DIV_TYPE_CODE),
                         col(ColumnsName.DIVISIONTYPE00).as(ColumnsName.DIV_TYPE_SK)

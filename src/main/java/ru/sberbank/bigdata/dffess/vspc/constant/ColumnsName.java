@@ -32,7 +32,8 @@ public final class ColumnsName {
     public static final String ADDRESS_ADDRFACT_ADDRCITY_CITYNAME = "address_addrfact_addrcity_cityname";
     public static final String ADDRESS_LOCATIONADDRESS = "address_locationaddress";
     public static final String ADDRESS_SUBJECTCODE = "address_subjectcode";
-    public static final String ADDRESS_CNTRYCODE = "cntry_code";
+    public static final String ADDR_CNTRYCODE = "cntry_code"; //cntry_code
+    public static final String ADDRESS_COUNTRY = "address_country";
     public static final String ADDRESS_OKATO2_CODE = "address_addrfact_okatocode";
     public static final String ADDRESS_POSTCODE = "address_postcode";
     public static final String ADDRESS_ADDRFACT_POSTCODE = "address_addrfact_postcode";

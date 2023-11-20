@@ -40,7 +40,7 @@ public class AddrTransformer implements EntityTransformer {
                         lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.ADDR_DP_CODE),
                         col(ColumnsName.ADDRESS_SUBJECTCODE).as(ColumnsName.ADDR_RUS_FED_SUBJ_SK),
                         lit(VpscConstant.RDM_IDL_SPARK).as(ColumnsName.ADDR_REG_FED_SUBJ_DP_CODE),
-                        col(ColumnsName.ADDRESS_CNTRYCODE).as(ColumnsName.ADDR_CNTRY_SK),
+                        when(col(ColumnsName.ADDRESS_COUNTRY).equalTo("РОССИЯ(RU)"), 643).when(col(ColumnsName.ADDRESS_COUNTRY).equalTo("ИНДИЯ(IN)"), 356).as(ColumnsName.ADDR_CNTRY_SK),
                         lit(VpscConstant.RDM_IDL_SPARK).as(ColumnsName.ADDR_CNTRY_DP_CODE),
                         col(ColumnsName.ADDRESS_OKATO2_CODE).as(ColumnsName.ADDR_OKATO2_SK),
                         lit(VpscConstant.RDM_IDL_SPARK).as(ColumnsName.ADDR_OKATO2_DP_CODE),
