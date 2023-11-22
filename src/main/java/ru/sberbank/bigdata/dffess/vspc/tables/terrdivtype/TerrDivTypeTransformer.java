@@ -39,6 +39,14 @@ public class TerrDivTypeTransformer implements EntityTransformer {
 
         terrdivtype = skClientWrapper.generateSk(terrdivtype, transformConfiguration.getStgTable(), transformConfiguration.getLoadMode(), columnEntities, transformConfiguration);
 
+        terrdivtype = terrdivtype.select(
+                col(ColumnsName.DIV_TYPE_SK).as(ColumnsName.SID),
+                lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.DIV_TYPE_DP_CODE),
+                col(ColumnsName.DIV_TYPE_CODE).as(ColumnsName.DIV_TYPE_CODE),
+                col(ColumnsName.DIV_TYPE_SK).as(ColumnsName.DIV_TYPE_SK)
+
+        );
+
         return terrdivtype;
     }
 }

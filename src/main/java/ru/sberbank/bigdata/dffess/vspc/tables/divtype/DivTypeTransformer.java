@@ -34,6 +34,7 @@ public class DivTypeTransformer implements EntityTransformer {
 
         Map<String, String> columnEntities = new HashMap<>();
         columnEntities.put(ColumnsName.DIV_TYPE_TERR_DIV_TYPE_SK, TablesName.TERRDIVTYPE);
+        columnEntities.put(ColumnsName.DIV_SK, TablesName.DIV);
 
 
         divtype = skClientWrapper.incrementSk(divtype, transformConfiguration.getStgTable(), columnEntities, transformConfiguration);
