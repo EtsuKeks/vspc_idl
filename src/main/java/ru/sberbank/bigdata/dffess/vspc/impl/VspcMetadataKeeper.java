@@ -18,7 +18,7 @@ public class VspcMetadataKeeper extends MetadataKeeper {
         addTable(DIV, Collections.singletonList(ColumnsName.DIV_SK), null, Collections.EMPTY_LIST);
         addTable(DIVH, Collections.singletonList(ColumnsName.DIV_SK), col(END_DT), Arrays.asList(START_DT, END_DT, PARTITION_COLUMN_MONTH));
         addTable(DIVTYPE, Collections.singletonList(ColumnsName.DIV_SK), col(END_DT), Arrays.asList(START_DT, END_DT, PARTITION_COLUMN_MONTH));
-        addTable(TERRDIVTYPE, Collections.singletonList(ColumnsName.DIV_TYPE_SK), null, Collections.EMPTY_LIST);
+        addTable(TERRDIVTYPE, Collections.singletonList(ColumnsName.TERR_DIV_TYPE_SK), null, Collections.EMPTY_LIST);
 
     }
 }

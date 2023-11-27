@@ -57,9 +57,10 @@ public final class ColumnsName {
     public static final String ADDR_SK = "addr_sk";
     public static final String DIV_SK = "div_sk";
     public static final String TERR_DIV_TYPE = "terr_div_type";
-    public static final String DIV_TYPE_DP_CODE = "div_type_dp_code";
+    public static final String TERR_DIV_TYPE_DP_CODE = "terr_div_type_dp_code";
+    public static final String TERR_DIV_TYPE_SK = "terr_div_type_sk";
+
     public static final String DIV_TYPE_CODE = "div_type_code";
-    public static final String DIV_TYPE_SK = "div_type_sk";
     public static final String DIV_TYPE_TERR_DIV_TYPE_SK = "div_type_terr_div_type_sk";
     public static final String DIV_TYPE_TERR_DIV_TYPE_DP_CODE = "div_type_terr_div_type_dp_code";
     public static final String REQUSITEDIVISION_BIC = "requisitesdivision_bic";

@@ -28,23 +28,22 @@ public class TerrDivTypeTransformer implements EntityTransformer {
         terrdivtype = terrdivtype
                 .select(
                         col(ColumnsName.DIVISIONTYPE00).as(ColumnsName.SID),
-                        lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.DIV_TYPE_DP_CODE),
+                        lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.TERR_DIV_TYPE_DP_CODE),
                         col(ColumnsName.DIVISIONTYPE00).as(ColumnsName.DIV_TYPE_CODE),
-                        col(ColumnsName.DIVISIONTYPE00).as(ColumnsName.DIV_TYPE_SK)
-                );
+                        col(ColumnsName.DIVISIONTYPE00).as(ColumnsName.TERR_DIV_TYPE_SK),
+                        lit(false).as(ColumnsName.DIRTY_FLAG)
 
-        Map<String, String> columnEntities = new HashMap<>();
-        columnEntities.put(ColumnsName.DIV_TYPE_SK, TablesName.TERRDIVTYPE);
+                ).distinct();
 
 
-        terrdivtype = skClientWrapper.generateSk(terrdivtype, transformConfiguration.getStgTable(), transformConfiguration.getLoadMode(), columnEntities, transformConfiguration);
+        terrdivtype = skClientWrapper.generateSk(terrdivtype, transformConfiguration.getStgTable(), transformConfiguration.getLoadMode(), transformConfiguration);
 
         terrdivtype = terrdivtype.select(
-                col(ColumnsName.DIV_TYPE_SK).as(ColumnsName.SID),
-                lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.DIV_TYPE_DP_CODE),
+                col(ColumnsName.TERR_DIV_TYPE_SK).as(ColumnsName.SID),
+                lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.TERR_DIV_TYPE_DP_CODE),
                 col(ColumnsName.DIV_TYPE_CODE).as(ColumnsName.DIV_TYPE_CODE),
-                col(ColumnsName.DIV_TYPE_SK).as(ColumnsName.DIV_TYPE_SK)
-
+                col(ColumnsName.TERR_DIV_TYPE_SK).as(ColumnsName.TERR_DIV_TYPE_SK),
+                lit(false).as(ColumnsName.DIRTY_FLAG)
         );
 
         return terrdivtype;
