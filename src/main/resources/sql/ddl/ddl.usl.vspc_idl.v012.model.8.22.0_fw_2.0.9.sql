@@ -15,7 +15,7 @@
 drop table if exists usl_{{ logical_env_prefix }}vspc_idl_snp.addr;
 
 create external table usl_{{ logical_env_prefix }}vspc_idl_snp.addr (
- addr_dp_code STRING,
+    addr_dp_code STRING,
     addr_sk BIGINT,
     city_name STRING,
     cntry_dp_code STRING,
@@ -135,6 +135,7 @@ stored as parquet
 location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/snp/div_type';
 
 msck repair table usl_{{ logical_env_prefix }}vspc_idl_snp.div_type;
+
 
 -- Тип подразделений территориальной структуры: hub table
 
@@ -466,6 +467,8 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.div_type (
     start_dt DATE
 )
 partitioned by (ctl_loading BIGINT, ctl_do STRING)
+partitioned by (p1month STRING)
+
 stored as parquet
 location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/div_type';
 
