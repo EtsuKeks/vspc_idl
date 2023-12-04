@@ -467,8 +467,6 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.div_type (
     start_dt DATE
 )
 partitioned by (ctl_loading BIGINT, ctl_do STRING)
-partitioned by (p1month STRING)
-
 stored as parquet
 location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/div_type';
 
