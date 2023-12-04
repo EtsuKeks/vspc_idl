@@ -571,7 +571,7 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.diff_div_ (
     legal_addr_dp_code STRING,
     legal_addr_sk BIGINT,
     parent_div_dp_code STRING,
-    parent_div_sk BIGINT
+    parent_div_sk BIGINT,
     short_div_code STRING,
     sid STRING,
     subbranch_code STRING
