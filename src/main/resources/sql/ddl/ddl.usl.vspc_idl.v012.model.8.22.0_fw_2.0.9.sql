@@ -455,7 +455,7 @@ msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.div_h;
 drop table if exists usl_{{ logical_env_prefix }}vspc_idl_stg.div_type;
 
 create external table usl_{{ logical_env_prefix }}vspc_idl_stg.div_type (
-    ctl_action STRING,
+    ctl_loading BIGINT,
     ctl_validfrom TIMESTAMP,
     dirty_flag BOOLEAN,
     div_dp_code STRING,
@@ -463,10 +463,9 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.div_type (
     div_type_terr_div_type_dp_code STRING,
     div_type_terr_div_type_sk BIGINT,
     end_dt DATE,
-    p1month STRING,
     start_dt DATE
 )
-partitioned by (ctl_loading BIGINT, ctl_do STRING)
+partitioned by (p1month STRING)
 stored as parquet
 location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/div_type';
 
@@ -477,7 +476,7 @@ msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.div_type;
 drop table if exists usl_{{ logical_env_prefix }}vspc_idl_stg.terr_div_type;
 
 create external table usl_{{ logical_env_prefix }}vspc_idl_stg.terr_div_type (
-    ctl_action STRING,
+    ctl_loading BIGINT,
     ctl_validfrom TIMESTAMP,
     deleted_flag BOOLEAN,
     dirty_flag BOOLEAN,
@@ -486,7 +485,6 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.terr_div_type (
     terr_div_type_dp_code STRING,
     terr_div_type_sk BIGINT
 )
-partitioned by (ctl_loading BIGINT, ctl_do STRING)
 stored as parquet
 location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/terr_div_type';
 
