@@ -148,6 +148,16 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
+            <version>1.6.10</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp-tls</artifactId>
+            <version>4.9.3</version>
+        </dependency>
+        <dependency>
             <groupId>ru.sberbank.bigdata.sl.sk</groupId>
             <artifactId>sl-sk-client</artifactId>
             <version>1.13.3</version>
