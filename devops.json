@@ -1,5 +1,5 @@
 {
-  "version": "D-01.301.001",
+  "version": "D-01.301.002",
   "stand_name": "fess",
   "build": "maven",
   "block": "bsp",
@@ -72,6 +72,6 @@
 
   ],
   "template_files": [
-    "sql/ddl/ddl.usl.vspc_idl.v012.model.8.22.0_fw_2.0.9.sql"
+    "sql/ddl/ddl.usl.vspc_idl.v013.model.8.44.0_fw_2.0.11.sql"
   ]
 }
