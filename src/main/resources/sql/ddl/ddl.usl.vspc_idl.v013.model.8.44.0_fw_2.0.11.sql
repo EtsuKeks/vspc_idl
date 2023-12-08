@@ -122,7 +122,6 @@ drop table if exists usl_{{ logical_env_prefix }}vspc_idl_snp.div_type;
 create external table usl_{{ logical_env_prefix }}vspc_idl_snp.div_type (
     ctl_loading BIGINT,
     ctl_validfrom TIMESTAMP,
-    dirty_flag BOOLEAN,
     div_dp_code STRING,
     div_sk BIGINT,
     div_type_terr_div_type_dp_code STRING,
@@ -168,11 +167,12 @@ msck repair table usl_{{ logical_env_prefix }}vspc_idl_snp.terr_div_type;
 drop table if exists usl_{{ logical_env_prefix }}vspc_idl_diff.addr;
 
 create external table usl_{{ logical_env_prefix }}vspc_idl_diff.addr (
-   addr_dp_code STRING,
+    addr_dp_code STRING,
     addr_sk BIGINT,
     city_name STRING,
     cntry_dp_code STRING,
     cntry_sk BIGINT,
+    ctl_action STRING,
     ctl_validfrom TIMESTAMP,
     deleted_flag BOOLEAN,
     dirty_flag BOOLEAN,
@@ -275,7 +275,6 @@ drop table if exists usl_{{ logical_env_prefix }}vspc_idl_diff.div_type;
 create external table usl_{{ logical_env_prefix }}vspc_idl_diff.div_type (
     ctl_action STRING,
     ctl_validfrom TIMESTAMP,
-    dirty_flag BOOLEAN,
     div_dp_code STRING,
     div_sk BIGINT,
     div_type_terr_div_type_dp_code STRING,
@@ -611,7 +610,6 @@ drop table if exists usl_{{ logical_env_prefix }}vspc_idl_stg.diff_div_type;
 create external table usl_{{ logical_env_prefix }}vspc_idl_stg.diff_div_type (
     ctl_action STRING,
     ctl_validfrom TIMESTAMP,
-    dirty_flag BOOLEAN,
     div_dp_code STRING,
     div_sk BIGINT,
     div_type_terr_div_type_dp_code STRING,
