@@ -456,7 +456,6 @@ drop table if exists usl_{{ logical_env_prefix }}vspc_idl_stg.div_type;
 create external table usl_{{ logical_env_prefix }}vspc_idl_stg.div_type (
     ctl_loading BIGINT,
     ctl_validfrom TIMESTAMP,
-    dirty_flag BOOLEAN,
     div_dp_code STRING,
     div_sk BIGINT,
     div_type_terr_div_type_dp_code STRING,
