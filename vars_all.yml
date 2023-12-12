@@ -58,7 +58,7 @@ stands:
   - stand_inventory: utarnsdpfess
     vars:
       <<: *commonVars
-      yarnQueue: "gl"
+      yarnQueue: "vspc"
       yarnQueueInit: "init"
       USER_NAME: "u_utarnsdpfess_s_usl_t_vspc_idl"
       sk_host: "pplis-fauna1440.cloud.df.sbrf.ru"
@@ -69,7 +69,7 @@ stands:
   - stand_inventory: arnsdpfess
     vars:
       <<: *commonVars
-      yarnQueue: "gl"
+      yarnQueue: "vspc"
       yarnQueueInit: "init"
       USER_NAME: "u_arn5sdpfess_s_usl_t_self_srv_devices_ndl_parus"
       sk_host: "domrat10.cloud.df.sbrf.ru"
@@ -81,7 +81,7 @@ stands:
   - stand_inventory: arnsdpfess2
     vars:
       <<: *commonVars
-      yarnQueue: "gl"
+      yarnQueue: "vspc"
       yarnQueueInit: "init"
       USER_NAME: "u_arn6sdpfess_s_usl_t_vspc_idl"
       sk_host: "domrat10.cloud.df.sbrf.ru"

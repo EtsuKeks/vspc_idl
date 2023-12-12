@@ -29,7 +29,9 @@ public class DivTypeTransformer implements EntityTransformer {
                         col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_SK),
                         lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.DIV_DP_CODE),
                         col(ColumnsName.DIVISIONTYPE00).as(ColumnsName.DIV_TYPE_TERR_DIV_TYPE_SK),
-                        lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.DIV_TYPE_TERR_DIV_TYPE_DP_CODE)
+                        lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.DIV_TYPE_TERR_DIV_TYPE_DP_CODE),
+                        lit(false).as(ColumnsName.DIRTY_FLAG)
+
                 );
 
         Map<String, String> columnEntities = new HashMap<>();
