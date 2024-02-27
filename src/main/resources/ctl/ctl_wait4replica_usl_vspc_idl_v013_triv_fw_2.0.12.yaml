@@ -51,7 +51,7 @@ workflows:
         - param:
         # Под кем авторизуемся, для Ndl  и IDL  разные
             name: keytab
-            prior_value: "{{ user_name }}.keytab"
+            prior_value: "{{ USER_NAME }}.keytab"
         - param:
         # Логи
             name: logs_path
@@ -67,7 +67,7 @@ workflows:
         - param:
         # авторизация в hdfs
             name: principal
-            prior_value: "{{ user_name }}@{{ domain }}"
+            prior_value: "{{ USER_NAME }}@{{ REALM }}"
         - param:
         # Какой дата продукт backup
             name: productEntityId
@@ -87,7 +87,7 @@ workflows:
         - param:
         # имя пользователя под кем запускается backup
             name: user.name
-            prior_value: "{{ user_name }}"
+            prior_value: "{{ USER_NAME }}"
         - param:
         # путь до keytab
             name: user_keytab_path
@@ -143,7 +143,7 @@ workflows:
         - param:
         # Под кем авторизуемся, для Ndl  и IDL  разные
             name: keytab
-            prior_value: "{{ user_name }}.keytab"
+            prior_value: "{{ USER_NAME }}.keytab"
         - param:
         # Логи
             name: logs_path
@@ -159,7 +159,7 @@ workflows:
         - param:
         # авторизация в hdfs
             name: principal
-            prior_value: "{{ user_name }}@{{ domain }}"
+            prior_value: "{{ USER_NAME }}@{{ REALM }}"
         - param:
         # Какой дата продукт backup
             name: productEntityId
@@ -179,7 +179,7 @@ workflows:
         - param:
         # имя пользователя под кем запускается backup
             name: user.name
-            prior_value: "{{ user_name }}"
+            prior_value: "{{ USER_NAME }}"
         - param:
         # путь до keytab
             name: user_keytab_path
