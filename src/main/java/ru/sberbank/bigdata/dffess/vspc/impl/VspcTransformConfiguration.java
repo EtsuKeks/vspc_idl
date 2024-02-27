@@ -9,10 +9,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import static org.apache.spark.sql.functions.*;
-import static ru.sberbank.bigdata.essa.common.constant.CommonConst.*;
-import static ru.sberbank.bigdata.essa.common.constant.CommonConst.DATE;
-import static ru.sberbank.bigdata.essa.common.utils.Expression.generatePartitionMonthValue;
 import static ru.sberbank.bigdata.dffess.vspc.constant.VpscConstant.*;
+import static ru.sberbank.bigdata.essa.common.constant.CommonConst.*;
+import static ru.sberbank.bigdata.essa.common.utils.Expression.generatePartitionMonthValue;
 
 public class VspcTransformConfiguration extends TransformConfiguration {
 
@@ -29,7 +28,9 @@ public class VspcTransformConfiguration extends TransformConfiguration {
     }
 
     @Override
-    public String getDataProduct() { return DATA_PRODUCT; }
+    public String getDataProduct() {
+        return DATA_PRODUCT;
+    }
 
     @Override
     public String getIncrCutOffDstDateString() {
@@ -55,7 +56,7 @@ public class VspcTransformConfiguration extends TransformConfiguration {
 
     @Override
     public Column getInitCutOffDate() {
-        return lit(IFRS9_INI_COB_CUTOFF_DATE).cast(DATE);
+        return lit(VSPC_IDL_CUTOFF_DATE).cast(DATE);
     }
 
     @Override

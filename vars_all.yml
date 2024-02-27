@@ -8,7 +8,7 @@
 # GIT_PROJECT: DFFESS
 # GIR_REPO: vspc_idl
 # GIT_BRANCH: develop
-# DEVOPS_CONFIG: devops.json
+# DEVOPS_CONFIG: ctl.json
 #
 # !!!! Все URL указывать без конечного знака - "/"
 #
@@ -22,7 +22,7 @@ vars: &commonVars
   logical_env: ""
   logical_env_prefix_with_slash: ""
   src_schema: "usl_{{ logical_env_prefix }}vspc_idl_in_snp"
-  ooziePath: "/oozie-app/bsp/vspc/vspc_idl"
+  ooziePath: "/oozie-app/bsp/VSPC/vspc_idl"
   userName: "{{ USER_NAME }}"
   keytabPath: "/keytab/{{ userName }}.keytab"
   principal_alias: "{{ userName }}@{{ REALM }}"
@@ -35,8 +35,8 @@ stands:
   - stand_inventory: sdpdevfess
     vars:
       <<: *commonVars
-      yarnQueue: "{{ YARN_QUEUE }}"
-      yarnQueueInit: "{{ YARN_QUEUE }}"
+      yarnQueue: "vspc"
+      yarnQueueInit: "vspc"
       USER_NAME: "u_sklsdpfess_s_usl_t_vspc_idl"
       sk_host: "mimi16.dev.df.sbrf.ru"
       sk_logical_env: "da13"
@@ -52,12 +52,13 @@ stands:
       sk_host: "mimi16.dev.df.sbrf.ru"
       sk_logical_env: "da13"
       sk_name_serv: "FESS-DEV"
+      sparkConf: "--conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=5G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=5 --conf spark.dynamicAllocation.maxExecutors=40 --conf spark.driver.memory=5G"
 
   # RDT
   - stand_inventory: utarnsdpfess
     vars:
       <<: *commonVars
-      yarnQueue: "gl"
+      yarnQueue: "vspc"
       yarnQueueInit: "init"
       USER_NAME: "u_utarnsdpfess_s_usl_t_vspc_idl"
       sk_host: "pplis-fauna1440.cloud.df.sbrf.ru"
@@ -68,9 +69,9 @@ stands:
   - stand_inventory: arnsdpfess
     vars:
       <<: *commonVars
-      yarnQueue: "gl"
+      yarnQueue: "vspc"
       yarnQueueInit: "init"
-      USER_NAME: "u_arnsdpfess_s_usl_t_vspc_idl"
+      USER_NAME: "u_arn5sdpfess_s_usl_t_self_srv_devices_ndl_parus"
       sk_host: "domrat10.cloud.df.sbrf.ru"
       sk_logical_env: "null"
       sk_name_serv: "arnsdpfess"
@@ -80,7 +81,7 @@ stands:
   - stand_inventory: arnsdpfess2
     vars:
       <<: *commonVars
-      yarnQueue: "gl"
+      yarnQueue: "vspc"
       yarnQueueInit: "init"
       USER_NAME: "u_arn6sdpfess_s_usl_t_vspc_idl"
       sk_host: "domrat10.cloud.df.sbrf.ru"

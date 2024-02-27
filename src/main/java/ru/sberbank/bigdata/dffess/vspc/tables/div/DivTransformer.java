@@ -14,27 +14,43 @@ import ru.sberbank.bigdata.essa.common.utils.HdfsHelper;
 import ru.sberbank.hermes.core.dmbuilder.modules.stg.builder.DmBuilder;
 import ru.sberbank.hermes.core.dmbuilder.services.logger.loggers.Logger;
 
-import static org.apache.spark.sql.functions.col;
-import static org.apache.spark.sql.functions.lit;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.apache.spark.sql.functions.*;
 
 public class DivTransformer implements EntityTransformer {
+
     @Override
     public Dataset<Row> transformData(DmBuilder dmBuilder, SkClientWrapper skClientWrapper, HdfsHelper hdfsHelper, CtlStatisticHelper ctlStatisticHelper, TransformConfiguration transformConfiguration, EntityProxyRelation entityProxyRelation, Logger logger) {
 
         Dataset<Row> div = dmBuilder.getDataset(transformConfiguration.getSrcSchemaSnp(), TablesName.EBX_REP_M_SFS_0002_SFSDIVISION);
+
         div = div
                 .select(
-                        /*col(ColumnsName.CODE).as(ColumnsName.BSNS_MODEL_TYPE_CODE),
-                        col(ColumnsName.NAME00).as(ColumnsName.BSNS_MODEL_TYPE_NAME),
-                        col(ColumnsName.DESCRIPTION).as(ColumnsName.BSNS_MODEL_TYPE_TXT),
-                        lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.IFRS_ASST_BSNS_MODEL_TYPE_DP_CODE),
-                        col(ColumnsName.CODE).as(ColumnsName.IFRS_ASST_BSNS_MODEL_TYPE_SK),
-                        col(ColumnsName.CODE).as(ColumnsName.SID),
-                        lit(false).as(ColumnsName.DIRTY_FLAG)*/
+                        col(ColumnsName.FULLDIVCODE).as(ColumnsName.SID),
+                        col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_SK),
+                        lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.DIV_DP_CODE),
+                        col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_CODE),
+                        col(ColumnsName.SHORTDIVCODE).as(ColumnsName.DIV_SHORT_DIV_CODE),
+                        to_date(col(ColumnsName.CLOSEDATE)).as(ColumnsName.DIV_CLOSEDATE),
+                        to_date(col(ColumnsName.OPENDATE)).as(ColumnsName.DIV_OPENDATE),
+                        concat(lit("0"), col(ColumnsName.FULLDIVCODE)).as(ColumnsName.DIV_SUBBRANCH_CODE),
+                        col(ColumnsName.HEADDIVISIONCODE).as(ColumnsName.DIV_PARENT_DIV_SK),
+                        lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.DIV_PARENT_DIV_DP_CODE),
+                        col(ColumnsName.ID).as(ColumnsName.DIV_LEGAL_ADDR_SK),
+                        lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.DIV_LEGAL_ADDR_DP_CODE),
+                        lit(false).as(ColumnsName.DIRTY_FLAG)
                 );
 
-        div = skClientWrapper.generateSk(div, transformConfiguration.getStgTable(), transformConfiguration.getLoadMode(), transformConfiguration);
+        Map<String, String> columnEntities = new HashMap<>();
+        columnEntities.put(ColumnsName.DIV_PARENT_DIV_SK, TablesName.DIV);
+        columnEntities.put(ColumnsName.DIV_LEGAL_ADDR_SK, TablesName.ADDR);
 
+
+        div = skClientWrapper.generateSk(div, transformConfiguration.getStgTable(), transformConfiguration.getLoadMode(), columnEntities, transformConfiguration);
         return div;
     }
+
+
 }

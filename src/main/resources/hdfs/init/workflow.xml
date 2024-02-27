@@ -1,9 +1,17 @@
-<workflow-app name="ESSA.VSPC_IDL" xmlns="uri:oozie:workflow:0.5">
+<workflow-app name="VSPC.VSPC_IDL" xmlns="uri:oozie:workflow:0.5">
     <global>
         <configuration>
             <property>
                 <name>mapred.job.queue.name</name>
                 <value>${yarn_queue}</value>
+            </property>
+            <property>
+                <name>mapreduce.map.memory.mb</name>
+                <value>16384</value>
+            </property>
+            <property>
+                <name>yarn.app.mapreduce.am.resource.mb</name>
+                <value>16384</value>
             </property>
         </configuration>
     </global>
@@ -34,13 +42,13 @@
             <env-var>update_rate=30000</env-var>
             <env-var>oozie_job_id=${wf:id()}</env-var>
             <env-var>oozie_job_action=MAIN_ACTION</env-var>
-            <file>/oozie-app/fin/DFESS/vspc_idl/yarn_killer.sh</file>
+            <file>/oozie-app/bsp/VSPC/vspc_idl/yarn_killer.sh</file>
         </shell>
         <ok to="joining"/>
         <error to="KILL_ERROR"/>
     </action>
 
-    <action name="MAIN_ACTION"  cred='howlauth'>
+    <action name="MAIN_ACTION" cred='howlauth'>
         <shell xmlns="uri:oozie:shell-action:0.1">
             <job-tracker>${jobTracker}</job-tracker>
             <name-node>${nameNode}</name-node>
@@ -48,14 +56,14 @@
             <argument>${loading_id}</argument>                   <!-- 1 -->
             <argument>${wf:conf('user.name')}@${kerberos_realm}</argument>               <!-- 2 -->
             <argument>${ctl}</argument>                          <!-- 3 -->
-            <argument>${user_keytab_path}</argument>  		 <!-- 4 -->
-            <argument>${nameNode}</argument>  			 <!-- 5 -->
-            <argument>${debug_distributive_path}</argument>  			 <!-- 6 -->
-            <argument>${devops_distributive_jar}</argument>	         <!-- 7 -->
-            <argument>${data_sets}</argument>			 <!-- 8-->
-            <argument>${parallel_threads}</argument>	 	 <!-- 9 -->
-            <argument>${firstNotNull(wf:conf('debug_logical_env'),' ')}</argument>	 <!-- 10 -->
-            <argument>${debug_sk_off}</argument>	 <!-- 11 -->
+            <argument>${user_keytab_path}</argument>         <!-- 4 -->
+            <argument>${nameNode}</argument>             <!-- 5 -->
+            <argument>${debug_distributive_path}</argument>             <!-- 6 -->
+            <argument>${devops_distributive_jar}</argument>             <!-- 7 -->
+            <argument>${data_sets}</argument>             <!-- 8-->
+            <argument>${parallel_threads}</argument>         <!-- 9 -->
+            <argument>${firstNotNull(wf:conf('debug_logical_env'),' ')}</argument>     <!-- 10 -->
+            <argument>${debug_sk_off}</argument>     <!-- 11 -->
 
             <file>StartLauncher.sh#StartLauncher.sh</file>
         </shell>

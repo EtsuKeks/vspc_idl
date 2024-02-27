@@ -23,22 +23,22 @@ public class MainClass {
         final String launcherList = "launcher_list";
 
         CmdArgsProvider cmdArgsProvider = new CmdArgsProvider();
-        Map<String,String> cmdArgs = cmdArgsProvider.provideArgs(args);
-        cmdArgs.forEach((s1,s2)-> System.out.println(s1+"="+s2));
+        Map<String, String> cmdArgs = cmdArgsProvider.provideArgs(args);
+        cmdArgs.forEach((s1, s2) -> System.out.println(s1 + "=" + s2));
 
         WfConfBuilder wfConfBuilder = new WfConfBuilder(cmdArgs, VpscConstant.DATA_PRODUCT, VpscConstant.CTL_ENTITY_ID);
         WfConfiguration wfConfiguration = wfConfBuilder.build();
 
         List<String> tmp = Stream.of(cmdArgs.get(launcherList).split(",")).collect(Collectors.toCollection(ArrayList::new));
-        Map<String,String> mainThreads = getRcrsMap();
-        List<Triple<String, ThreadConfiguration, Class>> launcherTriplesRcrs = generateTriples(tmp,mainThreads,"ru.sberbank.bigdata.essa.ifrs9.tables.", cmdArgs);
+        Map<String, String> mainThreads = getRcrsMap();
+        List<Triple<String, ThreadConfiguration, Class>> launcherTriplesRcrs = generateTriples(tmp, mainThreads, "ru.sberbank.bigdata.dffess.vspc.tables.", cmdArgs);
 
-        List<Triple<String,ThreadConfiguration, Class>> launcherTriples  = launcherTriplesRcrs ;
+        List<Triple<String, ThreadConfiguration, Class>> launcherTriples = launcherTriplesRcrs;
 
         DefaultWorkflow.Builder frameworkWorkflowBuilder = DefaultWorkflow.builder()
                 .setWfConfiguration(wfConfiguration);
-        for(Object launcherTriple : launcherTriples) {
-            Triple<String,ThreadConfiguration, Class> lt = (Triple<String,ThreadConfiguration, Class>) launcherTriple;
+        for (Object launcherTriple : launcherTriples) {
+            Triple<String, ThreadConfiguration, Class> lt = (Triple<String, ThreadConfiguration, Class>) launcherTriple;
             frameworkWorkflowBuilder.setThreadConf(lt.getLeft(), lt.getMiddle(), lt.getRight());
         }
         FrameworkWorkflow frameworkWorkflow = frameworkWorkflowBuilder.create();
@@ -46,17 +46,15 @@ public class MainClass {
 
     }
 
-    private static List generateTriples(List<String> tmp, Map<String,String> threads, String packageName, Map<String,String> cmdArgs) {
+    private static List generateTriples(List<String> tmp, Map<String, String> threads, String packageName, Map<String, String> cmdArgs) {
         List<String> launcherList = new ArrayList<>();
-        for( String s : tmp)
-        {
-            if(threads.containsKey(s))
-            {
+        for (String s : tmp) {
+            if (threads.containsKey(s)) {
                 launcherList.add(s);
             }
         }
 
-        if(!launcherList.isEmpty()) {
+        if (!launcherList.isEmpty()) {
             String confProviderBaseClassName = "ThreadConfigProvider";
             Class<?>[] emptyParams = new Class[0];
             Object[] emptyValues = new Object[0];
@@ -82,22 +80,18 @@ public class MainClass {
                     })
                     .collect(Collectors.toCollection(LinkedList::new));
         }
-        return  new LinkedList();
+        return new LinkedList();
 
     }
 
-    private static Map<String,String> getRcrsMap()
-    {
-        Map<String,String> mapRcrs = new HashMap<>();
-
-        mapRcrs.put("ifrsasstbsnsmodeltype","");
-        mapRcrs.put("ifrssubsqntaccmodeltype","");
-        mapRcrs.put("ifrsfairvaloptntype","");
-        mapRcrs.put("ifrssppitestrslttype","");
-        mapRcrs.put("ifrsmrkttestrslttype","");
-        mapRcrs.put("ifrsmrktratecalcdatatype","");
-        mapRcrs.put("ifrsmodfctntype","");
-
+    private static Map<String, String> getRcrsMap() {
+        Map<String, String> mapRcrs = new HashMap<>();
+        mapRcrs.put("addr", "");
+        mapRcrs.put("addrh", "");
+        mapRcrs.put("div", "");
+        mapRcrs.put("divh", "");
+        mapRcrs.put("divtype", "");
+        mapRcrs.put("terrdivtype", "");
         return mapRcrs;
     }
 
