@@ -90,6 +90,8 @@ public class MainClass {
         mapRcrs.put("addrh", "");
         mapRcrs.put("div", "");
         mapRcrs.put("divh", "");
+        mapRcrs.put("divtype", "");
+        mapRcrs.put("terrdivtype", "");
         return mapRcrs;
     }
 

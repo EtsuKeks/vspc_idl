@@ -9,7 +9,7 @@ entities:
       # original entity id 801005314
       id: "801{{ logical_env_ctl_entity_logenv_number }}5314"
       name: "{{ logical_env_prefix }}USL_VSPC_IDL"
-      path: ""
+      path: "\\data\\usl"
       storage: "HDFS"
       parent-id: 904000000
 workflows:
@@ -32,10 +32,10 @@ workflows:
             prior_value: /oozie-app/bsp/VSPC/vspc_idl/lib
         - param:
             name: devops_distributive_jar
-            prior_value: "vspc_idl-P-01.201.012-jar-with-dependencies.jar"
+            prior_value: "vspc_idl-D-01.301.005-jar-with-dependencies.jar"
         - param:
             name: data_sets
-            prior_value: addr,addrh,div,divh
+            prior_value: addr,addrh,div,divh,divtype,terrdivtype
         - param:
             name: parallel_threads
             prior_value: 1
@@ -85,10 +85,10 @@ workflows:
             prior_value: /oozie-app/bsp/VSPC/vspc_idl/lib
         - param:
             name: devops_distributive_jar
-            prior_value: "vspc_idl-P-01.201.012-jar-with-dependencies.jar"
+            prior_value: "vspc_idl-D-01.301.005-jar-with-dependencies.jar"
         - param:
             name: data_sets
-            prior_value: addr,addrh,div,divh
+            prior_value: addr,addrh,div,divh,divtype,terrdivtype
         - param:
             name: parallel_threads
             prior_value: 1

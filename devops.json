@@ -1,5 +1,5 @@
 {
-  "version": "P-01.201.012",
+  "version": "D-01.301.005",
   "stand_name": "fess",
   "build": "maven",
   "block": "bsp",
@@ -14,7 +14,7 @@
   "sast_conf": "devsecops-config.yml",
   "emails": "MDLisitsa@sberbank.ru alvmanuylov@sberbank.ru",
   "run_hive_script_sql": true,
-  "jira_task_release": "VSPCIDL-32",
+  "jira_task_release": "VSPCIDL-43",
   "nexus3": {
     "ci_it_service": "CI02619185",
     "ci_as_fp": "CI04734132"
@@ -72,6 +72,6 @@
 
   ],
   "template_files": [
-    "sql/ddl/ddl.usl.vspc_idl.v012.model.8.22.0_fw_2.0.9.sql"
+    "sql/ddl/ddl.usl.vspc_idl.v013.model.8.44.0_fw_2.0.11.sql"
   ]
 }
