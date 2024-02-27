@@ -29,5 +29,8 @@ java -Djava.security.krb5.conf=/etc/krb5.conf -Djavax.security.auth.useSubjectCr
 
 timestamp=$(date +%T)
 
+echo "curl $ctl/statval/m --json \
+'{ "loading_id": "${loading_id}", "entity_id": "${entity_id}", "stat_id": 12, "avalue": [ "${'timestamp'}" ], "profile_name": "${profile_name}"}'"
+
 curl $ctl/statval/m --json \
 '{ "loading_id": "${loading_id}", "entity_id": "${entity_id}", "stat_id": 12, "avalue": [ "${'timestamp'}" ], "profile_name": "${profile_name}"}'
