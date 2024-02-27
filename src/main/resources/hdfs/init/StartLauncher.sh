@@ -24,7 +24,7 @@ kinit -R
 echo "hdfs dfs -get ${dm_builder_jar} ${dm_builder_jar_local}"
 hdfs dfs -get ${dm_builder_jar} ${dm_builder_jar_local} 
 
-timestamp=$(date +%d-%m-%YT%H:%M:%S)
+timestamp=$(date +%d-%m-%Y %H:%M:%S)
 
 echo "curl $ctl/statval/m --json \
 '{ "loading_id": "${loading_id}", "entity_id": "${entity_id}", "stat_id": 12, "avalue": [ "${'timestamp'}" ], "profile_name": "${profile_name}"}'"
