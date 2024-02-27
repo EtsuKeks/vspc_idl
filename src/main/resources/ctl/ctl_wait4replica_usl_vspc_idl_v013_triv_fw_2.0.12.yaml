@@ -104,6 +104,10 @@ workflows:
         # Количество хранимых backup
             name: bkpNumbers
             prior_value: 2
+        - param:
+        # Профиль кластера
+            name: profile_name
+            prior_value: "{{ CTL_PROFILE_NAME }}"
       notifications:
           - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru" ] }
 
@@ -192,5 +196,9 @@ workflows:
         # Количество хранимых backup
             name: bkpNumbers
             prior_value: 2
+        - param:
+        # Профиль кластера
+            name: profile_name
+            prior_value: "{{ CTL_PROFILE_NAME }}"
       notifications:
           - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru","dvilapshin@sberbank.ru" ] }

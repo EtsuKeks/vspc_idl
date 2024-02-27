@@ -64,6 +64,8 @@
             <argument>${parallel_threads}</argument>         <!-- 9 -->
             <argument>${firstNotNull(wf:conf('debug_logical_env'),' ')}</argument>     <!-- 10 -->
             <argument>${debug_sk_off}</argument>     <!-- 11 -->
+            <argument>801005366</argument>
+            <argument>${profile_name}</argument>
 
             <file>StartLauncher.sh#StartLauncher.sh</file>
         </shell>
