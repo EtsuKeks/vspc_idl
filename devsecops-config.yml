@@ -7,7 +7,7 @@ team:
     # название команды в МУСе
     mus_name: "VSPC_IDL",
     # почтовый адрес Product Owner в МУСе для уведомлений с результатами сканирования. Возможно указание нескольких email через ;
-    mus_po_mail: "MDLisitsa@sberbank.ru",
+    mus_po_mail: "MDLisitsa@sberbank.ru;dvilapshin@sberbank.ru",
   }
 #  - {
 #      # Вторую и последующие команды необходимо добавить по формату, аналогично первой

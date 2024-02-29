@@ -37,7 +37,7 @@
             <env-var>nameNode=${nameNode}</env-var>
             <env-var>user_keytab_path=${user_keytab_path}</env-var>
             <env-var>ctl_url=${ctl}</env-var>
-            <env-var>ctl_entity_id=801005366</env-var>
+            <env-var>ctl_entity_id=801005314</env-var>
             <env-var>ctl_stat_id=15</env-var>
             <env-var>update_rate=30000</env-var>
             <env-var>oozie_job_id=${wf:id()}</env-var>
@@ -64,6 +64,8 @@
             <argument>${parallel_threads}</argument>         <!-- 9 -->
             <argument>${firstNotNull(wf:conf('debug_logical_env'),' ')}</argument>     <!-- 10 -->
             <argument>${debug_sk_off}</argument>     <!-- 11 -->
+            <argument>801005314</argument>
+            <argument>${profile_name}</argument>
 
             <file>StartLauncher.sh#StartLauncher.sh</file>
         </shell>
