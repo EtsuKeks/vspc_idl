@@ -69,13 +69,13 @@
   ],
   "template_files": [
   ],
-  "workflow_to_run_scenario": [                                           // Возможность запускать потоки шагами и использовать параллельный запуск
+  "workflow_to_run_scenario": [
     {
       "step": "step-1",
-      "workflows": ["USL_VSPC_IDL_INIT"]                                               // Запускается шаг 'step-1' и ожидается выполнение потока "wf-1"
+      "workflows": ["USL_VSPC_IDL_INIT"]
     },
     {
-      "step": "step-2 if step-1 success",                                 // Запускается шаг 'step-2 if step-1 success' и ожидается выполнение потока "wf-2"
+      "step": "step-2 if step-1 success",
       "workflows": ["USL_VSPC_IDL"]
     }
   ]
