@@ -83,7 +83,7 @@ workflows:
       schedule_params:
             eventAwaitStrategy: "and"
             entities:
-                  - entity:
+                - entity:
                     id: 928039295
                     statisticId: 2
                     profile: ts_espd
