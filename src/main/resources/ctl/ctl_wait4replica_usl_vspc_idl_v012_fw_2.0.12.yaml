@@ -79,7 +79,7 @@ workflows:
       orchestrator: oozie
       killyarnjobonerror: true
       schedule:
-            type: {{ ctl_schedule_type }}
+            type: "{{ ctl_schedule_type }}"
       schedule_params:
             eventAwaitStrategy: "and"
             entities:
