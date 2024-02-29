@@ -32,7 +32,7 @@ workflows:
             prior_value: /oozie-app/bsp/VSPC/vspc_idl/lib
         - param:
             name: devops_distributive_jar
-            prior_value: "vspc_idl-D-01.302.001-jar-with-dependencies.jar"
+            prior_value: "vspc_idl-D-01.302.002-jar-with-dependencies.jar"
         - param:
             name: data_sets
             prior_value: addr,addrh,div,divh,divtype,terrdivtype
@@ -94,7 +94,7 @@ workflows:
             prior_value: /oozie-app/bsp/VSPC/vspc_idl/lib
         - param:
             name: devops_distributive_jar
-            prior_value: "vspc_idl-D-01.302.001-jar-with-dependencies.jar"
+            prior_value: "vspc_idl-D-01.302.002-jar-with-dependencies.jar"
         - param:
             name: data_sets
             prior_value: addr,addrh,div,divh,divtype,terrdivtype
