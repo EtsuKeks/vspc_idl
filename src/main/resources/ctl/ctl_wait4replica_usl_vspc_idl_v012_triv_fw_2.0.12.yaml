@@ -23,8 +23,8 @@ workflows:
         entities:
           - entity:
               # original entity id 801005314 - vspc_idl
-              id: "801{{ logical_env_ctl_entity_logenv_number }}5314"
-              statisticId: 12
+              id: "801005314"
+              statisticId: 2
               profile: "{{ CTL_PROFILE_NAME }}"
               active: true
       params:

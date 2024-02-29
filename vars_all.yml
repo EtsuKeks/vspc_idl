@@ -45,6 +45,7 @@ stands:
       hdfs_path_triv: "/oozie-app/triv_ess"
       resourceGroupTriv: "vspc"
       hadoop_default_fs_uri_triv: "hdfs://FESS-DEV"
+      ctl_schedule_type: "none"
       
   # IFT
   - stand_inventory: sdpiftfess
@@ -60,6 +61,7 @@ stands:
       hdfs_path_triv: "/oozie-app/app/TRiV/trifrunner"
       resourceGroupTriv: "vspc"
       hadoop_default_fs_uri_triv: "hdfs://FESS-IFT"
+      ctl_schedule_type: "none"
 
   # RDT
   - stand_inventory: utarnsdpfess
@@ -74,6 +76,7 @@ stands:
       hdfs_path_triv: "/oozie-app/app/TRiV/trifrunner"
       resourceGroupTriv: "vspc"
       hadoop_default_fs_uri_triv: "hdfs://utarnsdpfess"
+      ctl_schedule_type: "none"
 
   # PROM
   - stand_inventory: arnsdpfess
@@ -89,6 +92,7 @@ stands:
       hdfs_path_triv: "/oozie-app/app/TRiV/trifrunner"
       resourceGroupTriv: "vspc"
       hadoop_default_fs_uri_triv: "hdfs://arnsdpfess"
+      ctl_schedule_type: "on-schedule"
 
   # PROM NEW
   - stand_inventory: arnsdpfess2
@@ -104,3 +108,4 @@ stands:
       hdfs_path_triv: "/oozie-app/app/TRiV/trifrunner"
       resourceGroupTriv: "vspc"
       hadoop_default_fs_uri_triv: "hdfs://arnsdpfess2"
+      ctl_schedule_type: "on-schedule"
