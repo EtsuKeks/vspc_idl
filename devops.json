@@ -70,13 +70,5 @@
   "template_files": [
   ],
   "workflow_to_run_scenario": [
-    {
-      "step": "step-1",
-      "workflows": ["USL_VSPC_IDL_INIT"]
-    },
-    {
-      "step": "step-2 if step-1 success",
-      "workflows": ["USL_VSPC_IDL"]
-    }
   ]
 }
