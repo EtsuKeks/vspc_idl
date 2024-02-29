@@ -70,5 +70,7 @@
   "template_files": [
   ],
   "workflow_to_run_scenario": [
+  ],
+  "workflow_to_run" : [
   ]
 }
