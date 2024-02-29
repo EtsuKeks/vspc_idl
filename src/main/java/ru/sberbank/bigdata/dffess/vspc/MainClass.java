@@ -29,8 +29,6 @@ public class MainClass {
         WfConfBuilder wfConfBuilder = new WfConfBuilder(cmdArgs, VpscConstant.DATA_PRODUCT, VpscConstant.CTL_ENTITY_ID);
         WfConfiguration wfConfiguration = wfConfBuilder.build();
 
-        wfConfiguration.setValue("cp_CtlCommon_statsIdsToPost", "2;12");
-
         List<String> tmp = Stream.of(cmdArgs.get(launcherList).split(",")).collect(Collectors.toCollection(ArrayList::new));
         Map<String, String> mainThreads = getRcrsMap();
         List<Triple<String, ThreadConfiguration, Class>> launcherTriplesRcrs = generateTriples(tmp, mainThreads, "ru.sberbank.bigdata.dffess.vspc.tables.", cmdArgs);
