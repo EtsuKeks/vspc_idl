@@ -13,7 +13,7 @@
   "sq_options": "",
   "sast_conf": "devsecops-config.yml",
   "emails": "MDLisitsa@sberbank.ru alvmanuylov@sberbank.ru dvilapshin@sberbank.ru anikusikov@sberbank.ru",
-  "run_hive_script_sql": false,
+  "run_hive_script_sql": true,
   "jira_task_release": "VSPCIDL-65",
   "nexus3": {
     "ci_it_service": "CI02619185",
@@ -56,6 +56,10 @@
     {
       "source": "src/main/resources/usl/rrm/*",
       "destination": "usl/rrm/"
+    },
+    {
+      "source": "src/main/resources/sql/*",
+      "destination": "sql/"
     },
     {
       "source": "src/main/resources/usl/certification/*",
