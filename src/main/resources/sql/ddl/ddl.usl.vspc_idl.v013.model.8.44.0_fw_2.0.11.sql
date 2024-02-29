@@ -12,9 +12,9 @@
 
 -- Адрес: hub table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_snp.addr;
+drop table if exists usl_vspc_idl_snp.addr;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_snp.addr (
+create external table usl_vspc_idl_snp.addr (
     addr_dp_code STRING,
     addr_sk BIGINT,
     city_name STRING,
@@ -40,15 +40,15 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_snp.addr (
 )
 
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/snp/addr';
+location '/data/usl/vspc_idl/snp/addr';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_snp.addr;
+msck repair table usl_vspc_idl_snp.addr;
 
 -- Адрес: satellite table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_snp.addr_h;
+drop table if exists usl_vspc_idl_snp.addr_h;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_snp.addr_h (
+create external table usl_vspc_idl_snp.addr_h (
     addr_dp_code STRING,
     addr_sk BIGINT,
     ctl_loading BIGINT,
@@ -59,15 +59,15 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_snp.addr_h (
 )
 partitioned by (p1month STRING)
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/snp/addr_h';
+location '/data/usl/vspc_idl/snp/addr_h';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_snp.addr_h;
+msck repair table usl_vspc_idl_snp.addr_h;
 
 -- Подразделение территориальной структуры: hub table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_snp.div_;
+drop table if exists usl_vspc_idl_snp.div_;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_snp.div_ (
+create external table usl_vspc_idl_snp.div_ (
     code STRING,
     ctl_loading BIGINT,
     ctl_validfrom TIMESTAMP,
@@ -87,15 +87,15 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_snp.div_ (
 )
 
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/snp/div_';
+location '/data/usl/vspc_idl/snp/div_';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_snp.div_;
+msck repair table usl_vspc_idl_snp.div_;
 
 -- Подразделение территориальной структуры: satellite table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_snp.div_h;
+drop table if exists usl_vspc_idl_snp.div_h;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_snp.div_h (
+create external table usl_vspc_idl_snp.div_h (
     ctl_loading BIGINT,
     ctl_validfrom TIMESTAMP,
     div_dp_code STRING,
@@ -110,16 +110,16 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_snp.div_h (
 )
 partitioned by (p1month STRING)
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/snp/div_h';
+location '/data/usl/vspc_idl/snp/div_h';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_snp.div_h;
+msck repair table usl_vspc_idl_snp.div_h;
 
 
 -- Подразделение территориальной структуры: satellite table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_snp.div_type;
+drop table if exists usl_vspc_idl_snp.div_type;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_snp.div_type (
+create external table usl_vspc_idl_snp.div_type (
     ctl_loading BIGINT,
     ctl_validfrom TIMESTAMP,
     div_dp_code STRING,
@@ -131,16 +131,16 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_snp.div_type (
 )
 partitioned by (p1month STRING)
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/snp/div_type';
+location '/data/usl/vspc_idl/snp/div_type';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_snp.div_type;
+msck repair table usl_vspc_idl_snp.div_type;
 
 
 -- Тип подразделений территориальной структуры: hub table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_snp.terr_div_type;
+drop table if exists usl_vspc_idl_snp.terr_div_type;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_snp.terr_div_type (
+create external table usl_vspc_idl_snp.terr_div_type (
     ctl_loading BIGINT,
     ctl_validfrom TIMESTAMP,
     deleted_flag BOOLEAN,
@@ -152,9 +152,9 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_snp.terr_div_type (
 )
 
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/snp/terr_div_type';
+location '/data/usl/vspc_idl/snp/terr_div_type';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_snp.terr_div_type;
+msck repair table usl_vspc_idl_snp.terr_div_type;
 
 
 
@@ -164,9 +164,9 @@ msck repair table usl_{{ logical_env_prefix }}vspc_idl_snp.terr_div_type;
 
 -- Адрес: hub table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_diff.addr;
+drop table if exists usl_vspc_idl_diff.addr;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_diff.addr (
+create external table usl_vspc_idl_diff.addr (
     addr_dp_code STRING,
     addr_sk BIGINT,
     city_name STRING,
@@ -192,15 +192,15 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_diff.addr (
 )
 partitioned by (ctl_loading BIGINT, ctl_do STRING)
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/diff/addr';
+location '/data/usl/vspc_idl/diff/addr';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_diff.addr;
+msck repair table usl_vspc_idl_diff.addr;
 
 -- Адрес: satellite table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_diff.addr_h;
+drop table if exists usl_vspc_idl_diff.addr_h;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_diff.addr_h (
+create external table usl_vspc_idl_diff.addr_h (
     addr_dp_code STRING,
     addr_sk BIGINT,
     ctl_action STRING,
@@ -212,15 +212,15 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_diff.addr_h (
 )
 partitioned by (ctl_loading BIGINT, ctl_do STRING)
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/diff/addr_h';
+location '/data/usl/vspc_idl/diff/addr_h';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_diff.addr_h;
+msck repair table usl_vspc_idl_diff.addr_h;
 
 -- Подразделение территориальной структуры: hub table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_diff.div_;
+drop table if exists usl_vspc_idl_diff.div_;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_diff.div_ (
+create external table usl_vspc_idl_diff.div_ (
     code STRING,
     ctl_action STRING,
     ctl_validfrom TIMESTAMP,
@@ -240,15 +240,15 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_diff.div_ (
 )
 partitioned by (ctl_loading BIGINT, ctl_do STRING)
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/diff/div_';
+location '/data/usl/vspc_idl/diff/div_';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_diff.div_;
+msck repair table usl_vspc_idl_diff.div_;
 
 -- Подразделение территориальной структуры: satellite table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_diff.div_h;
+drop table if exists usl_vspc_idl_diff.div_h;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_diff.div_h (
+create external table usl_vspc_idl_diff.div_h (
     ctl_action STRING,
     ctl_validfrom TIMESTAMP,
     div_dp_code STRING,
@@ -264,15 +264,15 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_diff.div_h (
 )
 partitioned by (ctl_loading BIGINT, ctl_do STRING)
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/diff/div_h';
+location '/data/usl/vspc_idl/diff/div_h';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_diff.div_h;
+msck repair table usl_vspc_idl_diff.div_h;
 
 -- Подразделение территориальной структуры: satellite table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_diff.div_type;
+drop table if exists usl_vspc_idl_diff.div_type;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_diff.div_type (
+create external table usl_vspc_idl_diff.div_type (
     ctl_action STRING,
     ctl_validfrom TIMESTAMP,
     div_dp_code STRING,
@@ -285,15 +285,15 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_diff.div_type (
 )
 partitioned by (ctl_loading BIGINT, ctl_do STRING)
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/diff/div_type';
+location '/data/usl/vspc_idl/diff/div_type';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_diff.div_type;
+msck repair table usl_vspc_idl_diff.div_type;
 
 -- Тип подразделений территориальной структуры: hub table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_diff.terr_div_type;
+drop table if exists usl_vspc_idl_diff.terr_div_type;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_diff.terr_div_type (
+create external table usl_vspc_idl_diff.terr_div_type (
     ctl_action STRING,
     ctl_validfrom TIMESTAMP,
     deleted_flag BOOLEAN,
@@ -305,9 +305,9 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_diff.terr_div_type (
 )
 partitioned by (ctl_loading BIGINT, ctl_do STRING)
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/diff/terr_div_type';
+location '/data/usl/vspc_idl/diff/terr_div_type';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_diff.terr_div_type;
+msck repair table usl_vspc_idl_diff.terr_div_type;
 
 
 
@@ -316,9 +316,9 @@ msck repair table usl_{{ logical_env_prefix }}vspc_idl_diff.terr_div_type;
 -- CTL_LOG tables
 ------------------------------------------------------------------------------------------------------------------------
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_stg.ctl_log;
+drop table if exists usl_vspc_idl_stg.ctl_log;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_stg.ctl_log(
+create external table usl_vspc_idl_stg.ctl_log(
         provider_product_code STRING,
         provider_dataset_code STRING,
         consumer_product_code STRING,
@@ -329,10 +329,10 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.ctl_log(
     ROW FORMAT DELIMITED
     FIELDS TERMINATED BY ','
     STORED AS TEXTFILE
-    location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/ctl_log'
+    location '/data/usl/vspc_idl/stg/ctl_log'
 	tblproperties ("skip.header.line.count"="1");
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.ctl_log;
+msck repair table usl_vspc_idl_stg.ctl_log;
 
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -346,9 +346,9 @@ msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.ctl_log;
 
 -- Адрес: hub table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_stg.addr;
+drop table if exists usl_vspc_idl_stg.addr;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_stg.addr (
+create external table usl_vspc_idl_stg.addr (
     addr_dp_code STRING,
     addr_sk BIGINT,
     city_name STRING,
@@ -374,15 +374,15 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.addr (
 )
 
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/addr';
+location '/data/usl/vspc_idl/stg/addr';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.addr;
+msck repair table usl_vspc_idl_stg.addr;
 
 -- Адрес: satellite table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_stg.addr_h;
+drop table if exists usl_vspc_idl_stg.addr_h;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_stg.addr_h (
+create external table usl_vspc_idl_stg.addr_h (
     addr_dp_code STRING,
     addr_sk BIGINT,
     ctl_loading BIGINT,
@@ -393,15 +393,15 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.addr_h (
 )
 partitioned by (p1month STRING)
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/addr_h';
+location '/data/usl/vspc_idl/stg/addr_h';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.addr_h;
+msck repair table usl_vspc_idl_stg.addr_h;
 
 -- Подразделение территориальной структуры: hub table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_stg.div_;
+drop table if exists usl_vspc_idl_stg.div_;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_stg.div_ (
+create external table usl_vspc_idl_stg.div_ (
     code STRING,
     ctl_loading BIGINT,
     ctl_validfrom TIMESTAMP,
@@ -421,15 +421,15 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.div_ (
 )
 
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/div_';
+location '/data/usl/vspc_idl/stg/div_';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.div_;
+msck repair table usl_vspc_idl_stg.div_;
 
 -- Подразделение территориальной структуры: satellite table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_stg.div_h;
+drop table if exists usl_vspc_idl_stg.div_h;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_stg.div_h (
+create external table usl_vspc_idl_stg.div_h (
     ctl_loading BIGINT,
     ctl_validfrom TIMESTAMP,
     div_dp_code STRING,
@@ -444,16 +444,16 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.div_h (
 )
 partitioned by (p1month STRING)
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/div_h';
+location '/data/usl/vspc_idl/stg/div_h';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.div_h;
+msck repair table usl_vspc_idl_stg.div_h;
 
 
 -- Подразделение территориальной структуры: satellite table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_stg.div_type;
+drop table if exists usl_vspc_idl_stg.div_type;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_stg.div_type (
+create external table usl_vspc_idl_stg.div_type (
     ctl_loading BIGINT,
     ctl_validfrom TIMESTAMP,
     div_dp_code STRING,
@@ -465,15 +465,15 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.div_type (
 )
 partitioned by (p1month STRING)
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/div_type';
+location '/data/usl/vspc_idl/stg/div_type';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.div_type;
+msck repair table usl_vspc_idl_stg.div_type;
 
 -- Тип подразделений территориальной структуры: hub table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_stg.terr_div_type;
+drop table if exists usl_vspc_idl_stg.terr_div_type;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_stg.terr_div_type (
+create external table usl_vspc_idl_stg.terr_div_type (
     ctl_loading BIGINT,
     ctl_validfrom TIMESTAMP,
     deleted_flag BOOLEAN,
@@ -484,9 +484,9 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.terr_div_type (
     terr_div_type_sk BIGINT
 )
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/terr_div_type';
+location '/data/usl/vspc_idl/stg/terr_div_type';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.terr_div_type;
+msck repair table usl_vspc_idl_stg.terr_div_type;
 
 
 
@@ -498,9 +498,9 @@ msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.terr_div_type;
 
 -- Адрес: hub table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_stg.diff_addr;
+drop table if exists usl_vspc_idl_stg.diff_addr;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_stg.diff_addr (
+create external table usl_vspc_idl_stg.diff_addr (
     addr_dp_code STRING,
     addr_sk BIGINT,
     city_name STRING,
@@ -526,15 +526,15 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.diff_addr (
 )
 partitioned by (ctl_loading BIGINT, ctl_do STRING)
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/diff_addr';
+location '/data/usl/vspc_idl/stg/diff_addr';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.diff_addr;
+msck repair table usl_vspc_idl_stg.diff_addr;
 
 -- Адрес: satellite table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_stg.diff_addr_h;
+drop table if exists usl_vspc_idl_stg.diff_addr_h;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_stg.diff_addr_h (
+create external table usl_vspc_idl_stg.diff_addr_h (
     addr_dp_code STRING,
     addr_sk BIGINT,
     ctl_action STRING,
@@ -546,15 +546,15 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.diff_addr_h (
 )
 partitioned by (ctl_loading BIGINT, ctl_do STRING)
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/diff_addr_h';
+location '/data/usl/vspc_idl/stg/diff_addr_h';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.diff_addr_h;
+msck repair table usl_vspc_idl_stg.diff_addr_h;
 
 -- Подразделение территориальной структуры: hub table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_stg.diff_div_;
+drop table if exists usl_vspc_idl_stg.diff_div_;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_stg.diff_div_ (
+create external table usl_vspc_idl_stg.diff_div_ (
     code STRING,
     ctl_action STRING,
     ctl_validfrom TIMESTAMP,
@@ -574,15 +574,15 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.diff_div_ (
 )
 partitioned by (ctl_loading BIGINT, ctl_do STRING)
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/diff_div_';
+location '/data/usl/vspc_idl/stg/diff_div_';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.diff_div_;
+msck repair table usl_vspc_idl_stg.diff_div_;
 
 -- Подразделение территориальной структуры: satellite table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_stg.diff_div_h;
+drop table if exists usl_vspc_idl_stg.diff_div_h;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_stg.diff_div_h (
+create external table usl_vspc_idl_stg.diff_div_h (
     ctl_action STRING,
     ctl_validfrom TIMESTAMP,
     div_dp_code STRING,
@@ -598,15 +598,15 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.diff_div_h (
 )
 partitioned by (ctl_loading BIGINT, ctl_do STRING)
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/diff_div_h';
+location '/data/usl/vspc_idl/stg/diff_div_h';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.diff_div_h;
+msck repair table usl_vspc_idl_stg.diff_div_h;
 
 -- Подразделение территориальной структуры: satellite table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_stg.diff_div_type;
+drop table if exists usl_vspc_idl_stg.diff_div_type;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_stg.diff_div_type (
+create external table usl_vspc_idl_stg.diff_div_type (
     ctl_action STRING,
     ctl_validfrom TIMESTAMP,
     div_dp_code STRING,
@@ -619,15 +619,15 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.diff_div_type (
 )
 partitioned by (ctl_loading BIGINT, ctl_do STRING)
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/diff_div_type';
+location '/data/usl/vspc_idl/stg/diff_div_type';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.diff_div_type;
+msck repair table usl_vspc_idl_stg.diff_div_type;
 
 -- Тип подразделений территориальной структуры: hub table
 
-drop table if exists usl_{{ logical_env_prefix }}vspc_idl_stg.diff_terr_div_type;
+drop table if exists usl_vspc_idl_stg.diff_terr_div_type;
 
-create external table usl_{{ logical_env_prefix }}vspc_idl_stg.diff_terr_div_type (
+create external table usl_vspc_idl_stg.diff_terr_div_type (
     ctl_action STRING,
     ctl_validfrom TIMESTAMP,
     deleted_flag BOOLEAN,
@@ -639,8 +639,8 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.diff_terr_div_typ
 )
 partitioned by (ctl_loading BIGINT, ctl_do STRING)
 stored as parquet
-location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/diff_terr_div_type';
+location '/data/usl/vspc_idl/stg/diff_terr_div_type';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.diff_terr_div_type;
+msck repair table usl_vspc_idl_stg.diff_terr_div_type;
 
 
