@@ -71,16 +71,11 @@ workflows:
       type: principal
       orchestrator: oozie
       killyarnjobonerror: true
-      schedule:
-            type: "{{ ctl_schedule_type }}"
       schedule_params:
-            eventAwaitStrategy: "and"
-            entities:
-                - entity:
-                    id: 928039295
-                    statisticId: 2
-                    profile: ts_espd
-                    active: true
+        eventAwaitStrategy: "or"
+        cron:
+          expression: "* * * * *"
+          active: false
       params:
         - param:
             name: debug_distributive_path
