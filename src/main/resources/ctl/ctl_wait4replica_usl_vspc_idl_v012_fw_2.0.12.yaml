@@ -22,7 +22,7 @@ workflows:
       orchestrator: oozie
       killyarnjobonerror: true
       schedule_params:
-        eventAwaitStrategy: "or"
+        eventAwaitStrategy: "and"
         cron:
           expression: "* * * * *"
           active: false
@@ -72,7 +72,7 @@ workflows:
       orchestrator: oozie
       killyarnjobonerror: true
       schedule_params:
-        eventAwaitStrategy: "or"
+        eventAwaitStrategy: "and"
         cron:
           expression: "* * * * *"
           active: false
