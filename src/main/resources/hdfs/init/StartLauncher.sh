@@ -25,11 +25,11 @@ hdfs dfs -get ${dm_builder_jar} ${dm_builder_jar_local}
 
 timestamp=$(date +%Y-%m-%dT%H:%M:%S)
 
-echo "curl -d '{"loading_id": '$loading_id', "entity_id": '$entity_id', "stat_id": 12, "avalue": [ '$timestamp' ]' -H "Content-Type: application/json" -X POST $ctl/v1/api/statval/m"
+echo "curl -d '{"loading_id": '$loading_id', "entity_id": '$entity_id', "stat_id": 12, "avalue": [ '$timestamp' ]}' -H "Content-Type: application/json" -X POST $ctl/v1/api/statval/m"
 
 echo "Start write statistic to ctl"
 
-curl -d '{"loading_id": '$loading_id', "entity_id": '$entity_id', "stat_id": 12, "avalue": [ "'$timestamp'" ]' -H "Content-Type: application/json" -X POST $ctl/v1/api/statval/m
+curl -d '{"loading_id": '$loading_id', "entity_id": '$entity_id', "stat_id": 12, "avalue": [ "'$timestamp'" ]}' -H "Content-Type: application/json" -X POST $ctl/v1/api/statval/m
 
 echo "End write statistic to ctl"
 
