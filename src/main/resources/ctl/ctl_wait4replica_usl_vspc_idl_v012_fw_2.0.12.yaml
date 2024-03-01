@@ -32,7 +32,7 @@ workflows:
             prior_value: /oozie-app/bsp/VSPC/vspc_idl/lib
         - param:
             name: devops_distributive_jar
-            prior_value: "vspc_idl-D-01.302.002-jar-with-dependencies.jar"
+            prior_value: "vspc_idl-D-01.302.003-jar-with-dependencies.jar"
         - param:
             name: data_sets
             prior_value: addr,addrh,div,divh,divtype,terrdivtype
@@ -42,9 +42,6 @@ workflows:
         - param:
             name: spark_parameters
             prior_value: "{{ sparkConf }}"
-        - param:
-            name: hms_src_schema
-            prior_value: "{{ src_schema }}"
         - param:
             name: debug_logical_env
             prior_value: "{{ logical_env }}"
@@ -66,10 +63,6 @@ workflows:
         - param:
             name: debug_sk_off
             prior_value: "ON"
-        - param:
-        # Профиль кластера
-            name: profile_name
-            prior_value: "{{ CTL_PROFILE_NAME }}"
   - "{{ logical_env_prefix }}USL_VSPC_IDL":
       name: "{{ logical_env_prefix }}USL_VSPC_IDL"
       category: "{{ logical_env_prefix }}USL_IDL"
@@ -94,7 +87,7 @@ workflows:
             prior_value: /oozie-app/bsp/VSPC/vspc_idl/lib
         - param:
             name: devops_distributive_jar
-            prior_value: "vspc_idl-D-01.302.002-jar-with-dependencies.jar"
+            prior_value: "vspc_idl-D-01.302.003-jar-with-dependencies.jar"
         - param:
             name: data_sets
             prior_value: addr,addrh,div,divh,divtype,terrdivtype
@@ -104,9 +97,6 @@ workflows:
         - param:
             name: spark_parameters
             prior_value: "{{ sparkConf }}"
-        - param:
-            name: hms_src_schema
-            prior_value: "{{ src_schema }}"
         - param:
             name: debug_logical_env
             prior_value: "{{ logical_env }}"
@@ -129,10 +119,6 @@ workflows:
             name: debug_sk_off
             prior_value: "ON"
             # Привязка нотификаций
-        - param:
-        # Профиль кластера
-            name: profile_name
-            prior_value: "{{ CTL_PROFILE_NAME }}"
       notifications:
         - { status: "ERROR", emails: [ "MDLisitsa@sberbank.ru", " alvmanuylov@sberbank.ru" ] }
         - { status: "SUCCESS", emails: [ "MDLisitsa@sberbank.ru", " alvmanuylov@sberbank.ru" ] }

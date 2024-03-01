@@ -1,5 +1,5 @@
 {
-  "version": "D-01.302.002",
+  "version": "D-01.302.003",
   "stand_name": "fess",
   "build": "maven",
   "block": "bsp",
@@ -73,8 +73,7 @@
   ],
   "template_files": [
   ],
-  "workflow_to_run_scenario": [
-  ],
   "workflow_to_run" : [
+    "USL_VSPC_IDL"
   ]
 }
