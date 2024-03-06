@@ -25,11 +25,11 @@
   },
   "distrib_files": [
     {
-      "source": "src/main/resources/ctl/ctl_wait4replica_usl_vspc_idl_v013_fw_2.0.12.yaml",
+      "source": "src/main/resources/ctl/ctl_wait4replica_usl_vspc_idl_v012_fw_2.0.12.yaml",
       "destination": "ctl/"
     },
     {
-      "source": "src/main/resources/ctl/ctl_wait4replica_usl_vspc_idl_v013_triv_fw_2.0.12.yaml",
+      "source": "src/main/resources/ctl/ctl_wait4replica_usl_vspc_idl_v012_triv_fw_2.0.12.yaml",
       "destination": "ctl/"
     },
     {
