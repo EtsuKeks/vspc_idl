@@ -7,7 +7,7 @@ team:
     # название команды в МУСе
     mus_name: "VSPC_IDL",
     # почтовый адрес Product Owner в МУСе для уведомлений с результатами сканирования. Возможно указание нескольких email через ;
-    mus_po_mail: "MDLisitsa@sberbank.ru;dvilapshin@sberbank.ru",
+    mus_po_mail: "MDLisitsa@sberbank.ru;dvilapshin@sberbank.ru;ANikUsikov@sberbank.ru;SATatuyko@sberbank.ru",
   }
 #  - {
 #      # Вторую и последующие команды необходимо добавить по формату, аналогично первой
@@ -46,4 +46,4 @@ oss:
   # Пример: "**/utils/**/*.xml" - исключение всех xml файлов во всех папках utils
   # !!! Перечисление нескольких масок возможно через знаки "," или ";" внутри одной строки, например, "**/*test*/**; **/*.txt, .git/**" !!!
   # !!! Пропуски в каждой маске справа и слева автоматически удалятся (trim) !!!
-  excludes: ""
+  excludes: "src/main/**"
