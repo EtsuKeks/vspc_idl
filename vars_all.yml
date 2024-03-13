@@ -15,6 +15,7 @@
 # 11/11/2021 - начальная версия
 #
 
+
 vars: &commonVars
   YARN_QUEUE: "default"
   supportTeam: "РО: Мануйлов Алексей/alvmanuylov@sberbank.ru"      # CTL -> support_team
