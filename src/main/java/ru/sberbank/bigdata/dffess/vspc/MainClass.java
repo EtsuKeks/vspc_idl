@@ -29,6 +29,8 @@ public class MainClass {
         WfConfBuilder wfConfBuilder = new WfConfBuilder(cmdArgs, VpscConstant.DATA_PRODUCT, VpscConstant.CTL_ENTITY_ID);
         WfConfiguration wfConfiguration = wfConfBuilder.build();
 
+        wfConfiguration.setValue("hms_src_schema", "usl_vspc_idl_in_snp");
+
         List<String> tmp = Stream.of(cmdArgs.get(launcherList).split(",")).collect(Collectors.toCollection(ArrayList::new));
         Map<String, String> mainThreads = getRcrsMap();
         List<Triple<String, ThreadConfiguration, Class>> launcherTriplesRcrs = generateTriples(tmp, mainThreads, "ru.sberbank.bigdata.dffess.vspc.tables.", cmdArgs);
