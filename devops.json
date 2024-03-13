@@ -1,5 +1,5 @@
 {
-  "version": "D-01.302.006",
+  "version": "D-01.302.007",
   "stand_name": "fess",
   "build": "maven",
   "block": "bsp",
