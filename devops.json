@@ -1,5 +1,5 @@
 {
-  "version": "D-01.302.007",
+  "version": "D-01.302.008",
   "stand_name": "fess",
   "build": "maven",
   "block": "t",
@@ -23,6 +23,14 @@
     "pom_path": "pom.xml",
     "set_path": "src/main/resources/devops/ci-settings.xml"
   },
+
+  "ess": {
+    "meta": [
+      "src/main/resources/usl/certification/cap_certification_usl.vspc_idl_v012_fw_2.0.9.json",
+      "src/main/resources/usl/dsm/cap_dsm_usl.vspc_idl_v012_fw_2.0.9.json"
+    ]
+  },
+
   "distrib_files": [
     {
       "source": "src/main/resources/ctl/ctl_wait4replica_usl_vspc_idl_v012_fw_2.0.12.yaml",
