@@ -47,6 +47,7 @@ stands:
       resourceGroupTriv: "vspc"
       hadoop_default_fs_uri_triv: "hdfs://FESS-DEV"
       ctl_schedule_type: "none"
+      uslCluster: "SDPDEVFESS"
       
   # IFT
   - stand_inventory: sdpiftfess
@@ -63,6 +64,7 @@ stands:
       resourceGroupTriv: "vspc"
       hadoop_default_fs_uri_triv: "hdfs://FESS-IFT"
       ctl_schedule_type: "none"
+      uslCluster: "SDPIFTFESS"
 
   # RDT
   - stand_inventory: utarnsdpfess
@@ -78,6 +80,7 @@ stands:
       resourceGroupTriv: "vspc"
       hadoop_default_fs_uri_triv: "hdfs://utarnsdpfess"
       ctl_schedule_type: "none"
+      uslCluster: "UTARNSDPFESS"
 
   # PROM
   - stand_inventory: arnsdpfess
@@ -94,6 +97,7 @@ stands:
       resourceGroupTriv: "vspc"
       hadoop_default_fs_uri_triv: "hdfs://arnsdpfess"
       ctl_schedule_type: "on-schedule"
+      uslCluster: "ARNSDPFESS"
 
   # PROM NEW
   - stand_inventory: arnsdpfess2
@@ -110,3 +114,4 @@ stands:
       resourceGroupTriv: "vspc"
       hadoop_default_fs_uri_triv: "hdfs://arnsdpfess2"
       ctl_schedule_type: "on-schedule"
+      uslCluster: "ARNSDPFESS2"
