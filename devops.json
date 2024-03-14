@@ -1,5 +1,5 @@
 {
-  "version": "D-01.302.008",
+  "version": "D-01.302.009",
   "stand_name": "fess",
   "build": "maven",
   "block": "t",
@@ -26,8 +26,7 @@
 
   "ess": {
     "meta": [
-      "src/main/resources/usl/certification/cap_certification_usl.vspc_idl_v012_fw_2.0.9.json",
-      "src/main/resources/usl/dsm/cap_dsm_usl.vspc_idl_v012_fw_2.0.9.json"
+      "usl/dsm/cap_dsm_usl.vspc_idl_v012_fw_2.0.9.json"
     ]
   },
 
