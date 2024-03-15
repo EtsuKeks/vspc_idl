@@ -23,8 +23,8 @@ workflows:
         entities:
           - entity:
               # original entity id 801005314 - vspc_idl
-              id: "801{{ logical_env_ctl_entity_logenv_number }}5314"
-              statisticId: 12
+              id: "801005314"
+              statisticId: 2
               profile: "{{ CTL_PROFILE_NAME }}"
               active: true
       params:
@@ -35,7 +35,7 @@ workflows:
         - param:
         # NameNode claster
             name: defaultFs
-            prior_value: "{{ hadoop_default_fs_uri }}"
+            prior_value: "{{ hadoop_default_fs_uri_triv }}"
         - param:
         # параметр среды для логического окружения
             name: env
@@ -47,15 +47,15 @@ workflows:
         - param:
         # путь до утилиты
             name: jars_path
-            prior_value: "{{ hdfs_path }}"
+            prior_value: "{{ hdfs_path_triv }}"
         - param:
         # Под кем авторизуемся, для Ndl  и IDL  разные
             name: keytab
-            prior_value: "{{ user_name }}.keytab"
+            prior_value: "{{ USER_NAME }}.keytab"
         - param:
         # Логи
             name: logs_path
-            prior_value: "{{ hdfs_path }}/log"
+            prior_value: "{{ hdfs_path_triv }}/log"
         - param:
         # Метод запуска
             name: method
@@ -63,11 +63,11 @@ workflows:
         - param:
         # Путь для до workflow.xml
             name: oozie.wf.application.path
-            prior_value: "{{ hdfs_path }}"
+            prior_value: "{{ hdfs_path_triv }}"
         - param:
         # авторизация в hdfs
             name: principal
-            prior_value: "{{ user_name }}@{{ domain }}"
+            prior_value: "{{ USER_NAME }}@{{ REALM }}"
         - param:
         # Какой дата продукт backup
             name: productEntityId
@@ -83,11 +83,11 @@ workflows:
         - param:
         # Очередь задания в oozie
             name: ss_queue
-            prior_value: "{{ resourceGroup }}"
+            prior_value: "{{ resourceGroupTriv }}"
         - param:
         # имя пользователя под кем запускается backup
             name: user.name
-            prior_value: "{{ user_name }}"
+            prior_value: "{{ USER_NAME }}"
         - param:
         # путь до keytab
             name: user_keytab_path
@@ -123,7 +123,7 @@ workflows:
         - param:
         # NameNode claster
             name: defaultFs
-            prior_value: "{{ hadoop_default_fs_uri }}"
+            prior_value: "{{ hadoop_default_fs_uri_triv }}"
         - param:
         # параметр среды для логического окружения
             name: env
@@ -135,15 +135,15 @@ workflows:
         - param:
         # путь до утилиты
             name: jars_path
-            prior_value: "{{ hdfs_path }}"
+            prior_value: "{{ hdfs_path_triv }}"
         - param:
         # Под кем авторизуемся, для Ndl  и IDL  разные
             name: keytab
-            prior_value: "{{ user_name }}.keytab"
+            prior_value: "{{ USER_NAME }}.keytab"
         - param:
         # Логи
             name: logs_path
-            prior_value: "{{ hdfs_path }}/log"
+            prior_value: "{{ hdfs_path_triv }}/log"
         - param:
         # Метод запуска
             name: method
@@ -151,11 +151,11 @@ workflows:
         - param:
         # Путь для до workflow.xml
             name: oozie.wf.application.path
-            prior_value: "{{ hdfs_path }}"
+            prior_value: "{{ hdfs_path_triv }}"
         - param:
         # авторизация в hdfs
             name: principal
-            prior_value: "{{ user_name }}@{{ domain }}"
+            prior_value: "{{ USER_NAME }}@{{ REALM }}"
         - param:
         # Какой дата продукт backup
             name: productEntityId
@@ -171,11 +171,11 @@ workflows:
         - param:
         # Очередь задания в oozie
             name: ss_queue
-            prior_value: "{{ resourceGroup }}"
+            prior_value: "{{ resourceGroupTriv }}"
         - param:
         # имя пользователя под кем запускается backup
             name: user.name
-            prior_value: "{{ user_name }}"
+            prior_value: "{{ USER_NAME }}"
         - param:
         # путь до keytab
             name: user_keytab_path
@@ -193,4 +193,4 @@ workflows:
             name: bkpNumbers
             prior_value: 2
       notifications:
-          - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru" ] }
+          - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru","dvilapshin@sberbank.ru" ] }
