@@ -29,7 +29,7 @@ workflows:
       params:
         - param:
             name: debug_distributive_path
-            prior_value: /oozie-app/bsp/VSPC/vspc_idl/lib
+            prior_value: /oozie-app/t/idl/vspc_idl/lib
         - param:
             name: devops_distributive_jar
             prior_value: "vspc_idl-D-01.302.009-jar-with-dependencies.jar"
@@ -47,7 +47,7 @@ workflows:
             prior_value: "{{ logical_env }}"
         - param:
             name: oozie.wf.application.path
-            prior_value: /oozie-app/bsp/VSPC/vspc_idl/init
+            prior_value: /oozie-app/t/idl/vspc_idl/init
         - param:
             name: user.name
             prior_value: "{{ USER_NAME }}"
@@ -79,7 +79,7 @@ workflows:
       params:
         - param:
             name: debug_distributive_path
-            prior_value: /oozie-app/bsp/VSPC/vspc_idl/lib
+            prior_value: /oozie-app/t/idl/vspc_idl/lib
         - param:
             name: devops_distributive_jar
             prior_value: "vspc_idl-D-01.302.009-jar-with-dependencies.jar"
@@ -97,7 +97,7 @@ workflows:
             prior_value: "{{ logical_env }}"
         - param:
             name: oozie.wf.application.path
-            prior_value: /oozie-app/bsp/VSPC/vspc_idl/init
+            prior_value: /oozie-app/t/idl/vspc_idl/init
         - param:
             name: user.name
             prior_value: "{{ USER_NAME }}"
