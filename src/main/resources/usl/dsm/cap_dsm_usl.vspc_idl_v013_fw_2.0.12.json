@@ -79,9 +79,40 @@
             "idColumnSidPath": null,
             "idColumnInterpreterPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_H.DIV_DP_CODE",
             "idColumnDirtyPath": null
+        },
+        {
+            "idEntityPath": "EDM.TERR_DIV_TYPE",
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TERR_DIV_TYPE",
+            "codeLayer": "USL",
+            "idProductPath": "VSPC_IDL",
+            "idColumnIdPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TERR_DIV_TYPE.TERR_DIV_TYPE_SK",
+            "idColumnSidPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TERR_DIV_TYPE.SID",
+            "idColumnInterpreterPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TERR_DIV_TYPE.TERR_DIV_TYPE_DP_CODE",
+            "idColumnDirtyPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TERR_DIV_TYPE.DIRTY_FLAG"
+        },
+        {
+            "idEntityPath": "EDM.TERR_DIV_TYPE",
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.TERR_DIV_TYPE",
+            "codeLayer": "USL",
+            "idProductPath": "VSPC_IDL",
+            "idColumnIdPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.TERR_DIV_TYPE.TERR_DIV_TYPE_SK",
+            "idColumnSidPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.TERR_DIV_TYPE.SID",
+            "idColumnInterpreterPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.TERR_DIV_TYPE.TERR_DIV_TYPE_DP_CODE",
+            "idColumnDirtyPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.TERR_DIV_TYPE.DIRTY_FLAG"
         }
     ],
     "TbLgPhColumnAsn": [
+        {
+            "idAttributePath": "EDM.TERR_DIV_TYPE.DIV_TYPE_CODE",
+            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TERR_DIV_TYPE.DIV_TYPE_CODE",
+            "codeLayer": "USL",
+            "idProductPath": "VSPC_IDL",
+            "idCurrencyAttrPath": null,
+            "idDomainValuePath": null,
+            "idColumnStartDatePath": null,
+            "idColumnEndDatePath": null,
+            "idColumnFkInterpreterPath": null
+        },
         {
             "idAttributePath": "EDM.ADDR.SRC_TXT",
             "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.SRC_TXT",
@@ -160,6 +191,28 @@
             "idColumnFkInterpreterPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.RUS_FED_SUBJ_DP_CODE"
         },
         {
+            "idAttributePath": "EDM.ADDR.IDX_NUM",
+            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.IDX_NUM",
+            "codeLayer": "USL",
+            "idProductPath": "VSPC_IDL",
+            "idCurrencyAttrPath": null,
+            "idDomainValuePath": null,
+            "idColumnStartDatePath": null,
+            "idColumnEndDatePath": null,
+            "idColumnFkInterpreterPath": null
+        },
+        {
+            "idAttributePath": "EDM.ADDR.@CNTRY",
+            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.CNTRY_SK",
+            "codeLayer": "USL",
+            "idProductPath": "VSPC_IDL",
+            "idCurrencyAttrPath": null,
+            "idDomainValuePath": null,
+            "idColumnStartDatePath": null,
+            "idColumnEndDatePath": null,
+            "idColumnFkInterpreterPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.CNTRY_DP_CODE"
+        },
+        {
             "idAttributePath": "EDM.ADDR.LOCTY_NAME",
             "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.LOCTY_NAME",
             "codeLayer": "USL",
@@ -180,6 +233,17 @@
             "idColumnStartDatePath": null,
             "idColumnEndDatePath": null,
             "idColumnFkInterpreterPath": null
+        },
+        {
+            "idAttributePath": "EDM.ADDR.@OKATO2",
+            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.OKATO2_SK",
+            "codeLayer": "USL",
+            "idProductPath": "VSPC_IDL",
+            "idCurrencyAttrPath": null,
+            "idDomainValuePath": null,
+            "idColumnStartDatePath": null,
+            "idColumnEndDatePath": null,
+            "idColumnFkInterpreterPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.OKATO2_DP_CODE"
         },
         {
             "idAttributePath": "EDM.ADDR.STANDARD_ADDR_TXT",
@@ -204,19 +268,19 @@
             "idColumnFkInterpreterPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.FACT_ADDR_DP_CODE"
         },
         {
-            "idAttributePath": "EDM.DIV.CODE",
-            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.CODE",
+            "idAttributePath": "EDM.DIV.DIV_TYPE@TERR_DIV_TYPE",
+            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.DIV_TYPE_TERR_DIV_TYPE_SK",
             "codeLayer": "USL",
             "idProductPath": "VSPC_IDL",
             "idCurrencyAttrPath": null,
             "idDomainValuePath": null,
-            "idColumnStartDatePath": null,
-            "idColumnEndDatePath": null,
-            "idColumnFkInterpreterPath": null
+            "idColumnStartDatePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.START_DT",
+            "idColumnEndDatePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.END_DT",
+            "idColumnFkInterpreterPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.DIV_TYPE_TERR_DIV_TYPE_DP_CODE"
         },
         {
-            "idAttributePath": "EDM.DIV.DIV_CLOSE_DT",
-            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.DIV_CLOSE_DT",
+            "idAttributePath": "EDM.DIV.CODE",
+            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.CODE",
             "codeLayer": "USL",
             "idProductPath": "VSPC_IDL",
             "idCurrencyAttrPath": null,
@@ -237,17 +301,6 @@
             "idColumnFkInterpreterPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.DIV_UPS_PAY_SYS_PRTCPNT_DP_CODE"
         },
         {
-            "idAttributePath": "EDM.DIV.DIV_OPEN_DT",
-            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.DIV_OPEN_DT",
-            "codeLayer": "USL",
-            "idProductPath": "VSPC_IDL",
-            "idCurrencyAttrPath": null,
-            "idDomainValuePath": null,
-            "idColumnStartDatePath": null,
-            "idColumnEndDatePath": null,
-            "idColumnFkInterpreterPath": null
-        },
-        {
             "idAttributePath": "EDM.DIV.DIV_NAME",
             "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.DIV_NAME",
             "codeLayer": "USL",
@@ -256,17 +309,6 @@
             "idDomainValuePath": null,
             "idColumnStartDatePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.START_DT",
             "idColumnEndDatePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.END_DT",
-            "idColumnFkInterpreterPath": null
-        },
-        {
-            "idAttributePath": "EDM.DIV.SUBBRANCH_CODE",
-            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.SUBBRANCH_CODE",
-            "codeLayer": "USL",
-            "idProductPath": "VSPC_IDL",
-            "idCurrencyAttrPath": null,
-            "idDomainValuePath": null,
-            "idColumnStartDatePath": null,
-            "idColumnEndDatePath": null,
             "idColumnFkInterpreterPath": null
         },
         {
@@ -290,6 +332,61 @@
             "idColumnStartDatePath": null,
             "idColumnEndDatePath": null,
             "idColumnFkInterpreterPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.PARENT_DIV_DP_CODE"
+        },
+        {
+            "idAttributePath": "EDM.DIV.SHORT_DIV_CODE",
+            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.SHORT_DIV_CODE",
+            "codeLayer": "USL",
+            "idProductPath": "VSPC_IDL",
+            "idCurrencyAttrPath": null,
+            "idDomainValuePath": null,
+            "idColumnStartDatePath": null,
+            "idColumnEndDatePath": null,
+            "idColumnFkInterpreterPath": null
+        },
+        {
+            "idAttributePath": "EDM.DIV.DIV_CLOSE_DT",
+            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.DIV_CLOSE_DT",
+            "codeLayer": "USL",
+            "idProductPath": "VSPC_IDL",
+            "idCurrencyAttrPath": null,
+            "idDomainValuePath": null,
+            "idColumnStartDatePath": null,
+            "idColumnEndDatePath": null,
+            "idColumnFkInterpreterPath": null
+        },
+        {
+            "idAttributePath": "EDM.DIV.DIV_OPEN_DT",
+            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.DIV_OPEN_DT",
+            "codeLayer": "USL",
+            "idProductPath": "VSPC_IDL",
+            "idCurrencyAttrPath": null,
+            "idDomainValuePath": null,
+            "idColumnStartDatePath": null,
+            "idColumnEndDatePath": null,
+            "idColumnFkInterpreterPath": null
+        },
+        {
+            "idAttributePath": "EDM.DIV.SUBBRANCH_CODE",
+            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.SUBBRANCH_CODE",
+            "codeLayer": "USL",
+            "idProductPath": "VSPC_IDL",
+            "idCurrencyAttrPath": null,
+            "idDomainValuePath": null,
+            "idColumnStartDatePath": null,
+            "idColumnEndDatePath": null,
+            "idColumnFkInterpreterPath": null
+        },
+        {
+            "idAttributePath": "EDM.TERR_DIV_TYPE.DIV_TYPE_CODE",
+            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.TERR_DIV_TYPE.DIV_TYPE_CODE",
+            "codeLayer": "USL",
+            "idProductPath": "VSPC_IDL",
+            "idCurrencyAttrPath": null,
+            "idDomainValuePath": null,
+            "idColumnStartDatePath": null,
+            "idColumnEndDatePath": null,
+            "idColumnFkInterpreterPath": null
         },
         {
             "idAttributePath": "EDM.ADDR.SRC_TXT",
@@ -369,6 +466,28 @@
             "idColumnFkInterpreterPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.ADDR.RUS_FED_SUBJ_DP_CODE"
         },
         {
+            "idAttributePath": "EDM.ADDR.IDX_NUM",
+            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.ADDR.IDX_NUM",
+            "codeLayer": "USL",
+            "idProductPath": "VSPC_IDL",
+            "idCurrencyAttrPath": null,
+            "idDomainValuePath": null,
+            "idColumnStartDatePath": null,
+            "idColumnEndDatePath": null,
+            "idColumnFkInterpreterPath": null
+        },
+        {
+            "idAttributePath": "EDM.ADDR.@CNTRY",
+            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.ADDR.CNTRY_SK",
+            "codeLayer": "USL",
+            "idProductPath": "VSPC_IDL",
+            "idCurrencyAttrPath": null,
+            "idDomainValuePath": null,
+            "idColumnStartDatePath": null,
+            "idColumnEndDatePath": null,
+            "idColumnFkInterpreterPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.ADDR.CNTRY_DP_CODE"
+        },
+        {
             "idAttributePath": "EDM.ADDR.LOCTY_NAME",
             "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.ADDR.LOCTY_NAME",
             "codeLayer": "USL",
@@ -389,6 +508,17 @@
             "idColumnStartDatePath": null,
             "idColumnEndDatePath": null,
             "idColumnFkInterpreterPath": null
+        },
+        {
+            "idAttributePath": "EDM.ADDR.@OKATO2",
+            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.ADDR.OKATO2_SK",
+            "codeLayer": "USL",
+            "idProductPath": "VSPC_IDL",
+            "idCurrencyAttrPath": null,
+            "idDomainValuePath": null,
+            "idColumnStartDatePath": null,
+            "idColumnEndDatePath": null,
+            "idColumnFkInterpreterPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.ADDR.OKATO2_DP_CODE"
         },
         {
             "idAttributePath": "EDM.ADDR.STANDARD_ADDR_TXT",
@@ -413,19 +543,19 @@
             "idColumnFkInterpreterPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_H.FACT_ADDR_DP_CODE"
         },
         {
-            "idAttributePath": "EDM.DIV.CODE",
-            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_.CODE",
+            "idAttributePath": "EDM.DIV.DIV_TYPE@TERR_DIV_TYPE",
+            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_TYPE.DIV_TYPE_TERR_DIV_TYPE_SK",
             "codeLayer": "USL",
             "idProductPath": "VSPC_IDL",
             "idCurrencyAttrPath": null,
             "idDomainValuePath": null,
-            "idColumnStartDatePath": null,
-            "idColumnEndDatePath": null,
-            "idColumnFkInterpreterPath": null
+            "idColumnStartDatePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_TYPE.START_DT",
+            "idColumnEndDatePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_TYPE.END_DT",
+            "idColumnFkInterpreterPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_TYPE.DIV_TYPE_TERR_DIV_TYPE_DP_CODE"
         },
         {
-            "idAttributePath": "EDM.DIV.DIV_CLOSE_DT",
-            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_.DIV_CLOSE_DT",
+            "idAttributePath": "EDM.DIV.CODE",
+            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_.CODE",
             "codeLayer": "USL",
             "idProductPath": "VSPC_IDL",
             "idCurrencyAttrPath": null,
@@ -446,17 +576,6 @@
             "idColumnFkInterpreterPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_H.DIV_UPS_PAY_SYS_PRTCPNT_DP_CODE"
         },
         {
-            "idAttributePath": "EDM.DIV.DIV_OPEN_DT",
-            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_.DIV_OPEN_DT",
-            "codeLayer": "USL",
-            "idProductPath": "VSPC_IDL",
-            "idCurrencyAttrPath": null,
-            "idDomainValuePath": null,
-            "idColumnStartDatePath": null,
-            "idColumnEndDatePath": null,
-            "idColumnFkInterpreterPath": null
-        },
-        {
             "idAttributePath": "EDM.DIV.DIV_NAME",
             "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_H.DIV_NAME",
             "codeLayer": "USL",
@@ -465,17 +584,6 @@
             "idDomainValuePath": null,
             "idColumnStartDatePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_H.START_DT",
             "idColumnEndDatePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_H.END_DT",
-            "idColumnFkInterpreterPath": null
-        },
-        {
-            "idAttributePath": "EDM.DIV.SUBBRANCH_CODE",
-            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_.SUBBRANCH_CODE",
-            "codeLayer": "USL",
-            "idProductPath": "VSPC_IDL",
-            "idCurrencyAttrPath": null,
-            "idDomainValuePath": null,
-            "idColumnStartDatePath": null,
-            "idColumnEndDatePath": null,
             "idColumnFkInterpreterPath": null
         },
         {
@@ -499,6 +607,50 @@
             "idColumnStartDatePath": null,
             "idColumnEndDatePath": null,
             "idColumnFkInterpreterPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_.PARENT_DIV_DP_CODE"
+        },
+        {
+            "idAttributePath": "EDM.DIV.SHORT_DIV_CODE",
+            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_.SHORT_DIV_CODE",
+            "codeLayer": "USL",
+            "idProductPath": "VSPC_IDL",
+            "idCurrencyAttrPath": null,
+            "idDomainValuePath": null,
+            "idColumnStartDatePath": null,
+            "idColumnEndDatePath": null,
+            "idColumnFkInterpreterPath": null
+        },
+        {
+            "idAttributePath": "EDM.DIV.DIV_CLOSE_DT",
+            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_.DIV_CLOSE_DT",
+            "codeLayer": "USL",
+            "idProductPath": "VSPC_IDL",
+            "idCurrencyAttrPath": null,
+            "idDomainValuePath": null,
+            "idColumnStartDatePath": null,
+            "idColumnEndDatePath": null,
+            "idColumnFkInterpreterPath": null
+        },
+        {
+            "idAttributePath": "EDM.DIV.DIV_OPEN_DT",
+            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_.DIV_OPEN_DT",
+            "codeLayer": "USL",
+            "idProductPath": "VSPC_IDL",
+            "idCurrencyAttrPath": null,
+            "idDomainValuePath": null,
+            "idColumnStartDatePath": null,
+            "idColumnEndDatePath": null,
+            "idColumnFkInterpreterPath": null
+        },
+        {
+            "idAttributePath": "EDM.DIV.SUBBRANCH_CODE",
+            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_.SUBBRANCH_CODE",
+            "codeLayer": "USL",
+            "idProductPath": "VSPC_IDL",
+            "idCurrencyAttrPath": null,
+            "idDomainValuePath": null,
+            "idColumnStartDatePath": null,
+            "idColumnEndDatePath": null,
+            "idColumnFkInterpreterPath": null
         }
     ],
     "TbPhPlatform": [
@@ -594,14 +746,50 @@
             "descriptionTable": "Подразделение территориальной структуры: satellite table",
             "idSuperTablePath": "HADOOP#{{ uslCluster }}#USL_VSPC_IDL_SNP#DIV_H",
             "typeFromGroup": "DIFF"
+        },
+        {
+            "idSchemePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP",
+            "codeTable": "DIV_TYPE",
+            "typeTable": "TABLE",
+            "nameTable": "Подразделение территориальной структуры: satellite table",
+            "descriptionTable": "Подразделение территориальной структуры: satellite table",
+            "idSuperTablePath": "HADOOP#{{ uslCluster }}#USL_VSPC_IDL_SNP#DIV_TYPE",
+            "typeFromGroup": "SNP"
+        },
+        {
+            "idSchemePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF",
+            "codeTable": "DIV_TYPE",
+            "typeTable": "TABLE",
+            "nameTable": "Подразделение территориальной структуры: satellite table",
+            "descriptionTable": "Подразделение территориальной структуры: satellite table",
+            "idSuperTablePath": "HADOOP#{{ uslCluster }}#USL_VSPC_IDL_SNP#DIV_TYPE",
+            "typeFromGroup": "DIFF"
+        },
+        {
+            "idSchemePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP",
+            "codeTable": "TERR_DIV_TYPE",
+            "typeTable": "TABLE",
+            "nameTable": "Тип подразделений территориальной структуры: hub table",
+            "descriptionTable": "Тип подразделений территориальной структуры: hub table",
+            "idSuperTablePath": "HADOOP#{{ uslCluster }}#USL_VSPC_IDL_SNP#TERR_DIV_TYPE",
+            "typeFromGroup": "SNP"
+        },
+        {
+            "idSchemePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF",
+            "codeTable": "TERR_DIV_TYPE",
+            "typeTable": "TABLE",
+            "nameTable": "Тип подразделений территориальной структуры: hub table",
+            "descriptionTable": "Тип подразделений территориальной структуры: hub table",
+            "idSuperTablePath": "HADOOP#{{ uslCluster }}#USL_VSPC_IDL_SNP#TERR_DIV_TYPE",
+            "typeFromGroup": "DIFF"
         }
     ],
     "TbPhColumn": [
         {
             "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR",
             "codeColumn": "ADDR_DP_CODE",
-            "nameColumn": "Код интерпретирующего data-продукта для экземпляра сущности",
-            "descriptionColumn": "Код интерпретирующего data-продукта для экземпляра сущности",
+            "nameColumn": "Код интерпретирующего data-продукта для данного экземпляра сущности &#39;Адрес&#39; (для поля &#39;addr_sk&#39;)",
+            "descriptionColumn": "Код интерпретирующего data-продукта для данного экземпляра сущности &#39;Адрес&#39; (для поля &#39;addr_sk&#39;)",
             "idDatatypePath": "HADOOP.STRING",
             "dataLength": null,
             "dataPrecision": null,
@@ -637,6 +825,34 @@
             "isUk": false,
             "isPk": false,
             "isFk": false,
+            "isTechField": false
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR",
+            "codeColumn": "CNTRY_DP_CODE",
+            "nameColumn": "Код интерпретирующего data-продукта для ссылки cntry_sk",
+            "descriptionColumn": "Код интерпретирующего data-продукта для ссылки cntry_sk",
+            "idDatatypePath": "HADOOP.STRING",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR",
+            "codeColumn": "CNTRY_SK",
+            "nameColumn": "Страна в адресе",
+            "descriptionColumn": "Страна в адресе",
+            "idDatatypePath": "HADOOP.LONG",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": true,
             "isTechField": false
         },
         {
@@ -739,6 +955,20 @@
         },
         {
             "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR",
+            "codeColumn": "IDX_NUM",
+            "nameColumn": "Почтовый индекс в адресе",
+            "descriptionColumn": "Почтовый индекс в адресе",
+            "idDatatypePath": "HADOOP.STRING",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": false
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR",
             "codeColumn": "LOCTY_NAME",
             "nameColumn": "Населенный пункт в адресе, в варианте представления &#39;Наименование&#39;",
             "descriptionColumn": "Населенный пункт в адресе, в варианте представления &#39;Наименование&#39;",
@@ -749,6 +979,34 @@
             "isUk": false,
             "isPk": false,
             "isFk": false,
+            "isTechField": false
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR",
+            "codeColumn": "OKATO2_DP_CODE",
+            "nameColumn": "Код интерпретирующего data-продукта для ссылки okato2_sk",
+            "descriptionColumn": "Код интерпретирующего data-продукта для ссылки okato2_sk",
+            "idDatatypePath": "HADOOP.STRING",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR",
+            "codeColumn": "OKATO2_SK",
+            "nameColumn": "ОКАТО адреса",
+            "descriptionColumn": "ОКАТО адреса",
+            "idDatatypePath": "HADOOP.LONG",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": true,
             "isTechField": false
         },
         {
@@ -838,8 +1096,8 @@
         {
             "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR_H",
             "codeColumn": "ADDR_DP_CODE",
-            "nameColumn": "Код интерпретирующего data-продукта для экземпляра сущности",
-            "descriptionColumn": "Код интерпретирующего data-продукта для экземпляра сущности",
+            "nameColumn": "Код интерпретирующего data-продукта для данного экземпляра сущности &#39;Адрес&#39; (для поля &#39;addr_sk&#39;)",
+            "descriptionColumn": "Код интерпретирующего data-продукта для данного экземпляра сущности &#39;Адрес&#39; (для поля &#39;addr_sk&#39;)",
             "idDatatypePath": "HADOOP.STRING",
             "dataLength": null,
             "dataPrecision": null,
@@ -907,9 +1165,9 @@
         },
         {
             "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR_H",
-            "codeColumn": "P1DAY",
-            "nameColumn": "Поле для секционирования по бизнес-истории (одна секция на 1 day, рассчитывается как последняя дата секции в формате YYYYMMDD)",
-            "descriptionColumn": "Поле для секционирования по бизнес-истории (одна секция на 1 day, рассчитывается как последняя дата секции в формате YYYYMMDD)",
+            "codeColumn": "P1MONTH",
+            "nameColumn": "Поле для секционирования по бизнес-истории (одна секция на 1 month, рассчитывается как последняя дата секции в формате YYYYMM)",
+            "descriptionColumn": "Поле для секционирования по бизнес-истории (одна секция на 1 month, рассчитывается как последняя дата секции в формате YYYYMM)",
             "idDatatypePath": "HADOOP.STRING",
             "dataLength": null,
             "dataPrecision": null,
@@ -1034,8 +1292,8 @@
         {
             "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_",
             "codeColumn": "DIV_DP_CODE",
-            "nameColumn": "Код интерпретирующего data-продукта для экземпляра сущности",
-            "descriptionColumn": "Код интерпретирующего data-продукта для экземпляра сущности",
+            "nameColumn": "Код интерпретирующего data-продукта для данного экземпляра сущности &#39;Подразделение территориальной структуры&#39; (для поля &#39;div_sk&#39;)",
+            "descriptionColumn": "Код интерпретирующего data-продукта для данного экземпляра сущности &#39;Подразделение территориальной структуры&#39; (для поля &#39;div_sk&#39;)",
             "idDatatypePath": "HADOOP.STRING",
             "dataLength": null,
             "dataPrecision": null,
@@ -1131,6 +1389,20 @@
         },
         {
             "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_",
+            "codeColumn": "SHORT_DIV_CODE",
+            "nameColumn": "Краткий код подразделения территориальной структуры",
+            "descriptionColumn": "Краткий код подразделения территориальной структуры",
+            "idDatatypePath": "HADOOP.STRING",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": false
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_",
             "codeColumn": "SID",
             "nameColumn": "Идентификатор сущности &#39;Подразделение территориальной структуры&#39; в data-продукте-источнике",
             "descriptionColumn": "Идентификатор сущности &#39;Подразделение территориальной структуры&#39; в data-продукте-источнике",
@@ -1188,8 +1460,8 @@
         {
             "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H",
             "codeColumn": "DIV_DP_CODE",
-            "nameColumn": "Код интерпретирующего data-продукта для экземпляра сущности",
-            "descriptionColumn": "Код интерпретирующего data-продукта для экземпляра сущности",
+            "nameColumn": "Код интерпретирующего data-продукта для данного экземпляра сущности &#39;Подразделение территориальной структуры&#39; (для поля &#39;div_sk&#39;)",
+            "descriptionColumn": "Код интерпретирующего data-продукта для данного экземпляра сущности &#39;Подразделение территориальной структуры&#39; (для поля &#39;div_sk&#39;)",
             "idDatatypePath": "HADOOP.STRING",
             "dataLength": null,
             "dataPrecision": null,
@@ -1299,9 +1571,9 @@
         },
         {
             "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H",
-            "codeColumn": "P1DAY",
-            "nameColumn": "Поле для секционирования по бизнес-истории (одна секция на 1 day, рассчитывается как последняя дата секции в формате YYYYMMDD)",
-            "descriptionColumn": "Поле для секционирования по бизнес-истории (одна секция на 1 day, рассчитывается как последняя дата секции в формате YYYYMMDD)",
+            "codeColumn": "P1MONTH",
+            "nameColumn": "Поле для секционирования по бизнес-истории (одна секция на 1 month, рассчитывается как последняя дата секции в формате YYYYMM)",
+            "descriptionColumn": "Поле для секционирования по бизнес-истории (одна секция на 1 month, рассчитывается как последняя дата секции в формате YYYYMM)",
             "idDatatypePath": "HADOOP.STRING",
             "dataLength": null,
             "dataPrecision": null,
@@ -1326,10 +1598,248 @@
             "isTechField": true
         },
         {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE",
+            "codeColumn": "CTL_LOADING",
+            "nameColumn": "(техническое поле) Идентификатор загрузки CTL, в рамках которой создана эта запись",
+            "descriptionColumn": "(техническое поле) Идентификатор загрузки CTL, в рамках которой создана эта запись",
+            "idDatatypePath": "HADOOP.LONG",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE",
+            "codeColumn": "CTL_VALIDFROM",
+            "nameColumn": "(техническое поле) Временная метка старта успешно завершенного обновления данной таблицы, приведшего к появлению или обновлению этой записи",
+            "descriptionColumn": "(техническое поле) Временная метка старта успешно завершенного обновления данной таблицы, приведшего к появлению или обновлению этой записи",
+            "idDatatypePath": "HADOOP.TIMESTAMP",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE",
+            "codeColumn": "DIV_DP_CODE",
+            "nameColumn": "Код интерпретирующего data-продукта для данного экземпляра сущности &#39;Подразделение территориальной структуры&#39; (для поля &#39;div_sk&#39;)",
+            "descriptionColumn": "Код интерпретирующего data-продукта для данного экземпляра сущности &#39;Подразделение территориальной структуры&#39; (для поля &#39;div_sk&#39;)",
+            "idDatatypePath": "HADOOP.STRING",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE",
+            "codeColumn": "DIV_SK",
+            "nameColumn": "Суррогатный ключ сущности &#39;Подразделение территориальной структуры&#39;",
+            "descriptionColumn": "Суррогатный ключ сущности &#39;Подразделение территориальной структуры&#39;",
+            "idDatatypePath": "HADOOP.LONG",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": true,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE",
+            "codeColumn": "DIV_TYPE_TERR_DIV_TYPE_DP_CODE",
+            "nameColumn": "Код интерпретирующего data-продукта для ссылки div_type_terr_div_type_sk",
+            "descriptionColumn": "Код интерпретирующего data-продукта для ссылки div_type_terr_div_type_sk",
+            "idDatatypePath": "HADOOP.STRING",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE",
+            "codeColumn": "DIV_TYPE_TERR_DIV_TYPE_SK",
+            "nameColumn": "Тип подразделерния территориальной структуры",
+            "descriptionColumn": "Тип подразделерния территориальной структуры",
+            "idDatatypePath": "HADOOP.LONG",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": true,
+            "isTechField": false
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE",
+            "codeColumn": "END_DT",
+            "nameColumn": "Дата окончания действия версии экземпляра по календарю бизнес-истории",
+            "descriptionColumn": "Дата окончания действия версии экземпляра по календарю бизнес-истории",
+            "idDatatypePath": "HADOOP.DATE",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE",
+            "codeColumn": "P1MONTH",
+            "nameColumn": "Поле для секционирования по бизнес-истории (одна секция на 1 month, рассчитывается как последняя дата секции в формате YYYYMM)",
+            "descriptionColumn": "Поле для секционирования по бизнес-истории (одна секция на 1 month, рассчитывается как последняя дата секции в формате YYYYMM)",
+            "idDatatypePath": "HADOOP.STRING",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE",
+            "codeColumn": "START_DT",
+            "nameColumn": "Дата начала действия версии экземпляра по календарю бизнес-истории",
+            "descriptionColumn": "Дата начала действия версии экземпляра по календарю бизнес-истории",
+            "idDatatypePath": "HADOOP.DATE",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TERR_DIV_TYPE",
+            "codeColumn": "CTL_LOADING",
+            "nameColumn": "(техническое поле) Идентификатор загрузки CTL, в рамках которой создана эта запись",
+            "descriptionColumn": "(техническое поле) Идентификатор загрузки CTL, в рамках которой создана эта запись",
+            "idDatatypePath": "HADOOP.LONG",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TERR_DIV_TYPE",
+            "codeColumn": "CTL_VALIDFROM",
+            "nameColumn": "(техническое поле) Временная метка старта успешно завершенного обновления данной таблицы, приведшего к появлению или обновлению этой записи",
+            "descriptionColumn": "(техническое поле) Временная метка старта успешно завершенного обновления данной таблицы, приведшего к появлению или обновлению этой записи",
+            "idDatatypePath": "HADOOP.TIMESTAMP",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TERR_DIV_TYPE",
+            "codeColumn": "DELETED_FLAG",
+            "nameColumn": "Признак логического удаления экземпляра сущности Тип подразделений территориальной структуры",
+            "descriptionColumn": "Признак логического удаления экземпляра сущности Тип подразделений территориальной структуры",
+            "idDatatypePath": "HADOOP.BOOLEAN",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TERR_DIV_TYPE",
+            "codeColumn": "DIRTY_FLAG",
+            "nameColumn": "Признак записи не из мастер-источника, включенной в интегрированный набор для обеспечения ссылочной целостности (DATA-7)",
+            "descriptionColumn": "Признак записи не из мастер-источника, включенной в интегрированный набор для обеспечения ссылочной целостности (DATA-7)",
+            "idDatatypePath": "HADOOP.BOOLEAN",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TERR_DIV_TYPE",
+            "codeColumn": "DIV_TYPE_CODE",
+            "nameColumn": "Код типа подразделений территориальной структуры",
+            "descriptionColumn": "Код типа подразделений территориальной структуры",
+            "idDatatypePath": "HADOOP.STRING",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": true,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": false
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TERR_DIV_TYPE",
+            "codeColumn": "SID",
+            "nameColumn": "Идентификатор сущности &#39;Тип подразделений территориальной структуры&#39; в data-продукте-источнике",
+            "descriptionColumn": "Идентификатор сущности &#39;Тип подразделений территориальной структуры&#39; в data-продукте-источнике",
+            "idDatatypePath": "HADOOP.STRING",
+            "dataLength": 100,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TERR_DIV_TYPE",
+            "codeColumn": "TERR_DIV_TYPE_DP_CODE",
+            "nameColumn": "Код интерпретирующего data-продукта для данного экземпляра сущности &#39;Тип подразделений территориальной структуры&#39; (для поля &#39;terr_div_type_sk&#39;)",
+            "descriptionColumn": "Код интерпретирующего data-продукта для данного экземпляра сущности &#39;Тип подразделений территориальной структуры&#39; (для поля &#39;terr_div_type_sk&#39;)",
+            "idDatatypePath": "HADOOP.STRING",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TERR_DIV_TYPE",
+            "codeColumn": "TERR_DIV_TYPE_SK",
+            "nameColumn": "Суррогатный ключ сущности &#39;Тип подразделений территориальной структуры&#39;",
+            "descriptionColumn": "Суррогатный ключ сущности &#39;Тип подразделений территориальной структуры&#39;",
+            "idDatatypePath": "HADOOP.LONG",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
             "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.ADDR",
             "codeColumn": "ADDR_DP_CODE",
-            "nameColumn": "Код интерпретирующего data-продукта для экземпляра сущности",
-            "descriptionColumn": "Код интерпретирующего data-продукта для экземпляра сущности",
+            "nameColumn": "Код интерпретирующего data-продукта для данного экземпляра сущности &#39;Адрес&#39; (для поля &#39;addr_sk&#39;)",
+            "descriptionColumn": "Код интерпретирующего data-продукта для данного экземпляра сущности &#39;Адрес&#39; (для поля &#39;addr_sk&#39;)",
             "idDatatypePath": "HADOOP.STRING",
             "dataLength": null,
             "dataPrecision": null,
@@ -1365,6 +1875,34 @@
             "isUk": false,
             "isPk": false,
             "isFk": false,
+            "isTechField": false
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.ADDR",
+            "codeColumn": "CNTRY_DP_CODE",
+            "nameColumn": "Код интерпретирующего data-продукта для ссылки cntry_sk",
+            "descriptionColumn": "Код интерпретирующего data-продукта для ссылки cntry_sk",
+            "idDatatypePath": "HADOOP.STRING",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.ADDR",
+            "codeColumn": "CNTRY_SK",
+            "nameColumn": "Страна в адресе",
+            "descriptionColumn": "Страна в адресе",
+            "idDatatypePath": "HADOOP.LONG",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": true,
             "isTechField": false
         },
         {
@@ -1495,6 +2033,20 @@
         },
         {
             "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.ADDR",
+            "codeColumn": "IDX_NUM",
+            "nameColumn": "Почтовый индекс в адресе",
+            "descriptionColumn": "Почтовый индекс в адресе",
+            "idDatatypePath": "HADOOP.STRING",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": false
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.ADDR",
             "codeColumn": "LOCTY_NAME",
             "nameColumn": "Населенный пункт в адресе, в варианте представления &#39;Наименование&#39;",
             "descriptionColumn": "Населенный пункт в адресе, в варианте представления &#39;Наименование&#39;",
@@ -1505,6 +2057,34 @@
             "isUk": false,
             "isPk": false,
             "isFk": false,
+            "isTechField": false
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.ADDR",
+            "codeColumn": "OKATO2_DP_CODE",
+            "nameColumn": "Код интерпретирующего data-продукта для ссылки okato2_sk",
+            "descriptionColumn": "Код интерпретирующего data-продукта для ссылки okato2_sk",
+            "idDatatypePath": "HADOOP.STRING",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.ADDR",
+            "codeColumn": "OKATO2_SK",
+            "nameColumn": "ОКАТО адреса",
+            "descriptionColumn": "ОКАТО адреса",
+            "idDatatypePath": "HADOOP.LONG",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": true,
             "isTechField": false
         },
         {
@@ -1594,8 +2174,8 @@
         {
             "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.ADDR_H",
             "codeColumn": "ADDR_DP_CODE",
-            "nameColumn": "Код интерпретирующего data-продукта для экземпляра сущности",
-            "descriptionColumn": "Код интерпретирующего data-продукта для экземпляра сущности",
+            "nameColumn": "Код интерпретирующего data-продукта для данного экземпляра сущности &#39;Адрес&#39; (для поля &#39;addr_sk&#39;)",
+            "descriptionColumn": "Код интерпретирующего data-продукта для данного экземпляра сущности &#39;Адрес&#39; (для поля &#39;addr_sk&#39;)",
             "idDatatypePath": "HADOOP.STRING",
             "dataLength": null,
             "dataPrecision": null,
@@ -1691,9 +2271,9 @@
         },
         {
             "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.ADDR_H",
-            "codeColumn": "P1DAY",
-            "nameColumn": "Поле для секционирования по бизнес-истории (одна секция на 1 day, рассчитывается как последняя дата секции в формате YYYYMMDD)",
-            "descriptionColumn": "Поле для секционирования по бизнес-истории (одна секция на 1 day, рассчитывается как последняя дата секции в формате YYYYMMDD)",
+            "codeColumn": "P1MONTH",
+            "nameColumn": "Поле для секционирования по бизнес-истории (одна секция на 1 month, рассчитывается как последняя дата секции в формате YYYYMM)",
+            "descriptionColumn": "Поле для секционирования по бизнес-истории (одна секция на 1 month, рассчитывается как последняя дата секции в формате YYYYMM)",
             "idDatatypePath": "HADOOP.STRING",
             "dataLength": null,
             "dataPrecision": null,
@@ -1846,8 +2426,8 @@
         {
             "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_",
             "codeColumn": "DIV_DP_CODE",
-            "nameColumn": "Код интерпретирующего data-продукта для экземпляра сущности",
-            "descriptionColumn": "Код интерпретирующего data-продукта для экземпляра сущности",
+            "nameColumn": "Код интерпретирующего data-продукта для данного экземпляра сущности &#39;Подразделение территориальной структуры&#39; (для поля &#39;div_sk&#39;)",
+            "descriptionColumn": "Код интерпретирующего data-продукта для данного экземпляра сущности &#39;Подразделение территориальной структуры&#39; (для поля &#39;div_sk&#39;)",
             "idDatatypePath": "HADOOP.STRING",
             "dataLength": null,
             "dataPrecision": null,
@@ -1943,6 +2523,20 @@
         },
         {
             "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_",
+            "codeColumn": "SHORT_DIV_CODE",
+            "nameColumn": "Краткий код подразделения территориальной структуры",
+            "descriptionColumn": "Краткий код подразделения территориальной структуры",
+            "idDatatypePath": "HADOOP.STRING",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": false
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_",
             "codeColumn": "SID",
             "nameColumn": "Идентификатор сущности &#39;Подразделение территориальной структуры&#39; в data-продукте-источнике",
             "descriptionColumn": "Идентификатор сущности &#39;Подразделение территориальной структуры&#39; в data-продукте-источнике",
@@ -2028,8 +2622,8 @@
         {
             "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_H",
             "codeColumn": "DIV_DP_CODE",
-            "nameColumn": "Код интерпретирующего data-продукта для экземпляра сущности",
-            "descriptionColumn": "Код интерпретирующего data-продукта для экземпляра сущности",
+            "nameColumn": "Код интерпретирующего data-продукта для данного экземпляра сущности &#39;Подразделение территориальной структуры&#39; (для поля &#39;div_sk&#39;)",
+            "descriptionColumn": "Код интерпретирующего data-продукта для данного экземпляра сущности &#39;Подразделение территориальной структуры&#39; (для поля &#39;div_sk&#39;)",
             "idDatatypePath": "HADOOP.STRING",
             "dataLength": null,
             "dataPrecision": null,
@@ -2139,9 +2733,9 @@
         },
         {
             "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_H",
-            "codeColumn": "P1DAY",
-            "nameColumn": "Поле для секционирования по бизнес-истории (одна секция на 1 day, рассчитывается как последняя дата секции в формате YYYYMMDD)",
-            "descriptionColumn": "Поле для секционирования по бизнес-истории (одна секция на 1 day, рассчитывается как последняя дата секции в формате YYYYMMDD)",
+            "codeColumn": "P1MONTH",
+            "nameColumn": "Поле для секционирования по бизнес-истории (одна секция на 1 month, рассчитывается как последняя дата секции в формате YYYYMM)",
+            "descriptionColumn": "Поле для секционирования по бизнес-истории (одна секция на 1 month, рассчитывается как последняя дата секции в формате YYYYMM)",
             "idDatatypePath": "HADOOP.STRING",
             "dataLength": null,
             "dataPrecision": null,
@@ -2157,6 +2751,300 @@
             "nameColumn": "Дата начала действия версии экземпляра по календарю бизнес-истории",
             "descriptionColumn": "Дата начала действия версии экземпляра по календарю бизнес-истории",
             "idDatatypePath": "HADOOP.DATE",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_TYPE",
+            "codeColumn": "CTL_ACTION",
+            "nameColumn": "(техническое поле) Операция (I&#x3D;insert, U&#x3D;update, D&#x3D;delete)",
+            "descriptionColumn": "(техническое поле) Операция (I&#x3D;insert, U&#x3D;update, D&#x3D;delete)",
+            "idDatatypePath": "HADOOP.STRING",
+            "dataLength": 1,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_TYPE",
+            "codeColumn": "CTL_DO",
+            "nameColumn": "(техническое поле) Направление применения изменений (R&#x3D;redo, U&#x3D;undo)",
+            "descriptionColumn": "(техническое поле) Направление применения изменений (R&#x3D;redo, U&#x3D;undo)",
+            "idDatatypePath": "HADOOP.STRING",
+            "dataLength": 1,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_TYPE",
+            "codeColumn": "CTL_LOADING",
+            "nameColumn": "(техническое поле) Идентификатор загрузки CTL, в рамках которой создана эта запись",
+            "descriptionColumn": "(техническое поле) Идентификатор загрузки CTL, в рамках которой создана эта запись",
+            "idDatatypePath": "HADOOP.LONG",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_TYPE",
+            "codeColumn": "CTL_VALIDFROM",
+            "nameColumn": "(техническое поле) Временная метка старта успешно завершенного обновления данной таблицы, приведшего к появлению или обновлению этой записи",
+            "descriptionColumn": "(техническое поле) Временная метка старта успешно завершенного обновления данной таблицы, приведшего к появлению или обновлению этой записи",
+            "idDatatypePath": "HADOOP.TIMESTAMP",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_TYPE",
+            "codeColumn": "DIV_DP_CODE",
+            "nameColumn": "Код интерпретирующего data-продукта для данного экземпляра сущности &#39;Подразделение территориальной структуры&#39; (для поля &#39;div_sk&#39;)",
+            "descriptionColumn": "Код интерпретирующего data-продукта для данного экземпляра сущности &#39;Подразделение территориальной структуры&#39; (для поля &#39;div_sk&#39;)",
+            "idDatatypePath": "HADOOP.STRING",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_TYPE",
+            "codeColumn": "DIV_SK",
+            "nameColumn": "Суррогатный ключ сущности &#39;Подразделение территориальной структуры&#39;",
+            "descriptionColumn": "Суррогатный ключ сущности &#39;Подразделение территориальной структуры&#39;",
+            "idDatatypePath": "HADOOP.LONG",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": true,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_TYPE",
+            "codeColumn": "DIV_TYPE_TERR_DIV_TYPE_DP_CODE",
+            "nameColumn": "Код интерпретирующего data-продукта для ссылки div_type_terr_div_type_sk",
+            "descriptionColumn": "Код интерпретирующего data-продукта для ссылки div_type_terr_div_type_sk",
+            "idDatatypePath": "HADOOP.STRING",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_TYPE",
+            "codeColumn": "DIV_TYPE_TERR_DIV_TYPE_SK",
+            "nameColumn": "Тип подразделерния территориальной структуры",
+            "descriptionColumn": "Тип подразделерния территориальной структуры",
+            "idDatatypePath": "HADOOP.LONG",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": true,
+            "isTechField": false
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_TYPE",
+            "codeColumn": "END_DT",
+            "nameColumn": "Дата окончания действия версии экземпляра по календарю бизнес-истории",
+            "descriptionColumn": "Дата окончания действия версии экземпляра по календарю бизнес-истории",
+            "idDatatypePath": "HADOOP.DATE",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_TYPE",
+            "codeColumn": "P1MONTH",
+            "nameColumn": "Поле для секционирования по бизнес-истории (одна секция на 1 month, рассчитывается как последняя дата секции в формате YYYYMM)",
+            "descriptionColumn": "Поле для секционирования по бизнес-истории (одна секция на 1 month, рассчитывается как последняя дата секции в формате YYYYMM)",
+            "idDatatypePath": "HADOOP.STRING",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_TYPE",
+            "codeColumn": "START_DT",
+            "nameColumn": "Дата начала действия версии экземпляра по календарю бизнес-истории",
+            "descriptionColumn": "Дата начала действия версии экземпляра по календарю бизнес-истории",
+            "idDatatypePath": "HADOOP.DATE",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.TERR_DIV_TYPE",
+            "codeColumn": "CTL_ACTION",
+            "nameColumn": "(техническое поле) Операция (I&#x3D;insert, U&#x3D;update, D&#x3D;delete)",
+            "descriptionColumn": "(техническое поле) Операция (I&#x3D;insert, U&#x3D;update, D&#x3D;delete)",
+            "idDatatypePath": "HADOOP.STRING",
+            "dataLength": 1,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.TERR_DIV_TYPE",
+            "codeColumn": "CTL_DO",
+            "nameColumn": "(техническое поле) Направление применения изменений (R&#x3D;redo, U&#x3D;undo)",
+            "descriptionColumn": "(техническое поле) Направление применения изменений (R&#x3D;redo, U&#x3D;undo)",
+            "idDatatypePath": "HADOOP.STRING",
+            "dataLength": 1,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.TERR_DIV_TYPE",
+            "codeColumn": "CTL_LOADING",
+            "nameColumn": "(техническое поле) Идентификатор загрузки CTL, в рамках которой создана эта запись",
+            "descriptionColumn": "(техническое поле) Идентификатор загрузки CTL, в рамках которой создана эта запись",
+            "idDatatypePath": "HADOOP.LONG",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.TERR_DIV_TYPE",
+            "codeColumn": "CTL_VALIDFROM",
+            "nameColumn": "(техническое поле) Временная метка старта успешно завершенного обновления данной таблицы, приведшего к появлению или обновлению этой записи",
+            "descriptionColumn": "(техническое поле) Временная метка старта успешно завершенного обновления данной таблицы, приведшего к появлению или обновлению этой записи",
+            "idDatatypePath": "HADOOP.TIMESTAMP",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.TERR_DIV_TYPE",
+            "codeColumn": "DELETED_FLAG",
+            "nameColumn": "Признак логического удаления экземпляра сущности Тип подразделений территориальной структуры",
+            "descriptionColumn": "Признак логического удаления экземпляра сущности Тип подразделений территориальной структуры",
+            "idDatatypePath": "HADOOP.BOOLEAN",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.TERR_DIV_TYPE",
+            "codeColumn": "DIRTY_FLAG",
+            "nameColumn": "Признак записи не из мастер-источника, включенной в интегрированный набор для обеспечения ссылочной целостности (DATA-7)",
+            "descriptionColumn": "Признак записи не из мастер-источника, включенной в интегрированный набор для обеспечения ссылочной целостности (DATA-7)",
+            "idDatatypePath": "HADOOP.BOOLEAN",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.TERR_DIV_TYPE",
+            "codeColumn": "DIV_TYPE_CODE",
+            "nameColumn": "Код типа подразделений территориальной структуры",
+            "descriptionColumn": "Код типа подразделений территориальной структуры",
+            "idDatatypePath": "HADOOP.STRING",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": true,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": false
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.TERR_DIV_TYPE",
+            "codeColumn": "SID",
+            "nameColumn": "Идентификатор сущности &#39;Тип подразделений территориальной структуры&#39; в data-продукте-источнике",
+            "descriptionColumn": "Идентификатор сущности &#39;Тип подразделений территориальной структуры&#39; в data-продукте-источнике",
+            "idDatatypePath": "HADOOP.STRING",
+            "dataLength": 100,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.TERR_DIV_TYPE",
+            "codeColumn": "TERR_DIV_TYPE_DP_CODE",
+            "nameColumn": "Код интерпретирующего data-продукта для данного экземпляра сущности &#39;Тип подразделений территориальной структуры&#39; (для поля &#39;terr_div_type_sk&#39;)",
+            "descriptionColumn": "Код интерпретирующего data-продукта для данного экземпляра сущности &#39;Тип подразделений территориальной структуры&#39; (для поля &#39;terr_div_type_sk&#39;)",
+            "idDatatypePath": "HADOOP.STRING",
+            "dataLength": null,
+            "dataPrecision": null,
+            "dataCodepage": null,
+            "isUk": false,
+            "isPk": false,
+            "isFk": false,
+            "isTechField": true
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.TERR_DIV_TYPE",
+            "codeColumn": "TERR_DIV_TYPE_SK",
+            "nameColumn": "Суррогатный ключ сущности &#39;Тип подразделений территориальной структуры&#39;",
+            "descriptionColumn": "Суррогатный ключ сущности &#39;Тип подразделений территориальной структуры&#39;",
+            "idDatatypePath": "HADOOP.LONG",
             "dataLength": null,
             "dataPrecision": null,
             "dataCodepage": null,
@@ -2188,6 +3076,18 @@
         {
             "codeSuperTable": "HADOOP#{{ uslCluster }}#USL_VSPC_IDL_SNP#DIV_H",
             "nameSuperTable": "Подразделение территориальной структуры: satellite table",
+            "isDiff": true,
+            "multiDiffMin": 1440
+        },
+        {
+            "codeSuperTable": "HADOOP#{{ uslCluster }}#USL_VSPC_IDL_SNP#DIV_TYPE",
+            "nameSuperTable": "Подразделение территориальной структуры: satellite table",
+            "isDiff": true,
+            "multiDiffMin": 1440
+        },
+        {
+            "codeSuperTable": "HADOOP#{{ uslCluster }}#USL_VSPC_IDL_SNP#TERR_DIV_TYPE",
+            "nameSuperTable": "Тип подразделений территориальной структуры: hub table",
             "isDiff": true,
             "multiDiffMin": 1440
         }
@@ -2246,6 +3146,18 @@
             "codeLink": null
         },
         {
+            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.DIV_SK",
+            "idColumnTargetPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.DIV_SK",
+            "cardinalityLink": "MANY_TO_ONE",
+            "codeLink": null
+        },
+        {
+            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.DIV_TYPE_TERR_DIV_TYPE_SK",
+            "idColumnTargetPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TERR_DIV_TYPE.TERR_DIV_TYPE_SK",
+            "cardinalityLink": "MANY_TO_ONE",
+            "codeLink": null
+        },
+        {
             "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.ADDR_H.ADDR_SK",
             "idColumnTargetPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.ADDR.ADDR_SK",
             "cardinalityLink": "MANY_TO_ONE",
@@ -2272,6 +3184,18 @@
         {
             "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_H.FACT_ADDR_SK",
             "idColumnTargetPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.ADDR.ADDR_SK",
+            "cardinalityLink": "MANY_TO_ONE",
+            "codeLink": null
+        },
+        {
+            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_TYPE.DIV_SK",
+            "idColumnTargetPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_.DIV_SK",
+            "cardinalityLink": "MANY_TO_ONE",
+            "codeLink": null
+        },
+        {
+            "idColumnPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_TYPE.DIV_TYPE_TERR_DIV_TYPE_SK",
+            "idColumnTargetPath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.TERR_DIV_TYPE.TERR_DIV_TYPE_SK",
             "cardinalityLink": "MANY_TO_ONE",
             "codeLink": null
         }
@@ -2307,6 +3231,22 @@
         },
         {
             "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_H",
+            "idCtlObjectPath": "801005314"
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE",
+            "idCtlObjectPath": "801005314"
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.DIV_TYPE",
+            "idCtlObjectPath": "801005314"
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TERR_DIV_TYPE",
+            "idCtlObjectPath": "801005314"
+        },
+        {
+            "idTablePath": "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_DIFF.TERR_DIV_TYPE",
             "idCtlObjectPath": "801005314"
         }
     ],

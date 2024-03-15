@@ -5,7 +5,7 @@
   "block": "t",
   "datamart_group": "idl",
   "datamart_name": "vspc_idl",
-  "datamart_ansible_vars": "src/main/resources/ctl/mart.yml",
+  "datamart_ansible_vars": "vars_all.yml",
   "sq_pr_key": "vspc_idl",
   "sq_pr_name": "vspc_idl",
   "sq_scan_folder": "src",
@@ -26,17 +26,18 @@
 
   "ess": {
     "meta": [
-      "usl/dsm/cap_dsm_usl.vspc_idl_v012_fw_2.0.9.json"
+      "usl/dsm/cap_dsm_usl.vspc_idl_v013_fw_2.0.12.json",
+      "usl/certification/cap_certification_usl.vspc_idl_v013_fw_2.0.12.json"
     ]
   },
 
   "distrib_files": [
     {
-      "source": "src/main/resources/ctl/ctl_wait4replica_usl_vspc_idl_v012_fw_2.0.12.yaml",
+      "source": "src/main/resources/ctl/ctl_wait4replica_usl_vspc_idl_v013_fw_2.0.12.yaml",
       "destination": "ctl/"
     },
     {
-      "source": "src/main/resources/ctl/ctl_wait4replica_usl_vspc_idl_v012_triv_fw_2.0.12.yaml",
+      "source": "src/main/resources/ctl/ctl_wait4replica_usl_vspc_idl_v013_triv_fw_2.0.12.yaml",
       "destination": "ctl/"
     },
     {
@@ -79,7 +80,7 @@
 
   ],
   "template_files": [
-    "usl/dsm/cap_dsm_usl.vspc_idl_v012_fw_2.0.9.json"
+    "usl/dsm/cap_dsm_usl.vspc_idl_v013_fw_2.0.12.json"
   ],
   "workflow_to_run" : [
     "USL_VSPC_IDL"
