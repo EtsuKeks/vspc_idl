@@ -79,6 +79,7 @@
 
   ],
   "template_files": [
+    "src/main/resources/usl/dsm/cap_dsm_usl.vspc_idl_v012_fw_2.0.9.json"
   ],
   "workflow_to_run" : [
     "USL_VSPC_IDL"
