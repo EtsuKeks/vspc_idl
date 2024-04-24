@@ -1,6 +1,6 @@
 package ru.sberbank.bigdata.dffess.vspc.tables.addrh;
 
-import ru.sberbank.bigdata.dffess.vspc.impl.VspcDmStgClass;
+/*import ru.sberbank.bigdata.dffess.vspc.impl.VspcDmStgClass;
 
 public class ADDRHStgClass extends VspcDmStgClass {
     public ADDRHStgClass() {
@@ -18,3 +18,4 @@ public class ADDRHStgClass extends VspcDmStgClass {
         stgClass.run(args);
     }
 }
+*/

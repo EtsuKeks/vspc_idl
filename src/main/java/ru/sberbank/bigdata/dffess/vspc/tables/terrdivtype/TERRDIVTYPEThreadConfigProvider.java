@@ -1,5 +1,6 @@
 package ru.sberbank.bigdata.dffess.vspc.tables.terrdivtype;
 
+/*
 import ru.sberbank.bigdata.dffess.vspc.constant.TablesName;
 import ru.sberbank.bigdata.essa.common.templates.ThreadConfigProvider;
 import ru.sberbank.hermes.core.dmbuilder.config.ThreadConfiguration;
@@ -15,4 +16,4 @@ public class TERRDIVTYPEThreadConfigProvider extends ThreadConfigProvider {
     public ThreadConfiguration provide(Map<String, String> cmdArgs) {
         return getConfigProvider(TablesName.TERRDIVTYPE);
     }
-}
+}*/

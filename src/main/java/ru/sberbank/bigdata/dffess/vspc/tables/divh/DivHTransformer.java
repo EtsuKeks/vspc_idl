@@ -1,5 +1,6 @@
 package ru.sberbank.bigdata.dffess.vspc.tables.divh;
 
+/*
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName;
@@ -49,3 +50,4 @@ public class DivHTransformer implements EntityTransformer {
         return divh;
     }
 }
+*/

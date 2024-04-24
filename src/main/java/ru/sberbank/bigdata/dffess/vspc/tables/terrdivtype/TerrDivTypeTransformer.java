@@ -1,6 +1,6 @@
 package ru.sberbank.bigdata.dffess.vspc.tables.terrdivtype;
 
-import org.apache.spark.sql.Dataset;
+/*import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName;
 import ru.sberbank.bigdata.dffess.vspc.constant.TablesName;
@@ -49,3 +49,4 @@ public class TerrDivTypeTransformer implements EntityTransformer {
         return terrdivtype;
     }
 }
+*/

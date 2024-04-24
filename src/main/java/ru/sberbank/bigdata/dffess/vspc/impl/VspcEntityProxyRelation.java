@@ -1,6 +1,6 @@
 package ru.sberbank.bigdata.dffess.vspc.impl;
 
-import ru.sberbank.bigdata.essa.common.templates.EntityProxyRelation;
+import ru.sberbank.bigdata.essa.common.slave.templates.EntityProxyRelation;
 
 import java.util.HashMap;
 import java.util.Map;

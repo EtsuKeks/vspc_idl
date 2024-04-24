@@ -5,14 +5,19 @@ import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName;
 import ru.sberbank.bigdata.dffess.vspc.constant.TablesName;
 import ru.sberbank.bigdata.dffess.vspc.constant.VpscConstant;
-import ru.sberbank.bigdata.essa.common.templates.EntityProxyRelation;
-import ru.sberbank.bigdata.essa.common.templates.EntityTransformer;
-import ru.sberbank.bigdata.essa.common.templates.SkClientWrapper;
-import ru.sberbank.bigdata.essa.common.templates.TransformConfiguration;
-import ru.sberbank.bigdata.essa.common.utils.CtlStatisticHelper;
-import ru.sberbank.bigdata.essa.common.utils.HdfsHelper;
+import ru.sberbank.bigdata.essa.common.logger.LoggerWrapper;
+import ru.sberbank.bigdata.essa.common.slave.app.SparkWrapper;
+import ru.sberbank.bigdata.essa.common.slave.hdfs.HdfsService;
+import ru.sberbank.bigdata.essa.common.slave.templates.EntityProxyRelation;
+import ru.sberbank.bigdata.essa.common.slave.templates.EntityTransformer;
+import ru.sberbank.bigdata.essa.common.slave.templates.SkClientWrapper;
+import ru.sberbank.bigdata.essa.common.slave.templates.TransformConfiguration;
+//??import ru.sberbank.bigdata.essa.common.utils.CtlStatisticHelper;
+//??import ru.sberbank.bigdata.essa.common.utils.HdfsHelper;
 import ru.sberbank.hermes.core.dmbuilder.modules.stg.builder.DmBuilder;
 import ru.sberbank.hermes.core.dmbuilder.services.logger.loggers.Logger;
+
+import ru.sberbank.bigdata.essa.common.utils.EntityStaticService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,9 +26,14 @@ import static org.apache.spark.sql.functions.*;
 
 public class AddrTransformer implements EntityTransformer {
     @Override
-    public Dataset<Row> transformData(DmBuilder dmBuilder, SkClientWrapper skClientWrapper, HdfsHelper hdfsHelper, CtlStatisticHelper ctlStatisticHelper, TransformConfiguration transformConfiguration, EntityProxyRelation entityProxyRelation, Logger logger) {
+    public Dataset<Row> transformData(SparkWrapper sparkWrapper, SkClientWrapper skClientWrapper, HdfsService hdfsService,
+                                      EntityStaticService entityStaticService, TransformConfiguration transformConfiguration,
+                                      EntityProxyRelation entityProxyRelation, LoggerWrapper loggerWrapper) {
 
-        Dataset<Row> addr = dmBuilder.getDataset(transformConfiguration.getSrcSchemaSnp(), TablesName.EBX_REP_M_SFS_0002_SFSDIVISION);
+
+
+
+        Dataset<Row> addr = sparkWrapper.getDataset(transformConfiguration.getSnpSrcSchema(TablesName.EBX_REP_M_SFS_0002_SFSDIVISION), TablesName.EBX_REP_M_SFS_0002_SFSDIVISION);
         addr = addr
                 .select(
                         col(ColumnsName.ID).as(ColumnsName.SID),

@@ -1,5 +1,6 @@
 package ru.sberbank.bigdata.dffess.vspc.tables.divh;
 
+/*
 import ru.sberbank.bigdata.dffess.vspc.constant.TablesName;
 import ru.sberbank.bigdata.essa.common.templates.ThreadConfigProvider;
 import ru.sberbank.hermes.core.dmbuilder.config.ThreadConfiguration;
@@ -19,4 +20,4 @@ public class DIVHThreadConfigProvider extends ThreadConfigProvider {
         threadConfiguration.setValue("mtp_Default_truncateIncFilterList", String.format("%s->p1month>=%s", TablesName.DIVH, cutMonth));
         return threadConfiguration;
     }
-}
+}*/

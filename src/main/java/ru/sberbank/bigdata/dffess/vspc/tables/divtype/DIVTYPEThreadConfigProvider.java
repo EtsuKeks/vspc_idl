@@ -1,5 +1,6 @@
 package ru.sberbank.bigdata.dffess.vspc.tables.divtype;
 
+/*
 import ru.sberbank.bigdata.dffess.vspc.constant.TablesName;
 import ru.sberbank.bigdata.essa.common.templates.ThreadConfigProvider;
 import ru.sberbank.hermes.core.dmbuilder.config.ThreadConfiguration;
@@ -20,3 +21,4 @@ public class DIVTYPEThreadConfigProvider extends ThreadConfigProvider {
         return threadConfiguration;
     }
 }
+ */

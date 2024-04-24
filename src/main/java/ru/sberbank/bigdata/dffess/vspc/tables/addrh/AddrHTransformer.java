@@ -1,5 +1,6 @@
 package ru.sberbank.bigdata.dffess.vspc.tables.addrh;
 
+/*
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName;
@@ -35,3 +36,4 @@ public class AddrHTransformer implements EntityTransformer {
         return addrh;
     }
 }
+*/

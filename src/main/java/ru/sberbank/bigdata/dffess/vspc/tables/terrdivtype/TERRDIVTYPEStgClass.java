@@ -1,5 +1,6 @@
 package ru.sberbank.bigdata.dffess.vspc.tables.terrdivtype;
 
+/*
 import ru.sberbank.bigdata.dffess.vspc.impl.VspcDmStgClass;
 
 public class TERRDIVTYPEStgClass extends VspcDmStgClass {
@@ -18,3 +19,4 @@ public class TERRDIVTYPEStgClass extends VspcDmStgClass {
         stgClass.run(args);
     }
 }
+*/

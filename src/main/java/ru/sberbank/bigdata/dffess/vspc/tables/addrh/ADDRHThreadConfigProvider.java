@@ -1,7 +1,6 @@
 package ru.sberbank.bigdata.dffess.vspc.tables.addrh;
 
-import ru.sberbank.bigdata.dffess.vspc.constant.TablesName;
-import ru.sberbank.bigdata.essa.common.templates.ThreadConfigProvider;
+/*import ru.sberbank.bigdata.dffess.vspc.constant.TablesName;
 import ru.sberbank.hermes.core.dmbuilder.config.ThreadConfiguration;
 
 import java.time.LocalDate;
@@ -19,4 +18,4 @@ public class ADDRHThreadConfigProvider extends ThreadConfigProvider {
         threadConfiguration.setValue("mtp_Default_truncateIncFilterList", String.format("%s->p1month>=%s", TablesName.ADDRH, cutMonth));
         return threadConfiguration;
     }
-}
+}*/

@@ -1,6 +1,6 @@
 package ru.sberbank.bigdata.dffess.vspc.loading;
 
-import ru.sberbank.bigdata.dffess.vspc.constant.TablesName;
+/*import ru.sberbank.bigdata.dffess.vspc.constant.TablesName;
 import ru.sberbank.bigdata.essa.common.loading.DataLoader;
 import ru.sberbank.bigdata.essa.common.loading.DataLoaderHist;
 import ru.sberbank.bigdata.essa.common.loading.DataLoaderHubDiff;
@@ -17,4 +17,4 @@ public class DataLoaderCreator {
         return new DataLoaderHubDiff();
     }
 }
-
+*/

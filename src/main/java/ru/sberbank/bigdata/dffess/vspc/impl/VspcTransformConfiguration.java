@@ -2,7 +2,8 @@ package ru.sberbank.bigdata.dffess.vspc.impl;
 
 import org.apache.spark.sql.Column;
 import ru.sberbank.bigdata.essa.common.structure.MetadataKeeper;
-import ru.sberbank.bigdata.essa.common.templates.TransformConfiguration;
+import ru.sberbank.bigdata.essa.common.slave.templates.TransformConfiguration;
+import ru.sberbank.bigdata.essa.common.structure.SourceSchemaKeeper;
 import ru.sberbank.hermes.core.dmbuilder.config.ModuleConfiguration;
 
 import java.time.LocalDate;
@@ -15,16 +16,29 @@ import static ru.sberbank.bigdata.essa.common.utils.Expression.generatePartition
 
 public class VspcTransformConfiguration extends TransformConfiguration {
 
-    private String stgPath;
+    private final SourceSchemaKeeper sourceSchemaKeeper;
+    private final MetadataKeeper metadataKeeper;
+    private final String today;
+    //??private String stgPath;
 
-    public VspcTransformConfiguration(ModuleConfiguration moduleConfiguration) {
-        super(moduleConfiguration);
-        stgPath = moduleConfiguration.getValue(STG_PATH);
+
+    public VspcTransformConfiguration() {
+        super();
+        //??stgPath = moduleConfiguration.getValue(STG_PATH);
+        sourceSchemaKeeper = new VspcSourceSchemaKeeper();
+        metadataKeeper = new VspcMetadataKeeper();
+        DateTimeFormatter formatterToStr = DateTimeFormatter.ofPattern(DATE_FORMAT);
+        today = LocalDate.now().format(formatterToStr);
     }
 
     @Override
     protected MetadataKeeper getMetadataKeeper() {
         return new VspcMetadataKeeper();
+    }
+
+    @Override
+    protected SourceSchemaKeeper getSourceSchemaKeeper() {
+        return sourceSchemaKeeper;
     }
 
     @Override
@@ -64,8 +78,8 @@ public class VspcTransformConfiguration extends TransformConfiguration {
         return false;
     }
 
-    @Override
+    /*??@Override
     public String getStagePath() {
         return stgPath;
-    }
+    }*/
 }

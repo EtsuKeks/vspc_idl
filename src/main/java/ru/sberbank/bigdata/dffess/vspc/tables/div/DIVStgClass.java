@@ -1,5 +1,7 @@
 package ru.sberbank.bigdata.dffess.vspc.tables.div;
 
+/*
+
 import ru.sberbank.bigdata.dffess.vspc.impl.VspcDmStgClass;
 
 public class DIVStgClass extends VspcDmStgClass {
@@ -18,3 +20,4 @@ public class DIVStgClass extends VspcDmStgClass {
         stgClass.run(args);
     }
 }
+*/

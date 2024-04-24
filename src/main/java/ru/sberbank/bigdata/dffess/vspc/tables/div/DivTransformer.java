@@ -1,5 +1,5 @@
 package ru.sberbank.bigdata.dffess.vspc.tables.div;
-
+/*
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName;
@@ -51,6 +51,5 @@ public class DivTransformer implements EntityTransformer {
         div = skClientWrapper.generateSk(div, transformConfiguration.getStgTable(), transformConfiguration.getLoadMode(), columnEntities, transformConfiguration);
         return div;
     }
-
-
 }
+*/
