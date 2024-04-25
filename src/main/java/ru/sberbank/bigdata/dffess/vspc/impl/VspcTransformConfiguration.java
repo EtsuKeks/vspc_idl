@@ -4,7 +4,6 @@ import org.apache.spark.sql.Column;
 import ru.sberbank.bigdata.essa.common.structure.MetadataKeeper;
 import ru.sberbank.bigdata.essa.common.slave.templates.TransformConfiguration;
 import ru.sberbank.bigdata.essa.common.structure.SourceSchemaKeeper;
-import ru.sberbank.hermes.core.dmbuilder.config.ModuleConfiguration;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

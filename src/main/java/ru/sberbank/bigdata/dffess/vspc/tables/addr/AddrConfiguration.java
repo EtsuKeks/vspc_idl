@@ -23,7 +23,7 @@ public class AddrConfiguration extends VspcEtlConfiguration {
     @Override
     public DataLoader getDataLoader() {
         return new DataLoaderHubSnp();
-    }///DataLoaderHubSnp
+    }///DataLoaderHubDiff DataLoaderHubSnp
 
     @Override
     public MovingTablesGenerator getMovingTablesGenerator() {

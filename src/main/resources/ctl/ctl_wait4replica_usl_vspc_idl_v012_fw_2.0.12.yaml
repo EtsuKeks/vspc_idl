@@ -14,7 +14,7 @@ entities:
       parent-id: 904000000
 workflows:
   - "{{ logical_env_prefix }}USL_VSPC_IDL_INIT":
-      name: "{{ logical_env_prefix }}USL_VSPC_IDL_INIT"
+      name: "{{ logical_env_prefix }}USL_VSPC_IDL_GBC_INIT"
       category: "{{ logical_env_prefix }}USL_IDL"
       profile: "{{ CTL_PROFILE_NAME }}"
       singleLoading: true
@@ -35,16 +35,16 @@ workflows:
             prior_value: "vspc_idl-D-01.302.010-jar-with-dependencies.jar"
         - param:
             name: data_sets
-            prior_value: addr,addrh,div,divh,divtype,terrdivtype
+            prior_value: addr,addr_h,div_,div_h,div_type,terr_div_type
         - param:
             name: parallel_threads
-            prior_value: 1
+            prior_value: 2
         - param:
-            name: spark_parameters
-            prior_value: "{{ sparkConf }}"
+            name: common_spark_parameters
+            prior_value: "--conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=5G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=5 --conf spark.dynamicAllocation.maxExecutors=40 --conf spark.driver.memory=5G"
         - param:
             name: debug_logical_env
-            prior_value: "{{ logical_env }}"
+            prior_value: ""
         - param:
             name: oozie.wf.application.path
             prior_value: /oozie-app/t/idl/vspc_idl/init
@@ -62,9 +62,27 @@ workflows:
             prior_value: "{{ yarnQueueInit }}"
         - param:
             name: debug_sk_off
-            prior_value: "ON"
+            prior_value: "Y"
+        - param:
+            name: hms_src_schema
+            prior_value: "usl_vspc_idl_snp"
+        - param:
+            name: log_level
+            prior_value: "ESSA"
+        - param:
+            name: recover_flag
+            prior_value: "N"
+        - param:
+            name: rtfw_feature_hub_daks
+            prior_value: "Y"
+        - param:
+            name: secman_cert_owner_email
+            prior_value: "dvilapshin@sberbank.ru"
+        - param:
+            name: target_hdfs_namespace
+            prior_value: "usl"
   - "{{ logical_env_prefix }}USL_VSPC_IDL":
-      name: "{{ logical_env_prefix }}USL_VSPC_IDL"
+      name: "{{ logical_env_prefix }}USL_VSPC_IDL_GBC"
       category: "{{ logical_env_prefix }}USL_IDL"
       profile: "{{ CTL_PROFILE_NAME }}"
       singleLoading: false
@@ -85,16 +103,16 @@ workflows:
             prior_value: "vspc_idl-D-01.302.010-jar-with-dependencies.jar"
         - param:
             name: data_sets
-            prior_value: addr,addrh,div,divh,divtype,terrdivtype
+            prior_value: addr,addr_h,div_,div_h,div_type,terr_div_type
         - param:
             name: parallel_threads
-            prior_value: 1
+            prior_value: 2
         - param:
-            name: spark_parameters
-            prior_value: "{{ sparkConf }}"
+            name: common_spark_parameters
+            prior_value: "--conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=5G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=5 --conf spark.dynamicAllocation.maxExecutors=40 --conf spark.driver.memory=5G"
         - param:
             name: debug_logical_env
-            prior_value: "{{ logical_env }}"
+            prior_value: ""
         - param:
             name: oozie.wf.application.path
             prior_value: /oozie-app/t/idl/vspc_idl/init
@@ -109,11 +127,29 @@ workflows:
             prior_value: "{{ REALM }}"
         - param:
             name: yarn_queue
-            prior_value: "{{ yarnQueue }}"
+            prior_value: "{{ yarnQueueInit }}"
         - param:
             name: debug_sk_off
-            prior_value: "ON"
+            prior_value: "Y"
+        - param:
+            name: hms_src_schema
+            prior_value: "usl_vspc_idl_snp"
+        - param:
+            name: log_level
+            prior_value: "ESSA"
+        - param:
+            name: recover_flag
+            prior_value: "N"
+        - param:
+            name: rtfw_feature_hub_daks
+            prior_value: "Y"
+        - param:
+            name: secman_cert_owner_email
+            prior_value: "dvilapshin@sberbank.ru"
+        - param:
+            name: target_hdfs_namespace
+            prior_value: "usl"
             # Привязка нотификаций
       notifications:
-        - { status: "ERROR", emails: [ "MDLisitsa@sberbank.ru", " alvmanuylov@sberbank.ru" ] }
-        - { status: "SUCCESS", emails: [ "MDLisitsa@sberbank.ru", " alvmanuylov@sberbank.ru" ] }
+        - { status: "ERROR", emails: [ "PGMamushkina@sberbank.ru" ] }
+        - { status: "SUCCESS", emails: [ "PGMamushkina@sberbank.ru" ] }

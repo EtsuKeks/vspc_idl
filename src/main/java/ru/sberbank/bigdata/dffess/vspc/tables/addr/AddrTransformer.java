@@ -12,11 +12,6 @@ import ru.sberbank.bigdata.essa.common.slave.templates.EntityProxyRelation;
 import ru.sberbank.bigdata.essa.common.slave.templates.EntityTransformer;
 import ru.sberbank.bigdata.essa.common.slave.templates.SkClientWrapper;
 import ru.sberbank.bigdata.essa.common.slave.templates.TransformConfiguration;
-//??import ru.sberbank.bigdata.essa.common.utils.CtlStatisticHelper;
-//??import ru.sberbank.bigdata.essa.common.utils.HdfsHelper;
-import ru.sberbank.hermes.core.dmbuilder.modules.stg.builder.DmBuilder;
-import ru.sberbank.hermes.core.dmbuilder.services.logger.loggers.Logger;
-
 import ru.sberbank.bigdata.essa.common.utils.EntityStaticService;
 
 import java.util.HashMap;
@@ -29,9 +24,6 @@ public class AddrTransformer implements EntityTransformer {
     public Dataset<Row> transformData(SparkWrapper sparkWrapper, SkClientWrapper skClientWrapper, HdfsService hdfsService,
                                       EntityStaticService entityStaticService, TransformConfiguration transformConfiguration,
                                       EntityProxyRelation entityProxyRelation, LoggerWrapper loggerWrapper) {
-
-
-
 
         Dataset<Row> addr = sparkWrapper.getDataset(transformConfiguration.getSnpSrcSchema(TablesName.EBX_REP_M_SFS_0002_SFSDIVISION), TablesName.EBX_REP_M_SFS_0002_SFSDIVISION);
         addr = addr
@@ -161,7 +153,6 @@ public class AddrTransformer implements EntityTransformer {
 
 
         addr = skClientWrapper.generateSk(addr, transformConfiguration.getStgTable(), transformConfiguration.getLoadMode(), columnEntities, transformConfiguration);
-
         return addr;
     }
 }
