@@ -24,6 +24,10 @@
 
     <repositories>
         <repository>
+            <id>internal</id>
+            <url>https://nexus-ci.delta.sbrf.ru/repository/maven-lib-int/</url>
+        </repository>
+        <repository>
             <id>Bigdata_snapshot</id>
             <name>Bigdata_snapshot</name>
             <url>https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/Bigdata_snapshot</url>
@@ -42,6 +46,17 @@
             <url>https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/corp-snapshots/</url>
         </repository>
     </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>public</id>
+            <url>https://nexus-ci.delta.sbrf.ru/repository/public/</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>internal</id>
+            <url>https://nexus-ci.delta.sbrf.ru/repository/maven-lib-int/</url>
+        </pluginRepository>
+    </pluginRepositories>
 
     <dependencies>
         <dependency>
