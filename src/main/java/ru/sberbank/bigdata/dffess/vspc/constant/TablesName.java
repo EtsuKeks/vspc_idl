@@ -7,7 +7,7 @@ public class TablesName {
     public static final String ADDR = "addr";
     public static final String DIVH = "div_h";
     public static final String DIV = "div_";
-    public static final String DIVTYPE= "div_type";
+    public static final String DIVTYPE = "div_type";
     public static final String TERRDIVTYPE = "terr_div_type";
 
     //source

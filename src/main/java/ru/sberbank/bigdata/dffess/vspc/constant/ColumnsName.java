@@ -2,6 +2,9 @@ package ru.sberbank.bigdata.dffess.vspc.constant;
 
 public final class ColumnsName {
     //target
+    public static final String CTL_VALIDFROM = "ctl_validfrom";
+
+    public static final String DELETED_FLAG = "deleted_flag";
     public static final String SID = "sid";
 
     public static final String DIRTY_FLAG = "dirty_flag";

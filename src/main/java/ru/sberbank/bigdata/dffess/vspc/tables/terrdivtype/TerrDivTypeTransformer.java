@@ -4,7 +4,7 @@ import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName;
 import ru.sberbank.bigdata.dffess.vspc.constant.TablesName;
-import ru.sberbank.bigdata.dffess.vspc.constant.VpscConstant;
+import ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant;
 import ru.sberbank.bigdata.essa.common.logger.LoggerWrapper;
 import ru.sberbank.bigdata.essa.common.slave.app.SparkWrapper;
 import ru.sberbank.bigdata.essa.common.slave.hdfs.HdfsService;
@@ -13,11 +13,10 @@ import ru.sberbank.bigdata.essa.common.slave.templates.EntityTransformer;
 import ru.sberbank.bigdata.essa.common.slave.templates.SkClientWrapper;
 import ru.sberbank.bigdata.essa.common.slave.templates.TransformConfiguration;
 import ru.sberbank.bigdata.essa.common.utils.EntityStaticService;
-import java.util.HashMap;
-import java.util.Map;
 
 import static org.apache.spark.sql.functions.col;
 import static org.apache.spark.sql.functions.lit;
+import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.CTL_VALIDFROM;
 
 public class TerrDivTypeTransformer implements EntityTransformer {
     @Override
@@ -29,7 +28,7 @@ public class TerrDivTypeTransformer implements EntityTransformer {
         terrdivtype = terrdivtype
                 .select(
                         col(ColumnsName.DIVISIONTYPE00).as(ColumnsName.SID),
-                        lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.TERR_DIV_TYPE_DP_CODE),
+                        lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.TERR_DIV_TYPE_DP_CODE),
                         col(ColumnsName.DIVISIONTYPE00).as(ColumnsName.DIV_TYPE_CODE),
                         col(ColumnsName.DIVISIONTYPE00).as(ColumnsName.TERR_DIV_TYPE_SK),
                         lit(false).as(ColumnsName.DIRTY_FLAG)
@@ -40,8 +39,9 @@ public class TerrDivTypeTransformer implements EntityTransformer {
         terrdivtype = skClientWrapper.generateSk(terrdivtype, transformConfiguration.getStgTable(), transformConfiguration.getLoadMode(), transformConfiguration);
 
         terrdivtype = terrdivtype.select(
+                //lit(VspcConstant.getCurrentHourCutOffDate().toString()).as(CTL_VALIDFROM),
                 col(ColumnsName.TERR_DIV_TYPE_SK).as(ColumnsName.SID),
-                lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.TERR_DIV_TYPE_DP_CODE),
+                lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.TERR_DIV_TYPE_DP_CODE),
                 col(ColumnsName.DIV_TYPE_CODE).as(ColumnsName.DIV_TYPE_CODE),
                 col(ColumnsName.TERR_DIV_TYPE_SK).as(ColumnsName.TERR_DIV_TYPE_SK),
                 lit(false).as(ColumnsName.DIRTY_FLAG)

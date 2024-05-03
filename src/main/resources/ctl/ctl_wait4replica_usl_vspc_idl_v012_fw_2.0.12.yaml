@@ -38,10 +38,10 @@ workflows:
             prior_value: addr,addr_h,div_,div_h,div_type,terr_div_type
         - param:
             name: parallel_threads
-            prior_value: 2
+            prior_value: 10
         - param:
             name: common_spark_parameters
-            prior_value: "--conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=5G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=5 --conf spark.dynamicAllocation.maxExecutors=40 --conf spark.driver.memory=5G"
+            prior_value: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=5G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=5 --conf spark.dynamicAllocation.maxExecutors=40 --conf spark.driver.memory=5G"
         - param:
             name: debug_logical_env
             prior_value: ""
@@ -81,6 +81,9 @@ workflows:
         - param:
             name: target_hdfs_namespace
             prior_value: "usl"
+        - param:
+            name: rtfw_feature_console_enable
+            prior_value: "Y"
   - "{{ logical_env_prefix }}USL_VSPC_IDL":
       name: "{{ logical_env_prefix }}USL_VSPC_IDL_GBC"
       category: "{{ logical_env_prefix }}USL_IDL"
@@ -106,10 +109,10 @@ workflows:
             prior_value: addr,addr_h,div_,div_h,div_type,terr_div_type
         - param:
             name: parallel_threads
-            prior_value: 2
+            prior_value: 10
         - param:
             name: common_spark_parameters
-            prior_value: "--conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=5G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=5 --conf spark.dynamicAllocation.maxExecutors=40 --conf spark.driver.memory=5G"
+            prior_value: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=5G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=5 --conf spark.dynamicAllocation.maxExecutors=40 --conf spark.driver.memory=5G"
         - param:
             name: debug_logical_env
             prior_value: ""
@@ -149,6 +152,9 @@ workflows:
         - param:
             name: target_hdfs_namespace
             prior_value: "usl"
+        - param:
+            name: rtfw_feature_console_enable
+            prior_value: "Y"
             # Привязка нотификаций
       notifications:
         - { status: "ERROR", emails: [ "PGMamushkina@sberbank.ru" ] }

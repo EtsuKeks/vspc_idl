@@ -20,7 +20,7 @@ import ru.sberbank.bigdata.essa.common.slave.templates.FinalConfiguration;
 import java.util.HashMap;
 import java.util.Map;
 
-import static ru.sberbank.bigdata.dffess.vspc.constant.VpscConstant.DATA_PRODUCT;
+import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DATA_PRODUCT;
 import static ru.sberbank.bigdata.essa.common.master.app.forApp.SparkConfKeeper.ResourceConfig.HARD;
 import static ru.sberbank.bigdata.essa.common.master.app.forApp.SparkConfKeeper.ResourceConfig.LITE;
 

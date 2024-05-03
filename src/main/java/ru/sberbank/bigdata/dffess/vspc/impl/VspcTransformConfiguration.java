@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import static org.apache.spark.sql.functions.*;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VpscConstant.*;
+import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.*;
 import static ru.sberbank.bigdata.essa.common.constant.CommonConst.*;
 import static ru.sberbank.bigdata.essa.common.utils.Expression.generatePartitionMonthValue;
 
