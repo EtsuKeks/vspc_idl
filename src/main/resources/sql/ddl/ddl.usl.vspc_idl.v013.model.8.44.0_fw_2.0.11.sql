@@ -644,3 +644,14 @@ location '/data/usl/vspc_idl/stg/diff_terr_div_type';
 msck repair table usl_vspc_idl_stg.diff_terr_div_type;
 
 
+
+drop table if exists usl_vspc_idl_stg.entity_statistic;
+
+create external table usl_vspc_idl_stg.entity_statistic (
+    src_table STRING,
+    ctl_loading BIGINT,
+    loading_date TIMESTAMP
+)
+partitioned by (dst_table STRING)
+stored as parquet
+location '/data/usl/vspc_idl/stg/entity_statistic';
