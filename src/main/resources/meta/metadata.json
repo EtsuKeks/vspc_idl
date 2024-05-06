@@ -3,5 +3,12 @@
   "productCode": "vspc_idl",
   "cefss": "CI03474485",
   "wellCode": "VSPC",
-  "lineage": []
+  "lineage": [
+      {
+        "providerProductCode": null,
+        "providerDatasetCode": null,
+        "consumerProductCode": "usl_self_srv_devices_ndl_p_tps",
+        "consumerDatasetCode": null
+      }
+  ]
 }
