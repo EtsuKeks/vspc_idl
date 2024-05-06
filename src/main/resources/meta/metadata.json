@@ -4,11 +4,47 @@
   "cefss": "CI03474485",
   "wellCode": "VSPC",
   "lineage": [
-      {
-        "providerProductCode": null,
-        "providerDatasetCode": null,
-        "consumerProductCode": "usl_vspc_idl",
-        "consumerDatasetCode": null
-      }
+    {
+      "providerProductCode": null,
+      "providerDatasetCode": null,
+      "consumerProductCode": "usl_vspc_idl",
+      "consumerDatasetCode": null
+    },
+    {
+      "providerProductCode": null,
+      "providerDatasetCode": null,
+      "consumerProductCode": "usl_vspc_idl",
+      "consumerDatasetCode": "usl_vspc_idl.addr.hub"
+    },
+    {
+      "providerProductCode": null,
+      "providerDatasetCode": null,
+      "consumerProductCode": "usl_vspc_idl",
+      "consumerDatasetCode": "usl_vspc_idl.addr.sat=h"
+    },
+    {
+      "providerProductCode": null,
+      "providerDatasetCode": null,
+      "consumerProductCode": "usl_vspc_idl",
+      "consumerDatasetCode": "usl_vspc_idl.div_.hub"
+    },
+    {
+      "providerProductCode": null,
+      "providerDatasetCode": null,
+      "consumerProductCode": "usl_vspc_idl",
+      "consumerDatasetCode": "usl_vspc_idl.div.sat=h"
+    },
+    {
+      "providerProductCode": null,
+      "providerDatasetCode": null,
+      "consumerProductCode": "usl_vspc_idl",
+      "consumerDatasetCode": "usl_vspc_idl.div.sat=type"
+    },
+    {
+      "providerProductCode": null,
+      "providerDatasetCode": null,
+      "consumerProductCode": "usl_vspc_idl",
+      "consumerDatasetCode": "usl_vspc_idl.terr_div.hub"
+    }
   ]
 }
