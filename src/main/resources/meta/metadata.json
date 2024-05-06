@@ -7,44 +7,44 @@
     {
       "providerProductCode": null,
       "providerDatasetCode": null,
-      "consumerProductCode": "usl_vspc_idl",
+      "consumerProductCode": "usl_vspc_idl_gbc",
       "consumerDatasetCode": null
     },
     {
       "providerProductCode": null,
       "providerDatasetCode": null,
-      "consumerProductCode": "usl_vspc_idl",
-      "consumerDatasetCode": "usl_vspc_idl.addr.hub"
+      "consumerProductCode": "usl_vspc_idl_gbc",
+      "consumerDatasetCode": "usl_vspc_idl_gbc.addr.hub"
     },
     {
       "providerProductCode": null,
       "providerDatasetCode": null,
-      "consumerProductCode": "usl_vspc_idl",
-      "consumerDatasetCode": "usl_vspc_idl.addr.sat=h"
+      "consumerProductCode": "usl_vspc_idl_gbc",
+      "consumerDatasetCode": "usl_vspc_idl_gbc.addr.sat=h"
     },
     {
       "providerProductCode": null,
       "providerDatasetCode": null,
-      "consumerProductCode": "usl_vspc_idl",
-      "consumerDatasetCode": "usl_vspc_idl.div_.hub"
+      "consumerProductCode": "usl_vspc_idl_gbc",
+      "consumerDatasetCode": "usl_vspc_idl_gbc.div_.hub"
     },
     {
       "providerProductCode": null,
       "providerDatasetCode": null,
-      "consumerProductCode": "usl_vspc_idl",
-      "consumerDatasetCode": "usl_vspc_idl.div.sat=h"
+      "consumerProductCode": "usl_vspc_idl_gbc",
+      "consumerDatasetCode": "usl_vspc_idl_gbc.div.sat=h"
     },
     {
       "providerProductCode": null,
       "providerDatasetCode": null,
-      "consumerProductCode": "usl_vspc_idl",
-      "consumerDatasetCode": "usl_vspc_idl.div.sat=type"
+      "consumerProductCode": "usl_vspc_idl_gbc",
+      "consumerDatasetCode": "usl_vspc_idl_gbc.div.sat=type"
     },
     {
       "providerProductCode": null,
       "providerDatasetCode": null,
-      "consumerProductCode": "usl_vspc_idl",
-      "consumerDatasetCode": "usl_vspc_idl.terr_div.hub"
+      "consumerProductCode": "usl_vspc_idl_gbc",
+      "consumerDatasetCode": "usl_vspc_idl_gbc.terr_div.hub"
     }
   ]
 }
