@@ -7,7 +7,7 @@
       {
         "providerProductCode": null,
         "providerDatasetCode": null,
-        "consumerProductCode": "usl_self_srv_devices_ndl_p_tps",
+        "consumerProductCode": "usl_vspc_idl",
         "consumerDatasetCode": null
       }
   ]
