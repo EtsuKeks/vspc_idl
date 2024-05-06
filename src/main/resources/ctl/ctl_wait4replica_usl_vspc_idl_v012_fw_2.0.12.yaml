@@ -53,7 +53,7 @@ workflows:
             prior_value: "{{ USER_NAME }}"
         - param:
             name: user_keytab_path
-            prior_value: "/keytab/{{ USER_NAME }}.keytab"
+            prior_value: "/keytab/"
         - param:
             name: kerberos_realm
             prior_value: "{{ REALM }}"
@@ -124,7 +124,7 @@ workflows:
             prior_value: "{{ USER_NAME }}"
         - param:
             name: user_keytab_path
-            prior_value: "/keytab/{{ USER_NAME }}.keytab"
+            prior_value: "/keytab/"
         - param:
             name: kerberos_realm
             prior_value: "{{ REALM }}"
