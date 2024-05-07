@@ -1,50 +1,50 @@
 {
   "productCtlEntityId": "801005314",
-  "productCode": "vspc_idl_gbc",
+  "productCode": "vspc_idl",
   "cefss": "CI04734132",
   "wellCode": "VSPC",
   "lineage": [
     {
       "providerProductCode": null,
       "providerDatasetCode": null,
-      "consumerProductCode": "usl_vspc_idl_gbc",
+      "consumerProductCode": "usl_vspc_idl",
       "consumerDatasetCode": null
     },
     {
       "providerProductCode": null,
       "providerDatasetCode": null,
-      "consumerProductCode": "usl_vspc_idl_gbc",
-      "consumerDatasetCode": "usl_vspc_idl_gbc.addr.hub"
+      "consumerProductCode": "usl_vspc_idl",
+      "consumerDatasetCode": "usl_vspc_idl.addr.hub"
     },
     {
       "providerProductCode": null,
       "providerDatasetCode": null,
-      "consumerProductCode": "usl_vspc_idl_gbc",
-      "consumerDatasetCode": "usl_vspc_idl_gbc.addr.sat=h"
+      "consumerProductCode": "usl_vspc_idl",
+      "consumerDatasetCode": "usl_vspc_idl.addr.sat=h"
     },
     {
       "providerProductCode": null,
       "providerDatasetCode": null,
-      "consumerProductCode": "usl_vspc_idl_gbc",
-      "consumerDatasetCode": "usl_vspc_idl_gbc.div_.hub"
+      "consumerProductCode": "usl_vspc_idl",
+      "consumerDatasetCode": "usl_vspc_idl.div_.hub"
     },
     {
       "providerProductCode": null,
       "providerDatasetCode": null,
-      "consumerProductCode": "usl_vspc_idl_gbc",
-      "consumerDatasetCode": "usl_vspc_idl_gbc.div.sat=h"
+      "consumerProductCode": "usl_vspc_idl",
+      "consumerDatasetCode": "usl_vspc_idl.div.sat=h"
     },
     {
       "providerProductCode": null,
       "providerDatasetCode": null,
-      "consumerProductCode": "usl_vspc_idl_gbc",
-      "consumerDatasetCode": "usl_vspc_idl_gbc.div.sat=type"
+      "consumerProductCode": "usl_vspc_idl",
+      "consumerDatasetCode": "usl_vspc_idl.div.sat=type"
     },
     {
       "providerProductCode": null,
       "providerDatasetCode": null,
-      "consumerProductCode": "usl_vspc_idl_gbc",
-      "consumerDatasetCode": "usl_vspc_idl_gbc.terr_div.hub"
+      "consumerProductCode": "usl_vspc_idl",
+      "consumerDatasetCode": "usl_vspc_idl.terr_div.hub"
     }
   ]
 }

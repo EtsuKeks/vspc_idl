@@ -14,7 +14,7 @@ entities:
       parent-id: 904000000
 workflows:
   - "{{ logical_env_prefix }}USL_VSPC_IDL_INIT":
-      name: "{{ logical_env_prefix }}USL_VSPC_IDL_GBC_INIT"
+      name: "{{ logical_env_prefix }}USL_VSPC_IDL_INIT"
       category: "{{ logical_env_prefix }}USL_IDL"
       profile: "{{ CTL_PROFILE_NAME }}"
       singleLoading: true
@@ -85,7 +85,7 @@ workflows:
             name: rtfw_feature_console_enable
             prior_value: "Y"
   - "{{ logical_env_prefix }}USL_VSPC_IDL":
-      name: "{{ logical_env_prefix }}USL_VSPC_IDL_GBC"
+      name: "{{ logical_env_prefix }}USL_VSPC_IDL"
       category: "{{ logical_env_prefix }}USL_IDL"
       profile: "{{ CTL_PROFILE_NAME }}"
       singleLoading: false
