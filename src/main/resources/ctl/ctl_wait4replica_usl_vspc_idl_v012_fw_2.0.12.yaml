@@ -35,7 +35,7 @@ workflows:
             prior_value: "vspc_idl-D-01.302.011-jar-with-dependencies.jar"
         - param:
             name: data_sets
-            prior_value: addr,addr_h,div_,div_h,div_type,terr_div_type
+            prior_value: addr;addr_h;div_;div_h;div_type;terr_div_type
         - param:
             name: parallel_threads
             prior_value: 10
@@ -106,7 +106,7 @@ workflows:
             prior_value: "vspc_idl-D-01.302.011-jar-with-dependencies.jar"
         - param:
             name: data_sets
-            prior_value: addr,addr_h,div_,div_h,div_type,terr_div_type
+            prior_value: addr;addr_h;div_;div_h;div_type;terr_div_type
         - param:
             name: parallel_threads
             prior_value: 10
