@@ -20,7 +20,7 @@
       "providerProductCode": null,
       "providerDatasetCode": null,
       "consumerProductCode": "usl_vspc_idl",
-      "consumerDatasetCode": "usl_vspc_idl.addr_h.hub"
+      "consumerDatasetCode": "usl_vspc_idl.addr_h.sat=h"
     },
     {
       "providerProductCode": null,
@@ -32,13 +32,13 @@
       "providerProductCode": null,
       "providerDatasetCode": null,
       "consumerProductCode": "usl_vspc_idl",
-      "consumerDatasetCode": "usl_vspc_idl.div_h.hub"
+      "consumerDatasetCode": "usl_vspc_idl.div_h.sat=h"
     },
     {
       "providerProductCode": null,
       "providerDatasetCode": null,
       "consumerProductCode": "usl_vspc_idl",
-      "consumerDatasetCode": "usl_vspc_idl.div_type.hub"
+      "consumerDatasetCode": "usl_vspc_idl.div_type.sat=type"
     },
     {
       "providerProductCode": null,
