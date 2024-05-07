@@ -56,7 +56,7 @@
             <argument>${loading_id}</argument>                   <!-- 1 -->
             <argument>${wf:conf('user.name')}@${kerberos_realm}</argument>               <!-- 2 -->
             <argument>${ctl}</argument>                          <!-- 3 -->
-            <argument>${user_keytab_path}</argument>         <!-- 4 -->
+            <argument>${user_keytab_path}${wf:conf('user.name')}.keytab</argument>         <!-- 4 -->
             <argument>${nameNode}</argument>             <!-- 5 -->
             <argument>${debug_distributive_path}</argument>             <!-- 6 -->
             <argument>${devops_distributive_jar}</argument>             <!-- 7 -->
