@@ -44,7 +44,7 @@
       "providerProductCode": null,
       "providerDatasetCode": null,
       "consumerProductCode": "usl_vspc_idl",
-      "consumerDatasetCode": "usl_vspc_idl.terr_div.hub"
+      "consumerDatasetCode": "usl_vspc_idl.terr_div_type.hub"
     }
   ]
 }
