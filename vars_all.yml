@@ -13,7 +13,7 @@
 
 vars: &commonVars
   logical_env_prefix: ""
-  base_path: "/oozie-app/t/ndl/vspc_idl"
+  base_path: "/oozie-app/t/idl/vspc_idl"
   
   file_path: "{{ base_path }}/init/"
   YARN_QUEUE: "vspc"
