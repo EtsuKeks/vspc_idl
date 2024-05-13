@@ -143,10 +143,6 @@ workflows:
             name: parallel_threads
             prior_value: "{{ parallel_threads }}"
         - param:
-            # Число дней, которые хранятся данные в таблице ctl_log
-            name: calc_logs_depth_days
-            prior_value: "{{ calc_logs_depth_days }}"
-        - param:
             # Значения параметров Spark, которые можно передать в командную строку spark-submit.
             name: common_spark_parameters
             prior_value: "{{ spark_parameters }}"
