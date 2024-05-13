@@ -1,6 +1,0 @@
-rslt_type_code;rslt_type_name;rslt_type_txt;ifrs_sppi_test_rslt_type_dp_code;ifrs_sppi_test_rslt_type_sk;sid;dirty_flag;deleted_flag
-N/A;Не применимо;Тест договорных денежных потоков (SPPI-тест) не применим;spr_ifrs9_idl;N/A;N/A;FALSE;FALSE
-NOT_PASSED;Не пройден;Тест договорных денежных потоков (SPPI-тест) не пройден (1);spr_ifrs9_idl;NOT_PASSED;NOT_PASSED;FALSE;FALSE
-PASSED;Пройден (1);Тест договорных денежных потоков (SPPI-тест) пройден;spr_ifrs9_idl;PASSED;PASSED;FALSE;FALSE
-INSERT;INSERT;Вставка новой записи;spr_ifrs9_idl;INSERT;INSERT;FALSE;FALSE
-TEST;TEST;Физическое удаление;spr_ifrs9_idl;TEST;TEST;FALSE;TRUE

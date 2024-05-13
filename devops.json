@@ -1,5 +1,5 @@
 {
-  "version": "D-01.302.011",
+  "version": "D-01.302.012",
   "stand_name": "fess",
   "build": "maven",
   "block": "t",
@@ -26,18 +26,17 @@
 
   "ess": {
     "meta": [
-      "usl/dsm/cap_dsm_usl.vspc_idl_v013_fw_2.0.12.json",
       "usl/certification/cap_certification_usl.vspc_idl_v013_fw_2.0.12.json"
     ]
   },
 
   "distrib_files": [
     {
-      "source": "src/main/resources/ctl/ctl_wait4replica_usl_vspc_idl_v012_fw_2.0.12.yaml",
+      "source": "src/main/resources/ctl/ctl_wait4replica_usl_vspc_idl_v013_fw_2.0.12.yaml",
       "destination": "ctl/"
     },
     {
-      "source": "src/main/resources/ctl/ctl_wait4replica_usl_vspc_idl_v012_triv_fw_2.0.12.yaml",
+      "source": "src/main/resources/ctl/ctl_wait4replica_usl_vspc_idl_v013_triv_fw_2.0.12.yaml",
       "destination": "ctl/"
     },
     {
@@ -84,9 +83,10 @@
 
   ],
   "template_files": [
-    "usl/dsm/cap_dsm_usl.vspc_idl_v013_fw_2.0.12.json"
+    "usl/dsm/cap_dsm_usl.vspc_idl_v013_fw_2.0.12.json",
+    "sql/ddl/ddl.usl.vspc_idl.v013.model.8.44.0_fw_2.0.12.sql"
   ],
   "workflow_to_run" : [
-    "USL_VSPC_IDL"
+    "USL_VSPC_IDL_INIT"
   ]
 }

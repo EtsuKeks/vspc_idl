@@ -28,6 +28,6 @@ public class AddrHConfiguration extends VspcEtlConfiguration {
 
     @Override
     public MovingTablesGenerator getMovingTablesGenerator() {
-        return new AfterCutDateGenerator();
+        return new AllMovingGenerator();
     }
 }
