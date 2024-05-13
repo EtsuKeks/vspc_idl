@@ -24,7 +24,7 @@ vars: &commonVars
   parallel_threads: 1
   debug_distributive_path: "{{ base_path }}/lib"
   debug_sk_off: "N"
-  build_version: "D-01.302.014"
+  build_version: "D-01.302.015"
   devops_distributive_jar: "vspc_idl-{{ build_version }}-jar-with-dependencies.jar"
 
   logical_env_prefix_with_slash: ""
@@ -36,7 +36,6 @@ vars: &commonVars
   kerberos_realm: "{{ REALM }}"
   domain: "{{ REALM }}"
   max_increment_depth: "10"
-
 
   data_owner_name: "SN"
   org_lvl2_name: "СП.Управление моделирования и исследования данных"
