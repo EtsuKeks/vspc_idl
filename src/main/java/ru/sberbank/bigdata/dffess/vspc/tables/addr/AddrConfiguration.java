@@ -6,6 +6,7 @@ import ru.sberbank.bigdata.essa.common.slave.loading.DataLoaderHubSnp;
 import ru.sberbank.bigdata.essa.common.slave.move.AfterCutDateGenerator;
 import ru.sberbank.bigdata.essa.common.slave.move.MovingTablesGenerator;
 import ru.sberbank.bigdata.essa.common.slave.templates.EntityTransformer;
+import ru.sberbank.bigdata.essa.common.slave.move.AllMovingGenerator;
 
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.ADDR;
 

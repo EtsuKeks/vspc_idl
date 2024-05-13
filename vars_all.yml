@@ -24,7 +24,7 @@ vars: &commonVars
   parallel_threads: 1
   debug_distributive_path: "{{ base_path }}/lib"
   debug_sk_off: "N"
-  build_version: "D-01.302.012"
+  build_version: "D-01.302.013"
   devops_distributive_jar: "vspc_idl-{{ build_version }}-jar-with-dependencies.jar"
 
   logical_env_prefix_with_slash: ""
