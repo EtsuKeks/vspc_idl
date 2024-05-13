@@ -48,7 +48,7 @@ stands:
     vars:
       <<: *commonVars
       cluster_name: "sklsdpfess"
-      spark_parameters: "--conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=2G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=5 --conf spark.dynamicAllocation.maxExecutors=40 --conf spark.driver.memory=5G"
+      spark_parameters: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=2G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=5 --conf spark.dynamicAllocation.maxExecutors=40 --conf spark.driver.memory=5G"
       hdfs_path: "/oozie-app/triv_ess"
       hadoop_default_fs_uri: "hdfs://FESS-DEV"
       user_name: "u_sklsdpfess_s_usl_t_vspc_idl"
