@@ -19,7 +19,7 @@ vars: &commonVars
   YARN_QUEUE: "vspc"
   debug_logical_env: ""
 
-  data_sets: "usl_vspc_idl.addr.hub;usl_vspc_idl.addr_h.sat=h;usl_vspc_idl.div_.hub;usl_vspc_idl.div_h.sat=h;usl_vspc_idl.div_type.hub;usl_vspc_idl.terr_div_type.hub"
+  data_sets: "usl_vspc_idl.addr.hub;usl_vspc_idl.addr_h.sat=h;usl_vspc_idl.div_.hub;usl_vspc_idl.div_h.sat=h;usl_vspc_idl.div_type.sat=h;usl_vspc_idl.terr_div_type.hub"
 
   parallel_threads: 1
   debug_distributive_path: "{{ base_path }}/lib"
