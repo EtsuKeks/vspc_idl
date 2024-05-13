@@ -27,7 +27,7 @@ import static ru.sberbank.bigdata.essa.common.master.app.forApp.SparkConfKeeper.
 public class MainClass {
 
     public static void main(String[] args) throws Exception {
-        System.out.println("ssdsssdsssd=========================================");
+        System.out.println("START MAIN VSPC_IDL");
         CmdArgsParser cmdArgsParser = new CmdArgsParser();
         Map<String, String> cmdArgs = cmdArgsParser.parse(args);
 
@@ -56,7 +56,7 @@ public class MainClass {
         AppRunnerGenerator appRunnerGenerator = new SparkAppRunnerGenerator();
         DataProductRunner dpr = new DataProductRunner(dp, ctlAdapter, appRunnerGenerator);
         dpr.run();
-        System.out.println("++++++++++++++++++++++++++++");
+        System.out.println("FINISHED MAIN VSPC_IDL");
 
     }
 
@@ -74,7 +74,7 @@ public class MainClass {
         Etl divh = Etl.newInstance(TablesName.DIVH, DivHConfiguration.class, LITE).addDependency(preload);
         Etl divtype = Etl.newInstance(TablesName.DIVTYPE, DivTypeConfiguration.class, LITE).addDependency(preload);
         Etl terrdivtype = Etl.newInstance(TablesName.TERRDIVTYPE, TerrDivTypeConfiguration.class, LITE).addDependency(preload);
-        return EtlKit.newInstance("ssd", HARD)
+        return EtlKit.newInstance("vspc_idl", HARD)
                 .addEtl(addr)
                 .addEtl(addrh)
                 .addEtl(div)
