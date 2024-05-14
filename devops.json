@@ -27,7 +27,8 @@
   "ess": {
     "meta": [
       "usl/certification/cap_certification_usl.vspc_idl_v013_fw_2.0.12.json"
-    ]
+    ], 
+    "well": "vspc"
   },
 
   "distrib_files": [
