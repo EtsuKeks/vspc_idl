@@ -31,7 +31,7 @@
             <env-var>loading_id=${loading_id}</env-var>
             <env-var>wf_name=${wf:name()}</env-var>
             <env-var>queue=${yarn_queue}</env-var>
-            <env-var>jar_name=yarnkiller-1.1-jar-with-dependencies.jar</env-var>
+            <env-var>jar_name=yarnkiller-2.0-jar-with-dependencies.jar</env-var>
             <env-var>jars_path=${debug_distributive_path}</env-var>
             <env-var>user_principal=${wf:conf('user.name')}@${kerberos_realm}</env-var>
             <env-var>nameNode=${nameNode}</env-var>
@@ -42,8 +42,8 @@
             <env-var>update_rate=30000</env-var>
             <env-var>oozie_job_id=${wf:id()}</env-var>
             <env-var>oozie_job_action=MAIN_ACTION</env-var>
+            <env-var>application_type=Oozie Launcher</env-var>
             <file>/oozie-app/t/idl/vspc_idl/yarn_killer.sh</file>
-
         </shell>
         <ok to="joining"/>
         <error to="KILL_ERROR"/>
@@ -65,7 +65,6 @@
             <argument>${parallel_threads}</argument>         <!-- 9 -->
             <argument>${firstNotNull(wf:conf('debug_logical_env'),' ')}</argument>     <!-- 10 -->
             <argument>${debug_sk_off}</argument>     <!-- 11 -->
-
             <file>StartLauncher.sh#StartLauncher.sh</file>
         </shell>
         <ok to="joining"/>
