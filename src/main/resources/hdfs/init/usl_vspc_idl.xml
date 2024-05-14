@@ -31,7 +31,7 @@
             <env-var>loading_id=${loading_id}</env-var>
             <env-var>wf_name=${wf:name()}</env-var>
             <env-var>queue=${yarn_queue}</env-var>
-            <env-var>jar_name=yarnkiller-2.0-jar-with-dependencies.jar</env-var>
+            <env-var>jar_name=yarnkiller-1.1-jar-with-dependencies.jar</env-var>
             <env-var>jars_path=${debug_distributive_path}</env-var>
             <env-var>user_principal=${wf:conf('user.name')}@${kerberos_realm}</env-var>
             <env-var>nameNode=${nameNode}</env-var>
