@@ -35,7 +35,7 @@
             <env-var>jars_path=${debug_distributive_path}</env-var>
             <env-var>user_principal=${wf:conf('user.name')}@${kerberos_realm}</env-var>
             <env-var>nameNode=${nameNode}</env-var>
-            <env-var>user_keytab_path=${user_keytab_path}</env-var>
+            <argument>user_keytab_path=${user_keytab_path}${wf:conf('user.name')}.keytab</argument>         <!-- 4 -->
             <env-var>ctl_url=${ctl}</env-var>
             <env-var>ctl_entity_id=801005314</env-var>
             <env-var>ctl_stat_id=15</env-var>
