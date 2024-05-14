@@ -32,7 +32,7 @@
             <env-var>wf_name=${wf:name()}</env-var>
             <env-var>queue=${yarn_queue}</env-var>
             <env-var>jar_name=yarnkiller-1.1-jar-with-dependencies.jar</env-var>
-            <env-var>jars_path=/dp-resources/yarn-killer-rb</env-var>
+            <env-var>jars_path=${debug_distributive_path}</env-var>
             <env-var>user_principal=${wf:conf('user.name')}@${kerberos_realm}</env-var>
             <env-var>nameNode=${nameNode}</env-var>
             <env-var>user_keytab_path=${user_keytab_path}</env-var>
