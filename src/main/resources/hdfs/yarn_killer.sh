@@ -1,5 +1,6 @@
 user_keytab_path_local=kill_tmp.keytab
-hdfs_jar=${nameNode}/oozie-app/essa/killer/${jar_name}
+hdfs_jar=${nameNode}${debug_distributive_path::-3}${jar_name}
+echo "${hdfs_jar}"
 
 
 hdfs dfs -get ${user_keytab_path} ${user_keytab_path_local} 
