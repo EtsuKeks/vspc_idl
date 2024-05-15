@@ -42,8 +42,8 @@ public class DivTypeTransformer implements EntityTransformer {
         columnEntities.put(ColumnsName.DIV_TYPE_TERR_DIV_TYPE_SK, TablesName.TERRDIVTYPE);
         columnEntities.put(ColumnsName.DIV_SK, TablesName.DIV);
 
+        divtype = skClientWrapper.incrementSk(divtype, TablesName.DIVTYPE, columnEntities, transformConfiguration);
 
-        divtype = skClientWrapper.incrementSk(divtype, transformConfiguration.getStgTable(), columnEntities, transformConfiguration);
         return divtype;
     }
 }

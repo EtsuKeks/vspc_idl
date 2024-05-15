@@ -47,8 +47,8 @@ public class DivHTransformer implements EntityTransformer {
         columnEntities.put(ColumnsName.DIV_UPS_PAY_SYS_PRTCPNT_SK, "pay_sys_prtcpnt");
         columnEntities.put(ColumnsName.DIV_FACT_ADDR_SK, TablesName.ADDR);
 
-        divh = skClientWrapper.incrementSk(divh, transformConfiguration.getStgTable(), columnEntities, transformConfiguration);
-        
+        divh = skClientWrapper.incrementSk(divh, TablesName.DIVH, columnEntities, transformConfiguration);
+
         return divh;
     }
 }

@@ -44,7 +44,7 @@ public class TerrDivTypeTransformer implements EntityTransformer {
                 lit(false).as(ColumnsName.DIRTY_FLAG)
         );
 
-        terrdivtype = skClientWrapper.generateSk(terrdivtype, transformConfiguration.getStgTable(), transformConfiguration);
+        terrdivtype = skClientWrapper.generateSk(terrdivtype, TablesName.TERRDIVTYPE, transformConfiguration.getLoadMode(), transformConfiguration);
 
         return terrdivtype;
     }

@@ -37,8 +37,8 @@ public class AddrHTransformer implements EntityTransformer {
                         lit(false).as(ColumnsName.DIRTY_FLAG)
                 );
 
-        addrh = skClientWrapper.incrementSk(addrh, transformConfiguration.getStgTable(), transformConfiguration);
-        
+        addrh = skClientWrapper.incrementSk(addrh, TablesName.ADDRH, transformConfiguration);
+
         return addrh;
     }
 }
