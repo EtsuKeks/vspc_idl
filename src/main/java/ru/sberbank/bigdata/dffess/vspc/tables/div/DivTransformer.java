@@ -52,7 +52,7 @@ public class DivTransformer implements EntityTransformer {
         columnEntities.put(ColumnsName.DIV_LEGAL_ADDR_SK, TablesName.ADDR);
 
 
-        div = skClientWrapper.generateSk(div, transformConfiguration.getStgTable(), transformConfiguration.getLoadMode(), columnEntities, transformConfiguration);
+        div = skClientWrapper.generateSk(div, transformConfiguration.getStgTable(), columnEntities, transformConfiguration);
         return div;
     }
 }

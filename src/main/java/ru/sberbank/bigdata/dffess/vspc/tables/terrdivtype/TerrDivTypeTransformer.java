@@ -35,9 +35,6 @@ public class TerrDivTypeTransformer implements EntityTransformer {
 
                 ).distinct();
 
-
-        terrdivtype = skClientWrapper.generateSk(terrdivtype, transformConfiguration.getStgTable(), transformConfiguration.getLoadMode(), transformConfiguration);
-
         terrdivtype = terrdivtype.select(
                 //lit(VspcConstant.getCurrentHourCutOffDate().toString()).as(CTL_VALIDFROM),
                 col(ColumnsName.TERR_DIV_TYPE_SK).as(ColumnsName.SID),
@@ -46,6 +43,8 @@ public class TerrDivTypeTransformer implements EntityTransformer {
                 col(ColumnsName.TERR_DIV_TYPE_SK).as(ColumnsName.TERR_DIV_TYPE_SK),
                 lit(false).as(ColumnsName.DIRTY_FLAG)
         );
+
+        terrdivtype = skClientWrapper.generateSk(terrdivtype, transformConfiguration.getStgTable(), transformConfiguration);
 
         return terrdivtype;
     }

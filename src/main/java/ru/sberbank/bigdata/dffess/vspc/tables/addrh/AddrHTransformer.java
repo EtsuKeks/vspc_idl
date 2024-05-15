@@ -25,6 +25,8 @@ public class AddrHTransformer implements EntityTransformer {
                                       EntityProxyRelation entityProxyRelation, LoggerWrapper loggerWrapper) {
 
         Dataset<Row> addrh = sparkWrapper.getDataset(transformConfiguration.getSnpSrcSchema(TablesName.EBX_REP_M_SFS_0002_SFSDIVISION), TablesName.EBX_REP_M_SFS_0002_SFSDIVISION);
+        
+
         addrh = addrh
                 .select(
                         lit(VspcConstant.getCurrentHourCutOffDate().toString()).as(CTL_VALIDFROM),
@@ -36,7 +38,7 @@ public class AddrHTransformer implements EntityTransformer {
                 );
 
         addrh = skClientWrapper.incrementSk(addrh, transformConfiguration.getStgTable(), transformConfiguration);
-        addrh.show();
+        
         return addrh;
     }
 }

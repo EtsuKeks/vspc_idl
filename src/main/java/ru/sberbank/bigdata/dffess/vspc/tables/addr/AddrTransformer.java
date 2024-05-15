@@ -154,7 +154,7 @@ public class AddrTransformer implements EntityTransformer {
         columnEntities.put(ColumnsName.ADDR_OKATO2_SK, "okato2");
 
 
-        addr = skClientWrapper.generateSk(addr, transformConfiguration.getStgTable(), transformConfiguration.getLoadMode(), columnEntities, transformConfiguration);
+        addr = skClientWrapper.generateSk(addr, transformConfiguration.getStgTable(), columnEntities, transformConfiguration);
         return addr;
     }
 }
