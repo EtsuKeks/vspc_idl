@@ -43,7 +43,7 @@ workflows:
         - param:
         #  имя утилиты
             name: jar_name
-            prior_value: "trif_ess-full-1.1.0.jar"
+            prior_value: "triv_ess-distcp.jar"
         - param:
         # путь до утилиты
             name: jars_path
@@ -131,7 +131,7 @@ workflows:
         - param:
         #  имя утилиты
             name: jar_name
-            prior_value: "trif_ess-full-1.1.0.jar"
+            prior_value: "triv_ess-distcp.jar"
         - param:
         # путь до утилиты
             name: jars_path
