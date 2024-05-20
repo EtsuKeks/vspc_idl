@@ -79,16 +79,17 @@ public class MainClass {
         Etl timezone = Etl.newInstance(TablesName.TIMEZONE, TimeZoneConfiguration.class, LITE).addDependency(preload);
 
         addrh = addrh.addDependency(addr);
+        div = div.addDependency(timezone);
         divh = divh.addDependency(div).addDependency(addr);
         divtype = divtype.addDependency(div);
 
         return EtlKit.newInstance("vspc_idl", HARD)
+                .addEtl(timezone)
                 .addEtl(addr)
                 .addEtl(addrh)
                 .addEtl(div)
                 .addEtl(divh)
                 .addEtl(divtype)
-                .addEtl(terrdivtype)
-                .addEtl(timezone);
+                .addEtl(terrdivtype);
     }
 }
