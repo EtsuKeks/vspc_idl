@@ -47,7 +47,7 @@ public class DivTransformer implements EntityTransformer {
                         lit(false).as(ColumnsName.DIRTY_FLAG),
                         col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM).as(ColumnsName.DIV_FULL_REG_NUM),
                         when(col(ColumnsName.FULLNAME).equalTo("ПАО Сбербанк"), col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM))
-                        .otherwise(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM).split("/")[col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM).split("/").length-1]).as(ColumnsName.DIV_REG_ORD)
+                        .otherwise(substring_index(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM), "/", -1)).as(ColumnsName.DIV_REG_ORD)
                 );
 
         Map<String, String> columnEntities = new HashMap<>();
