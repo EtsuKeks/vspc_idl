@@ -73,10 +73,6 @@
       "destination": "usl/certification/"
     },
     {
-      "source": "src/main/resources/usl/dsm/*",
-      "destination": "usl/dsm/"
-    },
-    {
       "source": "src/main/resources/meta/*",
       "destination": "meta/"
     }
