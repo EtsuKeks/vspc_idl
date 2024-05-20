@@ -78,6 +78,10 @@ public class MainClass {
         Etl terrdivtype = Etl.newInstance(TablesName.TERRDIVTYPE, TerrDivTypeConfiguration.class, LITE).addDependency(preload);
         Etl timezone = Etl.newInstance(TablesName.TIMEZONE, TimeZoneConfiguration.class, LITE).addDependency(preload);
 
+        addrh = addrh.addDependency(addr);
+        divh = divh.addDependency(div).addDependency(addr);
+        divtype = divtype.addDependency(div);
+
         return EtlKit.newInstance("vspc_idl", HARD)
                 .addEtl(addr)
                 .addEtl(addrh)
