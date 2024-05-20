@@ -8,6 +8,8 @@ import ru.sberbank.bigdata.dffess.vspc.tables.div.DivConfiguration;
 import ru.sberbank.bigdata.dffess.vspc.tables.divh.DivHConfiguration;
 import ru.sberbank.bigdata.dffess.vspc.tables.divtype.DivTypeConfiguration;
 import ru.sberbank.bigdata.dffess.vspc.tables.terrdivtype.TerrDivTypeConfiguration;
+import ru.sberbank.bigdata.dffess.vspc.tables.timezone.TimeZoneConfiguration;
+
 import ru.sberbank.bigdata.essa.common.logger.LoggerWrapper;
 import ru.sberbank.bigdata.essa.common.logger.SoutLoggerWrapper;
 import ru.sberbank.bigdata.essa.common.master.AppRunnerGenerator;
@@ -74,12 +76,15 @@ public class MainClass {
         Etl divh = Etl.newInstance(TablesName.DIVH, DivHConfiguration.class, LITE).addDependency(preload);
         Etl divtype = Etl.newInstance(TablesName.DIVTYPE, DivTypeConfiguration.class, LITE).addDependency(preload);
         Etl terrdivtype = Etl.newInstance(TablesName.TERRDIVTYPE, TerrDivTypeConfiguration.class, LITE).addDependency(preload);
+        Etl timezone = Etl.newInstance(TablesName.TIMEZONE, TimeZoneConfiguration.class, LITE).addDependency(preload);
+
         return EtlKit.newInstance("vspc_idl", HARD)
                 .addEtl(addr)
                 .addEtl(addrh)
                 .addEtl(div)
                 .addEtl(divh)
                 .addEtl(divtype)
-                .addEtl(terrdivtype);
+                .addEtl(terrdivtype)
+                .addEtl(timezone);
     }
 }

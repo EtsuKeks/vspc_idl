@@ -44,7 +44,8 @@ public class DivTransformer implements EntityTransformer {
                         lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.DIV_PARENT_DIV_DP_CODE),
                         col(ColumnsName.ID).as(ColumnsName.DIV_LEGAL_ADDR_SK),
                         lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.DIV_LEGAL_ADDR_DP_CODE),
-                        lit(false).as(ColumnsName.DIRTY_FLAG)
+                        lit(false).as(ColumnsName.DIRTY_FLAG),
+                        col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM).as(ColumnsName.DIV_FULL_REG_NUM),
                 );
 
         Map<String, String> columnEntities = new HashMap<>();

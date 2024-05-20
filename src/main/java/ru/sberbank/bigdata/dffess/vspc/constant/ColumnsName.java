@@ -49,8 +49,8 @@ public final class ColumnsName {
     public static final String DIVISIONTYPE00 = "divisiontype00";
     public static final String DIV_CODE = "code";
     public static final String DIV_SHORT_DIV_CODE = "short_div_code";
-    public static final String DIV_UPS_PAY_SYS_PRTCPNT_DP_CODE = "div_ups_pay_sys_prtcpnt_dp_code";
-    public static final String DIV_UPS_PAY_SYS_PRTCPNT_SK = "div_ups_pay_sys_prtcpnt_sk";
+    public static final String DIV_PAY_SYS_PRTCPNT_DP_CODE = "pay_sys_prtcpnt_dp_code";
+    public static final String DIV_PAY_SYS_PRTCPNT_SK = "div_pay_sys_prtcpnt_sk";
     public static final String CLOSEDATE = "closedate";
     public static final String DIV_CLOSEDATE = "div_close_dt";
     public static final String OPENDATE = "opendate";
@@ -62,6 +62,13 @@ public final class ColumnsName {
     public static final String TERR_DIV_TYPE = "terr_div_type";
     public static final String TERR_DIV_TYPE_DP_CODE = "terr_div_type_dp_code";
     public static final String TERR_DIV_TYPE_SK = "terr_div_type_sk";
+
+    public static final String DIV_TIME_ZONE_TIME_ZONE_CODE = "div_time_zone_time_zone_rf_dp_code";
+    public static final String DIV_TIME_ZONE_TIME_ZONE_SK = "div_time_zone_time_zone_rf_sk";
+    public static final String DIV_FULL_REG_NUM = "full_reg_num";
+    public static final String DIV_REG_ORD = "reg_ord";
+
+    public static final String DIV_REQUISITEDIVISION_REGISTRATIONNUM = "requisitesdivision_registrationnum";
 
     public static final String DIV_TYPE_CODE = "div_type_code";
     public static final String DIV_TYPE_TERR_DIV_TYPE_SK = "div_type_terr_div_type_sk";
@@ -81,6 +88,14 @@ public final class ColumnsName {
     public static final String DIV_FACT_ADDR_DP_CODE = "fact_addr_dp_code";
     public static final String DIV_FACT_ADDR_SK = "fact_addr_sk";
 
+    public static final String TIME_ZONE_ABBR_CODE = "time_zone_abbr_code";
+    public static final String TIME_ZONE_CODE = "time_zone_code";
+    public static final String TIME_ZONE_MSK_SHIFT_VAL = "time_zone_msk_shift_val";
+    public static final String TIME_ZONE_NAME = "time_zone_name";
+    public static final String TIME_ZONE_DP_CODE = "time_zone_rf_dp_code";
+    public static final String TIME_ZONE_SK = "time_zone_rf_sk";
+    public static final String TIME_ZONE_WRLD_SHIFT_VAL = "time_zone_wrld_shift_val";
+    public static final String ADDRESS_ADDRFACT_TIMEZONE = "address_addrfact_timezone";
 
     private ColumnsName() {
         //no_op

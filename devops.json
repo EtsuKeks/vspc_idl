@@ -26,18 +26,17 @@
 
   "ess": {
     "meta": [
-      "usl/certification/cap_certification_usl.vspc_idl_v013_fw_2.0.12.json"
+      "usl/certification/cap_certification_usl.vspc_idl_v014_fw_2.0.17.json"
     ], 
+    "kkd-spod": [
+      "usl/certification/dq.vspc_idl.v014_fw_2.0.17.json"
+    ],
     "well": "vspc"
   },
 
   "distrib_files": [
     {
-      "source": "src/main/resources/ctl/ctl_wait4replica_usl_vspc_idl_v013_fw_2.0.12.yaml",
-      "destination": "ctl/"
-    },
-    {
-      "source": "src/main/resources/ctl/ctl_wait4replica_usl_vspc_idl_v013_triv_fw_2.0.12.yaml",
+      "source": "src/main/resources/ctl/*",
       "destination": "ctl/"
     },
     {
@@ -81,11 +80,11 @@
       "source": "src/main/resources/meta/*",
       "destination": "meta/"
     }
-
   ],
   "template_files": [
-    "usl/dsm/cap_dsm_usl.vspc_idl_v013_fw_2.0.12.json",
-    "sql/ddl/ddl.usl.vspc_idl.v013.model.8.44.0_fw_2.0.12.sql"
+    "usl/certification/dq.vspc_idl.v014_fw_2.0.17.json",
+    "sql/ddl/ddl.usl.vspc_idl.v014.model_stg.8.76.0_fw_2.0.17.sql",
+    "sql/ddl/ddl.usl.vspc_idl.v014.model.8.76.0_fw_2.0.17.sql"
   ],
   "workflow_to_run" : [
     "USL_VSPC_IDL_INIT"

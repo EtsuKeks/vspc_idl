@@ -36,15 +36,15 @@ public class DivHTransformer implements EntityTransformer {
                         to_date(col(ColumnsName.OPENDATE)).as(ColumnsName.DIV_OPENDATE),
                         col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_CODE),
                         lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.DIV_DP_CODE),
-                        lit(VspcConstant.RDM_IDL_SPARK).as(ColumnsName.DIV_UPS_PAY_SYS_PRTCPNT_DP_CODE),
-                        col(ColumnsName.REQUSITEDIVISION_BIC).as(ColumnsName.DIV_UPS_PAY_SYS_PRTCPNT_SK),
+                        lit(VspcConstant.RDM_IDL_SPARK).as(ColumnsName.DIV_PAY_SYS_PRTCPNT_DP_CODE),
+                        col(ColumnsName.REQUSITEDIVISION_BIC).as(ColumnsName.DIV_PAY_SYS_PRTCPNT_SK),
                         lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.DIV_FACT_ADDR_DP_CODE),
                         col(ColumnsName.ID).as(ColumnsName.DIV_FACT_ADDR_SK),
                         lit(false).as(ColumnsName.DIRTY_FLAG)
                 );
 
         Map<String, String> columnEntities = new HashMap<>();
-        columnEntities.put(ColumnsName.DIV_UPS_PAY_SYS_PRTCPNT_SK, "pay_sys_prtcpnt");
+        columnEntities.put(ColumnsName.DIV_PAY_SYS_PRTCPNT_SK, "pay_sys_prtcpnt");
         columnEntities.put(ColumnsName.DIV_FACT_ADDR_SK, TablesName.ADDR);
 
         divh = skClientWrapper.incrementSk(divh, TablesName.DIVH, columnEntities, transformConfiguration);
