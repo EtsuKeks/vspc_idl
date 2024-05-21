@@ -49,17 +49,20 @@ public class DivTransformer implements EntityTransformer {
                         when(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null)
                         .otherwise(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM)).as(ColumnsName.DIV_FULL_REG_NUM),
 
-                        when(col(ColumnsName.FULLNAME).equalTo("ПАО Сбербанк"), 
+                        int(when(col(ColumnsName.FULLNAME).equalTo("ПАО Сбербанк"), 
                                 when(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null).otherwise(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM)))
                         .otherwise(
                                 when(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null)
-                                .otherwise(substring_index(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM), "/", -1))).as(ColumnsName.DIV_REG_ORD)
+                                .otherwise(substring_index(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM), "/", -1)))).as(ColumnsName.DIV_REG_ORD),
+                        
+                        col(ColumnsName.ADDRESS_ADDRFACT_TIMEZONE).as(ColumnsName.DIV_TIME_ZONE_TIME_ZONE_SK),
+                        lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.DIV_TIME_ZONE_TIME_ZONE_DP_CODE)
                 );
 
         Map<String, String> columnEntities = new HashMap<>();
         columnEntities.put(ColumnsName.DIV_PARENT_DIV_SK, TablesName.DIV);
         columnEntities.put(ColumnsName.DIV_LEGAL_ADDR_SK, TablesName.ADDR);
-
+        columnEntities.put(ColumnsName.DIV_TIME_ZONE_TIME_ZONE_SK, TablesName.TIMEZONE);
 
         div = skClientWrapper.generateSk(div, TablesName.DIV, transformConfiguration.getLoadMode(), columnEntities, transformConfiguration);
         return div;

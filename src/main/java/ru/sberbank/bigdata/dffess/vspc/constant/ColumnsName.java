@@ -50,7 +50,7 @@ public final class ColumnsName {
     public static final String DIV_CODE = "code";
     public static final String DIV_SHORT_DIV_CODE = "short_div_code";
     public static final String DIV_PAY_SYS_PRTCPNT_DP_CODE = "pay_sys_prtcpnt_dp_code";
-    public static final String DIV_PAY_SYS_PRTCPNT_SK = "div_pay_sys_prtcpnt_sk";
+    public static final String DIV_PAY_SYS_PRTCPNT_SK = "pay_sys_prtcpnt_sk";
     public static final String CLOSEDATE = "closedate";
     public static final String DIV_CLOSEDATE = "div_close_dt";
     public static final String OPENDATE = "opendate";
@@ -63,7 +63,7 @@ public final class ColumnsName {
     public static final String TERR_DIV_TYPE_DP_CODE = "terr_div_type_dp_code";
     public static final String TERR_DIV_TYPE_SK = "terr_div_type_sk";
 
-    public static final String DIV_TIME_ZONE_TIME_ZONE_CODE = "div_time_zone_time_zone_rf_dp_code";
+    public static final String DIV_TIME_ZONE_TIME_ZONE_DP_CODE = "div_time_zone_time_zone_rf_dp_code";
     public static final String DIV_TIME_ZONE_TIME_ZONE_SK = "div_time_zone_time_zone_rf_sk";
     public static final String DIV_FULL_REG_NUM = "full_reg_num";
     public static final String DIV_REG_ORD = "reg_ord";

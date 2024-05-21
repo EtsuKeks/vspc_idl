@@ -79,19 +79,22 @@ public class TimeZoneTransformer implements EntityTransformer {
                         .when(col(ColumnsName.ADDRESS_SUBJECTCODE).equalTo("VLAT"), "UTC+10")
                         .when(col(ColumnsName.ADDRESS_SUBJECTCODE).equalTo("MAGT"), "UTC+11")
                         .when(col(ColumnsName.ADDRESS_SUBJECTCODE).equalTo("PETT"), "UTC+12")
-                        .as(ColumnsName.TIME_ZONE_WRLD_SHIFT_VAL)
+                        .as(ColumnsName.TIME_ZONE_WRLD_SHIFT_VAL),
+
+                        col(ColumnsName.ADDRESS_ADDRFACT_TIMEZONE).as(ColumnsName.ADDRESS_ADDRFACT_TIMEZONE)
 
                 ).distinct(); 
 
         timezone = timezone.select(
-                col(ColumnsName.TIME_ZONE_CODE).as(ColumnsName.SID),
-                lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.TIME_ZONE_DP_CODE),
-                col(ColumnsName.TIME_ZONE_CODE).as(ColumnsName.TIME_ZONE_SK),
+                col(ColumnsName.ADDRESS_ADDRFACT_TIMEZONE).as(ColumnsName.SID),
+                col(ColumnsName.ADDRESS_ADDRFACT_TIMEZONE).as(ColumnsName.TIME_ZONE_ABBR_CODE),
                 col(ColumnsName.TIME_ZONE_CODE).as(ColumnsName.TIME_ZONE_CODE),
                 col(ColumnsName.TIME_ZONE_MSK_SHIFT_VAL).as(ColumnsName.TIME_ZONE_MSK_SHIFT_VAL),
                 col(ColumnsName.TIME_ZONE_NAME).as(ColumnsName.TIME_ZONE_NAME),
+                lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.TIME_ZONE_DP_CODE),
+                col(ColumnsName.ADDRESS_ADDRFACT_TIMEZONE).as(ColumnsName.TIME_ZONE_SK),
                 col(ColumnsName.TIME_ZONE_WRLD_SHIFT_VAL).as(ColumnsName.TIME_ZONE_WRLD_SHIFT_VAL),
-                lit(false).as(ColumnsName.DIRTY_FLAG)
+                lit(false).as(ColumnsName.DIRTY_FLAG),
         );
 
         timezone = skClientWrapper.generateSk(timezone, TablesName.TIMEZONE, transformConfiguration.getLoadMode(), transformConfiguration);
