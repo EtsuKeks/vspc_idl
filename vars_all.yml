@@ -42,6 +42,8 @@ vars: &commonVars
   secman_cert_owner_email: "dvilapshin@sberbank.ru"
   archiveStat_sfs: "2"
   archiveProfile_sfs: "ts_espd"
+  hdfs_path: "/oozie-app/t/tools/trivDistCp"
+  jar_name_triv: "triv_ess-distcp.jar"
 
 stands:
   # DEV

@@ -43,7 +43,7 @@ workflows:
         - param:
         #  имя утилиты
             name: jar_name
-            prior_value: "triv_ess-distcp.jar"
+            prior_value: "{{ jar_name_triv }}"
         - param:
         # путь до утилиты
             name: jars_path
@@ -131,7 +131,7 @@ workflows:
         - param:
         #  имя утилиты
             name: jar_name
-            prior_value: "triv_ess-distcp.jar"
+            prior_value: "{{ jar_name_triv }}"
         - param:
         # путь до утилиты
             name: jars_path
