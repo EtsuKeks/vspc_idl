@@ -62,6 +62,7 @@ stands:
       log_level: "ESSA"
       archiveProfile_sfs: "Default"
 
+
   # IFT
   - stand_inventory: sdpiftfess
     vars:
