@@ -24,7 +24,7 @@ vars: &commonVars
   parallel_threads: 10
   debug_distributive_path: "{{ base_path }}/lib"
   debug_sk_off: "N"
-  build_version: "D-01.302.015"
+  build_version: "D-01.401.001"
   devops_distributive_jar: "vspc_idl-{{ build_version }}-jar-with-dependencies.jar"
 
   logical_env_prefix_with_slash: ""
@@ -40,6 +40,8 @@ vars: &commonVars
   data_owner_name: "SN"
   org_lvl2_name: "СП.Управление моделирования и исследования данных"
   secman_cert_owner_email: "dvilapshin@sberbank.ru"
+  archiveStat_sfs: "2"
+  archiveProfile_sfs: "ts_espd"
 
 stands:
   # DEV
@@ -56,6 +58,7 @@ stands:
       rtfw_feature_hub_daks: "N"
       system_area_type: "q_SDP_comm"
       log_level: "ESSA"
+      archiveProfile_sfs: "Default"
 
   # IFT
   - stand_inventory: sdpiftfess
@@ -74,6 +77,7 @@ stands:
       rtfw_feature_hub_daks: "Y"
       system_area_type: "q_SDP_ESS"
       log_level: "INFO"
+      archiveProfile_sfs: "Default"
 
   # RDT
   - stand_inventory: utarnsdpfess

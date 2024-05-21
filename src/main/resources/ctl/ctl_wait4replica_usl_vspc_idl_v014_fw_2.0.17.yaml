@@ -22,7 +22,12 @@ workflows:
           expression: "* * * * *"
           active: false
         entities:
-
+          - entity:
+              # promebx.ebx_rep_m_sfs_0002_sfsdivision
+              id: 
+              statisticId: {{ archiveStat_sfs }}
+              profile: "{{ archiveProfile_sfs }}"
+              active: true
       params:
         - param:
             # Пользователь под которым запускается процесс
