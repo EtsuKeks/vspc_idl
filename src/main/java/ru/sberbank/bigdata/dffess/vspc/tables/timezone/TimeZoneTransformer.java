@@ -94,7 +94,7 @@ public class TimeZoneTransformer implements EntityTransformer {
                 lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.TIME_ZONE_DP_CODE),
                 col(ColumnsName.ADDRESS_ADDRFACT_TIMEZONE).as(ColumnsName.TIME_ZONE_SK),
                 col(ColumnsName.TIME_ZONE_WRLD_SHIFT_VAL).as(ColumnsName.TIME_ZONE_WRLD_SHIFT_VAL),
-                lit(false).as(ColumnsName.DIRTY_FLAG),
+                lit(false).as(ColumnsName.DIRTY_FLAG)
         );
 
         timezone = skClientWrapper.generateSk(timezone, TablesName.TIMEZONE, transformConfiguration.getLoadMode(), transformConfiguration);

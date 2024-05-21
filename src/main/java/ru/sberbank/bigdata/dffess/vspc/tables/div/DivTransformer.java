@@ -19,6 +19,7 @@ import java.util.Map;
 
 import static org.apache.spark.sql.functions.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.CTL_VALIDFROM;
+import org.apache.spark.sql.types.*;
 
 public class DivTransformer implements EntityTransformer {
 
@@ -49,11 +50,11 @@ public class DivTransformer implements EntityTransformer {
                         when(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null)
                         .otherwise(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM)).as(ColumnsName.DIV_FULL_REG_NUM),
 
-                        int(when(col(ColumnsName.FULLNAME).equalTo("ПАО Сбербанк"), 
+                        when(col(ColumnsName.FULLNAME).equalTo("ПАО Сбербанк"), 
                                 when(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null).otherwise(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM)))
                         .otherwise(
                                 when(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null)
-                                .otherwise(substring_index(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM), "/", -1)))).as(ColumnsName.DIV_REG_ORD),
+                                .otherwise(substring_index(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM), "/", -1))).cast(DataTypes.IntegerType).as(ColumnsName.DIV_REG_ORD),
                         
                         col(ColumnsName.ADDRESS_ADDRFACT_TIMEZONE).as(ColumnsName.DIV_TIME_ZONE_TIME_ZONE_SK),
                         lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.DIV_TIME_ZONE_TIME_ZONE_DP_CODE)
