@@ -24,7 +24,7 @@ workflows:
         entities:
           - entity:
               # promebx.ebx_rep_m_sfs_0002_sfsdivision
-              id: 
+              id: "{{ CTL_EBX_SFS_entity_id }}"
               statisticId: {{ archiveStat_sfs }}
               profile: "{{ archiveProfile_sfs }}"
               active: true
