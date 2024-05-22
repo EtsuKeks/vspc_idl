@@ -1,9 +1,9 @@
 {
-    "productCode" : "usl.vspc_idl",
+    "productCode" :  "usl.vspc_idl",
     "productName" : "IDL - подразделения терр.структуры",
-    "ldmVersion" : "8.22.0",
+    "ldmVersion" : "8.76.0",
     "shortProductCode" : "vspc_idl",
     "isIdl" : "true",
-    "productMinorVersion" : "013",
+    "productMinorVersion" : "014",
     "ctlEntityId" : "801005314"
 }
