@@ -24,7 +24,7 @@ vars: &commonVars
   parallel_threads: 10
   debug_distributive_path: "{{ base_path }}/lib"
   debug_sk_off: "N"
-  build_version: "D-01.401.002"
+  build_version: "D-01.401.005"
   devops_distributive_jar: "vspc_idl-{{ build_version }}-jar-with-dependencies.jar"
 
   logical_env_prefix_with_slash: ""
@@ -44,6 +44,7 @@ vars: &commonVars
   archiveProfile_sfs: "ts_espd"
   hdfs_path: "/oozie-app/t/tools/trivDistCp"
   jar_name_triv: "triv_ess-distcp.jar"
+  CTL_EBX_SFS_entity_id: "0"
 
 stands:
   # DEV
@@ -113,3 +114,4 @@ stands:
       system_area_type: "ARNSDPFESS_queue_vspc"
       log_level: "INFO"
       yarn_queue_init: "init"
+      CTL_EBX_SFS_entity_id: "928039295"
