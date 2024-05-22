@@ -12,12 +12,11 @@ target("addr", "", rows(table("ebx_rep_m_sfs_0002_sfsdivision")),historyNone(), 
 	.mapping("locty_name", get("[address_addrfact_addrplace_placename]"))
 	.mapping("reg_addr_name", get("[address_subjectcode]"))
 	.mapping("src_txt", get("[address_locationaddress]"))
-	.mapping("street_name", get("[address_addrfact_addrstreet_streetname]"));
-
-target("addr_h", "", rows(table("ebx_rep_m_sfs_0002_sfsdivision")),historyNone(), staticWhere("1=1"))
+	.mapping("street_name", get("[address_addrfact_addrstreet_streetname]"))
 	.mapping("standard_addr_txt", get("[address_locationaddress]"));
 
-target("div_", "", rows(table("ebx_rep_m_sfs_0002_sfsdivision")),historyNone(), staticWhere("1=1"))
+
+target("div", "", rows(table("ebx_rep_m_sfs_0002_sfsdivision")),historyNone(), staticWhere("1=1"))
 	.mapping("code", get("[fulldivcode]"))
 	.mapping("div_close_dt", get("[closedate]"))
 	.mapping("div_open_dt", get("[opendate]"))
@@ -27,16 +26,12 @@ target("div_", "", rows(table("ebx_rep_m_sfs_0002_sfsdivision")),historyNone(), 
 	.mapping("full_reg_num", get("[address_addrfact_timezone]"))
 	.mapping("reg_ord", get("[requisitesdivision_registrationnum]"))
 	.mapping("short_div_code", get("[addr_building_num]"))
-	.mapping("subbranch_code", get("[addr_building_num]"));
-
-target("div_h", "", rows(table("ebx_rep_m_sfs_0002_sfsdivision")),historyNone(), staticWhere("1=1"))
+	.mapping("subbranch_code", get("[addr_building_num]"))
 	.mapping("div_name", get("[addr_building_num]"))
 	.mapping("fact@addr", get("[addr_building_num]"))
+	.mapping("div_type@terr_div_type", get("[addr_building_num]"))
 	.mapping("@pay_sys_prtcpnt", get("[as_house_types_sk]"));
 
-target("div_type", "", rows(table("ebx_rep_m_sfs_0002_sfsdivision")),historyNone(), staticWhere("1=1"))
-    .mapping("div_type@terr_div_type", get("[addr_building_num]"))
-    .mapping("@div", get("[addr_building_num]"));
 
 target("terr_div_type", "", rows(table("ebx_rep_m_sfs_0002_sfsdivision")),historyNone(), staticWhere("1=1"))
 	.mapping("div_type_code", get("[addr_placement_num]"));
@@ -47,4 +42,3 @@ target("time_zone_rf", "", rows(table("ebx_rep_m_sfs_0002_sfsdivision")),history
 	.mapping("time_zone_msk_shift_val", get("[addr_place_name]"))
 	.mapping("time_zone_name", get("[addr_place_stock_flag]"))
 	.mapping("time_zone_wrld_shift_val", get("[addr_place_div_flag]"));
-
