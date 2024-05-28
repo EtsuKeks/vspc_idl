@@ -14,6 +14,7 @@ import ru.sberbank.bigdata.essa.common.slave.templates.SkClientWrapper;
 import ru.sberbank.bigdata.essa.common.slave.templates.TransformConfiguration;
 import ru.sberbank.bigdata.essa.common.utils.EntityStaticService;
 import ru.sberbank.bigdata.dffess.vspc.tables.addr.AddrTransformer;
+import org.apache.spark.sql.Column;
 
 import java.util.HashMap;
 import java.util.Map;

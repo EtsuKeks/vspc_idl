@@ -14,10 +14,13 @@ import ru.sberbank.bigdata.essa.common.slave.templates.SkClientWrapper;
 import ru.sberbank.bigdata.essa.common.slave.templates.TransformConfiguration;
 import ru.sberbank.bigdata.essa.common.utils.EntityStaticService;
 import ru.sberbank.bigdata.dffess.vspc.tables.addr.AddrTransformer;
+import org.apache.spark.sql.Column;
+
 
 import static org.apache.spark.sql.functions.col;
 import static org.apache.spark.sql.functions.lit;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.CTL_VALIDFROM;
+import static org.apache.spark.sql.functions.*;
 
 public class AddrHTransformer implements EntityTransformer {
     @Override
