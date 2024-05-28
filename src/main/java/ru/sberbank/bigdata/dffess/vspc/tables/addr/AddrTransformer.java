@@ -178,7 +178,7 @@ public class AddrTransformer implements EntityTransformer {
                 col(ColumnsName.ADDR_OKATO2_SK).as(ColumnsName.ADDR_OKATO2_SK),
                 lit(VspcConstant.RDM_IDL_SPARK).as(ColumnsName.ADDR_OKATO2_DP_CODE),
                 lit(false).as(ColumnsName.DIRTY_FLAG)
-        );
+        ).distinct();
 
         Map<String, String> columnEntities = new HashMap<>();
         columnEntities.put(ColumnsName.ADDR_RUS_FED_SUBJ_SK, "rus_fed_subj");

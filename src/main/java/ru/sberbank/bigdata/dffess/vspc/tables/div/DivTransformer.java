@@ -69,7 +69,7 @@ public class DivTransformer implements EntityTransformer {
                 lit(null).as(ColumnsName.ADDR_OKATO2_SK),
                 lit(null).as(ColumnsName.ADDR_RUS_FED_SUBJ_SK)
 
-        );
+        ).distinct();
 
         Dataset<Row> div = div_raw.select(
                 col(ColumnsName.SID).as(ColumnsName.SID),
@@ -95,7 +95,7 @@ public class DivTransformer implements EntityTransformer {
                 
                 col(ColumnsName.DIV_TIME_ZONE_TIME_ZONE_SK).as(ColumnsName.DIV_TIME_ZONE_TIME_ZONE_SK),
                 lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.DIV_TIME_ZONE_TIME_ZONE_DP_CODE)
-        );
+        ).distinct();
         
         Map<String, String> columnEntities = new HashMap<>();
         columnEntities.put(ColumnsName.DIV_PARENT_DIV_SK, TablesName.DIV);

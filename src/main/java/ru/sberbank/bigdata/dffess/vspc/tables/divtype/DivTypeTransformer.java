@@ -36,7 +36,7 @@ public class DivTypeTransformer implements EntityTransformer {
                         lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.DIV_TYPE_TERR_DIV_TYPE_DP_CODE),
                         lit(false).as(ColumnsName.DIRTY_FLAG)
 
-                );
+                ).distinct();
 
         Map<String, String> columnEntities = new HashMap<>();
         columnEntities.put(ColumnsName.DIV_TYPE_TERR_DIV_TYPE_SK, TablesName.TERRDIVTYPE);

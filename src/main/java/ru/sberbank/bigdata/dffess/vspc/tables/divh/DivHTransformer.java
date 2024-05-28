@@ -149,7 +149,7 @@ public class DivHTransformer implements EntityTransformer {
                                 .when(col(ColumnsName.ADDRESS_SUBJECTCODE).equalTo("Ярославская область"), "630")
                                 .when(col(ColumnsName.ADDRESS_SUBJECTCODE).equalTo("Не субъект РФ"), "0")
                                 .as(ColumnsName.ADDR_RUS_FED_SUBJ_SK)
-                );
+                ).distinct();
         
         Dataset<Row> divh = divh_raw.select(
                         lit(VspcConstant.getCurrentHourCutOffDate().toString()).as(CTL_VALIDFROM),
@@ -164,7 +164,7 @@ public class DivHTransformer implements EntityTransformer {
                         lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.DIV_FACT_ADDR_DP_CODE),
                         AddrTransformer.getKey("|").as(ColumnsName.DIV_FACT_ADDR_SK),
                         lit(false).as(ColumnsName.DIRTY_FLAG)
-                );
+                ).distinct();
 
         Map<String, String> columnEntities = new HashMap<>();
         columnEntities.put(ColumnsName.DIV_PAY_SYS_PRTCPNT_SK, "pay_sys_prtcpnt");
