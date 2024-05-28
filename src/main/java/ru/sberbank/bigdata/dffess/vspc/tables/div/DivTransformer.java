@@ -33,7 +33,7 @@ public class DivTransformer implements EntityTransformer {
 
         div_raw = div_raw.select(
                 col(ColumnsName.FULLDIVCODE).as(ColumnsName.SID),
-                col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_SK)
+                col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_SK),
                 col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_CODE),
                 col(ColumnsName.SHORTDIVCODE).as(ColumnsName.DIV_SHORT_DIV_CODE),
                 to_date(col(ColumnsName.CLOSEDATE)).as(ColumnsName.DIV_CLOSEDATE),
@@ -93,7 +93,7 @@ public class DivTransformer implements EntityTransformer {
                 col(ColumnsName.DIV_REG_ORD).as(ColumnsName.DIV_REG_ORD),
                 
                 col(ColumnsName.DIV_TIME_ZONE_TIME_ZONE_SK).as(ColumnsName.DIV_TIME_ZONE_TIME_ZONE_SK),
-                lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.DIV_TIME_ZONE_TIME_ZONE_DP_CODE),
+                lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.DIV_TIME_ZONE_TIME_ZONE_DP_CODE)
         );
         
         Map<String, String> columnEntities = new HashMap<>();

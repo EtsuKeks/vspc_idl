@@ -201,7 +201,7 @@ public class AddrTransformer implements EntityTransformer {
                 coalesce(col(ColumnsName.ADDR_STREET_NAME), lit("null").cast("string")),
                 coalesce(col(ColumnsName.ADDR_RUS_FED_SUBJ_SK), lit("null").cast("string")),
                 coalesce(col(ColumnsName.ADDR_CNTRY_SK), lit("null").cast("string")),
-                coalesce(col(ColumnsName.ADDR_OKATO2_SK), lit("null").cast("string")),
+                coalesce(col(ColumnsName.ADDR_OKATO2_SK), lit("null").cast("string"))
         );
     }
 }
