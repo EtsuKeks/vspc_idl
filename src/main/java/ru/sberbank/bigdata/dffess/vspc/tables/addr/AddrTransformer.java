@@ -4,28 +4,32 @@ import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName;
 import ru.sberbank.bigdata.dffess.vspc.constant.TablesName;
-import ru.sberbank.bigdata.dffess.vspc.constant.VpscConstant;
-import ru.sberbank.bigdata.essa.common.templates.EntityProxyRelation;
-import ru.sberbank.bigdata.essa.common.templates.EntityTransformer;
-import ru.sberbank.bigdata.essa.common.templates.SkClientWrapper;
-import ru.sberbank.bigdata.essa.common.templates.TransformConfiguration;
-import ru.sberbank.bigdata.essa.common.utils.CtlStatisticHelper;
-import ru.sberbank.bigdata.essa.common.utils.HdfsHelper;
-import ru.sberbank.hermes.core.dmbuilder.modules.stg.builder.DmBuilder;
-import ru.sberbank.hermes.core.dmbuilder.services.logger.loggers.Logger;
+import ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant;
+import ru.sberbank.bigdata.essa.common.logger.LoggerWrapper;
+import ru.sberbank.bigdata.essa.common.slave.app.SparkWrapper;
+import ru.sberbank.bigdata.essa.common.slave.hdfs.HdfsService;
+import ru.sberbank.bigdata.essa.common.slave.templates.EntityProxyRelation;
+import ru.sberbank.bigdata.essa.common.slave.templates.EntityTransformer;
+import ru.sberbank.bigdata.essa.common.slave.templates.SkClientWrapper;
+import ru.sberbank.bigdata.essa.common.slave.templates.TransformConfiguration;
+import ru.sberbank.bigdata.essa.common.utils.EntityStaticService;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.apache.spark.sql.functions.*;
+import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.CTL_VALIDFROM;
 
 public class AddrTransformer implements EntityTransformer {
     @Override
-    public Dataset<Row> transformData(DmBuilder dmBuilder, SkClientWrapper skClientWrapper, HdfsHelper hdfsHelper, CtlStatisticHelper ctlStatisticHelper, TransformConfiguration transformConfiguration, EntityProxyRelation entityProxyRelation, Logger logger) {
+    public Dataset<Row> transformData(SparkWrapper sparkWrapper, SkClientWrapper skClientWrapper, HdfsService hdfsService,
+                                      EntityStaticService entityStaticService, TransformConfiguration transformConfiguration,
+                                      EntityProxyRelation entityProxyRelation, LoggerWrapper loggerWrapper) {
 
-        Dataset<Row> addr = dmBuilder.getDataset(transformConfiguration.getSrcSchemaSnp(), TablesName.EBX_REP_M_SFS_0002_SFSDIVISION);
+        Dataset<Row> addr = sparkWrapper.getDataset(transformConfiguration.getSnpSrcSchema(TablesName.EBX_REP_M_SFS_0002_SFSDIVISION), TablesName.EBX_REP_M_SFS_0002_SFSDIVISION);
         addr = addr
                 .select(
+                        //lit(VspcConstant.getCurrentHourCutOffDate().toString()).as(CTL_VALIDFROM),
                         col(ColumnsName.ID).as(ColumnsName.SID),
                         col(ColumnsName.ID).as(ColumnsName.ADDR_SK),
                         coalesce(col(ColumnsName.ADDRESS_ADDRFACT_POSTCODE), col(ColumnsName.ADDRESS_POSTCODE)).as(ColumnsName.ADDR_IDX_NUM),
@@ -37,7 +41,7 @@ public class AddrTransformer implements EntityTransformer {
                         col(ColumnsName.ADDRESS_ADDRFACT_FIASCODE).as(ColumnsName.ADDR_FIAS_CODE),
                         col(ColumnsName.ADDRESS_ADDRFACT_ADDRSTREET_HOUSENUMBERS).as(ColumnsName.ADDR_HOUSE_NUM),
                         col(ColumnsName.ADDRESS_ADDRFACT_ADDRSTREET_STREETNAME).as(ColumnsName.ADDR_STREET_NAME),
-                        lit(VpscConstant.DATA_PRODUCT).as(ColumnsName.ADDR_DP_CODE),
+                        lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.ADDR_DP_CODE),
                         when(col(ColumnsName.ADDRESS_SUBJECTCODE).equalTo("Агинский Бурятский АО"), "712")
                                 .when(col(ColumnsName.ADDRESS_SUBJECTCODE).equalTo("Алтайский край"), "301")
                                 .when(col(ColumnsName.ADDRESS_SUBJECTCODE).equalTo("Амурская область"), "308")
@@ -136,11 +140,11 @@ public class AddrTransformer implements EntityTransformer {
                                 .when(col(ColumnsName.ADDRESS_SUBJECTCODE).equalTo("Ярославская область"), "630")
                                 .when(col(ColumnsName.ADDRESS_SUBJECTCODE).equalTo("Не субъект РФ"), "0")
                                 .as(ColumnsName.ADDR_RUS_FED_SUBJ_SK),
-                        lit(VpscConstant.RDM_IDL_SPARK).as(ColumnsName.ADDR_REG_FED_SUBJ_DP_CODE),
+                        lit(VspcConstant.RDM_IDL_SPARK).as(ColumnsName.ADDR_REG_FED_SUBJ_DP_CODE),
                         when(col(ColumnsName.ADDRESS_COUNTRY).equalTo("РОССИЯ(RU)"), "643").when(col(ColumnsName.ADDRESS_COUNTRY).equalTo("ИНДИЯ(IN)"), "356").otherwise(null).as(ColumnsName.ADDR_CNTRY_SK),
-                        lit(VpscConstant.RDM_IDL_SPARK).as(ColumnsName.ADDR_CNTRY_DP_CODE),
+                        lit(VspcConstant.RDM_IDL_SPARK).as(ColumnsName.ADDR_CNTRY_DP_CODE),
                         col(ColumnsName.ADDRESS_OKATO2_CODE).as(ColumnsName.ADDR_OKATO2_SK),
-                        lit(VpscConstant.RDM_IDL_SPARK).as(ColumnsName.ADDR_OKATO2_DP_CODE),
+                        lit(VspcConstant.RDM_IDL_SPARK).as(ColumnsName.ADDR_OKATO2_DP_CODE),
                         lit(false).as(ColumnsName.DIRTY_FLAG)
                 );
 
@@ -150,8 +154,7 @@ public class AddrTransformer implements EntityTransformer {
         columnEntities.put(ColumnsName.ADDR_OKATO2_SK, "okato2");
 
 
-        addr = skClientWrapper.generateSk(addr, transformConfiguration.getStgTable(), transformConfiguration.getLoadMode(), columnEntities, transformConfiguration);
-
+        addr = skClientWrapper.generateSk(addr, TablesName.ADDR, transformConfiguration.getLoadMode(), columnEntities, transformConfiguration);
         return addr;
     }
 }

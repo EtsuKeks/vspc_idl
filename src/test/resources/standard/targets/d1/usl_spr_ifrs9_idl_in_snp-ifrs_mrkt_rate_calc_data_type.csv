@@ -1,6 +1,0 @@
-calc_data_type_code;calc_data_type_name;calc_data_type_txt;ifrs_mrkt_rate_calc_data_type_dp_code;ifrs_mrkt_rate_calc_data_type_sk;sid;dirty_flag;deleted_flag
-NA;Не применимо;Применяется рыночная процентная ставка;spr_ifrs9_idl;NA;NA;FALSE;FALSE
-OBSERVABLE;Наблюдаемые;Данные используемые для определения рыночной ставки по финансовому инструменту являются наблюдаемыми для всех участников рынка (1);spr_ifrs9_idl;OBSERVABLE;OBSERVABLE;FALSE;FALSE
-UNOBSERVABLE;Ненаблюдаемые (1);Данные используемые для определения рыночной ставки по финансовому инструменту не являются наблюдаемыми для всех участников рынка;spr_ifrs9_idl;UNOBSERVABLE;UNOBSERVABLE;FALSE;FALSE
-INSERT;INSERT;Вставка новой записи;spr_ifrs9_idl;INSERT;INSERT;FALSE;FALSE
-TEST;TEST;Физическое удаление;spr_ifrs9_idl;TEST;TEST;FALSE;TRUE

@@ -10,102 +10,108 @@
 # GIT_BRANCH: develop
 # DEVOPS_CONFIG: ctl.json
 #
-# !!!! Все URL указывать без конечного знака - "/"
-#
-# 11/11/2021 - начальная версия
-#
 
 vars: &commonVars
-  YARN_QUEUE: "default"
-  supportTeam: "РО: Мануйлов Алексей/alvmanuylov@sberbank.ru"      # CTL -> support_team
   logical_env_prefix: ""
-  logical_env: ""
+  base_path: "/oozie-app/t/idl/vspc_idl"
+  
+  file_path: "{{ base_path }}/init/"
+  YARN_QUEUE: "vspc"
+  debug_logical_env: ""
+
+  data_sets: "usl_vspc_idl.addr.hub;usl_vspc_idl.addr_h.sat=h;usl_vspc_idl.div_.hub;usl_vspc_idl.div_h.sat=h;usl_vspc_idl.div_type.sat=h;usl_vspc_idl.terr_div_type.hub;usl_vspc_idl.time_zone_rf.hub"
+
+  parallel_threads: 10
+  debug_distributive_path: "{{ base_path }}/lib"
+  debug_sk_off: "N"
+  build_version: "D-01.401.008"
+  devops_distributive_jar: "vspc_idl-{{ build_version }}-jar-with-dependencies.jar"
+
   logical_env_prefix_with_slash: ""
-  src_schema: "usl_{{ logical_env_prefix }}vspc_idl_in_snp"
-  ooziePath: "/oozie-app/bsp/VSPC/vspc_idl"
-  userName: "{{ USER_NAME }}"
-  keytabPath: "/keytab/{{ userName }}.keytab"
-  principal_alias: "{{ userName }}@{{ REALM }}"
   logical_env_ctl_entity_logenv_number: "00"
-  hadoop_default_fs_uri: ""
-  sparkConf: "--conf spark.executor.memory=10G --conf spark.executor.cores=3 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=8G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=4G --conf spark.driver.memoryOverhead=12G --conf spark.executor.memoryOverhead=12G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=50 --conf spark.yarn.access.hadoopFileSystems=hdfs://hdfsgw/,hdfs://utarnsdpfess/ --conf spark.sql.legacy.allowCreatingManagedTableUsingNonemptyLocation=true --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800"
+  yarn_queue_init: "{{ YARN_QUEUE }}"
+
+  resourceGroup: "{{ YARN_QUEUE }}"
+  yarn_queue: "{{ YARN_QUEUE }}"
+  kerberos_realm: "{{ REALM }}"
+  domain: "{{ REALM }}"
+  max_increment_depth: "10"
+
+  data_owner_name: "SN"
+  org_lvl2_name: "СП.Управление моделирования и исследования данных"
+  secman_cert_owner_email: "dvilapshin@sberbank.ru"
+  archiveStat_sfs: "2"
+  archiveProfile_sfs: "ts_espd"
+  hdfs_path: "/oozie-app/t/tools/trivDistCp"
+  jar_name_triv: "triv_ess-distcp.jar"
+  CTL_EBX_SFS_entity_id: "0"
 
 stands:
   # DEV
   - stand_inventory: sdpdevfess
     vars:
       <<: *commonVars
-      yarnQueue: "vspc"
-      yarnQueueInit: "vspc"
+      cluster_name: "sklsdpfess"
+      spark_parameters: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=2G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=5 --conf spark.dynamicAllocation.maxExecutors=40 --conf spark.driver.memory=5G"
+      hdfs_path: "/oozie-app/t/tools/trivDistCp"
+      hadoop_default_fs_uri: "hdfs://FESS-DEV"
+      user_name: "u_sklsdpfess_s_usl_t_vspc_idl"
       USER_NAME: "u_sklsdpfess_s_usl_t_vspc_idl"
-      sk_host: "mimi16.dev.df.sbrf.ru"
-      sk_logical_env: "da13"
-      sk_name_serv: "FESS-DEV"
-      sparkConf: "--conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=5G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=5 --conf spark.dynamicAllocation.maxExecutors=40 --conf spark.driver.memory=5G"
-      hdfs_path_triv: "/oozie-app/triv_ess"
-      resourceGroupTriv: "vspc"
-      hadoop_default_fs_uri_triv: "hdfs://FESS-DEV"
-      ctl_schedule_type: "none"
-      
+      uslCluster: "sdpdevfess"
+      rtfw_feature_hub_daks: "N"
+      system_area_type: "q_SDP_comm"
+      log_level: "ESSA"
+      archiveProfile_sfs: "Default"
+
+
   # IFT
   - stand_inventory: sdpiftfess
     vars:
       <<: *commonVars
-      yarnQueue: "{{ YARN_QUEUE }}"
-      yarnQueueInit: "{{ YARN_QUEUE }}"
+      cluster_name: "itsklsdpfess"
+      spark_parameters: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=1G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=2 --conf spark.dynamicAllocation.maxExecutors=10 --conf spark.driver.memory=1G"
+      hdfs_path: "/oozie-app/t/tools/trivDistCp"
+      hadoop_default_fs_uri: "hdfs://FESS-IFT"
+      user_name: "u_itsklsdpfess_s_usl_t_vspc_idl"
       USER_NAME: "u_itsklsdpfess_s_usl_t_vspc_idl"
-      sk_host: "mimi16.dev.df.sbrf.ru"
-      sk_logical_env: "da13"
-      sk_name_serv: "FESS-DEV"
-      sparkConf: "--conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=5G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=5 --conf spark.dynamicAllocation.maxExecutors=40 --conf spark.driver.memory=5G --conf spark.sql.autoBroadcastJoinThreshold=-1"
-      hdfs_path_triv: "/oozie-app/app/TRiV/trifrunner"
-      resourceGroupTriv: "vspc"
-      hadoop_default_fs_uri_triv: "hdfs://FESS-IFT"
-      ctl_schedule_type: "none"
+      yarn_queue: "default"
+      resourceGroup: "default"
+      YARN_QUEUE: "default"
+      uslCluster: "sdpiftfess"
+      rtfw_feature_hub_daks: "Y"
+      system_area_type: "q_SDP_ESS"
+      log_level: "INFO"
+      archiveProfile_sfs: "Default"
 
   # RDT
   - stand_inventory: utarnsdpfess
     vars:
       <<: *commonVars
-      yarnQueue: "vspc"
-      yarnQueueInit: "init"
+      cluster_name: "utarnsdpfess"
+      spark_parameters: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.executor.memory=10G --conf spark.executor.cores=2 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=20G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=20G --conf spark.driver.memoryOverhead=10G --conf spark.executor.memoryOverhead=3G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=100 --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000"
+      hdfs_path: "/oozie-app/t/tools/trivDistCp"
+      hadoop_default_fs_uri: "hdfs://utarnsdpfess"
+      user_name: "u_utarnsdpfess_s_usl_t_vspc_idl"
       USER_NAME: "u_utarnsdpfess_s_usl_t_vspc_idl"
-      sk_host: "pplis-fauna1440.cloud.df.sbrf.ru"
-      sk_logical_env: "null"
-      sk_name_serv: "utarnsdpfess"
-      hdfs_path_triv: "/oozie-app/app/TRiV/trifrunner"
-      resourceGroupTriv: "vspc"
-      hadoop_default_fs_uri_triv: "hdfs://utarnsdpfess"
-      ctl_schedule_type: "none"
-
-  # PROM
-  - stand_inventory: arnsdpfess
-    vars:
-      <<: *commonVars
-      yarnQueue: "vspc"
-      yarnQueueInit: "init"
-      USER_NAME: "u_arn5sdpfess_s_usl_t_self_srv_devices_ndl_parus"
-      sk_host: "domrat10.cloud.df.sbrf.ru"
-      sk_logical_env: "null"
-      sk_name_serv: "arnsdpfess"
-      sparkConf: "--conf spark.executor.memory=10G --conf spark.executor.cores=3 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=8G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=4G --conf spark.driver.memoryOverhead=12G --conf spark.executor.memoryOverhead=12G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=50 --conf spark.yarn.access.hadoopFileSystems=hdfs://hdfsgw/,hdfs://arnsdpfess/,hdfs://clsklod7:8020 --conf spark.sql.legacy.allowCreatingManagedTableUsingNonemptyLocation=true --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800"
-      hdfs_path_triv: "/oozie-app/app/TRiV/trifrunner"
-      resourceGroupTriv: "vspc"
-      hadoop_default_fs_uri_triv: "hdfs://arnsdpfess"
-      ctl_schedule_type: "on-schedule"
+      uslCluster: "utarnsdpfess"
+      rtfw_feature_hub_daks: "N"
+      system_area_type: "{{ YARN_QUEUE }}"
+      log_level: "ESSA"
+      yarn_queue_init: "init"
 
   # PROM NEW
   - stand_inventory: arnsdpfess2
     vars:
       <<: *commonVars
-      yarnQueue: "vspc"
-      yarnQueueInit: "init"
+      cluster_name: "arn6sdpfess"
+      spark_parameters: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.executor.memory=10G --conf spark.executor.cores=2 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=10G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=2G --conf spark.driver.memoryOverhead=5G --conf spark.executor.memoryOverhead=3G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=100 --conf spark.yarn.access.hadoopFileSystems=hdfs://hdfsgw/,hdfs://arnsdpfess2/ --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000"
+      hdfs_path: "/oozie-app/t/tools/trivDistCp"
+      hadoop_default_fs_uri: "hdfs://arnsdpfess2"
+      user_name: "u_arn6sdpfess_s_usl_t_vspc_idl"
       USER_NAME: "u_arn6sdpfess_s_usl_t_vspc_idl"
-      sk_host: "domrat10.cloud.df.sbrf.ru"
-      sk_logical_env: "null"
-      sk_name_serv: "arnsdpfess2"
-      sparkConf: "--conf spark.executor.memory=10G --conf spark.executor.cores=3 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=8G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=4G --conf spark.driver.memoryOverhead=12G --conf spark.executor.memoryOverhead=12G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=50 --conf spark.yarn.access.hadoopFileSystems=hdfs://hdfsgw/,hdfs://arnsdpfess2/ --conf spark.sql.legacy.allowCreatingManagedTableUsingNonemptyLocation=true --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800"
-      hdfs_path_triv: "/oozie-app/app/TRiV/trifrunner"
-      resourceGroupTriv: "vspc"
-      hadoop_default_fs_uri_triv: "hdfs://arnsdpfess2"
-      ctl_schedule_type: "on-schedule"
+      uslCluster: "arnsdpfess2"
+      rtfw_feature_hub_daks: "Y"
+      system_area_type: "arnsdpfess2_vspc"
+      log_level: "INFO"
+      yarn_queue_init: "init"
+      CTL_EBX_SFS_entity_id: "928039295"

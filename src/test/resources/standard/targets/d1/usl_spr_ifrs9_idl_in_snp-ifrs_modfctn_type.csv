@@ -1,8 +1,0 @@
-modfctn_type_code;modfctn_type_name;modfctn_type_txt;ifrs_modfctn_type_dp_code;ifrs_modfctn_type_sk;sid;dirty_flag;deleted_flag
-NOT_ESSENTIAL;Несущественная модификация МСФО9;Изменение условий договора, которое приводит к пересчету валовой балансовой стоимости финансового инструмента;spr_ifrs9_idl;NOT_ESSENTIAL;NOT_ESSENTIAL;FALSE;FALSE
-NOT_MODIFY;Не модификация МСФО9;Изменение условий договора, которое не влияет на денежные потоки финансового инструмента;spr_ifrs9_idl;NOT_MODIFY;NOT_MODIFY;FALSE;FALSE
-NOT_MODIFY_PR;Не модификация МСФО9, ставка изменилась в рамках договора;Изменение условий договора, которое предусматривает пересчет применяемой эффективной процентной ставки в соответствии с измененными денежными потоками;spr_ifrs9_idl;NOT_MODIFY_PR;NOT_MODIFY_PR;FALSE;FALSE
-SPPI_NOT_PASSED_MODIFY;SPPI не пройден МСФО9 (с учетом существенных изменений/модификации);Существенное изменение условий договора при условии что такие условия не соответствуют критериям SPPI-тестирования (1);spr_ifrs9_idl;SPPI_NOT_PASSED_MODIFY;SPPI_NOT_PASSED_MODIFY;FALSE;FALSE
-SPPI_PASSED_MODIFY;SPPI пройден МСФО9 (с учетом существенных изменений/модификации) (1);Существенное изменение условий договора при условии что такие условия соответствуют критериям SPPI-тестирования;spr_ifrs9_idl;SPPI_PASSED_MODIFY;SPPI_PASSED_MODIFY;FALSE;FALSE
-INSERT;INSERT;Вставка новой записи;spr_ifrs9_idl;INSERT;INSERT;FALSE;FALSE
-TEST;TEST;Физическое удаление;spr_ifrs9_idl;TEST;TEST;FALSE;TRUE

@@ -1,6 +1,0 @@
-bsns_model_type_code;bsns_model_type_name;bsns_model_type_txt;ifrs_asst_bsns_model_type_dp_code;ifrs_asst_bsns_model_type_sk;sid;dirty_flag;deleted_flag
-HOLD;Держать;Бизнес-модель управления финансовыми активами, цель которой состоит в получении всех денежных потоков, предусмотренных договором;spr_ifrs9_idl;HOLD;HOLD;FALSE;FALSE
-HOLDnSALE;Держать и продавать;Бизнес-модель управления финансовыми активами, цель которой состоит в получении всех денежных потоков, предусмотренных договором, а также предусматривающая совершение операций купли-продажи (1);spr_ifrs9_idl;HOLDnSALE;HOLDnSALE;FALSE;FALSE
-OTHER;Прочие (1);Бизнес-модель управления финансовыми активами, предусматривающая совершение торговых операций;spr_ifrs9_idl;OTHER;OTHER;FALSE;FALSE
-INSERT;INSERT;Вставка новой записи;spr_ifrs9_idl;INSERT;INSERT;FALSE;FALSE
-TEST;TEST;Физическое удаление;spr_ifrs9_idl;TEST;TEST;FALSE;TRUE

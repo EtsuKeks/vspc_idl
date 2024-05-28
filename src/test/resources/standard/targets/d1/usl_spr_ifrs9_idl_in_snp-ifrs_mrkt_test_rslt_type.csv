@@ -1,5 +1,0 @@
-rslt_type_code;rslt_type_name;rslt_type_txt;ifrs_mrkt_test_rslt_type_dp_code;ifrs_mrkt_test_rslt_type_sk;sid;dirty_flag;deleted_flag
-NOT_PASSED;Не пройден;Тест на рыночность по финансовому инструменту не пройден;spr_ifrs9_idl;NOT_PASSED;NOT_PASSED;FALSE;FALSE
-PASSED;Пройден;Тест на рыночность по финансовому инструменту пройден (1);spr_ifrs9_idl;PASSED;PASSED;FALSE;FALSE
-INSERT;INSERT;Вставка новой записи;spr_ifrs9_idl;INSERT;INSERT;FALSE;FALSE
-TEST;TEST;Физическое удаление;spr_ifrs9_idl;TEST;TEST;FALSE;TRUE

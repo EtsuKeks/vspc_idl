@@ -1,9 +1,9 @@
 {
-  "version": "D-01.302.006",
+  "version": "D-01.401.008",
   "stand_name": "fess",
   "build": "maven",
-  "block": "bsp",
-  "datamart_group": "VSPC",
+  "block": "t",
+  "datamart_group": "idl",
   "datamart_name": "vspc_idl",
   "datamart_ansible_vars": "vars_all.yml",
   "sq_pr_key": "vspc_idl",
@@ -23,13 +23,20 @@
     "pom_path": "pom.xml",
     "set_path": "src/main/resources/devops/ci-settings.xml"
   },
+
+  "ess": {
+    "meta": [
+      "usl/certification/cap_certification_usl.vspc_idl_v014_fw_2.0.17.json"
+    ], 
+    "kkd-spod": [
+      "usl/certification/dq.vspc_idl.v014_fw_2.0.17.json"
+    ],
+    "well": "vspc"
+  },
+
   "distrib_files": [
     {
-      "source": "src/main/resources/ctl/ctl_wait4replica_usl_vspc_idl_v012_fw_2.0.12.yaml",
-      "destination": "ctl/"
-    },
-    {
-      "source": "src/main/resources/ctl/ctl_wait4replica_usl_vspc_idl_v012_triv_fw_2.0.12.yaml",
+      "source": "src/main/resources/ctl/*",
       "destination": "ctl/"
     },
     {
@@ -66,14 +73,16 @@
       "destination": "usl/certification/"
     },
     {
-      "source": "src/main/resources/usl/dsm/*",
-      "destination": "usl/dsm/"
+      "source": "src/main/resources/meta/*",
+      "destination": "meta/"
     }
-
   ],
   "template_files": [
+    "usl/certification/dq.vspc_idl.v014_fw_2.0.17.json",
+    "sql/ddl/ddl.usl.vspc_idl.v014.model_stg.8.76.0_fw_2.0.17.sql",
+    "sql/ddl/ddl.usl.vspc_idl.v014.model.8.76.0_fw_2.0.17.sql"
   ],
   "workflow_to_run" : [
-    "USL_VSPC_IDL"
+    "USL_VSPC_IDL_INIT"
   ]
 }

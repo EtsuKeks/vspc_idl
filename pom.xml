@@ -6,19 +6,12 @@
 
     <groupId>ru.sberbank.bigdata.dffess.vspc</groupId>
     <artifactId>vspc_idl</artifactId>
-    <version>D-01.302.005</version><!-- новая версия и коммиты для тегов D-01.301.005 tagId + VSPCIDL-36-->
+    <version>D-01.401.008</version>
 
     <properties>
+        <essa.common.version>2.1.0-SNAPSHOT</essa.common.version>
         <java.version>1.8</java.version>
-        <spark.version>2.4.5</spark.version>
-        <hadoop.version>3.1.3</hadoop.version>
-        <spark.scala.version>2.11</spark.scala.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <junit.version>4.12</junit.version>
-        <mockito.version>2.8.9</mockito.version>
-        <powermock.version>1.7.0</powermock.version>
     </properties>
 
     <repositories>
@@ -46,124 +39,11 @@
         <dependency>
             <groupId>ru.sberbank.bigdata.essa.common</groupId>
             <artifactId>essa-common-lib</artifactId>
-            <version>1.4.3</version>
-            <classifier>distrib</classifier>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-client</artifactId>
-            <version>${hadoop.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>28.0-jre</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-cli</groupId>
-            <artifactId>commons-cli</artifactId>
-            <version>1.4</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.7</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-core_${spark.scala.version}</artifactId>
-            <version>${spark.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-launcher_${spark.scala.version}</artifactId>
-            <version>${spark.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-sql_${spark.scala.version}</artifactId>
-            <version>${spark.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-hive_${spark.scala.version}</artifactId>
-            <version>${spark.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>com.sun.jersey</groupId>-->
-        <!--            <artifactId>jersey-client</artifactId>-->
-        <!--            <version>1.19.4</version>-->
-        <!--        </dependency>-->
-        <!--Hermes framework -->
-        <dependency>
-            <groupId>ru.sberbank.hermes.core</groupId>
-            <artifactId>hermes-core</artifactId>
-            <version>sdp-7.5.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>ru.sberbank.hermes.ext</groupId>
-            <artifactId>hermes-custom</artifactId>
-            <version>sdp-7.5.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.7.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-            <version>5.7.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.7.0</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>4.0.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-launcher</artifactId>
-            <version>1.8.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib-jdk8</artifactId>
-            <version>1.4.10</version>
-        </dependency>
-        <dependency>
-            <groupId>com.squareup.okhttp3</groupId>
-            <artifactId>okhttp-tls</artifactId>
-            <version>4.9.3</version>
-        </dependency>
-        <dependency>
-            <groupId>ru.sberbank.bigdata.sl.sk</groupId>
-            <artifactId>sl-sk-client</artifactId>
-            <version>1.13.3</version>
+            <version>${essa.common.version}</version>
             <classifier>distrib</classifier>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -218,6 +98,11 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.6.1</version>
             </plugin>
         </plugins>
     </build>

@@ -1,6 +1,0 @@
-fair_val_optn_type_code;fair_val_optn_type_name;fair_val_optn_type_txt;ifrs_fair_val_optn_type_dp_code;ifrs_fair_val_optn_type_sk;sid;dirty_flag;deleted_flag
-BANK_DECISION;Да, по усмотрению Банка;Учет обязательства по справедливой стоимости по причине классификации по усмотрению Банка;spr_ifrs9_idl;BANK_DECISION;BANK_DECISION;FALSE;FALSE
-FOR_TRADE;Да, предназначен для торговли;Учет обязательства по справедливой стоимости по причине отнесения к сделкам для торговли1;spr_ifrs9_idl;FOR_TRADE;FOR_TRADE;FALSE;FALSE
-NA;Нет1;Опция учета обязательства по справедливой стоимости не применяется;spr_ifrs9_idl;NA;NA;FALSE;FALSE
-INSERT;INSERT;Вставка новой записи;spr_ifrs9_idl;INSERT;INSERT;FALSE;FALSE
-TEST;TEST;Физическое удаление;spr_ifrs9_idl;TEST;TEST;FALSE;1;TRUE

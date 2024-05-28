@@ -4,6 +4,26 @@
                       http://maven.apache.org/xsd/settings-1.0.0.xsd">
 	<servers>
 		<server>
+			<id>Nexus_CI_Snapshot</id>
+			<username>${user.nexus3}</username>
+			<password>${password}</password>
+		</server>
+		<server>
+			<id>Nexus_CI_Release</id>
+			<username>${user.nexus3}</username>
+			<password>${password}</password>
+		</server>
+		<server>
+			<id>maven-distr-dev</id>
+			<username>${user.nexus3}</username>
+			<password>${password}</password>
+		</server>
+		<server>
+			<id>maven-distr-release</id>
+			<username>${user.nexus3}</username>
+			<password>${password}</password>
+		</server>
+		<server>
 			<id>client4d_snapshot</id>
 			<username>${user}</username>
 			<password>${password}</password>
@@ -43,6 +63,29 @@
 			<username>${user}</username>
 			<password>${password}</password>
 		</server>
+		<!-- Begin RTFW section -->
+		<server>
+			<id>Nexus_CI_Snapshot</id>
+			<username>${user.nexus3}</username>
+			<password>${password}</password>
+		</server>
+		<server>
+			<id>Nexus_CI_Release</id>
+			<username>${user.nexus3}</username>
+			<password>${password}</password>
+		</server>
+
+		<server>
+			<id>maven-distr-dev</id>
+			<username>${user.nexus3}</username>
+			<password>${password}</password>
+		</server>
+		<server>
+			<id>maven-distr-release</id>
+			<username>${user.nexus3}</username>
+			<password>${password}</password>
+		</server>
+		<!-- End RTFW section -->
 	</servers>
 
 
