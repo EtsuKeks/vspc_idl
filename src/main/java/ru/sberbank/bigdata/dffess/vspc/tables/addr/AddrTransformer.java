@@ -26,12 +26,12 @@ public class AddrTransformer implements EntityTransformer {
                                       EntityStaticService entityStaticService, TransformConfiguration transformConfiguration,
                                       EntityProxyRelation entityProxyRelation, LoggerWrapper loggerWrapper) {
 
-        Dataset<Row> addr = sparkWrapper.getDataset(transformConfiguration.getSnpSrcSchema(TablesName.EBX_REP_M_SFS_0002_SFSDIVISION), TablesName.EBX_REP_M_SFS_0002_SFSDIVISION);
-        addr = addr
-                .select(
+        Dataset<Row> addr_raw = sparkWrapper.getDataset(transformConfiguration.getSnpSrcSchema(TablesName.EBX_REP_M_SFS_0002_SFSDIVISION), TablesName.EBX_REP_M_SFS_0002_SFSDIVISION);
+
+        Dataset<Row> addr_fact = addr_raw.select(
                         //lit(VspcConstant.getCurrentHourCutOffDate().toString()).as(CTL_VALIDFROM),
-                        col(ColumnsName.ID).as(ColumnsName.SID),
-                        col(ColumnsName.ID).as(ColumnsName.ADDR_SK),
+                        col(ColumnsName.ADDRESS_LOCATIONADDRESS).as(ColumnsName.SID),
+                        col(ColumnsName.ADDRESS_LOCATIONADDRESS).as(ColumnsName.ADDR_SK),
                         coalesce(col(ColumnsName.ADDRESS_ADDRFACT_POSTCODE), col(ColumnsName.ADDRESS_POSTCODE)).as(ColumnsName.ADDR_IDX_NUM),
                         col(ColumnsName.ADDRESS_ADDRFACT_ADDRAREA_AREANAME).as(ColumnsName.ADDR_DISTRICT_NAME),
                         col(ColumnsName.ADDRESS_ADDRFACT_ADDPLACE_PLACENAME).as(ColumnsName.ADDR_LOCTY_NAME),
@@ -148,11 +148,35 @@ public class AddrTransformer implements EntityTransformer {
                         lit(false).as(ColumnsName.DIRTY_FLAG)
                 );
 
+        Dataset<Row> addr_legal = addr_raw.select(
+                        //lit(VspcConstant.getCurrentHourCutOffDate().toString()).as(CTL_VALIDFROM),
+                        col(ColumnsName.ADDRESS_LEGAL_LOCATIONADDRESS).as(ColumnsName.SID),
+                        col(ColumnsName.ADDRESS_LEGAL_LOCATIONADDRESS).as(ColumnsName.ADDR_SK),
+                        lit(null).as(ColumnsName.ADDR_IDX_NUM),
+                        lit(null).as(ColumnsName.ADDR_DISTRICT_NAME),
+                        lit(null).as(ColumnsName.ADDR_LOCTY_NAME),
+                        lit(null).as(ColumnsName.ADDR_REG_ADDR_NAME),
+                        col(ColumnsName.ADDRESS_LEGAL_LOCATIONADDRESS).as(ColumnsName.ADDR_SRC_TXT),
+                        lit(null).as(ColumnsName.ADDR_CITY_NAME),
+                        lit(null)..as(ColumnsName.ADDR_FIAS_CODE),
+                        lit(null)..as(ColumnsName.ADDR_HOUSE_NUM),
+                        lit(null)..as(ColumnsName.ADDR_STREET_NAME),
+                        lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.ADDR_DP_CODE),
+                        lit(null).as(ColumnsName.ADDR_RUS_FED_SUBJ_SK),
+                        lit(VspcConstant.RDM_IDL_SPARK).as(ColumnsName.ADDR_REG_FED_SUBJ_DP_CODE),
+                        lit(null).as(ColumnsName.ADDR_CNTRY_SK),
+                        lit(VspcConstant.RDM_IDL_SPARK).as(ColumnsName.ADDR_CNTRY_DP_CODE),
+                        lit(null).as(ColumnsName.ADDR_OKATO2_SK),
+                        lit(VspcConstant.RDM_IDL_SPARK).as(ColumnsName.ADDR_OKATO2_DP_CODE),
+                        lit(false).as(ColumnsName.DIRTY_FLAG)
+                );
+        
+        Dataset<Row> addr = addr_fact.union(addr_legal).distinct()
+
         Map<String, String> columnEntities = new HashMap<>();
         columnEntities.put(ColumnsName.ADDR_RUS_FED_SUBJ_SK, "rus_fed_subj");
         columnEntities.put(ColumnsName.ADDR_CNTRY_SK, "cntry");
         columnEntities.put(ColumnsName.ADDR_OKATO2_SK, "okato2");
-
 
         addr = skClientWrapper.generateSk(addr, TablesName.ADDR, transformConfiguration.getLoadMode(), columnEntities, transformConfiguration);
         return addr;

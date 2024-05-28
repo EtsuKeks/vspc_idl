@@ -34,6 +34,9 @@ public final class ColumnsName {
     public static final String ADDRESS_ADDRFACT_FIASCODE = "address_addrfact_fiascode";
     public static final String ADDRESS_ADDRFACT_ADDRCITY_CITYNAME = "address_addrfact_addrcity_cityname";
     public static final String ADDRESS_LOCATIONADDRESS = "address_locationaddress";
+
+    public static final String ADDRESS_LEGAL_LOCATIONADDRESS = "address_legaladdrdoc";
+
     public static final String ADDRESS_SUBJECTCODE = "address_subjectcode";
     public static final String ADDR_CNTRYCODE = "cntry_code"; //cntry_code
     public static final String ADDRESS_COUNTRY = "address_country";

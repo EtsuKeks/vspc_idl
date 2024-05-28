@@ -24,18 +24,28 @@ public class AddrHTransformer implements EntityTransformer {
                                       EntityStaticService entityStaticService, TransformConfiguration transformConfiguration,
                                       EntityProxyRelation entityProxyRelation, LoggerWrapper loggerWrapper) {
 
-        Dataset<Row> addrh = sparkWrapper.getDataset(transformConfiguration.getSnpSrcSchema(TablesName.EBX_REP_M_SFS_0002_SFSDIVISION), TablesName.EBX_REP_M_SFS_0002_SFSDIVISION);
+        Dataset<Row> addrh_raw = sparkWrapper.getDataset(transformConfiguration.getSnpSrcSchema(TablesName.EBX_REP_M_SFS_0002_SFSDIVISION), TablesName.EBX_REP_M_SFS_0002_SFSDIVISION);
         
 
-        addrh = addrh
-                .select(
+        Dataset<Row> addrh_fact = addrh_raw.select(
                         lit(VspcConstant.getCurrentHourCutOffDate().toString()).as(CTL_VALIDFROM),
-                        col(ColumnsName.ID).as(ColumnsName.ADDR_SK),
-                        col(ColumnsName.ID).as(ColumnsName.SID),
+                        col(ColumnsName.ADDRESS_LOCATIONADDRESS).as(ColumnsName.ADDR_SK),
+                        col(ColumnsName.ADDRESS_LOCATIONADDRESS).as(ColumnsName.SID),
                         lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.ADDR_DP_CODE),
                         col(ColumnsName.ADDRESS_LOCATIONADDRESS).as(ColumnsName.ADDR_STANDART_ADDRESS_TXT),
                         lit(false).as(ColumnsName.DIRTY_FLAG)
                 );
+
+        Dataset<Row> addrh_legal = addrh_raw.select(
+                        lit(VspcConstant.getCurrentHourCutOffDate().toString()).as(CTL_VALIDFROM),
+                        col(ColumnsName.ADDRESS_LEGAL_LOCATIONADDRESS).as(ColumnsName.ADDR_SK),
+                        col(ColumnsName.ADDRESS_LEGAL_LOCATIONADDRESS).as(ColumnsName.SID),
+                        lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.ADDR_DP_CODE),
+                        col(ColumnsName.ADDRESS_LEGAL_LOCATIONADDRESS).as(ColumnsName.ADDR_STANDART_ADDRESS_TXT),
+                        lit(false).as(ColumnsName.DIRTY_FLAG)
+                );
+
+        Dataset<Row> addrh = addrh_fact.union(addrh_legal).distinct()
 
         addrh = skClientWrapper.incrementSk(addrh, TablesName.ADDRH, transformConfiguration);
 

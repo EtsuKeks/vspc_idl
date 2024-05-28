@@ -43,7 +43,10 @@ public class DivTransformer implements EntityTransformer {
                         concat(lit("0"), col(ColumnsName.FULLDIVCODE)).as(ColumnsName.DIV_SUBBRANCH_CODE),
                         col(ColumnsName.HEADDIVISIONCODE).as(ColumnsName.DIV_PARENT_DIV_SK),
                         lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.DIV_PARENT_DIV_DP_CODE),
-                        col(ColumnsName.ID).as(ColumnsName.DIV_LEGAL_ADDR_SK),
+
+                        //col(ColumnsName.ADDRESS_LOCATIONADDRESS).as(ColumnsName.DIV_LEGAL_ADDR_SK),
+                        col(ColumnsName.ADDRESS_LEGAL_LOCATIONADDRESS).as(ColumnsName.DIV_LEGAL_ADDR_SK),
+
                         lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.DIV_LEGAL_ADDR_DP_CODE),
                         lit(false).as(ColumnsName.DIRTY_FLAG),
                                                 
