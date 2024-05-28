@@ -162,7 +162,11 @@ public class DivHTransformer implements EntityTransformer {
                         lit(VspcConstant.RDM_IDL_SPARK).as(ColumnsName.DIV_PAY_SYS_PRTCPNT_DP_CODE),
                         col(ColumnsName.DIV_PAY_SYS_PRTCPNT_SK).as(ColumnsName.DIV_PAY_SYS_PRTCPNT_SK),
                         lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.DIV_FACT_ADDR_DP_CODE),
-                        AddrTransformer.getKey("|").as(ColumnsName.DIV_FACT_ADDR_SK),
+                        
+                        when(col(ColumnsName.ADDR_SRC_TXT).isNotNull(), AddrTransformer.getKey("|")).otherwise(null).as(ColumnsName.DIV_FACT_ADDR_SK),
+
+                        //AddrTransformer.getKey("|").as(ColumnsName.DIV_FACT_ADDR_SK),
+
                         lit(false).as(ColumnsName.DIRTY_FLAG)
                 ).distinct();
 

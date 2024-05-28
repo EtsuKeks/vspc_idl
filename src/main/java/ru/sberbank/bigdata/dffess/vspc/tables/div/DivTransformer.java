@@ -84,7 +84,10 @@ public class DivTransformer implements EntityTransformer {
                 lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.DIV_PARENT_DIV_DP_CODE),
 
                 //col(ColumnsName.ADDRESS_LOCATIONADDRESS).as(ColumnsName.DIV_LEGAL_ADDR_SK),
-                AddrTransformer.getKey("|").as(ColumnsName.DIV_LEGAL_ADDR_SK),
+
+                when(col(ColumnsName.ADDR_SRC_TXT).isNotNull(), AddrTransformer.getKey("|")).otherwise(null).as(ColumnsName.DIV_LEGAL_ADDR_SK),
+        
+                //AddrTransformer.getKey("|").as(ColumnsName.DIV_LEGAL_ADDR_SK),
 
                 lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.DIV_LEGAL_ADDR_DP_CODE),
                 lit(false).as(ColumnsName.DIRTY_FLAG),
