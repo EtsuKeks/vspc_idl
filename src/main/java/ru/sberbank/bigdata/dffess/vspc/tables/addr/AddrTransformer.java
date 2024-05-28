@@ -191,18 +191,18 @@ public class AddrTransformer implements EntityTransformer {
 
     public static Column getKey(String sep) {
         return concat_ws(sep,
-                coalesce(col(ColumnsName.ADDR_IDX_NUM), lit("null").cast("string")),
-                coalesce(col(ColumnsName.ADDR_DISTRICT_NAME), lit("null").cast("string")),
-                coalesce(col(ColumnsName.ADDR_LOCTY_NAME), lit("null").cast("string")),
-                coalesce(col(ColumnsName.ADDR_REG_ADDR_NAME), lit("null").cast("string")),
-                coalesce(col(ColumnsName.ADDR_SRC_TXT), lit("null").cast("string")),
-                coalesce(col(ColumnsName.ADDR_CITY_NAME), lit("null").cast("string")),
-                coalesce(col(ColumnsName.ADDR_FIAS_CODE), lit("null").cast("string")),
-                coalesce(col(ColumnsName.ADDR_HOUSE_NUM), lit("null").cast("string")),
-                coalesce(col(ColumnsName.ADDR_STREET_NAME), lit("null").cast("string")),
-                coalesce(col(ColumnsName.ADDR_RUS_FED_SUBJ_SK), lit("null").cast("string")),
-                coalesce(col(ColumnsName.ADDR_CNTRY_SK), lit("null").cast("string")),
-                coalesce(col(ColumnsName.ADDR_OKATO2_SK), lit("null").cast("string"))
+                coalesce(col(ColumnsName.ADDR_IDX_NUM), lit("NULL").cast("string")),
+                coalesce(col(ColumnsName.ADDR_DISTRICT_NAME), lit("NULL").cast("string")),
+                coalesce(col(ColumnsName.ADDR_LOCTY_NAME), lit("NULL").cast("string")),
+                coalesce(col(ColumnsName.ADDR_REG_ADDR_NAME), lit("NULL").cast("string")),
+                coalesce(col(ColumnsName.ADDR_SRC_TXT), lit("NULL").cast("string")),
+                coalesce(col(ColumnsName.ADDR_CITY_NAME), lit("NULL").cast("string")),
+                coalesce(col(ColumnsName.ADDR_FIAS_CODE), lit("NULL").cast("string")),
+                coalesce(col(ColumnsName.ADDR_HOUSE_NUM), lit("NULL").cast("string")),
+                coalesce(col(ColumnsName.ADDR_STREET_NAME), lit("NULL").cast("string")),
+                coalesce(col(ColumnsName.ADDR_RUS_FED_SUBJ_SK), lit("NULL").cast("string")),
+                coalesce(col(ColumnsName.ADDR_CNTRY_SK), lit("NULL").cast("string")),
+                coalesce(col(ColumnsName.ADDR_OKATO2_SK), lit("NULL").cast("string"))
         );
     }
 }
