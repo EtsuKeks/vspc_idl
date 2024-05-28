@@ -171,7 +171,7 @@ public class AddrTransformer implements EntityTransformer {
                         lit(false).as(ColumnsName.DIRTY_FLAG)
                 );
         
-        Dataset<Row> addr = addr_fact.union(addr_legal).distinct()
+        Dataset<Row> addr = addr_fact.union(addr_legal).distinct();
 
         Map<String, String> columnEntities = new HashMap<>();
         columnEntities.put(ColumnsName.ADDR_RUS_FED_SUBJ_SK, "rus_fed_subj");
