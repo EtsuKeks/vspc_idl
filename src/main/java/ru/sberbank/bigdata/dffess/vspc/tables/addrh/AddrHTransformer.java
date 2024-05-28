@@ -45,7 +45,7 @@ public class AddrHTransformer implements EntityTransformer {
                         lit(false).as(ColumnsName.DIRTY_FLAG)
                 );
 
-        Dataset<Row> addrh = addrh_fact.union(addrh_legal).distinct()
+        Dataset<Row> addrh = addrh_fact.union(addrh_legal).distinct();
 
         addrh = skClientWrapper.incrementSk(addrh, TablesName.ADDRH, transformConfiguration);
 
