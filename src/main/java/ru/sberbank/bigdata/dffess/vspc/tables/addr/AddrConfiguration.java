@@ -3,6 +3,7 @@ package ru.sberbank.bigdata.dffess.vspc.tables.addr;
 import ru.sberbank.bigdata.dffess.vspc.impl.VspcEtlConfiguration;
 import ru.sberbank.bigdata.essa.common.slave.loading.DataLoader;
 import ru.sberbank.bigdata.essa.common.slave.loading.DataLoaderHubSnp;
+import ru.sberbank.bigdata.essa.common.slave.loading.DataLoaderHubDiff;
 import ru.sberbank.bigdata.essa.common.slave.move.AfterCutDateGenerator;
 import ru.sberbank.bigdata.essa.common.slave.move.MovingTablesGenerator;
 import ru.sberbank.bigdata.essa.common.slave.templates.EntityTransformer;
@@ -24,7 +25,7 @@ public class AddrConfiguration extends VspcEtlConfiguration {
     @Override
     public DataLoader getDataLoader() {
         return new DataLoaderHubSnp();
-    }///DataLoaderHubDiff DataLoaderHubSnp
+    } ///DataLoaderHubDiff DataLoaderHubSnp
 
     @Override
     public MovingTablesGenerator getMovingTablesGenerator() {

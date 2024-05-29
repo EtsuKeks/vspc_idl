@@ -17,7 +17,6 @@ public class VspcConstant {
     public static final DateTimeFormatter DF_TS = DateTimeFormatter.ofPattern(CommonConst.DATE_TIME_FORMAT);
 
     public static String getCtlValidFromStr(){
-
         String rec = LocalDateTime.now().format(DF_TS);
         return rec;
     }
