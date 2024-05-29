@@ -8,6 +8,7 @@ import ru.sberbank.bigdata.essa.common.slave.move.MovingTablesGenerator;
 import ru.sberbank.bigdata.essa.common.slave.templates.EntityTransformer;
 import ru.sberbank.bigdata.essa.common.slave.move.AllMovingGenerator;
 import ru.sberbank.bigdata.essa.common.slave.move.HistMovingGenerator;
+import ru.sberbank.bigdata.essa.common.slave.loading.DataLoaderHistDiff;
 
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.DIVH;
 
