@@ -25,8 +25,8 @@ public class DivHConfiguration extends VspcEtlConfiguration {
 
     @Override
     public DataLoader getDataLoader() {
-        return new DataLoaderHistDiff();
-        //return new DataLoaderHistSnp();
+        //return new DataLoaderHistDiff();
+        return new DataLoaderHistSnp();
     }///DataLoaderHubSnp
 
     @Override
