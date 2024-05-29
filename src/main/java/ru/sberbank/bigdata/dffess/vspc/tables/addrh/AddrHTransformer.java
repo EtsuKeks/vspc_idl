@@ -165,7 +165,8 @@ public class AddrHTransformer implements EntityTransformer {
                 AddrTransformer.getKey("|").as(ColumnsName.SID),
                 lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.ADDR_DP_CODE),
                 col(ColumnsName.ADDR_SRC_TXT).as(ColumnsName.ADDR_STANDART_ADDRESS_TXT),
-                lit(false).as(ColumnsName.DIRTY_FLAG)
+                lit(false).as(ColumnsName.DIRTY_FLAG),
+                lit(false).as(ColumnsName.DELETED_FLAG)
         ).distinct();
 
         addrh = skClientWrapper.incrementSk(addrh, TablesName.ADDRH, transformConfiguration);

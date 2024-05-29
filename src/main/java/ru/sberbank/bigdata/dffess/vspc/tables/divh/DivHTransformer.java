@@ -167,7 +167,8 @@ public class DivHTransformer implements EntityTransformer {
 
                         //AddrTransformer.getKey("|").as(ColumnsName.DIV_FACT_ADDR_SK),
 
-                        lit(false).as(ColumnsName.DIRTY_FLAG)
+                        lit(false).as(ColumnsName.DIRTY_FLAG),
+                        lit(false).as(ColumnsName.DELETED_FLAG)
                 ).distinct();
 
         Map<String, String> columnEntities = new HashMap<>();
