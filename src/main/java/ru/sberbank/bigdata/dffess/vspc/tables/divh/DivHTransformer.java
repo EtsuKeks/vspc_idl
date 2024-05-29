@@ -152,7 +152,7 @@ public class DivHTransformer implements EntityTransformer {
                 ).distinct();
         
         Dataset<Row> divh = divh_raw.select(
-                        lit(VspcConstant.getCurrentHourCutOffDate().toString()).as(CTL_VALIDFROM),
+                        lit(VspcConstant.getCtlValidFromStr()).as(CTL_VALIDFROM),
                         col(ColumnsName.DIV_SK).as(ColumnsName.DIV_SK),
                         col(ColumnsName.DIV_H_NAME).as(ColumnsName.DIV_H_NAME),
                         col(ColumnsName.DIV_CLOSEDATE).as(ColumnsName.DIV_CLOSEDATE),

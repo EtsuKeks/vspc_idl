@@ -160,7 +160,7 @@ public class AddrHTransformer implements EntityTransformer {
         Dataset<Row> addr = addr_fact.union(addr_legal).distinct();
         
         Dataset<Row> addrh = addr.select(
-                lit(VspcConstant.getCurrentHourCutOffDate().toString()).as(CTL_VALIDFROM),
+                lit(VspcConstant.getCtlValidFromStr()).as(CTL_VALIDFROM),
                 AddrTransformer.getKey("|").as(ColumnsName.ADDR_SK),
                 AddrTransformer.getKey("|").as(ColumnsName.SID),
                 lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.ADDR_DP_CODE),
