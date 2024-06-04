@@ -29,14 +29,14 @@ public class DivTypeTransformer implements EntityTransformer {
         Dataset<Row> divtype = sparkWrapper.getDataset(transformConfiguration.getSnpSrcSchema(TablesName.EBX_REP_M_SFS_0002_SFSDIVISION), TablesName.EBX_REP_M_SFS_0002_SFSDIVISION);
         divtype = divtype
                 .select(
-                        lit(VspcConstant.getCurrentHourCutOffDate().toString()).as(CTL_VALIDFROM),
+                        lit(VspcConstant.getCtlValidFromStr()).as(CTL_VALIDFROM),
                         col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_SK),
                         lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.DIV_DP_CODE),
                         col(ColumnsName.DIVISIONTYPE00).as(ColumnsName.DIV_TYPE_TERR_DIV_TYPE_SK),
                         lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.DIV_TYPE_TERR_DIV_TYPE_DP_CODE),
                         lit(false).as(ColumnsName.DIRTY_FLAG)
 
-                );
+                ).distinct();
 
         Map<String, String> columnEntities = new HashMap<>();
         columnEntities.put(ColumnsName.DIV_TYPE_TERR_DIV_TYPE_SK, TablesName.TERRDIVTYPE);

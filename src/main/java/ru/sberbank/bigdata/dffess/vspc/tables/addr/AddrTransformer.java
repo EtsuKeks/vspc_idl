@@ -13,6 +13,7 @@ import ru.sberbank.bigdata.essa.common.slave.templates.EntityTransformer;
 import ru.sberbank.bigdata.essa.common.slave.templates.SkClientWrapper;
 import ru.sberbank.bigdata.essa.common.slave.templates.TransformConfiguration;
 import ru.sberbank.bigdata.essa.common.utils.EntityStaticService;
+import org.apache.spark.sql.Column;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,12 +27,9 @@ public class AddrTransformer implements EntityTransformer {
                                       EntityStaticService entityStaticService, TransformConfiguration transformConfiguration,
                                       EntityProxyRelation entityProxyRelation, LoggerWrapper loggerWrapper) {
 
-        Dataset<Row> addr = sparkWrapper.getDataset(transformConfiguration.getSnpSrcSchema(TablesName.EBX_REP_M_SFS_0002_SFSDIVISION), TablesName.EBX_REP_M_SFS_0002_SFSDIVISION);
-        addr = addr
-                .select(
-                        //lit(VspcConstant.getCurrentHourCutOffDate().toString()).as(CTL_VALIDFROM),
-                        col(ColumnsName.ID).as(ColumnsName.SID),
-                        col(ColumnsName.ID).as(ColumnsName.ADDR_SK),
+        Dataset<Row> addr_raw = sparkWrapper.getDataset(transformConfiguration.getSnpSrcSchema(TablesName.EBX_REP_M_SFS_0002_SFSDIVISION), TablesName.EBX_REP_M_SFS_0002_SFSDIVISION);
+
+        Dataset<Row> addr_fact = addr_raw.select(
                         coalesce(col(ColumnsName.ADDRESS_ADDRFACT_POSTCODE), col(ColumnsName.ADDRESS_POSTCODE)).as(ColumnsName.ADDR_IDX_NUM),
                         col(ColumnsName.ADDRESS_ADDRFACT_ADDRAREA_AREANAME).as(ColumnsName.ADDR_DISTRICT_NAME),
                         col(ColumnsName.ADDRESS_ADDRFACT_ADDPLACE_PLACENAME).as(ColumnsName.ADDR_LOCTY_NAME),
@@ -41,7 +39,8 @@ public class AddrTransformer implements EntityTransformer {
                         col(ColumnsName.ADDRESS_ADDRFACT_FIASCODE).as(ColumnsName.ADDR_FIAS_CODE),
                         col(ColumnsName.ADDRESS_ADDRFACT_ADDRSTREET_HOUSENUMBERS).as(ColumnsName.ADDR_HOUSE_NUM),
                         col(ColumnsName.ADDRESS_ADDRFACT_ADDRSTREET_STREETNAME).as(ColumnsName.ADDR_STREET_NAME),
-                        lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.ADDR_DP_CODE),
+                        when(col(ColumnsName.ADDRESS_COUNTRY).equalTo("РОССИЯ(RU)"), "643").when(col(ColumnsName.ADDRESS_COUNTRY).equalTo("ИНДИЯ(IN)"), "356").otherwise(null).as(ColumnsName.ADDR_CNTRY_SK),
+                        col(ColumnsName.ADDRESS_OKATO2_CODE).as(ColumnsName.ADDR_OKATO2_SK),
                         when(col(ColumnsName.ADDRESS_SUBJECTCODE).equalTo("Агинский Бурятский АО"), "712")
                                 .when(col(ColumnsName.ADDRESS_SUBJECTCODE).equalTo("Алтайский край"), "301")
                                 .when(col(ColumnsName.ADDRESS_SUBJECTCODE).equalTo("Амурская область"), "308")
@@ -139,22 +138,71 @@ public class AddrTransformer implements EntityTransformer {
                                 .when(col(ColumnsName.ADDRESS_SUBJECTCODE).equalTo("Ямало-Ненецкий АО"), "766")
                                 .when(col(ColumnsName.ADDRESS_SUBJECTCODE).equalTo("Ярославская область"), "630")
                                 .when(col(ColumnsName.ADDRESS_SUBJECTCODE).equalTo("Не субъект РФ"), "0")
-                                .as(ColumnsName.ADDR_RUS_FED_SUBJ_SK),
-                        lit(VspcConstant.RDM_IDL_SPARK).as(ColumnsName.ADDR_REG_FED_SUBJ_DP_CODE),
-                        when(col(ColumnsName.ADDRESS_COUNTRY).equalTo("РОССИЯ(RU)"), "643").when(col(ColumnsName.ADDRESS_COUNTRY).equalTo("ИНДИЯ(IN)"), "356").otherwise(null).as(ColumnsName.ADDR_CNTRY_SK),
-                        lit(VspcConstant.RDM_IDL_SPARK).as(ColumnsName.ADDR_CNTRY_DP_CODE),
-                        col(ColumnsName.ADDRESS_OKATO2_CODE).as(ColumnsName.ADDR_OKATO2_SK),
-                        lit(VspcConstant.RDM_IDL_SPARK).as(ColumnsName.ADDR_OKATO2_DP_CODE),
-                        lit(false).as(ColumnsName.DIRTY_FLAG)
-                );
+                                .as(ColumnsName.ADDR_RUS_FED_SUBJ_SK)
+                ).where(col(ColumnsName.ADDRESS_LOCATIONADDRESS).isNotNull());
+
+        Dataset<Row> addr_legal = addr_raw.select(
+                        lit(null).as(ColumnsName.ADDR_IDX_NUM),
+                        lit(null).as(ColumnsName.ADDR_DISTRICT_NAME),
+                        lit(null).as(ColumnsName.ADDR_LOCTY_NAME),
+                        lit(null).as(ColumnsName.ADDR_REG_ADDR_NAME),
+                        col(ColumnsName.ADDRESS_LEGAL_LOCATIONADDRESS).as(ColumnsName.ADDR_SRC_TXT),
+                        lit(null).as(ColumnsName.ADDR_CITY_NAME),
+                        lit(null).as(ColumnsName.ADDR_FIAS_CODE),
+                        lit(null).as(ColumnsName.ADDR_HOUSE_NUM),
+                        lit(null).as(ColumnsName.ADDR_STREET_NAME),
+                        lit(null).as(ColumnsName.ADDR_CNTRY_SK),
+                        lit(null).as(ColumnsName.ADDR_OKATO2_SK),
+                        lit(null).as(ColumnsName.ADDR_RUS_FED_SUBJ_SK)
+                ).where(col(ColumnsName.ADDRESS_LEGAL_LOCATIONADDRESS).isNotNull());
+        
+        Dataset<Row> addr = addr_fact.union(addr_legal).distinct();
+
+        addr = addr.select(
+                getKey("|").as(ColumnsName.SID),
+                getKey("|").as(ColumnsName.ADDR_SK),
+                col(ColumnsName.ADDR_IDX_NUM).as(ColumnsName.ADDR_IDX_NUM),
+                col(ColumnsName.ADDR_DISTRICT_NAME).as(ColumnsName.ADDR_DISTRICT_NAME),
+                col(ColumnsName.ADDR_LOCTY_NAME).as(ColumnsName.ADDR_LOCTY_NAME),
+                col(ColumnsName.ADDR_REG_ADDR_NAME).as(ColumnsName.ADDR_REG_ADDR_NAME),
+                col(ColumnsName.ADDR_SRC_TXT).as(ColumnsName.ADDR_SRC_TXT),
+                col(ColumnsName.ADDR_CITY_NAME).as(ColumnsName.ADDR_CITY_NAME),
+                col(ColumnsName.ADDR_FIAS_CODE).as(ColumnsName.ADDR_FIAS_CODE),
+                col(ColumnsName.ADDR_HOUSE_NUM).as(ColumnsName.ADDR_HOUSE_NUM),
+                col(ColumnsName.ADDR_STREET_NAME).as(ColumnsName.ADDR_STREET_NAME),
+                lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.ADDR_DP_CODE),
+                col(ColumnsName.ADDR_RUS_FED_SUBJ_SK).as(ColumnsName.ADDR_RUS_FED_SUBJ_SK),
+                lit(VspcConstant.RDM_IDL_SPARK).as(ColumnsName.ADDR_REG_FED_SUBJ_DP_CODE),
+                col(ColumnsName.ADDR_CNTRY_SK).as(ColumnsName.ADDR_CNTRY_SK),
+                lit(VspcConstant.RDM_IDL_SPARK).as(ColumnsName.ADDR_CNTRY_DP_CODE),
+                col(ColumnsName.ADDR_OKATO2_SK).as(ColumnsName.ADDR_OKATO2_SK),
+                lit(VspcConstant.RDM_IDL_SPARK).as(ColumnsName.ADDR_OKATO2_DP_CODE),
+                lit(false).as(ColumnsName.DIRTY_FLAG)
+        ).distinct();
 
         Map<String, String> columnEntities = new HashMap<>();
         columnEntities.put(ColumnsName.ADDR_RUS_FED_SUBJ_SK, "rus_fed_subj");
         columnEntities.put(ColumnsName.ADDR_CNTRY_SK, "cntry");
         columnEntities.put(ColumnsName.ADDR_OKATO2_SK, "okato2");
 
-
         addr = skClientWrapper.generateSk(addr, TablesName.ADDR, transformConfiguration.getLoadMode(), columnEntities, transformConfiguration);
         return addr;
+    }
+
+    public static Column getKey(String sep) {
+        return concat_ws(sep,
+                coalesce(col(ColumnsName.ADDR_IDX_NUM), lit("NULL").cast("string")),
+                coalesce(col(ColumnsName.ADDR_DISTRICT_NAME), lit("NULL").cast("string")),
+                coalesce(col(ColumnsName.ADDR_LOCTY_NAME), lit("NULL").cast("string")),
+                coalesce(col(ColumnsName.ADDR_REG_ADDR_NAME), lit("NULL").cast("string")),
+                coalesce(col(ColumnsName.ADDR_SRC_TXT), lit("NULL").cast("string")),
+                coalesce(col(ColumnsName.ADDR_CITY_NAME), lit("NULL").cast("string")),
+                coalesce(col(ColumnsName.ADDR_FIAS_CODE), lit("NULL").cast("string")),
+                coalesce(col(ColumnsName.ADDR_HOUSE_NUM), lit("NULL").cast("string")),
+                coalesce(col(ColumnsName.ADDR_STREET_NAME), lit("NULL").cast("string")),
+                coalesce(col(ColumnsName.ADDR_RUS_FED_SUBJ_SK), lit("NULL").cast("string")),
+                coalesce(col(ColumnsName.ADDR_CNTRY_SK), lit("NULL").cast("string")),
+                coalesce(col(ColumnsName.ADDR_OKATO2_SK), lit("NULL").cast("string"))
+        );
     }
 }

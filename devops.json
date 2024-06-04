@@ -1,5 +1,5 @@
 {
-  "version": "D-01.401.008",
+  "version": "D-01.402.006",
   "stand_name": "fess",
   "build": "maven",
   "block": "t",
@@ -14,7 +14,7 @@
   "sast_conf": "devsecops-config.yml",
   "emails": "MDLisitsa@sberbank.ru SATatuyko@sberbank.ru dvilapshin@sberbank.ru anikusikov@sberbank.ru",
   "run_hive_script_sql": true,
-  "jira_task_release": "VSPCIDL-66",
+  "jira_task_release": "VSPCIDL-85",
   "nexus3": {
     "ci_it_service": "CI02619185",
     "ci_as_fp": "CI04734132"

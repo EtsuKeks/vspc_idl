@@ -42,7 +42,7 @@ public class TerrDivTypeTransformer implements EntityTransformer {
                 col(ColumnsName.DIV_TYPE_CODE).as(ColumnsName.DIV_TYPE_CODE),
                 col(ColumnsName.TERR_DIV_TYPE_SK).as(ColumnsName.TERR_DIV_TYPE_SK),
                 lit(false).as(ColumnsName.DIRTY_FLAG)
-        );
+        ).distinct();
 
         terrdivtype = skClientWrapper.generateSk(terrdivtype, TablesName.TERRDIVTYPE, transformConfiguration.getLoadMode(), transformConfiguration);
 
