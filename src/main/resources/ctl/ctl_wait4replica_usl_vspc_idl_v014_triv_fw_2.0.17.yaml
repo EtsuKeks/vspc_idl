@@ -105,7 +105,7 @@ workflows:
             name: bkpNumbers
             prior_value: 2
       notifications:
-          - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru", "dvilapshin@sberbank.ru" ] }
+          - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru", "SLSNTWRKDE_ess@sberbank.ru" ] }
 
   - "{{ logical_env_prefix }}USL_VSPC_IDL_TRIV_RESTORE":
       name: "{{ logical_env_prefix }}USL_VSPC_IDL_TRIV_RESTORE"
@@ -193,4 +193,4 @@ workflows:
             name: bkpNumbers
             prior_value: 2
       notifications:
-          - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru", "dvilapshin@sberbank.ru"  ] }
+          - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru", "SLSNTWRKDE_ess@sberbank.ru"  ] }

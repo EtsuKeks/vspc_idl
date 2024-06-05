@@ -99,7 +99,7 @@ workflows:
             name: cert_enabled_flag
             prior_value: "{{ cert_enabled_flag }}"
       notifications:
-          - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru",,"SLSNTWRKDE_ess@sberbank.ru" ] }
+          - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru","SLSNTWRKDE_ess@sberbank.ru" ] }
 
   - "{{ logical_env_prefix }}USL_VSPC_IDL_INIT":
       name: "{{ logical_env_prefix }}USL_VSPC_IDL_INIT"
@@ -185,7 +185,7 @@ workflows:
             name: cert_enabled_flag
             prior_value: "{{ cert_enabled_flag }}"
       notifications:
-          - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru",,"SLSNTWRKDE_ess@sberbank.ru" ] }
+          - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru","SLSNTWRKDE_ess@sberbank.ru" ] }
 
 entities:
   - entity:
