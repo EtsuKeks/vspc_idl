@@ -80,7 +80,7 @@ workflows:
         # for RT-FW framework
         - param:
             name: recover_flag
-            prior_value: "N"
+            prior_value: "{{ recover_flag }}"
         # for RT-FW framework (dummy)
         - param:
             name: target_hdfs_namespace
@@ -96,8 +96,8 @@ workflows:
             prior_value: "{{ log_level }}"
         # for RT-FW KAP.META
         - param:
-            name: rtfw_feature_hub_daks
-            prior_value: "{{ rtfw_feature_hub_daks }}"
+            name: cert_enabled_flag
+            prior_value: "{{ cert_enabled_flag }}"
       notifications:
           - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru",,"SLSNTWRKDE_ess@sberbank.ru" ] }
 
@@ -166,7 +166,7 @@ workflows:
         # for RT-FW framework
         - param:
             name: recover_flag
-            prior_value: "N"
+            prior_value: "{{ recover_flag }}"
         # for RT-FW framework (dummy)
         - param:
             name: target_hdfs_namespace
@@ -182,8 +182,8 @@ workflows:
             prior_value: "{{ log_level }}"
         # for RT-FW KAP.META
         - param:
-            name: rtfw_feature_hub_daks
-            prior_value: "{{ rtfw_feature_hub_daks }}"
+            name: cert_enabled_flag
+            prior_value: "{{ cert_enabled_flag }}"
       notifications:
           - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru",,"SLSNTWRKDE_ess@sberbank.ru" ] }
 
