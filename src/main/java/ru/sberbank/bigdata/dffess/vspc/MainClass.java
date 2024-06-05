@@ -20,11 +20,6 @@ public class MainClass {
         CmdArgsParser cmdArgsParser = new CmdArgsParser();
         Map<String, String> cmdArgs = cmdArgsParser.parse(args);
 
-        EtlKit preloadKit = preloadKit();
-        EtlKit etlKit = getEtlKit(preloadKit);
-
-        LoggerWrapper loggerWrapper = new SoutLoggerWrapper();
-
         DataProductGenerator dataProductGenerator = new VspcDataProductGenerator();
         CtlAdapter ctlAdapter = new CtlAdapterImpl(cmdArgs.get("ctl_url"), cmdArgs.get("loading_id"));
         AppRunnerGenerator appRunnerGenerator = new SparkAppRunnerGenerator();

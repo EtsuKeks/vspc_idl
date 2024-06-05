@@ -14,10 +14,10 @@ public class VspcMetadataKeeper extends MetadataKeeper {
     @Override
     public void build() {
         addTable(ADDR, stringList(ColumnsName.ADDR_SK));
-        addTable(ADDRH, stringList(ColumnsName.ADDR_SK), col(END_DT), stringList(START_DT, END_DT, PARTITION_COLUMN_MONTH));
+        addTable(ADDRH, stringList(ColumnsName.ADDR_SK), col(END_DT),PARTITION_COLUMN_MONTH, stringList(START_DT, END_DT, PARTITION_COLUMN_MONTH));
         addTable(DIV, stringList(ColumnsName.DIV_SK));
-        addTable(DIVH, stringList(ColumnsName.DIV_SK), col(END_DT), stringList(START_DT, END_DT, PARTITION_COLUMN_MONTH));
-        addTable(DIVTYPE, stringList(ColumnsName.DIV_SK), col(END_DT), stringList(START_DT, END_DT, PARTITION_COLUMN_MONTH));
+        addTable(DIVH, stringList(ColumnsName.DIV_SK), col(END_DT), PARTITION_COLUMN_MONTH, stringList(START_DT, END_DT, PARTITION_COLUMN_MONTH));
+        addTable(DIVTYPE, stringList(ColumnsName.DIV_SK), col(END_DT), PARTITION_COLUMN_MONTH, stringList(START_DT, END_DT, PARTITION_COLUMN_MONTH));
         addTable(TERRDIVTYPE, stringList(ColumnsName.TERR_DIV_TYPE_SK));
         addTable(TIMEZONE, stringList(ColumnsName.TIME_ZONE_SK));
     }
