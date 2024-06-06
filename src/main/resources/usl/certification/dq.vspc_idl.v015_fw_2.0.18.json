@@ -2003,6 +2003,57 @@
                          }
                      ]
                  }
+    //Внутри продуктовая ссылочная целостность таблица usl_vspc_idl_snp.div_type
+                ,{
+                     "rule": {
+                         "from": "usl_vspc_idl_snp.div_type fk LEFT JOIN usl_vspc_idl_snp.terr_div_type AS pk ON pk.terr_div_type_sk = fk.div_type_terr_div_type_sk AND fk.div_type_terr_div_type_dp_code like 'vspc%' and not coalesce(pk.deleted_flag,FALSE)",
+                         "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or fk.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(pk.deleted_flag, false)",
+                         "rule_cd": "r_usl_ri_s_vspc_idl-div_type-div_type_terr_div_type_sk",
+                         "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
+                        {
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_ri_s_vspc_idl-div_type-div_type_terr_div_type_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_ri_s_vspc_idl-div_type-div_type_terr_div_type_sk",
+                                         "metric_desc": "Для каждого значения внешнего ключа div_type.div_type_terr_div_type_sk должна найтись запись в таблице terr_div_type с тем же значением первичного ключа terr_div_type_sk",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN fk.div_type_terr_div_type_sk IS NOT NULL AND fk.div_type_terr_div_type_dp_code like 'vspc%' AND pk.terr_div_type_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 1
+                                     }
+                                 }
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_ri_s_vspc_idl-div_type-div_type_terr_div_type_sk",
+                                 "crit_desc": "Для каждого значения внешнего ключа должна найтись запись в таблице с тем же значением первичного ключа",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.DIV_TYPE_TERR_DIV_TYPE_SK"
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Ссылочная целостность"
+                             }
+                         }
+                     ]
+                 }
 
             // Пересечение по истории usl_vspc_idl_snp.addr_h
                  ,{
