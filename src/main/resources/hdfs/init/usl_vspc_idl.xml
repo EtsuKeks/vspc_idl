@@ -30,10 +30,6 @@
             <argument>${nameNode}</argument>             <!-- 5 -->
             <argument>${debug_distributive_path}</argument>             <!-- 6 -->
             <argument>${devops_distributive_jar}</argument>             <!-- 7 -->
-            <argument>${data_sets}</argument>             <!-- 8-->
-            <argument>${parallel_threads}</argument>         <!-- 9 -->
-            <argument>${firstNotNull(wf:conf('debug_logical_env'),' ')}</argument>     <!-- 10 -->
-            <argument>${debug_sk_off}</argument>     <!-- 11 -->
             <file>StartLauncher.sh#StartLauncher.sh</file>
         </shell>
         <ok to="End"/>
