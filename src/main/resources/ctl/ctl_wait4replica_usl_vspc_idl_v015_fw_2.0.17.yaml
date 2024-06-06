@@ -23,10 +23,10 @@ workflows:
           active: false
         entities:
           - entity:
-              # promebx.ebx_rep_m_sfs_0002_sfsdivision
-              id: "{{ CTL_EBX_SFS_entity_id }}"
-              statisticId: {{ archiveStat_sfs }}
-              profile: "{{ archiveProfile_sfs }}"
+              # usl_{{short_product_code}}_in.ebx_rep_m_sfs_0002_sfsdivision
+              id: 928039295
+              statisticId: {{ archiveStat_FakeCardCode }}
+              profile: "{{ archiveProfile_FakeCardCode }}"
               active: true
       params:
         - param:

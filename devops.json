@@ -1,5 +1,5 @@
 {
-  "version": "D-01.501.001",
+  "version": "D-01.501.002",
   "stand_name": "fess",
   "build": "maven",
   "block": "t",
@@ -26,10 +26,10 @@
 
   "ess": {
     "meta": [
-      "usl/certification/cap_certification_usl.vspc_idl_v014_fw_2.0.17.json"
+      "usl/certification/cap_certification_usl.vspc_idl_v015_fw_2.0.17.json"
     ], 
     "kkd-spod": [
-      "usl/certification/dq.vspc_idl.v014_fw_2.0.17.json"
+      "usl/certification/dq.vspc_idl.v015_fw_2.0.17.json"
     ],
     "well": "vspc"
   },
@@ -78,9 +78,9 @@
     }
   ],
   "template_files": [
-    "usl/certification/dq.vspc_idl.v014_fw_2.0.17.json",
-    "sql/ddl/ddl.usl.vspc_idl.v014.model_stg.8.76.0_fw_2.0.17.sql",
-    "sql/ddl/ddl.usl.vspc_idl.v014.model.8.76.0_fw_2.0.17.sql"
+    "usl/certification/dq.vspc_idl.v015_fw_2.0.17.json",
+    "sql/ddl/ddl.usl.vspc_idl.v015.model_stg.8.76.0_fw_2.0.17.sql",
+    "sql/ddl/ddl.usl.vspc_idl.v015.model.8.76.0_fw_2.0.17.sql"
   ],
   "workflow_to_run" : [
     "USL_VSPC_IDL_INIT"
