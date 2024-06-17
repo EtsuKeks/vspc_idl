@@ -27,7 +27,7 @@ public class AddrHConfiguration extends VspcEtlConfiguration {
 
     @Override
     public DataLoader getDataLoader() {
-        return new DataLoaderHistSnp();
+        return new DataLoaderHistDiff();
     } ///DataLoaderHubSnp DataLoaderHistDiff
 
     @Override
