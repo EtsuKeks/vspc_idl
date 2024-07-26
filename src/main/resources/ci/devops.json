@@ -33,7 +33,7 @@
       "destination": "s2t/"
     },
     {
-      "source": "src/main/resources/ci/docs/usl.rtfw_vspc_idl_version_fw_*",
+      "source": "src/main/resources/ci/docs/usl.vspc_idl_version_fw_2.0.18*",
       "destination": "docs/"
     },
     {
