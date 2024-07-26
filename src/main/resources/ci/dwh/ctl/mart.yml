@@ -1,0 +1,242 @@
+#
+# mart.yml
+#
+# Файл с переменными Ansible для всех сред
+# Файл предназначен для задания DevOps: https://sbt-jenkins.delta.sbrf.ru/datafactory/job/DataFactory/job/DataMart/job/UploadAnsibleVars_all_stands/
+# Описание задания:https://confluence.ca.sbrf.ru/display/DOTOOLS/UploadAnsibleVars_all_stands
+#
+# !!!! Все URL указывать без конечного знака - "/"
+#
+# 11/11/2021 - начальная версия
+#
+
+vars: &commonVars
+  ## Глобальные
+  datamart_group: "ndl"
+  short_product_code: "rtfw_ndl_eks"
+  product_version: "1.5.0-SNAPSHOT"
+
+  ## ctl.yaml и triv_ctl.yaml
+  logical_env_ctl_entity_logenv_number: "00"
+
+  ## ctl.yaml, triv_ctl.yaml, workflow.xml, devops.json, ddl.sql
+  logical_env_prefix: ""
+  archiveProfile_REPLICATE_002: "sklsdpstorkns1"
+  archiveStat_REPLICATE_002: "2"
+  archiveStat_CI03737640: "5"
+  archiveProfile_CI03737640: "clsklod5"
+  archiveProfile_REPLICATE_256: "arnsdpetl4hdp2"
+  archiveStat_REPLICATE_256: "12"
+  archiveStat_CI03197624_PPRB: "211"
+  archiveProfile_CI03197624_PPRB: "sklsdppprb"
+
+
+  ## ddl.sql
+  logical_env_prefix_with_slash: ""
+
+  ## cap_dsm.json
+  "uslCluster": "FESS_IFT" # Заглушка для всех сред, кроме ift и ПРОМ
+  "archiveCluster_rdm": "{{ uslCluster }}"
+
+  ## ctl.yaml
+  # Одинаково на всех средах
+  starting_business_date: ""
+  calc_logs_depth_days: "5"
+  data_sets: ""
+  debug_distributive_path: ""
+  devops_distributive_jar: "{{ short_product_code }}-{{ product_version }}-jar-with-dependencies.jar"
+  debug_sk_off: ""
+  file_path: "/oozie-app/t/{{ datamart_group }}/{{ short_product_code }}/"
+  resetted_entities: ""
+  sk_greenfield: ""
+  spark_parameters: "--conf spark.default.parallelism=10 --conf spark.sql.shuffle.partitions=10"
+
+  # Отличается на средах
+  yarn_queue: "default"
+  yarn_queue_init: "{{ yarn_queue }}"
+  source_hdfs_namespaces: ""
+  target_hdfs_namespace: "{{ HDFS_NAMENODE }}"
+  kerberos_realm: "{{ REALM }}"
+  cert_enabled_flag: "true"
+
+  ## Параметр обязателен в трубе:
+  YARN_QUEUE: "{{ yarn_queue }}"
+  logical_env: ""
+
+  ## triv_ctl.yaml
+  # Одинаково на всех средах
+  hdfs_path: "/oozie-app/app/TRiV/trifrunner"
+
+  # Отличается на средах
+  domain: "{{ REALM }}"
+  resourceGroup: "{{ yarn_queue }}"
+
+stands:
+  # DEV
+  - stand_inventory: sdpdevfess
+    vars:
+      <<: *commonVars
+      ## ctl.yaml
+      yarn_queue: "rtfw"
+      cluster_name: "sklsdpfess"
+
+      ## triv_ctl.yaml
+      hadoop_default_fs_uri: "sdpdevfess"
+      user_name: "u_{{ cluster_name }}_s_usl_t_rtfw_ndl_eks"
+
+      ## Параметр обязателен в трубе (= user_name)
+      USER_NAME: "u_sklsdpfess_s_usl_t_rtfw_ndl_eks"
+
+      ## Параметры метрик
+      rtfw_feature_monitoring_enabled: "true"
+
+  - stand_inventory: sdpdevfess+ds22
+    vars:
+      <<: *commonVars
+      ## ctl.yaml и triv_ctl.yaml
+      logical_env_ctl_entity_logenv_number: "22"
+
+      ## Параметр обязателен в трубе:
+      logical_env: "ds22"
+
+      ## ctl.yaml, triv_ctl.yaml, workflow.xml, devops.json, ddl.sql
+      logical_env_prefix: "{{ logical_env }}_"
+
+      ## ddl.sql
+      logical_env_prefix_with_slash: "{{ logical_env }}/"
+
+      ## ctl.yaml
+      yarn_queue: "rtfw"
+      cluster_name: "sklsdpfess"
+      file_path: "/oozie-app/t/{{ datamart_group }}/{{ short_product_code }}_{{ logical_env }}/"
+
+      ## triv_ctl.yaml
+      hadoop_default_fs_uri: "sdpdevfess"
+      user_name: "u_{{ cluster_name }}_s_usl_{{ logical_env_prefix }}t_rtfw_ndl_eks"
+
+      ## Параметр обязателен в трубе (= user_name)
+      USER_NAME: "u_sklsdpfess_s_usl_ds22_t_rtfw_ndl_eks"
+
+      ## Параметры метрик
+      rtfw_feature_monitoring_enabled: "true"
+
+  - stand_inventory: sdpdevfess+ts22
+    vars:
+      <<: *commonVars
+      ## ctl.yaml и triv_ctl.yaml
+      logical_env_ctl_entity_logenv_number: "72"
+
+      ## Параметр обязателен в трубе:
+      logical_env: "ts22"
+
+      ## ctl.yaml, triv_ctl.yaml, workflow.xml, devops.json, ddl.sql
+      logical_env_prefix: "{{ logical_env }}_"
+
+      ## ddl.sql
+      logical_env_prefix_with_slash: "{{ logical_env }}/"
+
+      ## ctl.yaml
+      yarn_queue: "rtfw"
+      cluster_name: "sklsdpfess"
+      file_path: "/oozie-app/t/{{ datamart_group }}/{{ short_product_code }}_{{ logical_env }}/"
+
+      ## triv_ctl.yaml
+      hadoop_default_fs_uri: "sdpdevfess"
+      user_name: "u_{{ cluster_name }}_s_usl_{{ logical_env_prefix }}t_rtfw_ndl_eks"
+
+      ## Параметр обязателен в трубе (= user_name)
+      USER_NAME: "u_sklsdpfess_s_usl_ts22_t_rtfw_ndl_eks"
+
+      ## Параметры метрик
+      rtfw_feature_monitoring_enabled: "true"
+
+  # IFT
+  - stand_inventory: sdpiftfess
+    vars:
+      <<: *commonVars
+      ## ctl.yaml
+      cluster_name: "itsklsdpfess"
+      ## triv_ctl.yaml
+      hadoop_default_fs_uri: "sdpiftfess"
+      user_name: "u_{{ cluster_name }}_s_usl_t_rtfw_ndl_eks"
+
+      ## Параметр обязателен в трубе (= user_name)
+      USER_NAME: "u_itsklsdpfess_s_usl_t_rtfw_ndl_eks"
+
+      ## Параметры метрик
+      rtfw_feature_monitoring_enabled: "true"
+
+  - stand_inventory: sdpiftfess+is22
+    vars:
+      <<: *commonVars
+      ## ctl.yaml и triv_ctl.yaml
+      logical_env_ctl_entity_logenv_number: "22"
+
+      ## Параметр обязателен в трубе:
+      logical_env: "is22"
+
+      ## ctl.yaml, triv_ctl.yaml, workflow.xml, devops.json, ddl.sql
+      logical_env_prefix: "{{ logical_env }}_"
+
+      ## ddl.sql
+      logical_env_prefix_with_slash: "{{ logical_env }}/"
+
+      ## ctl.yaml
+      cluster_name: "itsklsdpfess"
+      file_path: "/oozie-app/t/{{ datamart_group }}/{{ short_product_code }}_{{ logical_env }}/"
+
+      ## triv_ctl.yaml
+      hadoop_default_fs_uri: "sdpiftfess"
+      user_name: "u_{{ cluster_name }}_s_usl_{{ logical_env_prefix }}t_rtfw_ndl_eks"
+
+      ## Параметр обязателен в трубе (= user_name)
+      USER_NAME: "u_itsklsdpfess_s_usl_is22_t_rtfw_ndl_eks"
+
+      ## Параметры метрик
+      rtfw_feature_monitoring_enabled: "true"
+
+  # RDT
+  - stand_inventory: utarnsdpfess
+    vars:
+      <<: *commonVars
+      ## ctl.yaml
+      yarn_queue: "rtfw"
+      cluster_name: "utarnsdpfess"
+      yarn_queue_init: "init"
+      cert_enabled_flag: "false"
+
+      ## triv_ctl.yaml
+      hadoop_default_fs_uri: "utarnsdpfess"
+      user_name: "u_{{ cluster_name }}_s_usl_t_rtfw_ndl_eks"
+      resourceGroup: "{{ yarn_queue }}"
+
+      ## Параметры обязательны в трубе
+      YARN_QUEUE: "{{ yarn_queue }}"
+      # (= user_name)
+      USER_NAME: "u_utarnsdpfess_s_usl_t_rtfw_ndl_eks"
+
+      ## Параметры метрик
+      rtfw_feature_monitoring_enabled: "true"
+
+  # PROM
+  - stand_inventory: arnsdpfess2
+    vars:
+      <<: *commonVars
+      ## cap_dsm.json
+      "uslCluster": "ARNSDPFESS2"
+      "archiveCluster_rdm": "ARNSDPFESS2"
+
+      ## ctl.yaml
+      cluster_name: "arn6sdpfess"
+      yarn_queue_init: "init"
+      yarn_queue: "rtfw"
+
+      ## triv_ctl.yaml
+      hadoop_default_fs_uri: "arnsdpfess2"
+      user_name: "u_{{ cluster_name }}_s_usl_t_rtfw_ndl_eks"
+      resourceGroup: "{{ yarn_queue }}"
+
+      ## Параметры обязательны в трубе
+      YARN_QUEUE: "{{ yarn_queue }}"
+      # (= user_name)
+      USER_NAME: "u_arn6sdpfess_s_usl_t_rtfw_ndl_eks"
