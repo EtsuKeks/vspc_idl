@@ -33,7 +33,7 @@
       "destination": "s2t/"
     },
     {
-      "source": "src/main/resources/ci/docs/usl.rtfw_vspc_idl_version_fw_*",
+      "source": "src/main/resources/ci/docs/usl.vspc_idl_version_fw_2.0.18*",
       "destination": "docs/"
     },
     {
@@ -62,6 +62,6 @@
     "hdfs/usl_rtfw_vspc_idl.xml"
   ],
   "workflow_to_run": [
-    "{{ logical_env_prefix }}usl_vspc_idl"
+    "{{ logical_env_prefix }}usl_rtfw_ndl_eks"
   ]
 }
