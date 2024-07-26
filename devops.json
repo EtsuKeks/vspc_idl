@@ -1,0 +1,67 @@
+{
+  "version": "D-01.501.006",
+  "stand_name": "fess",
+  "build": "maven",
+  "block": "t",
+  "datamart_group": "idl",
+  "datamart_name": "vspc_idl",
+  "datamart_ansible_vars": "vars_all.yml",
+  "sq_pr_key": "vspc_idl",
+  "sq_pr_name": "vspc_idl",
+  "sq_scan_folder": "src",
+  "sq_binary_folder": "target",
+  "sq_options": "",
+  "sast_conf": "devsecops-config.yml",
+  "emails": "MDLisitsa@sberbank.ru SATatuyko@sberbank.ru dvilapshin@sberbank.ru anikusikov@sberbank.ru",
+  "run_hive_script_sql": true,
+  "jira_task_release": "VSPCIDL-98",
+  "nexus3": {
+    "ci_it_service": "CI02619185",
+    "ci_as_fp": "CI04734132"
+  },
+  "maven": {
+    "pom_path": "pom.xml",
+    "set_path": "src/main/resources/devops/ci-settings.xml"
+  },
+  "distrib_files": [
+    {
+      "source": "src/main/resources/ci/dwh/usl/certification/cap_certification*",
+      "destination": "usl/certification/"
+    },
+    {
+      "source": "src/main/resources/ci/docs/s2t.xlsx",
+      "destination": "s2t/"
+    },
+    {
+      "source": "src/main/resources/ci/docs/usl.rtfw_vspc_idl_version_fw_*",
+      "destination": "docs/"
+    },
+    {
+      "source": "src/main/resources/ci/dwh/usl/rrm/*",
+      "destination": "usl/rrm/"
+    },
+    {
+      "source": "src/main/resources/ci/dwh/ctl/*",
+      "destination": "ctl/"
+    },
+    {
+      "source": "src/main/resources/ci/dwh/hdfs/*",
+      "destination": "hdfs/"
+    },
+    {
+      "source": "target/*-with-dependencies.jar",
+      "destination": "hdfs/lib/"
+    },
+    {
+      "source": "src/main/resources/ci/dwh/hive/*",
+      "destination": "sql/ddl/"
+    }
+  ],
+  "template_files": [
+    "sql/ddl/ddl.usl.vspc_idl.v015.model.8.78.0_fw_2.0.18.sql",
+    "hdfs/usl_rtfw_vspc_idl.xml"
+  ],
+  "workflow_to_run": [
+    "{{ logical_env_prefix }}usl_rtfw_ndl_eks"
+  ]
+}
