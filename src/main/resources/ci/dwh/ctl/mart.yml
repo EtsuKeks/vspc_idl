@@ -13,7 +13,7 @@
 vars: &commonVars
   ## Глобальные
   datamart_group: "ndl"
-  short_product_code: "rtfw_ndl_eks"
+  short_product_code: "vspc_idl"
   product_version: "1.5.0-SNAPSHOT"
 
   ## ctl.yaml и triv_ctl.yaml
@@ -44,7 +44,7 @@ vars: &commonVars
   calc_logs_depth_days: "5"
   data_sets: ""
   debug_distributive_path: ""
-  devops_distributive_jar: "{{ short_product_code }}-{{ product_version }}-jar-with-dependencies.jar"
+  devops_distributive_jar: "{{  devops_distributive_jar }}"
   debug_sk_off: ""
   file_path: "/oozie-app/t/{{ datamart_group }}/{{ short_product_code }}/"
   resetted_entities: ""
@@ -76,95 +76,67 @@ stands:
   - stand_inventory: sdpdevfess
     vars:
       <<: *commonVars
-      ## ctl.yaml
-      yarn_queue: "rtfw"
       cluster_name: "sklsdpfess"
-
-      ## triv_ctl.yaml
-      hadoop_default_fs_uri: "sdpdevfess"
-      user_name: "u_{{ cluster_name }}_s_usl_t_rtfw_ndl_eks"
-
-      ## Параметр обязателен в трубе (= user_name)
-      USER_NAME: "u_sklsdpfess_s_usl_t_rtfw_ndl_eks"
-
-      ## Параметры метрик
-      rtfw_feature_monitoring_enabled: "true"
-
-  - stand_inventory: sdpdevfess+ds22
-    vars:
-      <<: *commonVars
-      ## ctl.yaml и triv_ctl.yaml
-      logical_env_ctl_entity_logenv_number: "22"
-
-      ## Параметр обязателен в трубе:
-      logical_env: "ds22"
-
-      ## ctl.yaml, triv_ctl.yaml, workflow.xml, devops.json, ddl.sql
-      logical_env_prefix: "{{ logical_env }}_"
-
-      ## ddl.sql
-      logical_env_prefix_with_slash: "{{ logical_env }}/"
-
-      ## ctl.yaml
-      yarn_queue: "rtfw"
-      cluster_name: "sklsdpfess"
-      file_path: "/oozie-app/t/{{ datamart_group }}/{{ short_product_code }}_{{ logical_env }}/"
-
-      ## triv_ctl.yaml
-      hadoop_default_fs_uri: "sdpdevfess"
-      user_name: "u_{{ cluster_name }}_s_usl_{{ logical_env_prefix }}t_rtfw_ndl_eks"
-
-      ## Параметр обязателен в трубе (= user_name)
-      USER_NAME: "u_sklsdpfess_s_usl_ds22_t_rtfw_ndl_eks"
-
-      ## Параметры метрик
-      rtfw_feature_monitoring_enabled: "true"
-
-  - stand_inventory: sdpdevfess+ts22
-    vars:
-      <<: *commonVars
-      ## ctl.yaml и triv_ctl.yaml
-      logical_env_ctl_entity_logenv_number: "72"
-
-      ## Параметр обязателен в трубе:
-      logical_env: "ts22"
-
-      ## ctl.yaml, triv_ctl.yaml, workflow.xml, devops.json, ddl.sql
-      logical_env_prefix: "{{ logical_env }}_"
-
-      ## ddl.sql
-      logical_env_prefix_with_slash: "{{ logical_env }}/"
-
-      ## ctl.yaml
-      yarn_queue: "rtfw"
-      cluster_name: "sklsdpfess"
-      file_path: "/oozie-app/t/{{ datamart_group }}/{{ short_product_code }}_{{ logical_env }}/"
-
-      ## triv_ctl.yaml
-      hadoop_default_fs_uri: "sdpdevfess"
-      user_name: "u_{{ cluster_name }}_s_usl_{{ logical_env_prefix }}t_rtfw_ndl_eks"
-
-      ## Параметр обязателен в трубе (= user_name)
-      USER_NAME: "u_sklsdpfess_s_usl_ts22_t_rtfw_ndl_eks"
-
-      ## Параметры метрик
-      rtfw_feature_monitoring_enabled: "true"
+      spark_parameters: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=2G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=5 --conf spark.dynamicAllocation.maxExecutors=40 --conf spark.driver.memory=5G"
+      hdfs_path: "/oozie-app/t/tools/trivDistCp"
+      hadoop_default_fs_uri: "hdfs://FESS-DEV"
+      user_name: "u_sklsdpfess_s_usl_t_vspc_idl"
+      USER_NAME: "u_sklsdpfess_s_usl_t_vspc_idl"
+      uslCluster: "sdpdevfess"
+      system_area_type: "q_SDP_comm"
+      log_level: "ESSA"
+      archiveProfile_sfs: "Default"
 
   # IFT
   - stand_inventory: sdpiftfess
     vars:
       <<: *commonVars
-      ## ctl.yaml
       cluster_name: "itsklsdpfess"
-      ## triv_ctl.yaml
-      hadoop_default_fs_uri: "sdpiftfess"
-      user_name: "u_{{ cluster_name }}_s_usl_t_rtfw_ndl_eks"
+      spark_parameters: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=1G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=2 --conf spark.dynamicAllocation.maxExecutors=10 --conf spark.driver.memory=1G"
+      hdfs_path: "/oozie-app/t/tools/trivDistCp"
+      hadoop_default_fs_uri: "hdfs://FESS-IFT"
+      user_name: "u_itsklsdpfess_s_usl_t_vspc_idl"
+      USER_NAME: "u_itsklsdpfess_s_usl_t_vspc_idl"
+      yarn_queue: "default"
+      resourceGroup: "default"
+      YARN_QUEUE: "default"
+      uslCluster: "sdpiftfess"
+      system_area_type: "q_SDP_ESS"
+      log_level: "INFO"
+      archiveProfile_sfs: "Default"
+      cert_enabled_flag: "true"
 
-      ## Параметр обязателен в трубе (= user_name)
-      USER_NAME: "u_itsklsdpfess_s_usl_t_rtfw_ndl_eks"
+  # RDT
+  - stand_inventory: utarnsdpfess
+    vars:
+      <<: *commonVars
+      cluster_name: "utarnsdpfess"
+      spark_parameters: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.executor.memory=10G --conf spark.executor.cores=2 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=20G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=20G --conf spark.driver.memoryOverhead=10G --conf spark.executor.memoryOverhead=3G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=100 --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000"
+      hdfs_path: "/oozie-app/t/tools/trivDistCp"
+      hadoop_default_fs_uri: "hdfs://utarnsdpfess"
+      user_name: "u_utarnsdpfess_s_usl_t_vspc_idl"
+      USER_NAME: "u_utarnsdpfess_s_usl_t_vspc_idl"
+      uslCluster: "utarnsdpfess"
+      system_area_type: "{{ YARN_QUEUE }}"
+      log_level: "ESSA"
+      yarn_queue_init: "init"
 
-      ## Параметры метрик
-      rtfw_feature_monitoring_enabled: "true"
+  # PROM NEW
+  - stand_inventory: arnsdpfess2
+    vars:
+      <<: *commonVars
+      cluster_name: "arn6sdpfess"
+      spark_parameters: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.executor.memory=10G --conf spark.executor.cores=2 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=10G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=2G --conf spark.driver.memoryOverhead=5G --conf spark.executor.memoryOverhead=3G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=100 --conf spark.yarn.access.hadoopFileSystems=hdfs://hdfsgw/,hdfs://arnsdpfess2/ --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000"
+      hdfs_path: "/oozie-app/t/tools/trivDistCp"
+      hadoop_default_fs_uri: "hdfs://arnsdpfess2"
+      user_name: "u_arn6sdpfess_s_usl_t_vspc_idl"
+      USER_NAME: "u_arn6sdpfess_s_usl_t_vspc_idl"
+      uslCluster: "arnsdpfess2"
+      system_area_type: "arnsdpfess2_vspc"
+      log_level: "INFO"
+      yarn_queue_init: "init"
+      cert_enabled_flag: "true"
+      archiveProfile_FakeCardCode: "ts_espd"
 
   - stand_inventory: sdpiftfess+is22
     vars:
