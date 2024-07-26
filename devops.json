@@ -21,7 +21,7 @@
   },
   "maven": {
     "pom_path": "pom.xml",
-    "set_path": "src/main/resources/devops/ci/ci-settings.xml"
+    "set_path": "src/main/resources/ci/ci-settings.xml"
   },
   "distrib_files": [
     {
