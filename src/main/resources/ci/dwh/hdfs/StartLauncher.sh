@@ -16,7 +16,7 @@ user_ticket_cache_file_name=`ls ${user_ticket_cache_path} | awk -F/ '{print $3}'
 cp ${user_ticket_cache_path} ./
 
 echo "spark-submit --files ${user_ticket_cache_file_name} --master yarn --deploy-mode cluster --queue ${yarn_queue} --conf spark.yarn.appMasterEnv.RTFW_KERBEROS_TICKET_CACHE_FILE=${user_ticket_cache_file_name} --conf spark.yarn.maxAppAttempts=1 --driver-memory 12G --class ru.sberbank.bigdata.dffess.rt.Main ${dm_builder_jar_local} ${loading_id} ${ctl}"
-spark-submit --files ${user_ticket_cache_file_name} --master yarn --deploy-mode cluster --queue ${yarn_queue} --conf spark.yarn.appMasterEnv.RTFW_KERBEROS_TICKET_CACHE_FILE=${user_ticket_cache_file_name} --conf spark.yarn.maxAppAttempts=1 --driver-memory 12G --class Main ${dm_builder_jar_local} ${loading_id} ${ctl}
+spark-submit --files ${user_ticket_cache_file_name} --master yarn --deploy-mode cluster --queue ${yarn_queue} --conf spark.yarn.appMasterEnv.RTFW_KERBEROS_TICKET_CACHE_FILE=${user_ticket_cache_file_name} --conf spark.yarn.maxAppAttempts=1 --driver-memory 12G --class ru.sberbank.bigdata.dffess.rt.Main ${dm_builder_jar_local} ${loading_id} ${ctl}
 spark_submit_status=$?
 echo Spark-приложение завершено со статусом $spark_submit_status
 exit $spark_submit_status
