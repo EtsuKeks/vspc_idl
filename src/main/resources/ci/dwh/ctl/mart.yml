@@ -86,7 +86,6 @@ stands:
       USER_NAME: "u_sklsdpfess_s_usl_t_vspc_idl"
       uslCluster: "sdpdevfess"
       system_area_type: "q_SDP_comm"
-      log_level: "ESSA"
       archiveProfile_sfs: "Default"
 
   # IFT
@@ -103,7 +102,6 @@ stands:
       YARN_QUEUE: "default"
       uslCluster: "sdpiftfess"
       system_area_type: "q_SDP_ESS"
-      log_level: "INFO"
       archiveProfile_sfs: "Default"
       cert_enabled_flag: "true"
 
@@ -118,7 +116,6 @@ stands:
       USER_NAME: "u_utarnsdpfess_s_usl_t_vspc_idl"
       uslCluster: "utarnsdpfess"
       system_area_type: "{{ YARN_QUEUE }}"
-      log_level: "ESSA"
       yarn_queue_init: "init"
 
   # PROM NEW
@@ -132,7 +129,6 @@ stands:
       USER_NAME: "u_arn6sdpfess_s_usl_t_vspc_idl"
       uslCluster: "arnsdpfess2"
       system_area_type: "arnsdpfess2_vspc"
-      log_level: "INFO"
       yarn_queue_init: "init"
       cert_enabled_flag: "true"
       archiveProfile_FakeCardCode: "ts_espd"

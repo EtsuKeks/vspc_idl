@@ -90,10 +90,6 @@ workflows:
             #name: secman.cert_owner_email
             name: secman_cert_owner_email
             prior_value: "{{ secman_cert_owner_email }}"
-        # for RT-FW logger
-        - param:
-            name: log_level
-            prior_value: "{{ log_level }}"
         # for RT-FW KAP.META
         - param:
             name: cert_enabled_flag
@@ -176,10 +172,6 @@ workflows:
             #name: secman.cert_owner_email
             name: secman_cert_owner_email
             prior_value: "{{ secman_cert_owner_email }}"
-        # for RT-FW logger
-        - param:
-            name: log_level
-            prior_value: "{{ log_level }}"
         # for RT-FW KAP.META
         - param:
             name: cert_enabled_flag
