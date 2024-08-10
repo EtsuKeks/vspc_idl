@@ -5,7 +5,7 @@
   "lineage": [
     {
       "providerProductAlias": "archive_rdm",
-      "providerDatasetCode": "ebx_rep_m_sfs_0002_sfsdivision",
+      "providerDatasetCode": "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision",
       "consumerDatasetCode": "usl_vspc_idl.div_.hub"
     }
   ],
@@ -1704,7 +1704,7 @@
       "alias": "archive_rdm",
       "tables": [
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_agrcorracctst_0001_agrcorracctstatus",
           "pk": [
@@ -1756,13 +1756,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_agrcorracctst_0001_agrcorracctstatus",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_agrcorracctst_0001_agrcorracctstatus",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_auctdepselt_0001_auctiondepositselt",
           "pk": [
@@ -1820,13 +1820,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_auctdepselt_0001_auctiondepositselt",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_auctdepselt_0001_auctiondepositselt",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_balasspotgot_0001_balanceassetspotgot",
           "pk": [
@@ -1884,13 +1884,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_balasspotgot_0001_balanceassetspotgot",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_balasspotgot_0001_balanceassetspotgot",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_bicdirswift_0002_bicdirectoryswift",
           "pk": [
@@ -2050,13 +2050,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_bicdirswift_0002_bicdirectoryswift",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_bicdirswift_0002_bicdirectoryswift",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_cashsymbol_0001_cashsymbol",
           "pk": [
@@ -2138,13 +2138,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_cashsymbol_0001_cashsymbol",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_cashsymbol_0001_cashsymbol",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_cbreportpaydir_0001_cbreportpaydirect",
           "pk": [
@@ -2196,13 +2196,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_cbreportpaydir_0001_cbreportpaydirect",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_cbreportpaydir_0001_cbreportpaydirect",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_cbreportprdsrt_0001_cbreportprodservtype",
           "pk": [
@@ -2268,13 +2268,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_cbreportprdsrt_0001_cbreportprodservtype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_cbreportprdsrt_0001_cbreportprodservtype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_cbrfsecurcode_0001_cbrfsecuritytype",
           "pk": [
@@ -2326,13 +2326,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_cbrfsecurcode_0001_cbrfsecuritytype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_cbrfsecurcode_0001_cbrfsecuritytype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_cbrprttrnsctcd_0001_cbreporttransactioncode",
           "pk": [
@@ -2397,13 +2397,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_cbrprttrnsctcd_0001_cbreporttransactioncode",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_cbrprttrnsctcd_0001_cbreporttransactioncode",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_clearingcur_0001_clearingcurrency",
           "pk": [
@@ -2485,13 +2485,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_clearingcur_0001_clearingcurrency",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_clearingcur_0001_clearingcurrency",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_clientfinpos_0001_clientfinancposition",
           "pk": [
@@ -2549,13 +2549,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_clientfinpos_0001_clientfinancposition",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_clientfinpos_0001_clientfinancposition",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_clprflmrkptype_0001_clientprofilemarkuptype",
           "pk": [
@@ -2619,13 +2619,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_clprflmrkptype_0001_clientprofilemarkuptype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_clprflmrkptype_0001_clientprofilemarkuptype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_clprflmrkptype_0001_clientprofilemarkuptypegroup",
           "pk": [
@@ -2677,13 +2677,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_clprflmrkptype_0001_clientprofilemarkuptypegroup",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_clprflmrkptype_0001_clientprofilemarkuptypegroup",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_clprfmarkstate_0001_clientprofilemarkupstate",
           "pk": [
@@ -2741,13 +2741,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_clprfmarkstate_0001_clientprofilemarkupstate",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_clprfmarkstate_0001_clientprofilemarkupstate",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_cncrdflflobvw_0001_cndtncredtdefltfallobligatnview",
           "pk": [
@@ -2799,13 +2799,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_cncrdflflobvw_0001_cndtncredtdefltfallobligatnview",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_cncrdflflobvw_0001_cndtncredtdefltfallobligatnview",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_cnliabcrnatpot_0001_cndtlbltscrdtntrpt",
           "pk": [
@@ -2814,13 +2814,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_cnliabcrnatpot_0001_cndtlbltscrdtntrpt",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_cnliabcrnatpot_0001_cndtlbltscrdtntrpt",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_cntdntrrcpidtp_0001_contrctdnttransactreciptidtype",
           "pk": [
@@ -2872,13 +2872,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_cntdntrrcpidtp_0001_contrctdnttransactreciptidtype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_cntdntrrcpidtp_0001_contrctdnttransactreciptidtype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_cntrctclsrsn_0001_contractclosereason",
           "pk": [
@@ -2960,13 +2960,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_cntrctclsrsn_0001_contractclosereason",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_cntrctclsrsn_0001_contractclosereason",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_coinprcsmet_0001_coinpreciousmetal",
           "pk": [
@@ -3018,13 +3018,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_coinprcsmet_0001_coinpreciousmetal",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_coinprcsmet_0001_coinpreciousmetal",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_coinprcsmetcl_0001_coinpreciousmetalclass",
           "pk": [
@@ -3142,13 +3142,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_coinprcsmetcl_0001_coinpreciousmetalclass",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_coinprcsmetcl_0001_coinpreciousmetalclass",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_coinprcsmetclm_0001_coinpreciousmetalclassmetal",
           "pk": [
@@ -3218,13 +3218,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_coinprcsmetclm_0001_coinpreciousmetalclassmetal",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_coinprcsmetclm_0001_coinpreciousmetalclassmetal",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_coinprcsmetclm_0001_preciousmetalalloycnt",
           "pk": [
@@ -3276,13 +3276,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_coinprcsmetclm_0001_preciousmetalalloycnt",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_coinprcsmetclm_0001_preciousmetalalloycnt",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_coinprcsmetcls_0001_coinpreciousmetalclassstatus",
           "pk": [
@@ -3334,13 +3334,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_coinprcsmetcls_0001_coinpreciousmetalclassstatus",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_coinprcsmetcls_0001_coinpreciousmetalclassstatus",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_coinprcsmetcog_0001_coinpreciousmetalcoinagguality",
           "pk": [
@@ -3392,13 +3392,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_coinprcsmetcog_0001_coinpreciousmetalcoinagguality",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_coinprcsmetcog_0001_coinpreciousmetalcoinagguality",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_collateral_0001_collateral",
           "pk": [
@@ -3480,13 +3480,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_collateral_0001_collateral",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_collateral_0001_collateral",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_colqualitcat_0001_collaterqualitycateg",
           "pk": [
@@ -3550,13 +3550,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_colqualitcat_0001_collaterqualitycateg",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_colqualitcat_0001_collaterqualitycateg",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_contactinftype_0001_contactinftype",
           "pk": [
@@ -3608,13 +3608,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_contactinftype_0001_contactinftype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_contactinftype_0001_contactinftype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_creditpurpose_0001_entitycreditpurpose",
           "pk": [
@@ -3678,13 +3678,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_creditpurpose_0001_entitycreditpurpose",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_creditpurpose_0001_entitycreditpurpose",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_creditrating_0001_creditrating",
           "pk": [
@@ -3754,13 +3754,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_creditrating_0001_creditrating",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_creditrating_0001_creditrating",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_crpclnbnkstspr_0001_crprtclntsbnksttspprtprgrm",
           "pk": [
@@ -3818,13 +3818,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_crpclnbnkstspr_0001_crprtclntsbnksttspprtprgrm",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_crpclnbnkstspr_0001_crprtclntsbnksttspprtprgrm",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_curcnopacctype_0001_currcontroperaccepttype",
           "pk": [
@@ -3876,13 +3876,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_curcnopacctype_0001_currcontroperaccepttype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_curcnopacctype_0001_currcontroperaccepttype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_curcontrdoc_0002_accountclienttype",
           "pk": [
@@ -3935,13 +3935,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_curcontrdoc_0002_accountclienttype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_curcontrdoc_0002_accountclienttype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_curcontrdoc_0002_clienttype",
           "pk": [
@@ -3993,13 +3993,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_curcontrdoc_0002_clienttype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_curcontrdoc_0002_clienttype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_curcontrdoc_0002_curcontrdocument",
           "pk": [
@@ -4051,13 +4051,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_curcontrdoc_0002_curcontrdocument",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_curcontrdoc_0002_curcontrdocument",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_curcontrdoc_0002_curcontrruleother",
           "pk": [
@@ -4128,13 +4128,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_curcontrdoc_0002_curcontrruleother",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_curcontrdoc_0002_curcontrruleother",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_curcontrdoc_0002_curcontrrulerus",
           "pk": [
@@ -4193,13 +4193,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_curcontrdoc_0002_curcontrrulerus",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_curcontrdoc_0002_curcontrrulerus",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_curcontrdoc_0002_documentrequired",
           "pk": [
@@ -4251,13 +4251,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_curcontrdoc_0002_documentrequired",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_curcontrdoc_0002_documentrequired",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_curcontrdoc_0002_hint",
           "pk": [
@@ -4309,13 +4309,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_curcontrdoc_0002_hint",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_curcontrdoc_0002_hint",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_curcontrdoc_0002_purposedocument",
           "pk": [
@@ -4404,13 +4404,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_curcontrdoc_0002_purposedocument",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_curcontrdoc_0002_purposedocument",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_curcontrdoc_0002_purposehint",
           "pk": [
@@ -4475,13 +4475,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_curcontrdoc_0002_purposehint",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_curcontrdoc_0002_purposehint",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_curcontrdoc_0002_purposereportform",
           "pk": [
@@ -4534,13 +4534,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_curcontrdoc_0002_purposereportform",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_curcontrdoc_0002_purposereportform",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_curcontrdoc_0002_reportform",
           "pk": [
@@ -4592,13 +4592,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_curcontrdoc_0002_reportform",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_curcontrdoc_0002_reportform",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_curcontrdoc_0002_transferpurpose",
           "pk": [
@@ -4692,13 +4692,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_curcontrdoc_0002_transferpurpose",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_curcontrdoc_0002_transferpurpose",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_curcontrdoc_0002_transferpurposegroup",
           "pk": [
@@ -4750,13 +4750,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_curcontrdoc_0002_transferpurposegroup",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_curcontrdoc_0002_transferpurposegroup",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_curcontrldirop_0001_crrnccntrlprtndrctn",
           "pk": [
@@ -4808,13 +4808,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_curcontrldirop_0001_crrnccntrlprtndrctn",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_curcontrldirop_0001_crrnccntrlprtndrctn",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_curctopcntrdir_0001_curctrlopercontractdir",
           "pk": [
@@ -4866,13 +4866,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_curctopcntrdir_0001_curctrlopercontractdir",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_curctopcntrdir_0001_curctrlopercontractdir",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_curctopcragdir_0001_curctrlopercredagrdir",
           "pk": [
@@ -4924,13 +4924,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_curctopcragdir_0001_curctrlopercredagrdir",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_curctopcragdir_0001_curctrlopercredagrdir",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_curctrcnfdoctp_0001_curctrlconfirmdoctype",
           "pk": [
@@ -5006,13 +5006,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_curctrcnfdoctp_0001_curctrlconfirmdoctype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_curctrcnfdoctp_0001_curctrlconfirmdoctype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_currtranstype_0002_currencytransactiontype",
           "pk": [
@@ -5094,13 +5094,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_currtranstype_0002_currencytransactiontype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_currtranstype_0002_currencytransactiontype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_dbaltlopexprd_0001_dballoctooloperexecperiod",
           "pk": [
@@ -5170,13 +5170,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_dbaltlopexprd_0001_dballoctooloperexecperiod",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_dbaltlopexprd_0001_dballoctooloperexecperiod",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_dbpagroprgcndt_0001_dbplcmntagroperrglrtycondtype",
           "pk": [
@@ -5234,13 +5234,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_dbpagroprgcndt_0001_dbplcmntagroperrglrtycondtype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_dbpagroprgcndt_0001_dbplcmntagroperrglrtycondtype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_dbpinsagrform_0001_dbplcmntinstragrform",
           "pk": [
@@ -5298,13 +5298,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_dbpinsagrform_0001_dbplcmntinstragrform",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_dbpinsagrform_0001_dbplcmntinstragrform",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_dbpinsagrsgchn_0001_dbplcmntinstragrsignchannel",
           "pk": [
@@ -5362,13 +5362,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_dbpinsagrsgchn_0001_dbplcmntinstragrsignchannel",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_dbpinsagrsgchn_0001_dbplcmntinstragrsignchannel",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_dbpinsencmbrtp_0001_dbplcmntinstrencumbrancetype",
           "pk": [
@@ -5426,13 +5426,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_dbpinsencmbrtp_0001_dbplcmntinstrencumbrancetype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_dbpinsencmbrtp_0001_dbplcmntinstrencumbrancetype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_dbpinsrtapplop_0001_dbplcmntnstrrtpplctnptn",
           "pk": [
@@ -5490,13 +5490,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_dbpinsrtapplop_0001_dbplcmntnstrrtpplctnptn",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_dbpinsrtapplop_0001_dbplcmntnstrrtpplctnptn",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_dbpinsrtclcmt_0001_dbplcmntinstrratecalcmethod",
           "pk": [
@@ -5554,13 +5554,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_dbpinsrtclcmt_0001_dbplcmntinstrratecalcmethod",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_dbpinsrtclcmt_0001_dbplcmntinstrratecalcmethod",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_dbpinsrtclmtop_0001_dbplcmntinstrratecalcmathoper",
           "pk": [
@@ -5618,13 +5618,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_dbpinsrtclmtop_0001_dbplcmntinstrratecalcmathoper",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_dbpinsrtclmtop_0001_dbplcmntinstrratecalcmathoper",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_dbpinsrtcmptp_0001_dbplcmntinstrratecomponenttype",
           "pk": [
@@ -5682,13 +5682,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_dbpinsrtcmptp_0001_dbplcmntinstrratecomponenttype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_dbpinsrtcmptp_0001_dbplcmntinstrratecomponenttype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_dbpinsrtdffprm_0001_dbplcmntinstrratediffparam",
           "pk": [
@@ -5746,13 +5746,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_dbpinsrtdffprm_0001_dbplcmntinstrratediffparam",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_dbpinsrtdffprm_0001_dbplcmntinstrratediffparam",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_dbpinsrtexpfrm_0001_dbplcmntnstrrtxprssnfrm",
           "pk": [
@@ -5810,13 +5810,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_dbpinsrtexpfrm_0001_dbplcmntnstrrtxprssnfrm",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_dbpinsrtexpfrm_0001_dbplcmntnstrrtxprssnfrm",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_dbpinstrtrevmd_0001_dbplcmntinstrratereviewmode",
           "pk": [
@@ -5874,13 +5874,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_dbpinstrtrevmd_0001_dbplcmntinstrratereviewmode",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_dbpinstrtrevmd_0001_dbplcmntinstrratereviewmode",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_dbplcmagbsoptp_0001_dbplcmntagrbsnsoptntype",
           "pk": [
@@ -5938,13 +5938,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_dbplcmagbsoptp_0001_dbplcmntagrbsnsoptntype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_dbplcmagbsoptp_0001_dbplcmntagrbsnsoptntype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_dctrnscntprtrl_0001_dctrnscntrctprtcpntrl",
           "pk": [
@@ -5996,13 +5996,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_dctrnscntprtrl_0001_dctrnscntrctprtcpntrl",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_dctrnscntprtrl_0001_dctrnscntrctprtcpntrl",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_dloptexctstl_0001_dealoptionexecutionstyle",
           "pk": [
@@ -6054,13 +6054,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_dloptexctstl_0001_dealoptionexecutionstyle",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_dloptexctstl_0001_dealoptionexecutionstyle",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_eatypeproducts_0002_cnmcctvtprdctlstsctn",
           "pk": [
@@ -6118,13 +6118,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_eatypeproducts_0002_cnmcctvtprdctlstsctn",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_eatypeproducts_0002_cnmcctvtprdctlstsctn",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_eatypeproducts_0002_economicactivityproduct",
           "pk": [
@@ -6212,13 +6212,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_eatypeproducts_0002_economicactivityproduct",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_eatypeproducts_0002_economicactivityproduct",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_eatypeproducts_0002_lastmodifiedtype",
           "pk": [
@@ -6270,13 +6270,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_eatypeproducts_0002_lastmodifiedtype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_eatypeproducts_0002_lastmodifiedtype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_education_0001_leveleducation",
           "pk": [
@@ -6334,13 +6334,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_education_0001_leveleducation",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_education_0001_leveleducation",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_efssrvimpslchn_0001_efsservimplementedsaleschannel",
           "pk": [
@@ -6398,13 +6398,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_efssrvimpslchn_0001_efsservimplementedsaleschannel",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_efssrvimpslchn_0001_efsservimplementedsaleschannel",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_epkclprfedlvl_0001_epkclientprofileeducationlevel",
           "pk": [
@@ -6462,13 +6462,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_epkclprfedlvl_0001_epkclientprofileeducationlevel",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_epkclprfedlvl_0001_epkclientprofileeducationlevel",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_epkiicntmrkflg_0001_epkindvinfocontactmarkflag",
           "pk": [
@@ -6532,13 +6532,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_epkiicntmrkflg_0001_epkindvinfocontactmarkflag",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_epkiicntmrkflg_0001_epkindvinfocontactmarkflag",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_epkiicntmrkflg_0001_pkndvnfcntctflgmrkgrp",
           "pk": [
@@ -6596,13 +6596,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_epkiicntmrkflg_0001_pkndvnfcntctflgmrkgrp",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_epkiicntmrkflg_0001_pkndvnfcntctflgmrkgrp",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_epkrfsubject_0001_epkrfsubject",
           "pk": [
@@ -6684,13 +6684,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_epkrfsubject_0001_epkrfsubject",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_epkrfsubject_0001_epkrfsubject",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_epkrfsubject_0001_epkrfsubjectnorfconstitution",
           "pk": [
@@ -6748,13 +6748,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_epkrfsubject_0001_epkrfsubjectnorfconstitution",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_epkrfsubject_0001_epkrfsubjectnorfconstitution",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_epkwrldcountry_0001_epkworldcountry",
           "pk": [
@@ -6830,13 +6830,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_epkwrldcountry_0001_epkworldcountry",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_epkwrldcountry_0001_epkworldcountry",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_epkwrldcountry_0001_epkworldcountrynooksm",
           "pk": [
@@ -6900,13 +6900,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_epkwrldcountry_0001_epkworldcountrynooksm",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_epkwrldcountry_0001_epkworldcountrynooksm",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_evntcrdtdfltvw_0001_eventcreditdefaultview",
           "pk": [
@@ -6958,13 +6958,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_evntcrdtdfltvw_0001_eventcreditdefaultview",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_evntcrdtdfltvw_0001_eventcreditdefaultview",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_fairvalfiniaot_0001_fairvalfininacoptype",
           "pk": [
@@ -7022,13 +7022,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_fairvalfiniaot_0001_fairvalfininacoptype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_fairvalfiniaot_0001_fairvalfininacoptype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_famrelkind_0001_familyrelationkind",
           "pk": [
@@ -7080,13 +7080,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_famrelkind_0001_familyrelationkind",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_famrelkind_0001_familyrelationkind",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_fastpaysysp_0002_fastpayparticipantv2",
           "pk": [
@@ -7162,13 +7162,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_fastpaysysp_0002_fastpayparticipantv2",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_fastpaysysp_0002_fastpayparticipantv2",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_fastpaysysp_0002_participantrole",
           "pk": [
@@ -7233,13 +7233,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_fastpaysysp_0002_participantrole",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_fastpaysysp_0002_participantrole",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_fiascitytype_0001_fiascitytype",
           "pk": [
@@ -7303,13 +7303,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_fiascitytype_0001_fiascitytype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_fiascitytype_0001_fiascitytype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_fiasdistrttype_0001_fiasdistricttype",
           "pk": [
@@ -7373,13 +7373,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_fiasdistrttype_0001_fiasdistricttype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_fiasdistrttype_0001_fiasdistricttype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_fiaslocatntype_0001_fiaslocationtype",
           "pk": [
@@ -7443,13 +7443,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_fiaslocatntype_0001_fiaslocationtype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_fiaslocatntype_0001_fiaslocationtype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_fiasregiontype_0001_fiasregiontype",
           "pk": [
@@ -7513,13 +7513,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_fiasregiontype_0001_fiasregiontype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_fiasregiontype_0001_fiasregiontype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_fiasstreettype_0001_fiasstreettype",
           "pk": [
@@ -7583,13 +7583,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_fiasstreettype_0001_fiasstreettype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_fiasstreettype_0001_fiasstreettype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_finassetbusmt_0001_finassetbusmodeltype",
           "pk": [
@@ -7647,13 +7647,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_finassetbusmt_0001_finassetbusmodeltype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_finassetbusmt_0001_finassetbusmodeltype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_finasspptestrt_0001_finassppitestrestype",
           "pk": [
@@ -7711,13 +7711,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_finasspptestrt_0001_finassppitestrestype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_finasspptestrt_0001_finassppitestrestype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_finimarktestrt_0001_fininmarktestrestype",
           "pk": [
@@ -7775,13 +7775,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_finimarktestrt_0001_fininmarktestrestype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_finimarktestrt_0001_fininmarktestrestype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_fininmrrtcldtt_0001_fininmarratcaldttype",
           "pk": [
@@ -7839,13 +7839,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_fininmrrtcldtt_0001_fininmarratcaldttype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_fininmrrtcldtt_0001_fininmarratcaldttype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_fininstrmdiftp_0001_fininstrmodiftype",
           "pk": [
@@ -7903,13 +7903,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_fininstrmdiftp_0001_fininstrmodiftype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_fininstrmdiftp_0001_fininstrmodiftype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_fininstsubamt_0001_fininstsubaccmodtype",
           "pk": [
@@ -7967,13 +7967,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_fininstsubamt_0001_fininstsubaccmodtype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_fininstsubamt_0001_fininstsubaccmodtype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_gender_0001_gender",
           "pk": [
@@ -8031,13 +8031,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_gender_0001_gender",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_gender_0001_gender",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_glbmrkttrdlnkr_0001_globalmarketstradeslinkrole",
           "pk": [
@@ -8095,13 +8095,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_glbmrkttrdlnkr_0001_globalmarketstradeslinkrole",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_glbmrkttrdlnkr_0001_globalmarketstradeslinkrole",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_glmrktrdtrnsst_0001_glbmrktstrdtrnsctnstts",
           "pk": [
@@ -8153,13 +8153,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_glmrktrdtrnsst_0001_glbmrktstrdtrnsctnstts",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_glmrktrdtrnsst_0001_glbmrktstrdtrnsctnstts",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_homlnssubprtfl_0001_homogeneousloansportfolio",
           "pk": [
@@ -8217,13 +8217,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_homlnssubprtfl_0001_homogeneousloansportfolio",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_homlnssubprtfl_0001_homogeneousloansportfolio",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_homlnssubprtfl_0001_homogeneousloanssubportfolio",
           "pk": [
@@ -8293,13 +8293,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_homlnssubprtfl_0001_homogeneousloanssubportfolio",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_homlnssubprtfl_0001_homogeneousloanssubportfolio",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_ibanstructure_0001_ibanstructure",
           "pk": [
@@ -8471,13 +8471,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_ibanstructure_0001_ibanstructure",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_ibanstructure_0001_ibanstructure",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_indcbcntrstchr_0001_indvdcardbankcntrctsttschngrsn",
           "pk": [
@@ -8535,13 +8535,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_indcbcntrstchr_0001_indvdcardbankcntrctsttschngrsn",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_indcbcntrstchr_0001_indvdcardbankcntrctsttschngrsn",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_indcontinfoust_0001_ndvdlcntctnfrmtnsgtp",
           "pk": [
@@ -8605,13 +8605,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_indcontinfoust_0001_ndvdlcntctnfrmtnsgtp",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_indcontinfoust_0001_ndvdlcntctnfrmtnsgtp",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_indcrbcnstcrsc_0001_ndvdcrdbnkcntrstschngrsnstscnt",
           "pk": [
@@ -8664,13 +8664,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_indcrbcnstcrsc_0001_ndvdcrdbnkcntrstschngrsnstscnt",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_indcrbcnstcrsc_0001_ndvdcrdbnkcntrstschngrsnstscnt",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_indcrbcntrctst_0001_indvdcardbankcontractstatus",
           "pk": [
@@ -8722,13 +8722,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_indcrbcntrctst_0001_indvdcardbankcontractstatus",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_indcrbcntrctst_0001_indvdcardbankcontractstatus",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_indpaycshclidt_0001_indpaycashclientidenttype",
           "pk": [
@@ -8780,13 +8780,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_indpaycshclidt_0001_indpaycashclientidenttype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_indpaycshclidt_0001_indpaycashclientidenttype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_indtrnsordt_0001_indtransferordertype",
           "pk": [
@@ -8838,13 +8838,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_indtrnsordt_0001_indtransferordertype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_indtrnsordt_0001_indtransferordertype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_indtrnspayords_0001_indtransferpayorderstatus",
           "pk": [
@@ -8902,13 +8902,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_indtrnspayords_0001_indtransferpayorderstatus",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_indtrnspayords_0001_indtransferpayorderstatus",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_indtrornspkprs_0001_indtrnsfrordernspkprccssstatus",
           "pk": [
@@ -8960,13 +8960,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_indtrornspkprs_0001_indtrnsfrordernspkprccssstatus",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_indtrornspkprs_0001_indtrnsfrordernspkprccssstatus",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_isdadaycount_0001_isdadaycount",
           "pk": [
@@ -9018,13 +9018,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_isdadaycount_0001_isdadaycount",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_isdadaycount_0001_isdadaycount",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_landcategory_0001_landcategory",
           "pk": [
@@ -9082,13 +9082,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_landcategory_0001_landcategory",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_landcategory_0001_landcategory",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_lcqualcategory_0001_loanorclaimqualitycategory",
           "pk": [
@@ -9146,13 +9146,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_lcqualcategory_0001_loanorclaimqualitycategory",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_lcqualcategory_0001_loanorclaimqualitycategory",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_ltcrdcntrcttp_0001_lettercreditcontracttype",
           "pk": [
@@ -9204,13 +9204,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_ltcrdcntrcttp_0001_lettercreditcontracttype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_ltcrdcntrcttp_0001_lettercreditcontracttype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_ltcrdcvrgsrctp_0001_lettercreditcoveragesourcetype",
           "pk": [
@@ -9262,13 +9262,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_ltcrdcvrgsrctp_0001_lettercreditcoveragesourcetype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_ltcrdcvrgsrctp_0001_lettercreditcoveragesourcetype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_maritalstatus_0001_maritalstatus",
           "pk": [
@@ -9326,13 +9326,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_maritalstatus_0001_maritalstatus",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_maritalstatus_0001_maritalstatus",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_nettingliqdetp_0001_lqdtnnttngdlntrknd",
           "pk": [
@@ -9390,13 +9390,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_nettingliqdetp_0001_lqdtnnttngdlntrknd",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_nettingliqdetp_0001_lqdtnnttngdlntrknd",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_offshorstatter_0001_financeministryorder",
           "pk": [
@@ -9466,13 +9466,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_offshorstatter_0001_financeministryorder",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_offshorstatter_0001_financeministryorder",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_offshorstatter_0001_offshorestateter",
           "pk": [
@@ -9560,13 +9560,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_offshorstatter_0001_offshorestateter",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_offshorstatter_0001_offshorestateter",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_offshorstatter_0001_offshorestateterpart",
           "pk": [
@@ -9648,13 +9648,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_offshorstatter_0001_offshorestateterpart",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_offshorstatter_0001_offshorestateterpart",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_okato_0001_admterdivobject",
           "pk": [
@@ -9778,13 +9778,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_okato_0001_admterdivobject",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_okato_0001_admterdivobject",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_okato_0001_okatochangetype",
           "pk": [
@@ -9836,13 +9836,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_okato_0001_okatochangetype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_okato_0001_okatochangetype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_okb_0001_okvcurrency",
           "pk": [
@@ -9948,13 +9948,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_okb_0001_okvcurrency",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_okb_0001_okvcurrency",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_okei_0002_measureunit",
           "pk": [
@@ -10090,13 +10090,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_okei_0002_measureunit",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_okei_0002_measureunit",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_okei_0002_measureunitgroup",
           "pk": [
@@ -10148,13 +10148,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_okei_0002_measureunitgroup",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_okei_0002_measureunitgroup",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_okei_0002_okeichangetype",
           "pk": [
@@ -10206,13 +10206,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_okei_0002_okeichangetype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_okei_0002_okeichangetype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_okei_0002_okeisection",
           "pk": [
@@ -10264,13 +10264,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_okei_0002_okeisection",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_okei_0002_okeisection",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_okfs_0001_okfschangetype",
           "pk": [
@@ -10322,13 +10322,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_okfs_0001_okfschangetype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_okfs_0001_okfschangetype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_okfs_0001_ownershipform",
           "pk": [
@@ -10416,13 +10416,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_okfs_0001_ownershipform",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_okfs_0001_ownershipform",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_okof_0001_fixedasset",
           "pk": [
@@ -10516,13 +10516,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_okof_0001_fixedasset",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_okof_0001_fixedasset",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_okof_0001_okofchangetype",
           "pk": [
@@ -10574,13 +10574,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_okof_0001_okofchangetype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_okof_0001_okofchangetype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_okogu_0001_okoguchangetype",
           "pk": [
@@ -10632,13 +10632,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_okogu_0001_okoguchangetype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_okogu_0001_okoguchangetype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_okogu_0001_publicauthority",
           "pk": [
@@ -10738,13 +10738,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_okogu_0001_publicauthority",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_okogu_0001_publicauthority",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_okopf_0001_okopfchangetype",
           "pk": [
@@ -10796,13 +10796,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_okopf_0001_okopfchangetype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_okopf_0001_okopfchangetype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_okopf_0001_orglegalform",
           "pk": [
@@ -10896,13 +10896,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_okopf_0001_orglegalform",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_okopf_0001_orglegalform",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_oksm_0001_country",
           "pk": [
@@ -10972,13 +10972,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_oksm_0001_country",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_oksm_0001_country",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_oksm_0002_oksmcountry",
           "pk": [
@@ -11078,13 +11078,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_oksm_0002_oksmcountry",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_oksm_0002_oksmcountry",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_oksm_0002_oksmcountrylastmodifiedtype",
           "pk": [
@@ -11136,13 +11136,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_oksm_0002_oksmcountrylastmodifiedtype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_oksm_0002_oksmcountrylastmodifiedtype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_oktmo_0001_municipalobject",
           "pk": [
@@ -11272,13 +11272,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_oktmo_0001_municipalobject",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_oktmo_0001_municipalobject",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_oktmo_0001_oktmochangetype",
           "pk": [
@@ -11330,13 +11330,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_oktmo_0001_oktmochangetype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_oktmo_0001_oktmochangetype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_okved_0002_economicactivitytype",
           "pk": [
@@ -11436,13 +11436,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_okved_0002_economicactivitytype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_okved_0002_economicactivitytype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_okved_0002_okvedchangetype",
           "pk": [
@@ -11494,13 +11494,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_okved_0002_okvedchangetype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_okved_0002_okvedchangetype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_okved_0002_okvedsection",
           "pk": [
@@ -11558,13 +11558,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_okved_0002_okvedsection",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_okved_0002_okvedsection",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_optintratetype_0001_optioninterestratetype",
           "pk": [
@@ -11622,13 +11622,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_optintratetype_0001_optioninterestratetype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_optintratetype_0001_optioninterestratetype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_orgjurisd_0001_orgjurisd",
           "pk": [
@@ -11704,13 +11704,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_orgjurisd_0001_orgjurisd",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_orgjurisd_0001_orgjurisd",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_paydocauthstat_0001_paydocauthorstatus",
           "pk": [
@@ -11792,13 +11792,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_paydocauthstat_0001_paydocauthorstatus",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_paydocauthstat_0001_paydocauthorstatus",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_paymentdirect_0001_paymentdirection",
           "pk": [
@@ -11856,13 +11856,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_paymentdirect_0001_paymentdirection",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_paymentdirect_0001_paymentdirection",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_paymentdockind_0001_paymentdocumentkind",
           "pk": [
@@ -11938,13 +11938,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_paymentdockind_0001_paymentdocumentkind",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_paymentdockind_0001_paymentdocumentkind",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_paymentdockind_0001_paymentdocumentshifr",
           "pk": [
@@ -11996,13 +11996,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_paymentdockind_0001_paymentdocumentshifr",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_paymentdockind_0001_paymentdocumentshifr",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_productioncrd_0001_russianpcdate",
           "pk": [
@@ -12054,13 +12054,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_productioncrd_0001_russianpcdate",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_productioncrd_0001_russianpcdate",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_productioncrd_0001_russianpcdaytype",
           "pk": [
@@ -12112,13 +12112,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_productioncrd_0001_russianpcdaytype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_productioncrd_0001_russianpcdaytype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_pruspaysysbank_0002_partaccount",
           "pk": [
@@ -12207,13 +12207,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_pruspaysysbank_0002_partaccount",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_pruspaysysbank_0002_partaccount",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_pruspaysysbank_0002_partacctransrest",
           "pk": [
@@ -12279,13 +12279,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_pruspaysysbank_0002_partacctransrest",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_pruspaysysbank_0002_partacctransrest",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_pruspaysysbank_0002_partrestriction",
           "pk": [
@@ -12344,13 +12344,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_pruspaysysbank_0002_partrestriction",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_pruspaysysbank_0002_partrestriction",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_pruspaysysbank_0002_partruspaysys",
           "pk": [
@@ -12498,13 +12498,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_pruspaysysbank_0002_partruspaysys",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_pruspaysysbank_0002_partruspaysys",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_pruspaysysbank_0002_partswiftbic",
           "pk": [
@@ -12563,13 +12563,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_pruspaysysbank_0002_partswiftbic",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_pruspaysysbank_0002_partswiftbic",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_qualitydebts_0001_debtservicingquality",
           "pk": [
@@ -12627,13 +12627,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_qualitydebts_0001_debtservicingquality",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_qualitydebts_0001_debtservicingquality",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_relborgrpmemst_0001_relatborrowgrpmemsts",
           "pk": [
@@ -12691,13 +12691,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_relborgrpmemst_0001_relatborrowgrpmemsts",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_relborgrpmemst_0001_relatborrowgrpmemsts",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_relborgrpst_0001_relatborrowgrpstatus",
           "pk": [
@@ -12755,13 +12755,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_relborgrpst_0001_relatborrowgrpstatus",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_relborgrpst_0001_relatborrowgrpstatus",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_relborgrtype_0001_relatborrowgrouptype",
           "pk": [
@@ -12819,13 +12819,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_relborgrtype_0001_relatborrowgrouptype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_relborgrtype_0001_relatborrowgrouptype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_repotype_0001_repotype",
           "pk": [
@@ -12883,13 +12883,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_repotype_0001_repotype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_repotype_0001_repotype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_rfsubcodefts_0001_rusfedsubjcodefts",
           "pk": [
@@ -12941,13 +12941,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_rfsubcodefts_0001_rusfedsubjcodefts",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_rfsubcodefts_0001_rusfedsubjcodefts",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_ruscustomsss_0001_ruscustomsubdivision",
           "pk": [
@@ -13120,13 +13120,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_ruscustomsss_0001_ruscustomsubdivision",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_ruscustomsss_0001_ruscustomsubdivision",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_sbcntcomcriter_0002_sbcountrelcriter",
           "pk": [
@@ -13220,13 +13220,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_sbcntcomcriter_0002_sbcountrelcriter",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_sbcntcomcriter_0002_sbcountrelcriter",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_sberclcerttype_0001_sberclcerttype",
           "pk": [
@@ -13362,13 +13362,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_sberclcerttype_0001_sberclcerttype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_sberclcerttype_0001_sberclcerttype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_sberclcerttype_0001_sberclcerttypecateg",
           "pk": [
@@ -13426,13 +13426,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_sberclcerttype_0001_sberclcerttypecateg",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_sberclcerttype_0001_sberclcerttypecateg",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_sberclcerttype_0001_sberclcerttypevalper",
           "pk": [
@@ -13490,13 +13490,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_sberclcerttype_0001_sberclcerttypevalper",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_sberclcerttype_0001_sberclcerttypevalper",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_sbpntreptrmcls_0001_sberprmsrntrepmnttermclause",
           "pk": [
@@ -13554,13 +13554,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_sbpntreptrmcls_0001_sberprmsrntrepmnttermclause",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_sbpntreptrmcls_0001_sberprmsrntrepmnttermclause",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_sbprntrpmcurcl_0001_sbrprmsrntrpmntcrrnccls",
           "pk": [
@@ -13618,13 +13618,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_sbprntrpmcurcl_0001_sbrprmsrntrpmntcrrnccls",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_sbprntrpmcurcl_0001_sbrprmsrntrpmntcrrnccls",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_secregistrar_0002_securitiesregistrar",
           "pk": [
@@ -13718,13 +13718,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_secregistrar_0002_securitiesregistrar",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_secregistrar_0002_securitiesregistrar",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_sfs_0002_sfsdivision",
           "pk": [
@@ -14364,13 +14364,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_sfs_0002_sfsdivision",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_slfsrvdvctype_0001_self_service_device_type",
           "pk": [
@@ -14422,13 +14422,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_slfsrvdvctype_0001_self_service_device_type",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_slfsrvdvctype_0001_self_service_device_type",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_soun_0001_addtaxsubdiv",
           "pk": [
@@ -14524,13 +14524,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_soun_0001_addtaxsubdiv",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_soun_0001_addtaxsubdiv",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_soun_0001_taxsubdivision",
           "pk": [
@@ -14715,13 +14715,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_soun_0001_taxsubdivision",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_soun_0001_taxsubdivision",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_soun_0001_taxsubdivtype",
           "pk": [
@@ -14773,13 +14773,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_soun_0001_taxsubdivtype",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_soun_0001_taxsubdivtype",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_stdimprloansgr_0001_standardorimpairedloansgroup",
           "pk": [
@@ -14831,13 +14831,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_stdimprloansgr_0001_standardorimpairedloansgroup",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_stdimprloansgr_0001_standardorimpairedloansgroup",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_strategentity_0002_listsection",
           "pk": [
@@ -14895,13 +14895,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_strategentity_0002_listsection",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_strategentity_0002_listsection",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_strategentity_0002_strategicentity",
           "pk": [
@@ -15002,13 +15002,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_strategentity_0002_strategicentity",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_strategentity_0002_strategicentity",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_swiftcountry_0001_swiftcountry",
           "pk": [
@@ -15066,13 +15066,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_swiftcountry_0001_swiftcountry",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_swiftcountry_0001_swiftcountry",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_taxpayerregr_0001_taxpayregreas",
           "pk": [
@@ -15124,13 +15124,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_taxpayerregr_0001_taxpayregreas",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_taxpayerregr_0001_taxpayregreas",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_taxperiod_0001_taxperiod",
           "pk": [
@@ -15182,13 +15182,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_taxperiod_0001_taxperiod",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_taxperiod_0001_taxperiod",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_tradeexemethod_0001_tradeexecutionmethod",
           "pk": [
@@ -15246,13 +15246,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_tradeexemethod_0001_tradeexecutionmethod",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_tradeexemethod_0001_tradeexecutionmethod",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_workprofession_0001_officerposition",
           "pk": [
@@ -15328,13 +15328,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_workprofession_0001_officerposition",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_workprofession_0001_officerposition",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_workprofession_0001_workerprofession",
           "pk": [
@@ -15410,13 +15410,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_workprofession_0001_workerprofession",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_workprofession_0001_workerprofession",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_m_wrldcntassinsr_0001_worldcountryassessmntinsrance",
           "pk": [
@@ -15475,13 +15475,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_m_wrldcntassinsr_0001_worldcountryassessmntinsrance",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_m_wrldcntassinsr_0001_worldcountryassessmntinsrance",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_n_e_regtype_dp_0002_registercode_dpcode_2",
           "pk": [
@@ -15587,13 +15587,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_n_e_regtype_dp_0002_registercode_dpcode_2",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_n_e_regtype_dp_0002_registercode_dpcode_2",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_n_xeks0001_0001_xeks_0001",
           "pk": [
@@ -15646,13 +15646,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_n_xeks0001_0001_xeks_0001",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_n_xeks0001_0001_xeks_0001",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_n_xeks0002_0001_xeks_0002",
           "pk": [
@@ -15722,13 +15722,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_n_xeks0002_0001_xeks_0002",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_n_xeks0002_0001_xeks_0002",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_x_cbcntrstchrprb_0001_agr_card_ind_status_xref_p_tcp",
           "pk": [
@@ -15814,13 +15814,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_x_cbcntrstchrprb_0001_agr_card_ind_status_xref_p_tcp",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_x_cbcntrstchrprb_0001_agr_card_ind_status_xref_p_tcp",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_x_cbcntrstchrprb_0001_origprb",
           "pk": [
@@ -15872,13 +15872,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_x_cbcntrstchrprb_0001_origprb",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_x_cbcntrstchrprb_0001_origprb",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_x_cbcntrstchrway_0001_agr_card_ind_status_xref_way",
           "pk": [
@@ -15964,13 +15964,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_x_cbcntrstchrway_0001_agr_card_ind_status_xref_way",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_x_cbcntrstchrway_0001_agr_card_ind_status_xref_way",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_x_cbcntrstchrway_0001_origway",
           "pk": [
@@ -16022,13 +16022,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_x_cbcntrstchrway_0001_origway",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_x_cbcntrstchrway_0001_origway",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_x_indcbstsprb_0001_agr_card_ind_sts_xref_p_tcp",
           "pk": [
@@ -16114,13 +16114,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_x_indcbstsprb_0001_agr_card_ind_sts_xref_p_tcp",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_x_indcbstsprb_0001_agr_card_ind_sts_xref_p_tcp",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_x_indcbstsprb_0001_origprb",
           "pk": [
@@ -16172,13 +16172,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_x_indcbstsprb_0001_origprb",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_x_indcbstsprb_0001_origprb",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_x_indcbstsway_0001_agr_card_ind_sts_xref_way4",
           "pk": [
@@ -16223,13 +16223,13 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_x_indcbstsway_0001_agr_card_ind_sts_xref_way4",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_x_indcbstsway_0001_agr_card_ind_sts_xref_way4",
               "filter": ""
             }
           ]
         },
         {
-          "databaseCode": "usl_{{short_product_code}}_in",
+          "databaseCode": "usl_vspc_idl_in",
           "manFlag": false,
           "tableCode": "ebx_rep_x_indcbstsway_0001_origway",
           "pk": [
@@ -16281,7 +16281,7 @@
           ],
           "datasets": [
             {
-              "datasetCode": "usl_{{short_product_code}}_in.ebx_rep_x_indcbstsway_0001_origway",
+              "datasetCode": "usl_vspc_idl_in.ebx_rep_x_indcbstsway_0001_origway",
               "filter": ""
             }
           ]
