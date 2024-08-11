@@ -6,7 +6,7 @@
     {
       "providerProductAlias": "archive_rdm",
       "providerDatasetCode": "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision",
-      "consumerDatasetCode": "usl_vspc_idl.div_.hub"
+      "consumerDatasetCode": "usl_vspc_idl.div.hub"
     }
   ],
   "archiveProviderEntities": [
