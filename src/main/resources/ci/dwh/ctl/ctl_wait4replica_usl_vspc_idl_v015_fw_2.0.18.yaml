@@ -56,7 +56,7 @@ workflows:
         - param:
             # Список мнемокодов наборов данных, которые требуется обновить data-продукту при следующем запуске
             name: data_sets
-            prior_value: "usl_vspc_idl.div_.hub"
+            prior_value: "usl_vspc_idl.div.hub"
         - param:
             # Число одновременно запускаемых нитей исполнения в коде data-продукта
             name: parallel_threads
@@ -138,7 +138,7 @@ workflows:
         - param:
             # Список мнемокодов наборов данных, которые требуется обновить data-продукту при следующем запуске
             name: data_sets
-            prior_value: "usl_vspc_idl.div_.hub"
+            prior_value: "usl_vspc_idl.div.hub"
         - param:
             # Число одновременно запускаемых нитей исполнения в коде data-продукта
             name: parallel_threads

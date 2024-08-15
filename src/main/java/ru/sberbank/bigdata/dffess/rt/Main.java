@@ -85,7 +85,7 @@ public class Main {
 
         //  Создаётся трансформация, которая в результате своей работы публикует набор данных:
         //  'usl_vspc_idl.div.hub' (должен быть указан в файле metadata.json)
-        Transformation div = new DivTransformation(app, "usl_vspc_idl.div_.hub");
+        Transformation div = new DivTransformation(app, "usl_vspc_idl.div.hub");
         if (context.getLoadMode() == INCREMENT) {
             //srcMap.put(z_ft_money_delta, new SourceTableTransformation(app, EBX_REP_M_SFS_0002_SFSDIVISION, INCREMENT, INTERNAL_VSPC_IDL, KAP802_STORK));
             //srcMap.put(as_addr_obj_delta, new SourceTableTransformation(app, EBX_REP_M_SFS_0002_SFSDIVISION, INCREMENT, INTERNAL_VSPC_IDL, KAP802_XSTREAM));
