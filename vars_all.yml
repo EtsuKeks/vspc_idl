@@ -49,6 +49,9 @@ vars: &commonVars
   archiveProfile_FakeCardCode: "Default"
   short_product_code: "vspc_idl"
 
+  calc_logs_depth_days: ""
+  sk_greenfield: ""
+
 stands:
   # DEV
   - stand_inventory: sdpdevfess
