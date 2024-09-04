@@ -6,7 +6,7 @@ dm_builder_jar_local=${7}
 user_keytab_path=${4}
 user_keytab_path_local=tmp.keytab
 loading_id=${1}
-ctl=${3}
+ctl=${8}
 
 umask 022
 export HADOOP_CONF_DIR=/etc/hadoop/conf

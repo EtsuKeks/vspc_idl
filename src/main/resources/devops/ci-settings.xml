@@ -5,46 +5,11 @@
 
 	<servers>
 		<server>
-			<id>client4d_snapshot</id>
-			<username>${user}</username>
-			<password>${password}</password>
-		</server>
-		<server>
-			<id>client4d</id>
-			<username>${user}</username>
-			<password>${password}</password>
-		</server>
-		<server>
-			<id>Atlassian_proxy</id>
-			<username>${user}</username>
-			<password>${password}</password>
-		</server>
-		<server>
-			<id>Bigdata_release</id>
-			<username>${user}</username>
-			<password>${password}</password>
-		</server>
-		<server>
-			<id>Bigdata_snapshot</id>
-			<username>${user}</username>
-			<password>${password}</password>
-		</server>
-		<server>
-			<id>Corp_snapshot</id>
-			<username>${user}</username>
-			<password>${password}</password>
-		</server>
-		<server>
 			<id>central</id>
-			<username>${user}</username>
+			<username>${user.nexus3}</username>
 			<password>${password}</password>
 		</server>
-		<server>
-			<id>bigdata.nexus.alpha.sbrf.ru</id>
-			<username>${user}</username>
-			<password>${password}</password>
-		</server>
-		<!-- Begin RTFW section -->
+
 		<server>
 			<id>Nexus_CI_Snapshot</id>
 			<username>${user.nexus3}</username>
@@ -55,76 +20,26 @@
 			<username>${user.nexus3}</username>
 			<password>${password}</password>
 		</server>
-		<!-- End RTFW section -->
+
 		<server>
-			<id>nexus3_lib_dev</id>
+			<id>maven-distr-dev</id>
 			<username>${user.nexus3}</username>
 			<password>${password}</password>
 		</server>
 		<server>
-			<id>nexus3_lib_release</id>
+			<id>maven-distr-release</id>
 			<username>${user.nexus3}</username>
 			<password>${password}</password>
 		</server>
 	</servers>
 
-
 	<mirrors>
 		<mirror>
-			<id>nexus.delta.sbrf.ru</id>
-			<name>Sigma Nexus</name>
-			<url>https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/central/</url>
+			<id>central</id>
+			<name>central</name>
+			<url>https://nexus-ci.delta.sbrf.ru/repository/public/</url>
 			<mirrorOf>central</mirrorOf>
 		</mirror>
-		<mirror>
-			<id>nexus.client4d_group</id>
-			<name>Mirror of central client4d_group</name>
-			<url>https://sbtnexus.delta.sbrf.ru/nexus/content/groups/client4d_group/</url>
-			<mirrorOf>client4d-alpha-snapshots,client4d-alpha-releases,client4d-alpha-thirdparty</mirrorOf>
-		</mirror>
-		<mirror>
-			<id>repository.jboss.test</id>
-			<name>Delta Nexus</name>
-			<url>https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/central/</url>
-			<mirrorOf>repository.jboss.org</mirrorOf>
-		</mirror>
-		<mirror>
-			<id>dynamodb-local-oregon.test</id>
-			<name>Delta Nexus</name>
-			<url>https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/central/</url>
-			<mirrorOf>dynamodb-local-oregon</mirrorOf>
-		</mirror>
-		<mirror>
-			<id>apache.snapshots.test</id>
-			<name>Delta Nexus</name>
-			<url>https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/central/</url>
-			<mirrorOf>apache.snapshots</mirrorOf>
-		</mirror>
-		<mirror>
-			<id>apache.snapshots.https.test</id>
-			<name>Delta Nexus</name>
-			<url>https://sbtnexus.delta.sbrf.ru/nexus/content/repositories/central/</url>
-			<mirrorOf>apache.snapshots.https</mirrorOf>
-		</mirror>
 	</mirrors>
-
-
-	<pluginGroups>
-		<pluginGroup>org.sonarsource.scanner.maven</pluginGroup>
-	</pluginGroups>
-	<profiles>
-		<profile>
-			<id>sonar</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-
-			<properties>
-				<sonar.host.url>https://sonar.ca.sbrf.ru/sonar</sonar.host.url>
-				<sonar.projectName>ru.sberbank.bigdata.dffess.vspc:essa:feature/develop</sonar.projectName>
-				<sonar.language>java</sonar.language>
-			</properties>
-		</profile>
-	</profiles>
 
 </settings>

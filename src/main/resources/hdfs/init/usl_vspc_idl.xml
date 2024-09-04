@@ -30,6 +30,7 @@
             <argument>${nameNode}</argument>             <!-- 5 -->
             <argument>${debug_distributive_path}</argument>             <!-- 6 -->
             <argument>${devops_distributive_jar}</argument>             <!-- 7 -->
+            <argument>${ctl_secure}</argument>             <!-- 8 -->
             <file>StartLauncher.sh#StartLauncher.sh</file>
         </shell>
         <ok to="End"/>

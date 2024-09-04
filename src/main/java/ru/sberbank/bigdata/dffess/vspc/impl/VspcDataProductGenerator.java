@@ -13,6 +13,7 @@ import static ru.sberbank.bigdata.essa.common.master.app.forApp.SparkConfKeeper.
 import static ru.sberbank.bigdata.essa.common.master.app.forApp.SparkConfKeeper.ResourceConfig.LITE;
 
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.*;
+import static ru.sberbank.bigdata.essa.common.slave.app.CtlStatService.StatisticsType.DATA_PRODUCT;
 
 import ru.sberbank.bigdata.dffess.vspc.tables.addr.AddrConfiguration;
 import ru.sberbank.bigdata.dffess.vspc.tables.addrh.AddrHConfiguration;
@@ -38,15 +39,13 @@ public class VspcDataProductGenerator implements DataProductGenerator {
         EtlKit finisher = EtlKit.newInstance("finisher", LITE)
                 .addDependency(preloadKit)
                 .addDependency(snpKit)
-                .needToPostStatistic(statMap)
+                .needToPostStatistic(statMap, DATA_PRODUCT)
                 .addConfiguration(FinalConfiguration.class);
 
-        DataProduct dp = DataProduct.newInstance(new VspcEntityProvider())
+        return DataProduct.newInstance(new VspcEntityProvider(), new VspcEtlSeqServiceImpl())
                 .addEtlKit(preloadKit)
                 .addEtlKit(snpKit)
                 .addEtlKit(finisher);
-
-        return dp;
     }
 
     private static EtlKit preloadKit() {
