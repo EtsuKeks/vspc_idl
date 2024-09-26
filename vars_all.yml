@@ -24,7 +24,7 @@ vars: &commonVars
   parallel_threads: 10
   debug_distributive_path: "{{ base_path }}/lib"
   debug_sk_off: "false"
-  build_version: "D-01.602.002"
+  build_version: "D-01.602.003"
   devops_distributive_jar: "vspc_idl-{{ build_version }}-jar-with-dependencies.jar"
 
   logical_env_prefix_with_slash: ""
@@ -70,6 +70,8 @@ stands:
       system_area_type: "q_SDP_comm"
       log_level: "ESSA"
       archiveProfile_sfs: "Default"
+      kafka_broker_list: "tvlsq-log000006.dev.df.sbrf.ru:9093,tvlsq-log000001.dev.df.sbrf.ru:9093,tvlsq-log000002.dev.df.sbrf.ru:9093,tvlsq-log000003.dev.df.sbrf.ru:9093,tvlsq-log000004.dev.df.sbrf.ru:9093,tvlsq-log000005.dev.df.sbrf.ru:9093"
+      kafka_topic: "log-kafka-04"
 
   # IFT
   - stand_inventory: sdpiftfess
@@ -89,6 +91,8 @@ stands:
       log_level: "INFO"
       archiveProfile_sfs: "Default"
       cert_enabled_flag: "true"
+      kafka_broker_list: "tvlsq-log000002.dev.df.sbrf.ru:9093,tvlsq-log000003.dev.df.sbrf.ru:9093,tvlsq-log000004.dev.df.sbrf.ru:9093,tvlsq-log000005.dev.df.sbrf.ru:9093,tvlsq-log000006.dev.df.sbrf.ru:9093,tvlsq-log000001.dev.df.sbrf.ru:9093"
+      kafka_topic: "log-kafka-04"
 
   # RDT
   - stand_inventory: utarnsdpfess
@@ -104,6 +108,8 @@ stands:
       system_area_type: "{{ YARN_QUEUE }}"
       log_level: "ESSA"
       yarn_queue_init: "init"
+      kafka_broker_list: "https://ppliq-log000118.log.df.sbrf.ru:9093,https://ppliq-log000119.log.df.sbrf.ru:9093,https://ppliq-log000120.log.df.sbrf.ru:9093,https://ppliq-log000121.log.df.sbrf.ru:9093,https://ppliq-log000122.log.df.sbrf.ru:9093,https://ppliq-log000123.log.df.sbrf.ru:9093,https://ppliq-log000124.log.df.sbrf.ru:9093,https://ppliq-log000125.log.df.sbrf.ru:9093,https://ppliq-log000126.log.df.sbrf.ru:9093,https://ppliq-log000127.log.df.sbrf.ru:9093,https://ppliq-log000128.log.df.sbrf.ru:9093,https://ppliq-log000129.log.df.sbrf.ru:9093,https://ppliq-log000130.log.df.sbrf.ru:9093,https://ppliq-log000131.log.df.sbrf.ru:9093,https://ppliq-log000132.log.df.sbrf.ru:9093,https://ppliq-log000117.log.df.sbrf.ru:9093"
+      kafka_topic: "log-kafka-10"
 
   # PROM NEW
   - stand_inventory: arnsdpfess2
@@ -121,3 +127,7 @@ stands:
       yarn_queue_init: "init"
       cert_enabled_flag: "true"
       archiveProfile_FakeCardCode: "ts_espd"
+      # https://confluence.delta.sbrf.ru/pages/viewpage.action?pageId=12061548095
+      kafka_broker_list: "https://logapps-sk-01.log.df.sbrf.ru:9093,https://logapps-sk-02.log.df.sbrf.ru:9093,https://logapps-sk-03.log.df.sbrf.ru:9093,https://logapps-mc-01.log.df.sbrf.ru:9093,https://logapps-mc-02.log.df.sbrf.ru:9093,logapps-mc-03.log.df.sbrf.ru:9093"
+      # может отличаться
+      kafka_topic: "log-CI02619185-CI03905513"
