@@ -19,12 +19,12 @@ vars: &commonVars
   YARN_QUEUE: "vspc"
   debug_logical_env: ""
 
-  data_sets: "usl_vspc_idl.addr.hub;usl_vspc_idl.addr_h.sat=h;usl_vspc_idl.div_.hub;usl_vspc_idl.div_h.sat=h;usl_vspc_idl.div_type.sat=h;usl_vspc_idl.terr_div_type.hub;usl_vspc_idl.time_zone_rf.hub"
+  data_sets: ""
 
   parallel_threads: 10
   debug_distributive_path: "{{ base_path }}/lib"
   debug_sk_off: "false"
-  build_version: "D-01.602.003"
+  build_version: "D-01.602.004"
   devops_distributive_jar: "vspc_idl-{{ build_version }}-jar-with-dependencies.jar"
 
   logical_env_prefix_with_slash: ""
