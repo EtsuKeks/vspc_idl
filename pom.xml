@@ -6,10 +6,10 @@
 
     <groupId>ru.sberbank.bigdata.dffess.ssd</groupId>
     <artifactId>vspc_idl</artifactId>
-    <version>D-01.602.004</version>
+    <version>D-01.602.006</version>
 
     <properties>
-        <essa.common.version>2.1.4</essa.common.version>
+        <essa.common.version>2.1.4.1-SNAPSHOT</essa.common.version>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
