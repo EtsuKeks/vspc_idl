@@ -5,6 +5,14 @@
                 <name>mapred.job.queue.name</name>
                 <value>${yarn_queue}</value>
             </property>
+            <property>
+                <name>mapreduce.map.memory.mb</name>
+                <value>16384</value>
+            </property>
+            <property>
+                <name>yarn.app.mapreduce.am.resource.mb</name>
+                <value>16384</value>
+            </property>
         </configuration>
     </global>
 
