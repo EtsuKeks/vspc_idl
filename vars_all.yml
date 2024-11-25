@@ -62,7 +62,7 @@ stands:
       <<: *commonVars
       cluster_name: "sklsdpfess"
       spark_parameters: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=2G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=5 --conf spark.dynamicAllocation.maxExecutors=40 --conf spark.driver.memory=5G"
-      hdfs_path: "/oozie-app/t/tools/trivDistCp"
+      spark_parameters_init: "{{ spark_parameters }}"
       hadoop_default_fs_uri: "hdfs://FESS-DEV"
       user_name: "u_sklsdpfess_s_usl_t_vspc_idl"
       USER_NAME: "u_sklsdpfess_s_usl_t_vspc_idl"
@@ -79,7 +79,7 @@ stands:
       <<: *commonVars
       cluster_name: "itsklsdpfess"
       spark_parameters: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=1G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=2 --conf spark.dynamicAllocation.maxExecutors=10 --conf spark.driver.memory=1G"
-      hdfs_path: "/oozie-app/t/tools/trivDistCp"
+      spark_parameters_init: "{{ spark_parameters }}"
       hadoop_default_fs_uri: "hdfs://FESS-IFT"
       user_name: "u_itsklsdpfess_s_usl_t_vspc_idl"
       USER_NAME: "u_itsklsdpfess_s_usl_t_vspc_idl"
@@ -100,7 +100,7 @@ stands:
       <<: *commonVars
       cluster_name: "utarnsdpfess"
       spark_parameters: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.executor.memory=10G --conf spark.executor.cores=2 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=20G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=20G --conf spark.driver.memoryOverhead=10G --conf spark.executor.memoryOverhead=3G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=100 --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000"
-      hdfs_path: "/oozie-app/t/tools/trivDistCp"
+      spark_parameters_init: "{{ spark_parameters }} --command essaDebugSkOff=ON_GF"
       hadoop_default_fs_uri: "hdfs://utarnsdpfess"
       user_name: "u_utarnsdpfess_s_usl_t_vspc_idl"
       USER_NAME: "u_utarnsdpfess_s_usl_t_vspc_idl"
@@ -117,7 +117,7 @@ stands:
       <<: *commonVars
       cluster_name: "arn6sdpfess"
       spark_parameters: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.executor.memory=10G --conf spark.executor.cores=2 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=10G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=2G --conf spark.driver.memoryOverhead=5G --conf spark.executor.memoryOverhead=3G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=100 --conf spark.yarn.access.hadoopFileSystems=hdfs://hdfsgw/,hdfs://arnsdpfess2/ --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000"
-      hdfs_path: "/oozie-app/t/tools/trivDistCp"
+      spark_parameters_init: "{{ spark_parameters }} --command essaDebugSkOff=ON_GF"
       hadoop_default_fs_uri: "hdfs://arnsdpfess2"
       user_name: "u_arn6sdpfess_s_usl_t_vspc_idl"
       USER_NAME: "u_arn6sdpfess_s_usl_t_vspc_idl"
@@ -130,4 +130,4 @@ stands:
       # https://confluence.delta.sbrf.ru/pages/viewpage.action?pageId=12061548095
       kafka_broker_list: "https://logapps-sk-01.log.df.sbrf.ru:9093,https://logapps-sk-02.log.df.sbrf.ru:9093,https://logapps-sk-03.log.df.sbrf.ru:9093,https://logapps-mc-01.log.df.sbrf.ru:9093,https://logapps-mc-02.log.df.sbrf.ru:9093,logapps-mc-03.log.df.sbrf.ru:9093"
       # может отличаться
-      kafka_topic: "log-CI02619185-CI03905513"
+      kafka_topic: "log-CI02619185-CI04734132"
