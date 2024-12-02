@@ -1,0 +1,2483 @@
+[{"FullDataHubCode": "CAP/KERNEL/USL/VSPC_IDL",
+"CertificateType": "CERTIFICATE",
+"ProjectArea": "USL",
+"DataProductCtlEntity": "801005314",
+"ArrayChecks" :[
+//Union checks
+//hubs snapshot
+     
+                // Таблица usl_vspc_idl_snp.addr
+                 {
+                     "rule": {
+                         "from": "usl_vspc_idl_snp.addr table_from",
+                         "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or table_from.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(table_from.deleted_flag, false)",
+                         "rule_cd": "r_usl_union_hab_s_vspc_idl-addr",
+                         "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
+                //Обязательность (NotNull columns).
+                      {
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-addr-addr_dp_code",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-addr-addr_dp_code",
+                                         "metric_desc": "Поле addr.addr_dp_code не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.addr_dp_code IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 1
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-addr-addr_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-addr-addr_sk",
+                                         "metric_desc": "Поле addr.addr_sk не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.addr_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 2
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-addr-ctl_loading",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-addr-ctl_loading",
+                                         "metric_desc": "Поле addr.ctl_loading не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.ctl_loading IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 3
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-addr-ctl_validfrom",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-addr-ctl_validfrom",
+                                         "metric_desc": "Поле addr.ctl_validfrom не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.ctl_validfrom IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 4
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-addr-sid",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-addr-sid",
+                                         "metric_desc": "Поле addr.sid не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.sid IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 5
+                                     }
+                                 }
+ 
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_tn_s_vspc_idl-addr-NotNullColumns",
+                                 "crit_desc": "Поля с свойстовом notNull должны быть всегда заполнены",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.ADDR_DP_CODE" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.ADDR_SK" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.CTL_LOADING" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.CTL_VALIDFROM" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.SID" 
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Обязательность"
+                             }
+                         }
+                //Обязательность заполнения fk_dp_code для foreign key
+                     ,{
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-addr-cntry_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-addr-cntry_sk",
+                                         "metric_desc": "Поле cntry_sk всегда должно быть заполнено, если заполнено поле cntry_sk",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.cntry_sk IS NOT NULL AND table_from.cntry_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 6
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-addr-okato2_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-addr-okato2_sk",
+                                         "metric_desc": "Поле okato2_sk всегда должно быть заполнено, если заполнено поле okato2_sk",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.okato2_sk IS NOT NULL AND table_from.okato2_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 7
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-addr-rus_fed_subj_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-addr-rus_fed_subj_sk",
+                                         "metric_desc": "Поле rus_fed_subj_sk всегда должно быть заполнено, если заполнено поле rus_fed_subj_sk",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.rus_fed_subj_sk IS NOT NULL AND table_from.rus_fed_subj_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 8
+                                     }
+                                 }
+ 
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_tn_s_vspc_idl-addr-",
+                                 "crit_desc": "Поле  всегда должно быть заполнено у foreign key ",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.CNTRY_SK"  
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.OKATO2_SK"  
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.RUS_FED_SUBJ_SK"  
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Обязательность"
+                             }
+                      } 
+                //Уникальность по SK
+                     ,{
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_uq_s_vspc_idl-addr-addr_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_uq_s_vspc_idl-addr-addr_sk",
+                                         "metric_desc": "В таблице addr значение поля addr_sk должно быть уникально",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "(COUNT (1) - COUNT (DISTINCT table_from.addr_sk))",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 9
+                                     }
+                                 }
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_uq_s_vspc_idl-addr-addr_sk",
+                                 "crit_desc": "В таблице addr значение поля addr_sk должно быть уникально",
+                                 "dq_metacolumn": [
+                                     "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.ADDR_SK"
+                                 ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Уникальность"
+                             }
+                         }
+                //Уникальность по натуральным ключам(для таблиц где отсутствуют SK)
+
+                     ]
+                 }
+
+                // Таблица usl_vspc_idl_snp.div_
+                , {
+                     "rule": {
+                         "from": "usl_vspc_idl_snp.div_ table_from",
+                         "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or table_from.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(table_from.deleted_flag, false)",
+                         "rule_cd": "r_usl_union_hab_s_vspc_idl-div_",
+                         "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
+                //Обязательность (NotNull columns).
+                      {
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_-ctl_loading",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_-ctl_loading",
+                                         "metric_desc": "Поле div_.ctl_loading не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.ctl_loading IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 1
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_-ctl_validfrom",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_-ctl_validfrom",
+                                         "metric_desc": "Поле div_.ctl_validfrom не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.ctl_validfrom IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 2
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_-div_dp_code",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_-div_dp_code",
+                                         "metric_desc": "Поле div_.div_dp_code не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.div_dp_code IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 3
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_-div_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_-div_sk",
+                                         "metric_desc": "Поле div_.div_sk не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.div_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 4
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_-sid",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_-sid",
+                                         "metric_desc": "Поле div_.sid не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.sid IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 5
+                                     }
+                                 }
+ 
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_tn_s_vspc_idl-div_-NotNullColumns",
+                                 "crit_desc": "Поля с свойстовом notNull должны быть всегда заполнены",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.CTL_LOADING" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.CTL_VALIDFROM" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.DIV_DP_CODE" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.DIV_SK" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.SID" 
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Обязательность"
+                             }
+                         }
+                //Обязательность заполнения fk_dp_code для foreign key
+                     ,{
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_-div_time_zone_time_zone_rf_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_-div_time_zone_time_zone_rf_sk",
+                                         "metric_desc": "Поле div_time_zone_time_zone_rf_sk всегда должно быть заполнено, если заполнено поле div_time_zone_time_zone_rf_sk",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.div_time_zone_time_zone_rf_sk IS NOT NULL AND table_from.div_time_zone_time_zone_rf_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 6
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_-legal_addr_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_-legal_addr_sk",
+                                         "metric_desc": "Поле legal_addr_sk всегда должно быть заполнено, если заполнено поле legal_addr_sk",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.legal_addr_sk IS NOT NULL AND table_from.legal_addr_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 7
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_-parent_div_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_-parent_div_sk",
+                                         "metric_desc": "Поле parent_div_sk всегда должно быть заполнено, если заполнено поле parent_div_sk",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.parent_div_sk IS NOT NULL AND table_from.parent_div_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 8
+                                     }
+                                 }
+ 
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_tn_s_vspc_idl-div_-",
+                                 "crit_desc": "Поле  всегда должно быть заполнено у foreign key ",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.DIV_TIME_ZONE_TIME_ZONE_RF_SK"  
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.LEGAL_ADDR_SK"  
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.PARENT_DIV_SK"  
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Обязательность"
+                             }
+                      } 
+                //Уникальность по SK
+                     ,{
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_uq_s_vspc_idl-div_-div_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_uq_s_vspc_idl-div_-div_sk",
+                                         "metric_desc": "В таблице div_ значение поля div_sk должно быть уникально",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "(COUNT (1) - COUNT (DISTINCT table_from.div_sk))",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 9
+                                     }
+                                 }
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_uq_s_vspc_idl-div_-div_sk",
+                                 "crit_desc": "В таблице div_ значение поля div_sk должно быть уникально",
+                                 "dq_metacolumn": [
+                                     "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.DIV_SK"
+                                 ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Уникальность"
+                             }
+                         }
+                //Уникальность по натуральным ключам(для таблиц где отсутствуют SK)
+
+                     ]
+                 }
+
+                // Таблица usl_vspc_idl_snp.terr_div_type
+                , {
+                     "rule": {
+                         "from": "usl_vspc_idl_snp.terr_div_type table_from",
+                         "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or table_from.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(table_from.deleted_flag, false)",
+                         "rule_cd": "r_usl_union_hab_s_vspc_idl-terr_div_type",
+                         "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
+                //Обязательность (NotNull columns).
+                      {
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-terr_div_type-ctl_loading",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-terr_div_type-ctl_loading",
+                                         "metric_desc": "Поле terr_div_type.ctl_loading не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.ctl_loading IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 1
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-terr_div_type-ctl_validfrom",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-terr_div_type-ctl_validfrom",
+                                         "metric_desc": "Поле terr_div_type.ctl_validfrom не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.ctl_validfrom IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 2
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-terr_div_type-sid",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-terr_div_type-sid",
+                                         "metric_desc": "Поле terr_div_type.sid не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.sid IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 3
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-terr_div_type-terr_div_type_dp_code",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-terr_div_type-terr_div_type_dp_code",
+                                         "metric_desc": "Поле terr_div_type.terr_div_type_dp_code не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.terr_div_type_dp_code IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 4
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-terr_div_type-terr_div_type_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-terr_div_type-terr_div_type_sk",
+                                         "metric_desc": "Поле terr_div_type.terr_div_type_sk не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.terr_div_type_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 5
+                                     }
+                                 }
+ 
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_tn_s_vspc_idl-terr_div_type-NotNullColumns",
+                                 "crit_desc": "Поля с свойстовом notNull должны быть всегда заполнены",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TERR_DIV_TYPE.CTL_LOADING" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TERR_DIV_TYPE.CTL_VALIDFROM" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TERR_DIV_TYPE.SID" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TERR_DIV_TYPE.TERR_DIV_TYPE_DP_CODE" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TERR_DIV_TYPE.TERR_DIV_TYPE_SK" 
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Обязательность"
+                             }
+                         }
+                //Обязательность заполнения fk_dp_code для foreign key
+
+                //Уникальность по SK
+                     ,{
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_uq_s_vspc_idl-terr_div_type-terr_div_type_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_uq_s_vspc_idl-terr_div_type-terr_div_type_sk",
+                                         "metric_desc": "В таблице terr_div_type значение поля terr_div_type_sk должно быть уникально",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "(COUNT (1) - COUNT (DISTINCT table_from.terr_div_type_sk))",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 6
+                                     }
+                                 }
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_uq_s_vspc_idl-terr_div_type-terr_div_type_sk",
+                                 "crit_desc": "В таблице terr_div_type значение поля terr_div_type_sk должно быть уникально",
+                                 "dq_metacolumn": [
+                                     "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TERR_DIV_TYPE.TERR_DIV_TYPE_SK"
+                                 ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Уникальность"
+                             }
+                         }
+                //Уникальность по натуральным ключам(для таблиц где отсутствуют SK)
+
+                     ]
+                 }
+
+                // Таблица usl_vspc_idl_snp.time_zone_rf
+                , {
+                     "rule": {
+                         "from": "usl_vspc_idl_snp.time_zone_rf table_from",
+                         "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or table_from.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(table_from.deleted_flag, false)",
+                         "rule_cd": "r_usl_union_hab_s_vspc_idl-time_zone_rf",
+                         "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
+                //Обязательность (NotNull columns).
+                      {
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-time_zone_rf-ctl_loading",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-time_zone_rf-ctl_loading",
+                                         "metric_desc": "Поле time_zone_rf.ctl_loading не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.ctl_loading IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 1
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-time_zone_rf-ctl_validfrom",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-time_zone_rf-ctl_validfrom",
+                                         "metric_desc": "Поле time_zone_rf.ctl_validfrom не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.ctl_validfrom IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 2
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-time_zone_rf-sid",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-time_zone_rf-sid",
+                                         "metric_desc": "Поле time_zone_rf.sid не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.sid IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 3
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-time_zone_rf-time_zone_rf_dp_code",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-time_zone_rf-time_zone_rf_dp_code",
+                                         "metric_desc": "Поле time_zone_rf.time_zone_rf_dp_code не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.time_zone_rf_dp_code IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 4
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-time_zone_rf-time_zone_rf_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-time_zone_rf-time_zone_rf_sk",
+                                         "metric_desc": "Поле time_zone_rf.time_zone_rf_sk не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.time_zone_rf_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 5
+                                     }
+                                 }
+ 
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_tn_s_vspc_idl-time_zone_rf-NotNullColumns",
+                                 "crit_desc": "Поля с свойстовом notNull должны быть всегда заполнены",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TIME_ZONE_RF.CTL_LOADING" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TIME_ZONE_RF.CTL_VALIDFROM" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TIME_ZONE_RF.SID" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TIME_ZONE_RF.TIME_ZONE_RF_DP_CODE" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TIME_ZONE_RF.TIME_ZONE_RF_SK" 
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Обязательность"
+                             }
+                         }
+                //Обязательность заполнения fk_dp_code для foreign key
+
+                //Уникальность по SK
+                     ,{
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_uq_s_vspc_idl-time_zone_rf-time_zone_rf_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_uq_s_vspc_idl-time_zone_rf-time_zone_rf_sk",
+                                         "metric_desc": "В таблице time_zone_rf значение поля time_zone_rf_sk должно быть уникально",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "(COUNT (1) - COUNT (DISTINCT table_from.time_zone_rf_sk))",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 6
+                                     }
+                                 }
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_uq_s_vspc_idl-time_zone_rf-time_zone_rf_sk",
+                                 "crit_desc": "В таблице time_zone_rf значение поля time_zone_rf_sk должно быть уникально",
+                                 "dq_metacolumn": [
+                                     "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.TIME_ZONE_RF.TIME_ZONE_RF_SK"
+                                 ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Уникальность"
+                             }
+                         }
+                //Уникальность по натуральным ключам(для таблиц где отсутствуют SK)
+
+                     ]
+                 }
+
+//satellite snapshot
+
+                // Таблица usl_vspc_idl_snp.addr_h
+                , {
+                     "rule": {
+                         "from": "usl_vspc_idl_snp.addr_h table_from ",
+                         "where": "'$$LOADINGIDS_ARRAY$$' = 'null' or table_from.ctl_loading in ($$LOADINGIDS_ARRAY$$)",
+                         "rule_cd": "r_usl_union_satellite_s_vspc_idl-addr_h",
+                         "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
+                    //Обязательность (NotNull columns).
+                      {
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-addr_h-addr_dp_code",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-addr_h-addr_dp_code",
+                                         "metric_desc": "Поле addr_h.addr_dp_code не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.addr_dp_code IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 1
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-addr_h-addr_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-addr_h-addr_sk",
+                                         "metric_desc": "Поле addr_h.addr_sk не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.addr_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 2
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-addr_h-ctl_loading",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-addr_h-ctl_loading",
+                                         "metric_desc": "Поле addr_h.ctl_loading не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.ctl_loading IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 3
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-addr_h-ctl_validfrom",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-addr_h-ctl_validfrom",
+                                         "metric_desc": "Поле addr_h.ctl_validfrom не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.ctl_validfrom IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 4
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-addr_h-end_dt",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-addr_h-end_dt",
+                                         "metric_desc": "Поле addr_h.end_dt не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.end_dt IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 5
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-addr_h-p1month",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-addr_h-p1month",
+                                         "metric_desc": "Поле addr_h.p1month не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.p1month IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 6
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-addr_h-start_dt",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-addr_h-start_dt",
+                                         "metric_desc": "Поле addr_h.start_dt не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.start_dt IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 7
+                                     }
+                                 }
+ 
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_tn_s_vspc_idl-addr_h-NotNullColumns",
+                                 "crit_desc": "Поля с свойстовом notNull должны быть всегда заполнены",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR_H.ADDR_DP_CODE" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR_H.ADDR_SK" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR_H.CTL_LOADING" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR_H.CTL_VALIDFROM" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR_H.END_DT" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR_H.P1MONTH" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR_H.START_DT" 
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Обязательность"
+                             }
+                         }
+                    //Обязательность заполнения fk_dp_code для foreign key и для primary key
+                     ,{
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-addr_h-addr_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-addr_h-addr_sk",
+                                         "metric_desc": "Поле addr_sk всегда должно быть заполнено, если заполнено поле addr_sk",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.addr_sk IS NOT NULL AND table_from.addr_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 8
+                                     }
+                                 }
+ 
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_tn_s_vspc_idl-addr_h-",
+                                 "crit_desc": "Поле  всегда должно быть заполнено у foreign key ",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR_H.ADDR_SK"  
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Обязательность"
+                             }
+                      } 
+                   //Уникальность
+                     ,{
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_uq_s_vspc_idl-addr_h-addr_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_uq_s_vspc_idl-addr_h-addr_sk",
+                                         "metric_desc": "В таблице addr_h связка полей addr_sk и start_dt должна быть уникальной",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "(COUNT (1) - COUNT (DISTINCT  table_from.addr_sk, table_from.start_dt))",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 9
+                                     }
+                                 }
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_uq_s_vspc_idl-addr_h-addr_sk",
+                                 "crit_desc": "В таблице addr_h связка полей addr_sk и start_dt должна быть уникальной",
+                                 "dq_metacolumn": [
+                                     "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR_H.ADDR_SK "
+                                    ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR_H.START_DT"
+                                 ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Уникальность"
+                             }
+                        }
+                     ]
+                 }
+
+                // Таблица usl_vspc_idl_snp.div_h
+                , {
+                     "rule": {
+                         "from": "usl_vspc_idl_snp.div_h table_from ",
+                         "where": "'$$LOADINGIDS_ARRAY$$' = 'null' or table_from.ctl_loading in ($$LOADINGIDS_ARRAY$$)",
+                         "rule_cd": "r_usl_union_satellite_s_vspc_idl-div_h",
+                         "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
+                    //Обязательность (NotNull columns).
+                      {
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-ctl_loading",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_h-ctl_loading",
+                                         "metric_desc": "Поле div_h.ctl_loading не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.ctl_loading IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 1
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-ctl_validfrom",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_h-ctl_validfrom",
+                                         "metric_desc": "Поле div_h.ctl_validfrom не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.ctl_validfrom IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 2
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-div_dp_code",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_h-div_dp_code",
+                                         "metric_desc": "Поле div_h.div_dp_code не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.div_dp_code IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 3
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-div_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_h-div_sk",
+                                         "metric_desc": "Поле div_h.div_sk не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.div_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 4
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-end_dt",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_h-end_dt",
+                                         "metric_desc": "Поле div_h.end_dt не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.end_dt IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 5
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-p1month",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_h-p1month",
+                                         "metric_desc": "Поле div_h.p1month не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.p1month IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 6
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-start_dt",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_h-start_dt",
+                                         "metric_desc": "Поле div_h.start_dt не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.start_dt IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 7
+                                     }
+                                 }
+ 
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_tn_s_vspc_idl-div_h-NotNullColumns",
+                                 "crit_desc": "Поля с свойстовом notNull должны быть всегда заполнены",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.CTL_LOADING" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.CTL_VALIDFROM" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.DIV_DP_CODE" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.DIV_SK" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.END_DT" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.P1MONTH" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.START_DT" 
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Обязательность"
+                             }
+                         }
+                    //Обязательность заполнения fk_dp_code для foreign key и для primary key
+                     ,{
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-div_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_h-div_sk",
+                                         "metric_desc": "Поле div_sk всегда должно быть заполнено, если заполнено поле div_sk",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.div_sk IS NOT NULL AND table_from.div_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 8
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-fact_addr_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_h-fact_addr_sk",
+                                         "metric_desc": "Поле fact_addr_sk всегда должно быть заполнено, если заполнено поле fact_addr_sk",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.fact_addr_sk IS NOT NULL AND table_from.fact_addr_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 9
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-pay_sys_prtcpnt_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_h-pay_sys_prtcpnt_sk",
+                                         "metric_desc": "Поле pay_sys_prtcpnt_sk всегда должно быть заполнено, если заполнено поле pay_sys_prtcpnt_sk",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.pay_sys_prtcpnt_sk IS NOT NULL AND table_from.pay_sys_prtcpnt_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 10
+                                     }
+                                 }
+ 
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_tn_s_vspc_idl-div_h-",
+                                 "crit_desc": "Поле  всегда должно быть заполнено у foreign key ",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.DIV_SK"  
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.FACT_ADDR_SK"  
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.PAY_SYS_PRTCPNT_SK"  
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Обязательность"
+                             }
+                      } 
+                   //Уникальность
+                     ,{
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_uq_s_vspc_idl-div_h-div_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_uq_s_vspc_idl-div_h-div_sk",
+                                         "metric_desc": "В таблице div_h связка полей div_sk и start_dt должна быть уникальной",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "(COUNT (1) - COUNT (DISTINCT  table_from.div_sk, table_from.start_dt))",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 11
+                                     }
+                                 }
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_uq_s_vspc_idl-div_h-div_sk",
+                                 "crit_desc": "В таблице div_h связка полей div_sk и start_dt должна быть уникальной",
+                                 "dq_metacolumn": [
+                                     "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.DIV_SK "
+                                    ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.START_DT"
+                                 ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Уникальность"
+                             }
+                        }
+                     ]
+                 }
+
+                // Таблица usl_vspc_idl_snp.div_type
+                , {
+                     "rule": {
+                         "from": "usl_vspc_idl_snp.div_type table_from ",
+                         "where": "'$$LOADINGIDS_ARRAY$$' = 'null' or table_from.ctl_loading in ($$LOADINGIDS_ARRAY$$)",
+                         "rule_cd": "r_usl_union_satellite_s_vspc_idl-div_type",
+                         "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
+                    //Обязательность (NotNull columns).
+                      {
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_type-ctl_loading",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_type-ctl_loading",
+                                         "metric_desc": "Поле div_type.ctl_loading не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.ctl_loading IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 1
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_type-ctl_validfrom",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_type-ctl_validfrom",
+                                         "metric_desc": "Поле div_type.ctl_validfrom не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.ctl_validfrom IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 2
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_type-div_dp_code",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_type-div_dp_code",
+                                         "metric_desc": "Поле div_type.div_dp_code не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.div_dp_code IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 3
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_type-div_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_type-div_sk",
+                                         "metric_desc": "Поле div_type.div_sk не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.div_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 4
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_type-end_dt",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_type-end_dt",
+                                         "metric_desc": "Поле div_type.end_dt не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.end_dt IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 5
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_type-p1month",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_type-p1month",
+                                         "metric_desc": "Поле div_type.p1month не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.p1month IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 6
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_type-start_dt",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_type-start_dt",
+                                         "metric_desc": "Поле div_type.start_dt не может принимать пустое значение",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.start_dt IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 7
+                                     }
+                                 }
+ 
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_tn_s_vspc_idl-div_type-NotNullColumns",
+                                 "crit_desc": "Поля с свойстовом notNull должны быть всегда заполнены",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.CTL_LOADING" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.CTL_VALIDFROM" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.DIV_DP_CODE" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.DIV_SK" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.END_DT" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.P1MONTH" 
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.START_DT" 
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Обязательность"
+                             }
+                         }
+                    //Обязательность заполнения fk_dp_code для foreign key и для primary key
+                     ,{
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_type-div_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_type-div_sk",
+                                         "metric_desc": "Поле div_sk всегда должно быть заполнено, если заполнено поле div_sk",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.div_sk IS NOT NULL AND table_from.div_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 8
+                                     }
+                                 }
+ ,
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_type-div_type_terr_div_type_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_type-div_type_terr_div_type_sk",
+                                         "metric_desc": "Поле div_type_terr_div_type_sk всегда должно быть заполнено, если заполнено поле div_type_terr_div_type_sk",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.div_type_terr_div_type_sk IS NOT NULL AND table_from.div_type_terr_div_type_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 9
+                                     }
+                                 }
+ 
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_tn_s_vspc_idl-div_type-",
+                                 "crit_desc": "Поле  всегда должно быть заполнено у foreign key ",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.DIV_SK"  
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.DIV_TYPE_TERR_DIV_TYPE_SK"  
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Обязательность"
+                             }
+                      } 
+                   //Уникальность
+                     ,{
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_uq_s_vspc_idl-div_type-div_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_uq_s_vspc_idl-div_type-div_sk",
+                                         "metric_desc": "В таблице div_type связка полей div_sk и start_dt должна быть уникальной",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "(COUNT (1) - COUNT (DISTINCT  table_from.div_sk, table_from.start_dt))",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 10
+                                     }
+                                 }
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_uq_s_vspc_idl-div_type-div_sk",
+                                 "crit_desc": "В таблице div_type связка полей div_sk и start_dt должна быть уникальной",
+                                 "dq_metacolumn": [
+                                     "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.DIV_SK "
+                                    ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.START_DT"
+                                 ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Уникальность"
+                             }
+                        }
+                     ]
+                 }
+
+//links snapshot
+
+
+
+    //Внутри продуктовая ссылочная целостность таблица usl_vspc_idl_snp.div_
+                ,{
+                     "rule": {
+                         "from": "usl_vspc_idl_snp.div_ fk LEFT JOIN usl_vspc_idl_snp.addr AS pk ON pk.addr_sk = fk.legal_addr_sk AND fk.legal_addr_dp_code like 'vspc%' and not coalesce(pk.deleted_flag,FALSE)",
+                         "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or fk.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(pk.deleted_flag, false) and not coalesce(fk.deleted_flag, false)",
+                         "rule_cd": "r_usl_ri_s_vspc_idl-div_-legal_addr_sk",
+                         "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
+                        {
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_ri_s_vspc_idl-div_-legal_addr_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_ri_s_vspc_idl-div_-legal_addr_sk",
+                                         "metric_desc": "Для каждого значения внешнего ключа div_.legal_addr_sk должна найтись запись в таблице addr с тем же значением первичного ключа addr_sk",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN fk.legal_addr_sk IS NOT NULL AND fk.legal_addr_dp_code like 'vspc%' AND pk.addr_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 1
+                                     }
+                                 }
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_ri_s_vspc_idl-div_-legal_addr_sk",
+                                 "crit_desc": "Для каждого значения внешнего ключа должна найтись запись в таблице с тем же значением первичного ключа",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.LEGAL_ADDR_SK"
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Ссылочная целостность"
+                             }
+                         }
+                     ]
+                 }
+    //Внутри продуктовая ссылочная целостность таблица usl_vspc_idl_snp.div_
+                ,{
+                     "rule": {
+                         "from": "usl_vspc_idl_snp.div_ fk LEFT JOIN usl_vspc_idl_snp.div_ AS pk ON pk.div_sk = fk.parent_div_sk AND fk.parent_div_dp_code like 'vspc%' and not coalesce(pk.deleted_flag,FALSE)",
+                         "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or fk.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(pk.deleted_flag, false) and not coalesce(fk.deleted_flag, false)",
+                         "rule_cd": "r_usl_ri_s_vspc_idl-div_-parent_div_sk",
+                         "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
+                        {
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_ri_s_vspc_idl-div_-parent_div_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_ri_s_vspc_idl-div_-parent_div_sk",
+                                         "metric_desc": "Для каждого значения внешнего ключа div_.parent_div_sk должна найтись запись в таблице div_ с тем же значением первичного ключа div_sk",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN fk.parent_div_sk IS NOT NULL AND fk.parent_div_dp_code like 'vspc%' AND pk.div_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 1
+                                     }
+                                 }
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_ri_s_vspc_idl-div_-parent_div_sk",
+                                 "crit_desc": "Для каждого значения внешнего ключа должна найтись запись в таблице с тем же значением первичного ключа",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.PARENT_DIV_SK"
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Ссылочная целостность"
+                             }
+                         }
+                     ]
+                 }
+    //Внутри продуктовая ссылочная целостность таблица usl_vspc_idl_snp.div_h
+                ,{
+                     "rule": {
+                         "from": "usl_vspc_idl_snp.div_h fk LEFT JOIN usl_vspc_idl_snp.addr AS pk ON pk.addr_sk = fk.fact_addr_sk AND fk.fact_addr_dp_code like 'vspc%' and not coalesce(pk.deleted_flag,FALSE)",
+                         "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or fk.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(pk.deleted_flag, false)",
+                         "rule_cd": "r_usl_ri_s_vspc_idl-div_h-fact_addr_sk",
+                         "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
+                        {
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_ri_s_vspc_idl-div_h-fact_addr_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_ri_s_vspc_idl-div_h-fact_addr_sk",
+                                         "metric_desc": "Для каждого значения внешнего ключа div_h.fact_addr_sk должна найтись запись в таблице addr с тем же значением первичного ключа addr_sk",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN fk.fact_addr_sk IS NOT NULL AND fk.fact_addr_dp_code like 'vspc%' AND pk.addr_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 1
+                                     }
+                                 }
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_ri_s_vspc_idl-div_h-fact_addr_sk",
+                                 "crit_desc": "Для каждого значения внешнего ключа должна найтись запись в таблице с тем же значением первичного ключа",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.FACT_ADDR_SK"
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Ссылочная целостность"
+                             }
+                         }
+                     ]
+                 }
+    //Внутри продуктовая ссылочная целостность таблица usl_vspc_idl_snp.div_type
+                ,{
+                     "rule": {
+                         "from": "usl_vspc_idl_snp.div_type fk LEFT JOIN usl_vspc_idl_snp.terr_div_type AS pk ON pk.terr_div_type_sk = fk.div_type_terr_div_type_sk AND fk.div_type_terr_div_type_dp_code like 'vspc%' and not coalesce(pk.deleted_flag,FALSE)",
+                         "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or fk.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(pk.deleted_flag, false)",
+                         "rule_cd": "r_usl_ri_s_vspc_idl-div_type-div_type_terr_div_type_sk",
+                         "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
+                        {
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_ri_s_vspc_idl-div_type-div_type_terr_div_type_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_ri_s_vspc_idl-div_type-div_type_terr_div_type_sk",
+                                         "metric_desc": "Для каждого значения внешнего ключа div_type.div_type_terr_div_type_sk должна найтись запись в таблице terr_div_type с тем же значением первичного ключа terr_div_type_sk",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN fk.div_type_terr_div_type_sk IS NOT NULL AND fk.div_type_terr_div_type_dp_code like 'vspc%' AND pk.terr_div_type_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 1
+                                     }
+                                 }
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_ri_s_vspc_idl-div_type-div_type_terr_div_type_sk",
+                                 "crit_desc": "Для каждого значения внешнего ключа должна найтись запись в таблице с тем же значением первичного ключа",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.DIV_TYPE_TERR_DIV_TYPE_SK"
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Ссылочная целостность"
+                             }
+                         }
+                     ]
+                 }
+
+            // Пересечение по истории usl_vspc_idl_snp.addr_h
+                 ,{
+                     "rule": {
+                     "from": "( SELECT  addr_sk, start_dt, end_dt, LEAD (start_dt) OVER (PARTITION BY addr_sk ORDER BY start_dt) AS next_start_dt, LAG (end_dt) OVER (PARTITION BY addr_sk ORDER BY start_dt) AS prev_end_dt FROM usl_vspc_idl_snp.addr_h,(select min(from_unixtime(unix_timestamp(explode.col , 'dd.MM.yyyy'), 'yyyy-MM-dd')) buss_date from $$ADS_TABLE$$ explode ) bd where end_dt >= bd.buss_date) a",
+                         "where": "",
+                         "rule_cd": "r_usl_bh_s_vspc_idl-addr_h",
+                         "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
+                        {
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_bh_s_vspc_idl-addr_h",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_bh_s_vspc_idl-addr_h",
+                                         "metric_desc": "В таблице addr_h, для одного значения поля addr_sk, не могут пересекаться интервалы из полей start_dt и end_dt",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN (a.next_start_dt IS NOT NULL AND a.end_dt >= a.next_start_dt) OR  (a.prev_end_dt IS NOT NULL AND a.start_dt <= a.prev_end_dt)  OR  a.start_dt > end_dt THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 1
+                                     }
+                                 }
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_bh_s_vspc_idl-addr_h",
+                                 "crit_desc": "В таблице addr_h, для одного значения поля addr_sk, не могут пересекаться интервалы из полей start_dt и end_dt",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR_H.ADDR_SK",
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR_H.START_DT",
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR_H.END_DT"
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Согласованность"
+                             }
+                         }
+                     ]
+                 }
+            // Пересечение по истории usl_vspc_idl_snp.div_h
+                 ,{
+                     "rule": {
+                     "from": "( SELECT  div_sk, start_dt, end_dt, LEAD (start_dt) OVER (PARTITION BY div_sk ORDER BY start_dt) AS next_start_dt, LAG (end_dt) OVER (PARTITION BY div_sk ORDER BY start_dt) AS prev_end_dt FROM usl_vspc_idl_snp.div_h,(select min(from_unixtime(unix_timestamp(explode.col , 'dd.MM.yyyy'), 'yyyy-MM-dd')) buss_date from $$ADS_TABLE$$ explode ) bd where end_dt >= bd.buss_date) a",
+                         "where": "",
+                         "rule_cd": "r_usl_bh_s_vspc_idl-div_h",
+                         "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
+                        {
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_bh_s_vspc_idl-div_h",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_bh_s_vspc_idl-div_h",
+                                         "metric_desc": "В таблице div_h, для одного значения поля div_sk, не могут пересекаться интервалы из полей start_dt и end_dt",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN (a.next_start_dt IS NOT NULL AND a.end_dt >= a.next_start_dt) OR  (a.prev_end_dt IS NOT NULL AND a.start_dt <= a.prev_end_dt)  OR  a.start_dt > end_dt THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 1
+                                     }
+                                 }
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_bh_s_vspc_idl-div_h",
+                                 "crit_desc": "В таблице div_h, для одного значения поля div_sk, не могут пересекаться интервалы из полей start_dt и end_dt",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.DIV_SK",
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.START_DT",
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.END_DT"
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Согласованность"
+                             }
+                         }
+                     ]
+                 }
+            // Пересечение по истории usl_vspc_idl_snp.div_type
+                 ,{
+                     "rule": {
+                     "from": "( SELECT  div_sk, start_dt, end_dt, LEAD (start_dt) OVER (PARTITION BY div_sk ORDER BY start_dt) AS next_start_dt, LAG (end_dt) OVER (PARTITION BY div_sk ORDER BY start_dt) AS prev_end_dt FROM usl_vspc_idl_snp.div_type,(select min(from_unixtime(unix_timestamp(explode.col , 'dd.MM.yyyy'), 'yyyy-MM-dd')) buss_date from $$ADS_TABLE$$ explode ) bd where end_dt >= bd.buss_date) a",
+                         "where": "",
+                         "rule_cd": "r_usl_bh_s_vspc_idl-div_type",
+                         "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
+                        {
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_bh_s_vspc_idl-div_type",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_bh_s_vspc_idl-div_type",
+                                         "metric_desc": "В таблице div_type, для одного значения поля div_sk, не могут пересекаться интервалы из полей start_dt и end_dt",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN (a.next_start_dt IS NOT NULL AND a.end_dt >= a.next_start_dt) OR  (a.prev_end_dt IS NOT NULL AND a.start_dt <= a.prev_end_dt)  OR  a.start_dt > end_dt THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 1
+                                     }
+                                 }
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_bh_s_vspc_idl-div_type",
+                                 "crit_desc": "В таблице div_type, для одного значения поля div_sk, не могут пересекаться интервалы из полей start_dt и end_dt",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.DIV_SK",
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.START_DT",
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.END_DT"
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Согласованность"
+                             }
+                         }
+                     ]
+                 }
+
+
+
+]
+}
+//cross data product  check
+
+    ,{"FullDataHubCode": "INTEGRAL#VSPC_IDL-RDM_IDL_SPARK",// Кросс продуктовые проверки
+    "CertificateType": "CERTIFICATE",
+    "ProjectArea": "USL",
+    "DataProductCtlEntity": "0",
+    "ArrayChecks" :[
+    
+                {
+                     "rule": {
+                         "from": "usl_vspc_idl_snp.div_ AS fk LEFT JOIN usl_rdm_idl_spark_snp.time_zone_rf AS pk ON fk.div_time_zone_time_zone_rf_sk = pk.time_zone_rf_sk AND fk.div_time_zone_time_zone_rf_dp_code ='rdm_idl_spark' AND not coalesce(pk.deleted_flag,FALSE)",
+                         "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or fk.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(pk.deleted_flag, false) and not coalesce(fk.deleted_flag, false)",
+                         "rule_cd": "r_usl_gri_s_vspc_idl-rdm_idl_spark-div_-div_time_zone_time_zone_rf_sk",
+                         "code_datahub": "INTEGRAL#VSPC_IDL-RDM_IDL_SPARK",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
+                        {
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_gri_s_vspc_idl-rdm_idl_spark-div_-div_time_zone_time_zone_rf_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_gri_s_vspc_idl-rdm_idl_spark-div_-div_time_zone_time_zone_rf_sk",
+                                         "metric_desc": "Для каждого значения внешнего ключа div_.div_time_zone_time_zone_rf_sk должна найтись запись в таблице time_zone_rf с тем же значением первичного ключа time_zone_rf_sk",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN fk.div_time_zone_time_zone_rf_sk IS NOT NULL AND fk.div_time_zone_time_zone_rf_dp_code = 'rdm_idl_spark' AND pk.time_zone_rf_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 1
+                                     }
+                                 }
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_gri_s_vspc_idl-rdm_idl_spark-div_-div_time_zone_time_zone_rf_sk",
+                                 "crit_desc": "Для каждого значения внешнего ключа должна найтись запись в таблице с тем же значением первичного ключа",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.DIV_TIME_ZONE_TIME_ZONE_RF_SK"
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Ссылочная целостность"
+                             }
+                         }
+                     ]
+                 }
+                ,{
+                     "rule": {
+                         "from": "usl_vspc_idl_snp.div_h AS fk LEFT JOIN usl_rdm_idl_spark_snp.pay_sys_prtcpnt AS pk ON fk.pay_sys_prtcpnt_sk = pk.pay_sys_prtcpnt_sk AND fk.pay_sys_prtcpnt_dp_code ='rdm_idl_spark' AND not coalesce(pk.deleted_flag,FALSE)",
+                         "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or fk.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(pk.deleted_flag, false)",
+                         "rule_cd": "r_usl_gri_s_vspc_idl-rdm_idl_spark-div_h-pay_sys_prtcpnt_sk",
+                         "code_datahub": "INTEGRAL#VSPC_IDL-RDM_IDL_SPARK",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
+                        {
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_gri_s_vspc_idl-rdm_idl_spark-div_h-pay_sys_prtcpnt_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_gri_s_vspc_idl-rdm_idl_spark-div_h-pay_sys_prtcpnt_sk",
+                                         "metric_desc": "Для каждого значения внешнего ключа div_h.pay_sys_prtcpnt_sk должна найтись запись в таблице pay_sys_prtcpnt с тем же значением первичного ключа pay_sys_prtcpnt_sk",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN fk.pay_sys_prtcpnt_sk IS NOT NULL AND fk.pay_sys_prtcpnt_dp_code = 'rdm_idl_spark' AND pk.pay_sys_prtcpnt_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 1
+                                     }
+                                 }
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_gri_s_vspc_idl-rdm_idl_spark-div_h-pay_sys_prtcpnt_sk",
+                                 "crit_desc": "Для каждого значения внешнего ключа должна найтись запись в таблице с тем же значением первичного ключа",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.PAY_SYS_PRTCPNT_SK"
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Ссылочная целостность"
+                             }
+                         }
+                     ]
+                 }
+                ,{
+                     "rule": {
+                         "from": "usl_vspc_idl_snp.addr AS fk LEFT JOIN usl_rdm_idl_spark_snp.rus_fed_subj AS pk ON fk.rus_fed_subj_sk = pk.rus_fed_subj_sk AND fk.rus_fed_subj_dp_code ='rdm_idl_spark' AND not coalesce(pk.deleted_flag,FALSE)",
+                         "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or fk.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(pk.deleted_flag, false) and not coalesce(fk.deleted_flag, false)",
+                         "rule_cd": "r_usl_gri_s_vspc_idl-rdm_idl_spark-addr-rus_fed_subj_sk",
+                         "code_datahub": "INTEGRAL#VSPC_IDL-RDM_IDL_SPARK",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
+                        {
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_gri_s_vspc_idl-rdm_idl_spark-addr-rus_fed_subj_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_gri_s_vspc_idl-rdm_idl_spark-addr-rus_fed_subj_sk",
+                                         "metric_desc": "Для каждого значения внешнего ключа addr.rus_fed_subj_sk должна найтись запись в таблице rus_fed_subj с тем же значением первичного ключа rus_fed_subj_sk",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN fk.rus_fed_subj_sk IS NOT NULL AND fk.rus_fed_subj_dp_code = 'rdm_idl_spark' AND pk.rus_fed_subj_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 1
+                                     }
+                                 }
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_gri_s_vspc_idl-rdm_idl_spark-addr-rus_fed_subj_sk",
+                                 "crit_desc": "Для каждого значения внешнего ключа должна найтись запись в таблице с тем же значением первичного ключа",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.RUS_FED_SUBJ_SK"
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Ссылочная целостность"
+                             }
+                         }
+                     ]
+                 }
+                ,{
+                     "rule": {
+                         "from": "usl_vspc_idl_snp.addr AS fk LEFT JOIN usl_rdm_idl_spark_snp.okato2 AS pk ON fk.okato2_sk = pk.okato2_sk AND fk.okato2_dp_code ='rdm_idl_spark' AND not coalesce(pk.deleted_flag,FALSE)",
+                         "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or fk.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(pk.deleted_flag, false) and not coalesce(fk.deleted_flag, false)",
+                         "rule_cd": "r_usl_gri_s_vspc_idl-rdm_idl_spark-addr-okato2_sk",
+                         "code_datahub": "INTEGRAL#VSPC_IDL-RDM_IDL_SPARK",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
+                        {
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_gri_s_vspc_idl-rdm_idl_spark-addr-okato2_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_gri_s_vspc_idl-rdm_idl_spark-addr-okato2_sk",
+                                         "metric_desc": "Для каждого значения внешнего ключа addr.okato2_sk должна найтись запись в таблице okato2 с тем же значением первичного ключа okato2_sk",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN fk.okato2_sk IS NOT NULL AND fk.okato2_dp_code = 'rdm_idl_spark' AND pk.okato2_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 1
+                                     }
+                                 }
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_gri_s_vspc_idl-rdm_idl_spark-addr-okato2_sk",
+                                 "crit_desc": "Для каждого значения внешнего ключа должна найтись запись в таблице с тем же значением первичного ключа",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.OKATO2_SK"
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Ссылочная целостность"
+                             }
+                         }
+                     ]
+                 }
+                ,{
+                     "rule": {
+                         "from": "usl_vspc_idl_snp.addr AS fk LEFT JOIN usl_rdm_idl_spark_snp.cntry AS pk ON fk.cntry_sk = pk.cntry_sk AND fk.cntry_dp_code ='rdm_idl_spark' AND not coalesce(pk.deleted_flag,FALSE)",
+                         "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or fk.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(pk.deleted_flag, false) and not coalesce(fk.deleted_flag, false)",
+                         "rule_cd": "r_usl_gri_s_vspc_idl-rdm_idl_spark-addr-cntry_sk",
+                         "code_datahub": "INTEGRAL#VSPC_IDL-RDM_IDL_SPARK",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
+                        {
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_gri_s_vspc_idl-rdm_idl_spark-addr-cntry_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_gri_s_vspc_idl-rdm_idl_spark-addr-cntry_sk",
+                                         "metric_desc": "Для каждого значения внешнего ключа addr.cntry_sk должна найтись запись в таблице cntry с тем же значением первичного ключа cntry_sk",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN fk.cntry_sk IS NOT NULL AND fk.cntry_dp_code = 'rdm_idl_spark' AND pk.cntry_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 1
+                                     }
+                                 }
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_gri_s_vspc_idl-rdm_idl_spark-addr-cntry_sk",
+                                 "crit_desc": "Для каждого значения внешнего ключа должна найтись запись в таблице с тем же значением первичного ключа",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.CNTRY_SK"
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Ссылочная целостность"
+                             }
+                         }
+                     ]
+                 }
+    ]
+    }
+
+]
