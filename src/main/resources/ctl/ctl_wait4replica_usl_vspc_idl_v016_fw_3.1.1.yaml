@@ -11,7 +11,7 @@ workflows:
 ############################################################One Instance CTL Yaml #####################################################
   - "{{ logical_env_prefix }}USL_VSPC_IDL":
       name: "{{ logical_env_prefix }}USL_VSPC_IDL"
-      category: "{{ logical_env_prefix }}USL_IDL"
+      category: "{{ logical_env_prefix }}VSPC"
       profile: "{{ CTL_PROFILE_NAME }}"
       singleLoading: true
       type: principal
@@ -29,6 +29,7 @@ workflows:
               statisticId: {{ archiveStat_FakeCardCode }}
               profile: "{{ archiveProfile_FakeCardCode }}"
               active: true
+
       params:
         - param:
             # Пользователь под которым запускается процесс
@@ -126,6 +127,14 @@ workflows:
         - param:
             name: cert_enabled_flag
             prior_value: "{{ cert_enabled_flag }}"
+        # for RT-FW logger
+        - param:
+            name: sl.logger.kafka_broker_list
+            prior_value: "{{ kafka_broker_list }}"
+        # for RT-FW logger
+        - param:
+            name: sl.logger.kafka_topic
+            prior_value: "{{ kafka_topic }}"
       notifications:
           - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru","SLSNTWRKDE_ess@sberbank.ru" ] }
           - { status: "RUNNING", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru","SLSNTWRKDE_ess@sberbank.ru" ] }
@@ -133,7 +142,7 @@ workflows:
 
   - "{{ logical_env_prefix }}USL_VSPC_IDL_INIT":
       name: "{{ logical_env_prefix }}USL_VSPC_IDL_INIT"
-      category: "{{ logical_env_prefix }}USL_IDL"
+      category: "{{ logical_env_prefix }}VSPC"
       profile: "{{ CTL_PROFILE_NAME }}"
       singleLoading: true
       type: principal
@@ -208,7 +217,7 @@ workflows:
         - param:
             # Значения параметров Spark, которые можно передать в командную строку spark-submit.
             name: common_spark_parameters
-            prior_value: "{{ spark_parameters }}"
+            prior_value: "{{ spark_parameters_init }}"
         - param:
             # Содержит полный путь, от корня до имени файла  (без имен файлов) к корневому каталогу дистрибутива data-продукта
             name: debug_distributive_path
@@ -241,6 +250,14 @@ workflows:
         - param:
             name: cert_enabled_flag
             prior_value: "{{ cert_enabled_flag }}"
+        # for RT-FW logger
+        - param:
+            name: sl.logger.kafka_broker_list
+            prior_value: "{{ kafka_broker_list }}"
+        # for RT-FW logger
+        - param:
+            name: sl.logger.kafka_topic
+            prior_value: "{{ kafka_topic }}"
       notifications:
           - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru","SLSNTWRKDE_ess@sberbank.ru" ] }
           - { status: "RUNNING", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru","SLSNTWRKDE_ess@sberbank.ru" ] }
