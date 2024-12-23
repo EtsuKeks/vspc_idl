@@ -15,6 +15,7 @@ public class TablesName {
 
     //source
     public static final String EBX_REP_M_SFS_0002_SFSDIVISION = "ebx_rep_m_sfs_0002_sfsdivision";
+    public static final String EBX_REP_M_RFCZONETIME_0002_RFCZONETIME = "ebx_rep_m_rfzonetime_0002_rfzonetime";
 
     private TablesName() {
         //no_op
