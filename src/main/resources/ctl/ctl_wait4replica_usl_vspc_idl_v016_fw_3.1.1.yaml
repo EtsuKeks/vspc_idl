@@ -107,9 +107,6 @@ workflows:
             # Имя запускаемого .jar-файла.
             name: devops_distributive_jar
             prior_value: "{{ devops_distributive_jar }}"
-        - param:
-            name: max_increment_depth
-            prior_value: "{{ max_increment_depth }}"
         # for RT-FW framework
         - param:
             name: recover_flag
@@ -230,9 +227,6 @@ workflows:
             # Имя запускаемого .jar-файла.
             name: devops_distributive_jar
             prior_value: "{{ devops_distributive_jar }}"
-        - param:
-            name: max_increment_depth
-            prior_value: "{{ max_increment_depth }}"
         # for RT-FW framework
         - param:
             name: recover_flag

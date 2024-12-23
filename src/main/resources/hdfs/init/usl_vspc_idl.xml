@@ -31,7 +31,9 @@
             <argument>${debug_distributive_path}</argument>  			 <!-- 6 -->
             <argument>${devops_distributive_jar}</argument>	         <!-- 7 -->
             <argument>${ctl_secure}</argument>                       <!-- 8 -->
+            <argument>${wf:conf('user.name')}</argument>        <!-- 9 -->
             <file>StartLauncher.sh#StartLauncher.sh</file>
+            <file>kvno_command.sh#kvno_command.sh</file>
         </shell>
         <ok to="End"/>
         <error to="Kill"/>

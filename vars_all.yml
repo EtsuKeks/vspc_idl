@@ -24,7 +24,7 @@ vars: &commonVars
   parallel_threads: 10
   debug_distributive_path: "{{ base_path }}/lib"
   debug_sk_off: "false"
-  build_version: "D-01.602.009"
+  build_version: "D-01.603.004"
   devops_distributive_jar: "vspc_idl-{{ build_version }}-jar-with-dependencies.jar"
 
   logical_env_prefix_with_slash: ""
@@ -35,7 +35,6 @@ vars: &commonVars
   yarn_queue: "{{ YARN_QUEUE }}"
   kerberos_realm: "{{ REALM }}"
   domain: "{{ REALM }}"
-  max_increment_depth: "10"
 
   data_owner_name: "SN"
   org_lvl2_name: "СП.Управление моделирования и исследования данных"
@@ -106,7 +105,7 @@ stands:
       USER_NAME: "u_utarnsdpfess_s_usl_t_vspc_idl"
       uslCluster: "utarnsdpfess"
       system_area_type: "{{ YARN_QUEUE }}"
-      log_level: "ESSA"
+      log_level: "INFO"
       yarn_queue_init: "init"
       kafka_broker_list: "https://ppliq-log000118.log.df.sbrf.ru:9093,https://ppliq-log000119.log.df.sbrf.ru:9093,https://ppliq-log000120.log.df.sbrf.ru:9093,https://ppliq-log000121.log.df.sbrf.ru:9093,https://ppliq-log000122.log.df.sbrf.ru:9093,https://ppliq-log000123.log.df.sbrf.ru:9093,https://ppliq-log000124.log.df.sbrf.ru:9093,https://ppliq-log000125.log.df.sbrf.ru:9093,https://ppliq-log000126.log.df.sbrf.ru:9093,https://ppliq-log000127.log.df.sbrf.ru:9093,https://ppliq-log000128.log.df.sbrf.ru:9093,https://ppliq-log000129.log.df.sbrf.ru:9093,https://ppliq-log000130.log.df.sbrf.ru:9093,https://ppliq-log000131.log.df.sbrf.ru:9093,https://ppliq-log000132.log.df.sbrf.ru:9093,https://ppliq-log000117.log.df.sbrf.ru:9093"
       kafka_topic: "log-kafka-10"
@@ -116,7 +115,7 @@ stands:
     vars:
       <<: *commonVars
       cluster_name: "arn6sdpfess"
-      spark_parameters: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.executor.memory=10G --conf spark.executor.cores=2 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=10G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=2G --conf spark.driver.memoryOverhead=5G --conf spark.executor.memoryOverhead=3G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=100 --conf spark.yarn.access.hadoopFileSystems=hdfs://hdfsgw/,hdfs://arnsdpfess2/ --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000"
+      spark_parameters: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.executor.memory=10G --conf spark.executor.cores=2 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=10G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=2G --conf spark.driver.memoryOverhead=5G --conf spark.executor.memoryOverhead=3G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=100 --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000"
       spark_parameters_init: "{{ spark_parameters }} --command essaDebugSkOff=ON_GF"
       hadoop_default_fs_uri: "hdfs://arnsdpfess2"
       user_name: "u_arn6sdpfess_s_usl_t_vspc_idl"

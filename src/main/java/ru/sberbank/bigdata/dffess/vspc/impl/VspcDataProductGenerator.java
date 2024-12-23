@@ -26,7 +26,7 @@ import ru.sberbank.bigdata.dffess.vspc.tables.timezone.TimeZoneConfiguration;
 public class VspcDataProductGenerator implements DataProductGenerator {
 
     @Override
-    public DataProduct generate() {
+    public DataProduct generate(String instanceCode) {
 
         EtlKit preloadKit = preloadKit();
         EtlKit snpKit = snpKit(preloadKit);
