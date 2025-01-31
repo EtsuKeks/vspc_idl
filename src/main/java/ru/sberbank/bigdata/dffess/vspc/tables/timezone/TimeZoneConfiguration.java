@@ -1,13 +1,13 @@
 package ru.sberbank.bigdata.dffess.vspc.tables.timezone;
 
 import ru.sberbank.bigdata.dffess.vspc.impl.VspcEtlConfiguration;
+import ru.sberbank.bigdata.essa.common.slave.compress.CompressedTablesGenerator;
+import ru.sberbank.bigdata.essa.common.slave.compress.EmptyCompressedGenerator;
 import ru.sberbank.bigdata.essa.common.slave.loading.DataLoader;
 import ru.sberbank.bigdata.essa.common.slave.loading.DataLoaderHistSnp;
-import ru.sberbank.bigdata.essa.common.slave.move.AfterCutDateGenerator;
-import ru.sberbank.bigdata.essa.common.slave.move.MovingTablesGenerator;
+import ru.sberbank.bigdata.essa.common.slave.loading.EmptyDataLoader;
+import ru.sberbank.bigdata.essa.common.slave.move.*;
 import ru.sberbank.bigdata.essa.common.slave.templates.EntityTransformer;
-import ru.sberbank.bigdata.essa.common.slave.move.AllMovingGenerator;
-import ru.sberbank.bigdata.essa.common.slave.move.HistMovingGenerator;
 import ru.sberbank.bigdata.essa.common.slave.loading.DataLoaderHubSnp;
 
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.TIMEZONE;

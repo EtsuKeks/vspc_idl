@@ -100,6 +100,9 @@ public final class ColumnsName {
     public static final String TIME_ZONE_WRLD_SHIFT_VAL = "time_zone_wrld_shift_val";
     public static final String ADDRESS_ADDRFACT_TIMEZONE = "address_addrfact_timezone";
 
+
+
+
     private ColumnsName() {
         //no_op
     }

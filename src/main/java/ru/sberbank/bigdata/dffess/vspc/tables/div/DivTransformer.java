@@ -2,9 +2,11 @@ package ru.sberbank.bigdata.dffess.vspc.tables.div;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
+import org.apache.spark.sql.types.DataTypes;
 import ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName;
 import ru.sberbank.bigdata.dffess.vspc.constant.TablesName;
 import ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant;
+import ru.sberbank.bigdata.dffess.vspc.tables.addr.AddrTransformer;
 import ru.sberbank.bigdata.essa.common.logger.LoggerWrapper;
 import ru.sberbank.bigdata.essa.common.slave.app.SparkWrapper;
 import ru.sberbank.bigdata.essa.common.slave.hdfs.HdfsService;
@@ -13,15 +15,11 @@ import ru.sberbank.bigdata.essa.common.slave.templates.EntityTransformer;
 import ru.sberbank.bigdata.essa.common.slave.templates.SkClientWrapper;
 import ru.sberbank.bigdata.essa.common.slave.templates.TransformConfiguration;
 import ru.sberbank.bigdata.essa.common.utils.EntityStaticService;
-import ru.sberbank.bigdata.dffess.vspc.tables.addr.AddrTransformer;
-import org.apache.spark.sql.Column;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.apache.spark.sql.functions.*;
-import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.CTL_VALIDFROM;
-import org.apache.spark.sql.types.*;
 
 public class DivTransformer implements EntityTransformer {
 
@@ -44,17 +42,20 @@ public class DivTransformer implements EntityTransformer {
 
                 //col(ColumnsName.ADDRESS_LOCATIONADDRESS).as(ColumnsName.DIV_LEGAL_ADDR_SK),
                 //col(ColumnsName.ADDRESS_LEGAL_LOCATIONADDRESS).as(ColumnsName.DIV_LEGAL_ADDR_SK),
-                                        
-                when(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null)
-                .otherwise(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM)).as(ColumnsName.DIV_FULL_REG_NUM),
 
-                when(col(ColumnsName.FULLNAME).equalTo("ПАО Сбербанк"), 
+                when(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null)
+                        .otherwise(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM)).as(ColumnsName.DIV_FULL_REG_NUM),
+
+                when(col(ColumnsName.FULLNAME).equalTo("ПАО Сбербанк"),
                         when(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null).otherwise(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM)))
-                .otherwise(
-                        when(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null)
-                        .otherwise(substring_index(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM), "/", -1))).cast(DataTypes.IntegerType).as(ColumnsName.DIV_REG_ORD),
-                
-                col(ColumnsName.ADDRESS_ADDRFACT_TIMEZONE).as(ColumnsName.DIV_TIME_ZONE_TIME_ZONE_SK),
+                        .otherwise(
+                                when(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null)
+                                        .otherwise(substring_index(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM), "/", -1))).cast(DataTypes.IntegerType).as(ColumnsName.DIV_REG_ORD),
+
+                //col(ColumnsName.ADDRESS_ADDRFACT_TIMEZONE).as(ColumnsName.DIV_TIME_ZONE_TIME_ZONE_SK),
+
+                when(col(ColumnsName.ADDRESS_ADDRFACT_TIMEZONE).equalTo("KALT"), "USZ1")
+                        .otherwise(col(ColumnsName.ADDRESS_ADDRFACT_TIMEZONE)).as(ColumnsName.DIV_TIME_ZONE_TIME_ZONE_SK),
 
                 lit(null).as(ColumnsName.ADDR_IDX_NUM),
                 lit(null).as(ColumnsName.ADDR_DISTRICT_NAME),
@@ -86,20 +87,20 @@ public class DivTransformer implements EntityTransformer {
                 //col(ColumnsName.ADDRESS_LOCATIONADDRESS).as(ColumnsName.DIV_LEGAL_ADDR_SK),
 
                 when(col(ColumnsName.ADDR_SRC_TXT).isNotNull(), AddrTransformer.getKey("|")).otherwise(null).as(ColumnsName.DIV_LEGAL_ADDR_SK),
-        
+
                 //AddrTransformer.getKey("|").as(ColumnsName.DIV_LEGAL_ADDR_SK),
 
                 lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.DIV_LEGAL_ADDR_DP_CODE),
                 lit(false).as(ColumnsName.DIRTY_FLAG),
-                                        
+
                 col(ColumnsName.DIV_FULL_REG_NUM).as(ColumnsName.DIV_FULL_REG_NUM),
 
                 col(ColumnsName.DIV_REG_ORD).as(ColumnsName.DIV_REG_ORD),
-                
+
                 col(ColumnsName.DIV_TIME_ZONE_TIME_ZONE_SK).as(ColumnsName.DIV_TIME_ZONE_TIME_ZONE_SK),
                 lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.DIV_TIME_ZONE_TIME_ZONE_DP_CODE)
         ).distinct();
-        
+
         Map<String, String> columnEntities = new HashMap<>();
         columnEntities.put(ColumnsName.DIV_PARENT_DIV_SK, TablesName.DIV);
         columnEntities.put(ColumnsName.DIV_LEGAL_ADDR_SK, TablesName.ADDR);
