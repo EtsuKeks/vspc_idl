@@ -26,7 +26,7 @@
 
   "ess": {
     "meta": [
-      "usl/certification/cap_certification_usl.vspc_idl_v016_fw_3.1.1.json"
+      "usl/certification/cap_certification_usl.vspc_idl_v017_fw_3.5.4.json"
     ], 
     "kkd-spod": [
       "usl/certification/dq.vspc_idl.v016_fw_3.1.1.json"
@@ -79,8 +79,8 @@
   ],
   "template_files": [
     "usl/certification/dq.vspc_idl.v016_fw_3.1.1.json",
-    "sql/ddl/ddl.usl.vspc_idl.v016.model_stg.8.94.0_fw_3.1.1.sql",
-    "sql/ddl/ddl.usl.vspc_idl.v016.model.8.94.0_fw_3.1.1.sql"
+    "sql/ddl/ddl.usl.vspc_idl.v017.model_stg.9.4.0_fw_3.5.4.sql",
+    "sql/ddl/ddl.usl.vspc_idl.v017.model.9.4.0_fw_3.5.4.sql"
   ],
   "workflow_to_run" : [
     "USL_VSPC_IDL_INIT"
