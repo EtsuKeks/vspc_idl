@@ -99,7 +99,7 @@ stands:
       <<: *commonVars
       cluster_name: "utarnsdpfess"
       spark_parameters: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.executor.memory=10G --conf spark.executor.cores=2 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=20G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=20G --conf spark.driver.memoryOverhead=10G --conf spark.executor.memoryOverhead=3G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=100 --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000"
-      spark_parameters_init: "{{ spark_parameters }} --command essaDebugSkOff=ON_GF"
+      spark_parameters_init: "{{ spark_parameters }}"
       hadoop_default_fs_uri: "hdfs://utarnsdpfess"
       user_name: "u_utarnsdpfess_s_usl_t_vspc_idl"
       USER_NAME: "u_utarnsdpfess_s_usl_t_vspc_idl"
@@ -116,7 +116,7 @@ stands:
       <<: *commonVars
       cluster_name: "arn6sdpfess"
       spark_parameters: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.executor.memory=10G --conf spark.executor.cores=2 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=10G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=2G --conf spark.driver.memoryOverhead=5G --conf spark.executor.memoryOverhead=3G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=100 --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000"
-      spark_parameters_init: "{{ spark_parameters }} --command essaDebugSkOff=ON_GF"
+      spark_parameters_init: "{{ spark_parameters }}"
       hadoop_default_fs_uri: "hdfs://arnsdpfess2"
       user_name: "u_arn6sdpfess_s_usl_t_vspc_idl"
       USER_NAME: "u_arn6sdpfess_s_usl_t_vspc_idl"
