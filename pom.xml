@@ -6,7 +6,7 @@
 
     <groupId>ru.sberbank.bigdata.dffess.ssd</groupId>
     <artifactId>vspc_idl</artifactId>
-    <version>D-01.701.005</version>
+    <version>D-01.701.006</version>
 
     <properties>
         <essa.common.version>2.2.0-SNAPSHOT</essa.common.version>
@@ -16,6 +16,7 @@
         <jackson.version>2.12.7.1</jackson.version>
         <jackson-annotations.version>2.12.2</jackson-annotations.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <skclient.version>1.27.0</skclient.version>
     </properties>
 
     <dependencies>
@@ -51,6 +52,10 @@
                 <exclusion>
                     <groupId>com.fasterxml.jackson.core</groupId>
                     <artifactId>jackson-databind</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>ru.sberbank.bigdata.sl.sk</groupId>
+                    <artifactId>sl-sk-client</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -88,6 +93,22 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ru.sberbank.bigdata.sl.sk</groupId>
+            <artifactId>sl-sk-client</artifactId>
+            <version>${skclient.version}</version>
+            <!-- exclusions for compatibility with rt-fw-baseline -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.hadoop</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.spark</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
