@@ -1,6 +1,7 @@
 package ru.sberbank.bigdata.dffess.vspc.constant;
 
 public final class ColumnsName {
+
     //target
     public static final String CTL_VALIDFROM = "ctl_validfrom";
 
@@ -8,7 +9,6 @@ public final class ColumnsName {
     public static final String SID = "sid";
 
     public static final String DIRTY_FLAG = "dirty_flag";
-
 
     public static final String ADDR_CITY_NAME = "city_name";
     public static final String ADDR_FIAS_CODE = "fias_code";
@@ -22,10 +22,10 @@ public final class ColumnsName {
     public static final String ADDR_OKATO2_SK = "okato2_sk";
     public static final String ADDR_OKATO2_DP_CODE = "okato2_dp_code";
 
-
     public static final String ADDR_SRC_TXT = "src_txt";
     public static final String ADDR_STREET_NAME = "street_name";
     public static final String ADDR_STANDART_ADDRESS_TXT = "standard_addr_txt";
+
     //source
     public static final String ADDRESS_ADDRFACT_ADDRSTREET_STREETNAME = "address_addrfact_addrstreet_streetname";
     public static final String ADDRESS_ADDRFACT_ADDRSTREET_HOUSENUMBERS = "address_addrfact_addrhouse_housenumbers";
@@ -99,9 +99,6 @@ public final class ColumnsName {
     public static final String TIME_ZONE_SK = "time_zone_rf_sk";
     public static final String TIME_ZONE_WRLD_SHIFT_VAL = "time_zone_wrld_shift_val";
     public static final String ADDRESS_ADDRFACT_TIMEZONE = "address_addrfact_timezone";
-
-
-
 
     private ColumnsName() {
         //no_op

@@ -16,9 +16,9 @@ import ru.sberbank.bigdata.essa.common.utils.EntityStaticService;
 
 import static org.apache.spark.sql.functions.col;
 import static org.apache.spark.sql.functions.lit;
-import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.CTL_VALIDFROM;
 
 public class TerrDivTypeTransformer implements EntityTransformer {
+
     @Override
     public Dataset<Row> transformData(SparkWrapper sparkWrapper, SkClientWrapper skClientWrapper, HdfsService hdfsService,
                                       EntityStaticService entityStaticService, TransformConfiguration transformConfiguration,

@@ -9,6 +9,7 @@ import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.*;
 import static ru.sberbank.bigdata.essa.common.utils.Expression.stringList;
 
 public class VspcEtlSeqServiceImpl implements EtlSeqService {
+
     @Override
     public List<String> getSeq(String instanceCode, CommonConst.LoadMode loadMode) {
         return stringList(

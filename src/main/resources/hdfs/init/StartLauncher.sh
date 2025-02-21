@@ -18,7 +18,7 @@ krb5cc_file_name=krb5cc_${user}_$(uuidgen)
 krb5cc_file_path=/tmp/${krb5cc_file_name}
 export KRB5CCNAME=/tmp/${krb5cc_file_name}
 #export RTFW_KERBEROS_TICKET_CACHE_FILE=${krb5cc_file_name}
-export RTFW_KERBEROS_TICKET_CACHE_FILE=RTFW_KERBEROS_TICKET_CACHE_FILE
+export RTFW_KERBEROS_TICKET_CACHE_FILE=rtfw_kerberos_ticket_cache_file
 
 hdfs dfs -get ${user_keytab_path} ${user_keytab_path_local}
 kinit -kt ${user_keytab_path_local} ${user_principal}
@@ -31,7 +31,7 @@ echo ${kvno_command}
 echo ----------------  kvno_command end  ----------------
 $kvno_command
 hadoopFileSystems=$(cat /etc/hadoop/conf/hdfs-site.xml | tr '\n' ' ' | sed -e 's/^.*dfs.nameservices<\/name>\s*<value>\([^<]*\)<.*/\1/' | tr ',' '\n' | sed -e 's/^\(.*\)$/hdfs:\/\/\1:8020/' | tr '\n' ',')
-cp $krb5cc_file_path ./RTFW_KERBEROS_TICKET_CACHE_FILE
+cp $krb5cc_file_path ./rtfw_kerberos_ticket_cache_file
 
 klist
 

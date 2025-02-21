@@ -3,18 +3,17 @@ package ru.sberbank.bigdata.dffess.vspc.impl;
 import ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName;
 import ru.sberbank.bigdata.essa.common.structure.MetadataKeeper;
 
-import static ru.sberbank.bigdata.essa.common.utils.Expression.stringList;
-
 import static org.apache.spark.sql.functions.col;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.*;
 import static ru.sberbank.bigdata.essa.common.constant.CommonColumnName.*;
-import static ru.sberbank.bigdata.essa.common.constant.CommonColumnName.PARTITION_COLUMN_MONTH;
+import static ru.sberbank.bigdata.essa.common.utils.Expression.stringList;
 
 public class VspcMetadataKeeper extends MetadataKeeper {
+
     @Override
     public void build() {
         addTable(ADDR, stringList(ColumnsName.ADDR_SK));
-        addTable(ADDRH, stringList(ColumnsName.ADDR_SK), col(END_DT),PARTITION_COLUMN_MONTH, stringList(START_DT, END_DT, PARTITION_COLUMN_MONTH));
+        addTable(ADDRH, stringList(ColumnsName.ADDR_SK), col(END_DT), PARTITION_COLUMN_MONTH, stringList(START_DT, END_DT, PARTITION_COLUMN_MONTH));
         addTable(DIV, stringList(ColumnsName.DIV_SK));
         addTable(DIVH, stringList(ColumnsName.DIV_SK), col(END_DT), PARTITION_COLUMN_MONTH, stringList(START_DT, END_DT, PARTITION_COLUMN_MONTH));
         addTable(DIVTYPE, stringList(ColumnsName.DIV_SK), col(END_DT), PARTITION_COLUMN_MONTH, stringList(START_DT, END_DT, PARTITION_COLUMN_MONTH));

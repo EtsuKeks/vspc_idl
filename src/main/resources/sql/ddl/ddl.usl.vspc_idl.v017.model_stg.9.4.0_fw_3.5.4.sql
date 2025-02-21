@@ -361,6 +361,9 @@ location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/diff_time_zo
 
 msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.diff_time_zone_rf;
 
+------------------------------------------------------------------------------------------------------------------------
+-- entity_statistic table
+------------------------------------------------------------------------------------------------------------------------
 
 drop table if exists usl_{{ logical_env_prefix }}vspc_idl_stg.entity_statistic;
 
@@ -372,3 +375,22 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.entity_statistic 
 partitioned by (dst_table STRING)
 stored as parquet
 location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/entity_statistic';
+
+msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.entity_statistic;
+
+------------------------------------------------------------------------------------------------------------------------
+-- partitions_statistic table
+------------------------------------------------------------------------------------------------------------------------
+
+drop table if exists usl_{{ logical_env_prefix }}vspc_idl_stg.partitions_statistic;
+
+create external table usl_{{ logical_env_prefix }}vspc_idl_stg.partitions_statistic (
+    partition_value STRING,
+    ctl_loading BIGINT,
+    loading_date TIMESTAMP
+)
+partitioned by (dst_table STRING)
+stored as parquet
+location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/partitions_statistic';
+
+msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.partitions_statistic;

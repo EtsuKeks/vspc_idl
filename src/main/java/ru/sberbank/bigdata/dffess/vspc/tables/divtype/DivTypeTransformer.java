@@ -17,10 +17,12 @@ import ru.sberbank.bigdata.essa.common.utils.EntityStaticService;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.apache.spark.sql.functions.*;
+import static org.apache.spark.sql.functions.col;
+import static org.apache.spark.sql.functions.lit;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.CTL_VALIDFROM;
 
 public class DivTypeTransformer implements EntityTransformer {
+
     @Override
     public Dataset<Row> transformData(SparkWrapper sparkWrapper, SkClientWrapper skClientWrapper, HdfsService hdfsService,
                                       EntityStaticService entityStaticService, TransformConfiguration transformConfiguration,
