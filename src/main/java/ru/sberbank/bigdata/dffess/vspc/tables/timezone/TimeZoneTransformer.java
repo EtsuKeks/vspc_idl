@@ -2,7 +2,6 @@ package ru.sberbank.bigdata.dffess.vspc.tables.timezone;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
-import ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant;
 import ru.sberbank.bigdata.essa.common.logger.LoggerWrapper;
 import ru.sberbank.bigdata.essa.common.slave.app.SparkWrapper;
 import ru.sberbank.bigdata.essa.common.slave.hdfs.HdfsService;
@@ -17,6 +16,7 @@ import static org.apache.spark.sql.functions.lit;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.EBX_REP_M_RFCZONETIME_0002_RFCZONETIME;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.TIMEZONE;
+import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DATA_PRODUCT;
 import static ru.sberbank.bigdata.essa.common.constant.CommonColumnName.SID;
 
 public class TimeZoneTransformer implements EntityTransformer {
@@ -28,16 +28,16 @@ public class TimeZoneTransformer implements EntityTransformer {
 
         Dataset<Row> timezone = sparkWrapper.getDataset(transformConfiguration.getSnpSrcSchema(EBX_REP_M_RFCZONETIME_0002_RFCZONETIME), EBX_REP_M_RFCZONETIME_0002_RFCZONETIME);
         timezone = timezone.select(
-                        col("abbreviation").as(SID),
-                        col("abbreviation").as(TIME_ZONE_ABBR_CODE),
-                        col("code").as(TIME_ZONE_CODE),
-                        col("timedesignation").as(TIME_ZONE_MSK_SHIFT_VAL),
-                        col("name00").as(TIME_ZONE_NAME),
-                        lit(VspcConstant.DATA_PRODUCT).as(TIME_ZONE_DP_CODE),
-                        col("abbreviation").as(TIME_ZONE_SK),
-                        col("utcformat").as(TIME_ZONE_WRLD_SHIFT_VAL),
+                        col(ABBREVIATION).as(SID),
+                        col(ABBREVIATION).as(TIME_ZONE_ABBR_CODE),
+                        col(CODE).as(TIME_ZONE_CODE),
+                        col(TIMEDESIGNATION).as(TIME_ZONE_MSK_SHIFT_VAL),
+                        col(NAME00).as(TIME_ZONE_NAME),
+                        lit(DATA_PRODUCT).as(TIME_ZONE_DP_CODE),
+                        col(ABBREVIATION).as(TIME_ZONE_SK),
+                        col(UTCFORMAT).as(TIME_ZONE_WRLD_SHIFT_VAL),
                         lit(false).as(DIRTY_FLAG)
-                ).where(col("abbreviation").isNotNull())
+                ).where(col(ABBREVIATION).isNotNull())
                 .distinct();
 
         timezone = skClientWrapper.generateSk(timezone, TIMEZONE, transformConfiguration.getLoadMode(), transformConfiguration);

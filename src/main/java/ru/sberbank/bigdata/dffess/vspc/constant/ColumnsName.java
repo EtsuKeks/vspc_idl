@@ -4,6 +4,7 @@ public final class ColumnsName {
 
     //    SOURCE
 
+    // EBX_REP_M_SFS_0002_SFSDIVISION
     public static final String ADDRESS_ADDRFACT_ADDRAREA_AREANAME = "address_addrfact_addrarea_areaname";
     public static final String ADDRESS_ADDRFACT_ADDRCITY_CITYNAME = "address_addrfact_addrcity_cityname";
     public static final String ADDRESS_ADDRFACT_ADDRSTREET_HOUSENUMBERS = "address_addrfact_addrhouse_housenumbers";
@@ -27,6 +28,13 @@ public final class ColumnsName {
     public static final String REQUSITEDIVISION_BIC = "requisitesdivision_bic";
     public static final String DIV_REQUISITEDIVISION_REGISTRATIONNUM = "requisitesdivision_registrationnum";
     public static final String SHORTDIVCODE = "shortdivcode";
+
+    // EBX_REP_M_RFCZONETIME_0002_RFCZONETIME
+    public static final String ABBREVIATION = "abbreviation";
+    public static final String CODE = "code";
+    public static final String TIMEDESIGNATION = "timedesignation";
+    public static final String NAME00 = "name00";
+    public static final String UTCFORMAT = "utcformat";
 
     //    TARGET
 
