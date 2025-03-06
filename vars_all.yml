@@ -24,7 +24,7 @@ vars: &commonVars
   parallel_threads: 10
   debug_distributive_path: "{{ base_path }}/lib"
   debug_sk_off: "false"
-  build_version: "D-01.701.007"
+  build_version: "D-01.701.008"
   devops_distributive_jar: "vspc_idl-{{ build_version }}-jar-with-dependencies.jar"
 
   logical_env_prefix_with_slash: ""
@@ -54,6 +54,10 @@ vars: &commonVars
 
   starting_business_date: "2019-06-01"
 
+  # sl_secman_sberca_role для работы с CN увеличенной длины
+  sl_secman_sberca_role: "client_3y_CUSTOM_rsa"
+
+
 stands:
   # DEV
   - stand_inventory: sdpdevfess
@@ -71,6 +75,7 @@ stands:
       uslCluster: "sdpdevfess"
       system_area_type: "q_SDP_comm"
       log_level: "ESSA"
+      sl_secman_sberca_role: "client_3y_AS_rsa"
       archiveProfile_sfs: "Default"
       kafka_broker_list: "tvlsq-log000001.dev.df.sbrf.ru:9093,tvlsq-log000002.dev.df.sbrf.ru:9093,tvlsq-log000003.dev.df.sbrf.ru:9093,tvlsq-log000004.dev.df.sbrf.ru:9093,tvlsq-log000005.dev.df.sbrf.ru:9093,tvlsq-log000006.dev.df.sbrf.ru:9093"
 #      kafka_topic: "log-kafka-04"

@@ -138,6 +138,10 @@ workflows:
         - param:
             name: sl.logger.kafka_topic
             prior_value: "{{ kafka_topic }}"
+        - param:
+            # Поддержка длинных имен дата продуктов rtfw 3.4.x
+            name: sl.secman.sberca_role
+            prior_value: "{{ sl_secman_sberca_role }}"
       notifications:
           - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru","SLSNTWRKDE_ess@sberbank.ru" ] }
           - { status: "RUNNING", emails: [ "SLSNTWRKDE_ess@sberbank.ru" ] }
@@ -258,6 +262,10 @@ workflows:
         - param:
             name: sl.logger.kafka_topic
             prior_value: "{{ kafka_topic }}"
+        - param:
+            # Поддержка длинных имен дата продуктов rtfw 3.4.x
+            name: sl.secman.sberca_role
+            prior_value: "{{ sl_secman_sberca_role }}"
       notifications:
           - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru","SLSNTWRKDE_ess@sberbank.ru" ] }
           - { status: "RUNNING", emails: [ "SLSNTWRKDE_ess@sberbank.ru" ] }

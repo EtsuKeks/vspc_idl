@@ -6,7 +6,7 @@
 
     <groupId>ru.sberbank.bigdata.dffess.ssd</groupId>
     <artifactId>vspc_idl</artifactId>
-    <version>D-01.701.007</version>
+    <version>D-01.701.008</version>
 
     <properties>
         <essa.common.version>2.2.0-SNAPSHOT</essa.common.version>

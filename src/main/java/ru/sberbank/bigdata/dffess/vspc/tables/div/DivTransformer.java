@@ -2,10 +2,6 @@ package ru.sberbank.bigdata.dffess.vspc.tables.div;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
-import org.apache.spark.sql.types.DataTypes;
-import ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName;
-import ru.sberbank.bigdata.dffess.vspc.constant.TablesName;
-import ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant;
 import ru.sberbank.bigdata.dffess.vspc.tables.addr.AddrTransformer;
 import ru.sberbank.bigdata.essa.common.logger.LoggerWrapper;
 import ru.sberbank.bigdata.essa.common.slave.app.SparkWrapper;
@@ -20,6 +16,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.apache.spark.sql.functions.*;
+import static org.apache.spark.sql.types.DataTypes.IntegerType;
+import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
+import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.*;
+import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DATA_PRODUCT;
+import static ru.sberbank.bigdata.essa.common.constant.CommonColumnName.SID;
 
 public class DivTransformer implements EntityTransformer {
 
@@ -28,85 +29,76 @@ public class DivTransformer implements EntityTransformer {
                                       EntityStaticService entityStaticService, TransformConfiguration transformConfiguration,
                                       EntityProxyRelation entityProxyRelation, LoggerWrapper loggerWrapper) {
 
-        Dataset<Row> div_raw = sparkWrapper.getDataset(transformConfiguration.getSnpSrcSchema(TablesName.EBX_REP_M_SFS_0002_SFSDIVISION), TablesName.EBX_REP_M_SFS_0002_SFSDIVISION);
+        Dataset<Row> div_raw = sparkWrapper.getDataset(transformConfiguration.getSnpSrcSchema(EBX_REP_M_SFS_0002_SFSDIVISION), EBX_REP_M_SFS_0002_SFSDIVISION);
 
         div_raw = div_raw.select(
-                col(ColumnsName.FULLDIVCODE).as(ColumnsName.SID),
-                col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_SK),
-                col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_CODE),
-                col(ColumnsName.SHORTDIVCODE).as(ColumnsName.DIV_SHORT_DIV_CODE),
-                to_date(col(ColumnsName.CLOSEDATE)).as(ColumnsName.DIV_CLOSEDATE),
-                to_date(col(ColumnsName.OPENDATE)).as(ColumnsName.DIV_OPENDATE),
-                concat(lit("0"), col(ColumnsName.FULLDIVCODE)).as(ColumnsName.DIV_SUBBRANCH_CODE),
-                col(ColumnsName.HEADDIVISIONCODE).as(ColumnsName.DIV_PARENT_DIV_SK),
+                col(FULLDIVCODE).as(SID),
+                col(FULLDIVCODE).as(DIV_SK),
+                col(FULLDIVCODE).as(DIV_CODE),
+                col(SHORTDIVCODE).as(DIV_SHORT_DIV_CODE),
+                to_date(col(CLOSEDATE)).as(DIV_CLOSEDATE),
+                to_date(col(OPENDATE)).as(DIV_OPENDATE),
+                concat(lit("0"), col(FULLDIVCODE)).as(DIV_SUBBRANCH_CODE),
+                col(HEADDIVISIONCODE).as(DIV_PARENT_DIV_SK),
 
-                //col(ColumnsName.ADDRESS_LOCATIONADDRESS).as(ColumnsName.DIV_LEGAL_ADDR_SK),
-                //col(ColumnsName.ADDRESS_LEGAL_LOCATIONADDRESS).as(ColumnsName.DIV_LEGAL_ADDR_SK),
+                when(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null)
+                        .otherwise(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM)).as(DIV_FULL_REG_NUM),
 
-                when(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null)
-                        .otherwise(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM)).as(ColumnsName.DIV_FULL_REG_NUM),
-
-                when(col(ColumnsName.FULLNAME).equalTo("ПАО Сбербанк"),
-                        when(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null).otherwise(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM)))
+                when(col(FULLNAME).equalTo("ПАО Сбербанк"),
+                        when(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null).otherwise(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM)))
                         .otherwise(
-                                when(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null)
-                                        .otherwise(substring_index(col(ColumnsName.DIV_REQUISITEDIVISION_REGISTRATIONNUM), "/", -1))).cast(DataTypes.IntegerType).as(ColumnsName.DIV_REG_ORD),
+                                when(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null)
+                                        .otherwise(substring_index(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM), "/", -1))).cast(IntegerType).as(DIV_REG_ORD),
 
-                //col(ColumnsName.ADDRESS_ADDRFACT_TIMEZONE).as(ColumnsName.DIV_TIME_ZONE_TIME_ZONE_SK),
+                when(col(ADDRESS_ADDRFACT_TIMEZONE).equalTo("KALT"), "USZ1")
+                        .otherwise(col(ADDRESS_ADDRFACT_TIMEZONE)).as(DIV_TIME_ZONE_TIME_ZONE_SK),
 
-                when(col(ColumnsName.ADDRESS_ADDRFACT_TIMEZONE).equalTo("KALT"), "USZ1")
-                        .otherwise(col(ColumnsName.ADDRESS_ADDRFACT_TIMEZONE)).as(ColumnsName.DIV_TIME_ZONE_TIME_ZONE_SK),
-
-                lit(null).as(ColumnsName.ADDR_IDX_NUM),
-                lit(null).as(ColumnsName.ADDR_DISTRICT_NAME),
-                lit(null).as(ColumnsName.ADDR_LOCTY_NAME),
-                lit(null).as(ColumnsName.ADDR_REG_ADDR_NAME),
-                col(ColumnsName.ADDRESS_LEGAL_LOCATIONADDRESS).as(ColumnsName.ADDR_SRC_TXT),
-                lit(null).as(ColumnsName.ADDR_CITY_NAME),
-                lit(null).as(ColumnsName.ADDR_FIAS_CODE),
-                lit(null).as(ColumnsName.ADDR_HOUSE_NUM),
-                lit(null).as(ColumnsName.ADDR_STREET_NAME),
-                lit(null).as(ColumnsName.ADDR_CNTRY_SK),
-                lit(null).as(ColumnsName.ADDR_OKATO2_SK),
-                lit(null).as(ColumnsName.ADDR_RUS_FED_SUBJ_SK)
+                lit(null).as(ADDR_IDX_NUM),
+                lit(null).as(ADDR_DISTRICT_NAME),
+                lit(null).as(ADDR_LOCTY_NAME),
+                lit(null).as(ADDR_REG_ADDR_NAME),
+                col(ADDRESS_LEGAL_LOCATIONADDRESS).as(ADDR_SRC_TXT),
+                lit(null).as(ADDR_CITY_NAME),
+                lit(null).as(ADDR_FIAS_CODE),
+                lit(null).as(ADDR_HOUSE_NUM),
+                lit(null).as(ADDR_STREET_NAME),
+                lit(null).as(ADDR_CNTRY_SK),
+                lit(null).as(ADDR_OKATO2_SK),
+                lit(null).as(ADDR_RUS_FED_SUBJ_SK)
 
         ).distinct();
 
         Dataset<Row> div = div_raw.select(
-                col(ColumnsName.SID).as(ColumnsName.SID),
-                col(ColumnsName.DIV_SK).as(ColumnsName.DIV_SK),
-                lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.DIV_DP_CODE),
-                col(ColumnsName.DIV_CODE).as(ColumnsName.DIV_CODE),
-                col(ColumnsName.DIV_SHORT_DIV_CODE).as(ColumnsName.DIV_SHORT_DIV_CODE),
-                col(ColumnsName.DIV_CLOSEDATE).as(ColumnsName.DIV_CLOSEDATE),
-                col(ColumnsName.DIV_OPENDATE).as(ColumnsName.DIV_OPENDATE),
-                col(ColumnsName.DIV_SUBBRANCH_CODE).as(ColumnsName.DIV_SUBBRANCH_CODE),
-                col(ColumnsName.DIV_PARENT_DIV_SK).as(ColumnsName.DIV_PARENT_DIV_SK),
-                lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.DIV_PARENT_DIV_DP_CODE),
+                col(SID).as(SID),
+                col(DIV_SK).as(DIV_SK),
+                lit(DATA_PRODUCT).as(DIV_DP_CODE),
+                col(DIV_CODE).as(DIV_CODE),
+                col(DIV_SHORT_DIV_CODE).as(DIV_SHORT_DIV_CODE),
+                col(DIV_CLOSEDATE).as(DIV_CLOSEDATE),
+                col(DIV_OPENDATE).as(DIV_OPENDATE),
+                col(DIV_SUBBRANCH_CODE).as(DIV_SUBBRANCH_CODE),
+                col(DIV_PARENT_DIV_SK).as(DIV_PARENT_DIV_SK),
+                lit(DATA_PRODUCT).as(DIV_PARENT_DIV_DP_CODE),
 
-                //col(ColumnsName.ADDRESS_LOCATIONADDRESS).as(ColumnsName.DIV_LEGAL_ADDR_SK),
+                when(col(ADDR_SRC_TXT).isNotNull(), AddrTransformer.getKey("|")).otherwise(null).as(DIV_LEGAL_ADDR_SK),
 
-                when(col(ColumnsName.ADDR_SRC_TXT).isNotNull(), AddrTransformer.getKey("|")).otherwise(null).as(ColumnsName.DIV_LEGAL_ADDR_SK),
+                lit(DATA_PRODUCT).as(DIV_LEGAL_ADDR_DP_CODE),
+                lit(false).as(DIRTY_FLAG),
 
-                //AddrTransformer.getKey("|").as(ColumnsName.DIV_LEGAL_ADDR_SK),
+                col(DIV_FULL_REG_NUM).as(DIV_FULL_REG_NUM),
 
-                lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.DIV_LEGAL_ADDR_DP_CODE),
-                lit(false).as(ColumnsName.DIRTY_FLAG),
+                col(DIV_REG_ORD).as(DIV_REG_ORD),
 
-                col(ColumnsName.DIV_FULL_REG_NUM).as(ColumnsName.DIV_FULL_REG_NUM),
-
-                col(ColumnsName.DIV_REG_ORD).as(ColumnsName.DIV_REG_ORD),
-
-                col(ColumnsName.DIV_TIME_ZONE_TIME_ZONE_SK).as(ColumnsName.DIV_TIME_ZONE_TIME_ZONE_SK),
-                lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.DIV_TIME_ZONE_TIME_ZONE_DP_CODE)
+                col(DIV_TIME_ZONE_TIME_ZONE_SK).as(DIV_TIME_ZONE_TIME_ZONE_SK),
+                lit(DATA_PRODUCT).as(DIV_TIME_ZONE_TIME_ZONE_DP_CODE)
         ).distinct();
 
         Map<String, String> columnEntities = new HashMap<>();
-        columnEntities.put(ColumnsName.DIV_PARENT_DIV_SK, TablesName.DIV);
-        columnEntities.put(ColumnsName.DIV_LEGAL_ADDR_SK, TablesName.ADDR);
-        columnEntities.put(ColumnsName.DIV_TIME_ZONE_TIME_ZONE_SK, TablesName.TIMEZONE);
+        columnEntities.put(DIV_PARENT_DIV_SK, DIV);
+        columnEntities.put(DIV_LEGAL_ADDR_SK, ADDR);
+        columnEntities.put(DIV_TIME_ZONE_TIME_ZONE_SK, TIMEZONE);
 
-        div = skClientWrapper.generateSk(div, TablesName.DIV, transformConfiguration.getLoadMode(), columnEntities, transformConfiguration);
+        div = skClientWrapper.generateSk(div, DIV, transformConfiguration.getLoadMode(), columnEntities, transformConfiguration);
         return div;
     }
 }
