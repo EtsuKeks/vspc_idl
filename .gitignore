@@ -15,3 +15,6 @@ metaide.properties
 model/**
 *.zip
 zeromq/**
+.vscode/
+.sberstack/*
+.sberstack
