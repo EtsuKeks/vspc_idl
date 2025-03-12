@@ -11,8 +11,7 @@ import ru.sberbank.bigdata.essa.common.slave.templates.SkClientWrapper;
 import ru.sberbank.bigdata.essa.common.slave.templates.TransformConfiguration;
 import ru.sberbank.bigdata.essa.common.utils.EntityStaticService;
 
-import static org.apache.spark.sql.functions.col;
-import static org.apache.spark.sql.functions.lit;
+import static org.apache.spark.sql.functions.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.EBX_REP_M_RFCZONETIME_0002_RFCZONETIME;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.TIMEZONE;
@@ -28,13 +27,13 @@ public class TimeZoneTransformer implements EntityTransformer {
 
         Dataset<Row> timezone = sparkWrapper.getDataset(transformConfiguration.getSnpSrcSchema(EBX_REP_M_RFCZONETIME_0002_RFCZONETIME), EBX_REP_M_RFCZONETIME_0002_RFCZONETIME);
         timezone = timezone.select(
-                        col(ABBREVIATION).as(SID),
-                        col(ABBREVIATION).as(TIME_ZONE_ABBR_CODE),
+                        when(col(ABBREVIATION).equalTo("USZ1"), "KALT").otherwise(col(ABBREVIATION)).as(SID),
+                        when(col(ABBREVIATION).equalTo("USZ1"), "KALT").otherwise(col(ABBREVIATION)).as(TIME_ZONE_ABBR_CODE),
                         col(CODE).as(TIME_ZONE_CODE),
                         col(TIMEDESIGNATION).as(TIME_ZONE_MSK_SHIFT_VAL),
                         col(NAME00).as(TIME_ZONE_NAME),
                         lit(DATA_PRODUCT).as(TIME_ZONE_DP_CODE),
-                        col(ABBREVIATION).as(TIME_ZONE_SK),
+                        when(col(ABBREVIATION).equalTo("USZ1"), "KALT").otherwise(col(ABBREVIATION)).as(TIME_ZONE_SK),
                         col(UTCFORMAT).as(TIME_ZONE_WRLD_SHIFT_VAL),
                         lit(false).as(DIRTY_FLAG)
                 ).where(col(ABBREVIATION).isNotNull())

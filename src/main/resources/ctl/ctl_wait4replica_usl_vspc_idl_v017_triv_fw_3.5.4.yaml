@@ -10,7 +10,7 @@ categories:
 workflows:
   - "{{ logical_env_prefix }}USL_VSPC_IDL_TRIV_BACKUP":
       name: "{{ logical_env_prefix }}USL_VSPC_IDL_TRIV_BACKUP"
-      category: "VSPC"
+      category: "{{ logical_env_prefix }}VSPC"
       profile: "{{ CTL_PROFILE_NAME }}"
       singleLoading: true
       type: principal
@@ -109,7 +109,7 @@ workflows:
 
   - "{{ logical_env_prefix }}USL_VSPC_IDL_TRIV_RESTORE":
       name: "{{ logical_env_prefix }}USL_VSPC_IDL_TRIV_RESTORE"
-      category: "VSPC"
+      category: "{{ logical_env_prefix }}VSPC"
       profile: "{{ CTL_PROFILE_NAME }}"
       singleLoading: true
       type: principal

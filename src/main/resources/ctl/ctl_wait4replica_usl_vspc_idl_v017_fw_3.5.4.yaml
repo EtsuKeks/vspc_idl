@@ -11,7 +11,7 @@ workflows:
 ############################################################One Instance CTL Yaml #####################################################
   - "{{ logical_env_prefix }}USL_VSPC_IDL":
       name: "{{ logical_env_prefix }}USL_VSPC_IDL"
-      category: "VSPC"
+      category: "{{ logical_env_prefix }}VSPC"
       profile: "{{ CTL_PROFILE_NAME }}"
       singleLoading: true
       type: principal
@@ -145,7 +145,7 @@ workflows:
 
   - "{{ logical_env_prefix }}USL_VSPC_IDL_INIT":
       name: "{{ logical_env_prefix }}USL_VSPC_IDL_INIT"
-      category: "VSPC"
+      category: "{{ logical_env_prefix }}VSPC"
       profile: "{{ CTL_PROFILE_NAME }}"
       singleLoading: true
       type: principal
