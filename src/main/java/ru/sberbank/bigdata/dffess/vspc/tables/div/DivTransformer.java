@@ -50,7 +50,7 @@ public class DivTransformer implements EntityTransformer {
                                 when(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null)
                                         .otherwise(substring_index(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM), "/", -1))).cast(IntegerType).as(DIV_REG_ORD),
 
-                when(col(ADDRESS_ADDRFACT_TIMEZONE).equalTo("KALT"), "USZ1")
+                when(col(ADDRESS_ADDRFACT_TIMEZONE).equalTo("USZ1"), "KALT")
                         .otherwise(col(ADDRESS_ADDRFACT_TIMEZONE)).as(DIV_TIME_ZONE_TIME_ZONE_SK),
 
                 lit(null).as(ADDR_IDX_NUM),
