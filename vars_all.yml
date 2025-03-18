@@ -37,7 +37,7 @@ vars: &commonVars
   domain: "{{ REALM }}"
 
   data_owner_name: "SN"
-  org_lvl2_name: "СП.Управление моделирования и исследования данных"
+  org_lvl2_name: "СП.Дивизион \\\"Моделирование и исследование данных\\\""
   secman_cert_owner_email: "dvilapshin@sberbank.ru"
   hdfs_path: "/oozie-app/t/tools/trivDistCp"
   jar_name_triv: "triv_ess-distcp.jar"
