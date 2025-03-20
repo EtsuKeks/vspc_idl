@@ -1,5 +1,5 @@
 {
-  "version": "D-01.603.004",
+  "version": "D-01.701.013",
   "stand_name": "fess",
   "build": "maven",
   "block": "t",
@@ -12,9 +12,9 @@
   "sq_binary_folder": "target",
   "sq_options": "",
   "sast_conf": "devsecops-config.yml",
-  "emails": "MDLisitsa@sberbank.ru SATatuyko@sberbank.ru dvilapshin@sberbank.ru anikusikov@sberbank.ru",
+  "emails": "MDLisitsa@sberbank.ru SATatuyko@sberbank.ru dvilapshin@sberbank.ru anikusikov@sberbank.ru AnVladimiroRomanov@sberbank.ru",
   "run_hive_script_sql": true,
-  "jira_task_release": "VSPCIDL-137",
+  "jira_task_release": "VSPCIDL-148",
   "nexus3": {
     "ci_it_service": "CI02619185",
     "ci_as_fp": "CI04734132"
@@ -26,10 +26,10 @@
 
   "ess": {
     "meta": [
-      "usl/certification/cap_certification_usl.vspc_idl_v016_fw_3.1.1.json"
+      "usl/certification/cap_certification_usl.vspc_idl_v017_fw_3.5.4.json"
     ], 
     "kkd-spod": [
-      "usl/certification/dq.vspc_idl.v016_fw_3.1.1.json"
+      "usl/certification/dq.vspc_idl.v017_fw_3.5.4.json"
     ],
     "well": "vspc"
   },
@@ -78,9 +78,9 @@
     }
   ],
   "template_files": [
-    "usl/certification/dq.vspc_idl.v016_fw_3.1.1.json",
-    "sql/ddl/ddl.usl.vspc_idl.v016.model_stg.8.94.0_fw_3.1.1.sql",
-    "sql/ddl/ddl.usl.vspc_idl.v016.model.8.94.0_fw_3.1.1.sql"
+    "usl/certification/dq.vspc_idl.v017_fw_3.5.4.json",
+    "sql/ddl/ddl.usl.vspc_idl.v017.model_stg.9.4.0_fw_3.5.4.sql",
+    "sql/ddl/ddl.usl.vspc_idl.v017.model.9.4.0_fw_3.5.4.sql"
   ],
   "workflow_to_run" : [
     "USL_VSPC_IDL_INIT"

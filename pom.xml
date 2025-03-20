@@ -6,13 +6,131 @@
 
     <groupId>ru.sberbank.bigdata.dffess.ssd</groupId>
     <artifactId>vspc_idl</artifactId>
-    <version>D-01.603.004</version>
+    <version>D-01.701.013</version>
 
     <properties>
-        <essa.common.version>2.1.5.1</essa.common.version>
+        <essa.common.version>2.2.0</essa.common.version>
         <java.version>1.8</java.version>
+        <jetty.version>9.4.53.v20231009</jetty.version>
+        <avro.version>1.11.3</avro.version>
+        <jackson.version>2.12.7.1</jackson.version>
+        <jackson-annotations.version>2.12.2</jackson-annotations.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <skclient.version>1.27.0</skclient.version>
+        <zookeeper.version>3.9.2</zookeeper.version>
+        <commons-text.version>1.10.0</commons-text.version>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>ru.sberbank.bigdata.essa.common</groupId>
+            <artifactId>essa-common-lib</artifactId>
+            <version>${essa.common.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-server</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-io</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-servlets</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-servlet</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.avro</groupId>
+                    <artifactId>avro</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>ru.sberbank.bigdata.sl.sk</groupId>
+                    <artifactId>sl-sk-client</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.zookeeper</groupId>
+                    <artifactId>zookeeper</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-text</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>${jetty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-io</artifactId>
+            <version>${jetty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlets</artifactId>
+            <version>${jetty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlet</artifactId>
+            <version>${jetty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro</artifactId>
+            <version>${avro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson-annotations.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ru.sberbank.bigdata.sl.sk</groupId>
+            <artifactId>sl-sk-client</artifactId>
+            <version>${skclient.version}</version>
+            <!-- exclusions for compatibility with rt-fw-baseline -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.hadoop</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.spark</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>${zookeeper.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>${commons-text.version}</version>
+        </dependency>
+    </dependencies>
 
     <repositories>
         <repository>
@@ -70,15 +188,6 @@
         </pluginRepository>
     </pluginRepositories>
 
-
-    <dependencies>
-        <dependency>
-            <groupId>ru.sberbank.bigdata.essa.common</groupId>
-            <artifactId>essa-common-lib</artifactId>
-            <version>${essa.common.version}</version>
-        </dependency>
-    </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -130,6 +239,98 @@
                             </relocations>
                             <shadedArtifactAttached>true</shadedArtifactAttached>
                             <shadedClassifierName>jar-with-dependencies</shadedClassifierName>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.properties.PropertiesTransformer">
+                                    <resource>META-INF/maven/org.eclipse.jetty/jetty-server/pom.properties</resource>
+                                    <ordinalKey>ordinal</ordinalKey>
+                                    <alreadyMergedKey>already_merged</alreadyMergedKey>
+                                    <defaultOrdinal>0</defaultOrdinal>
+                                    <reverseOrder>false</reverseOrder>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.XmlAppendingTransformer">
+                                    <resource>META-INF/maven/org.eclipse.jetty/jetty-server/pom.xml</resource>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.properties.PropertiesTransformer">
+                                    <resource>META-INF/maven/org.eclipse.jetty/jetty-servlets/pom.properties</resource>
+                                    <ordinalKey>ordinal</ordinalKey>
+                                    <alreadyMergedKey>already_merged</alreadyMergedKey>
+                                    <defaultOrdinal>0</defaultOrdinal>
+                                    <reverseOrder>false</reverseOrder>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.XmlAppendingTransformer">
+                                    <resource>META-INF/maven/org.eclipse.jetty/jetty-servlets/pom.xml</resource>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.properties.PropertiesTransformer">
+                                    <resource>META-INF/maven/org.eclipse.jetty/jetty-io/pom.properties</resource>
+                                    <ordinalKey>ordinal</ordinalKey>
+                                    <alreadyMergedKey>already_merged</alreadyMergedKey>
+                                    <defaultOrdinal>0</defaultOrdinal>
+                                    <reverseOrder>false</reverseOrder>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.XmlAppendingTransformer">
+                                    <resource>META-INF/maven/org.eclipse.jetty/jetty-io/pom.xml</resource>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.properties.PropertiesTransformer">
+                                    <resource>META-INF/maven/org.eclipse.jetty/jetty-servlet/pom.properties</resource>
+                                    <ordinalKey>ordinal</ordinalKey>
+                                    <alreadyMergedKey>already_merged</alreadyMergedKey>
+                                    <defaultOrdinal>0</defaultOrdinal>
+                                    <reverseOrder>false</reverseOrder>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.XmlAppendingTransformer">
+                                    <resource>META-INF/maven/org.eclipse.jetty/jetty-servlet/pom.xml</resource>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.properties.PropertiesTransformer">
+                                    <resource>META-INF/maven/org.apache.avro/avro/pom.properties</resource>
+                                    <ordinalKey>ordinal</ordinalKey>
+                                    <alreadyMergedKey>already_merged</alreadyMergedKey>
+                                    <defaultOrdinal>0</defaultOrdinal>
+                                    <reverseOrder>false</reverseOrder>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.XmlAppendingTransformer">
+                                    <resource>META-INF/maven/org.apache.avro/avro/pom.xml</resource>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.properties.PropertiesTransformer">
+                                    <resource>META-INF/maven/com.fasterxml.jackson.core/jackson-annotations/pom.properties</resource>
+                                    <ordinalKey>ordinal</ordinalKey>
+                                    <alreadyMergedKey>already_merged</alreadyMergedKey>
+                                    <defaultOrdinal>0</defaultOrdinal>
+                                    <reverseOrder>false</reverseOrder>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.XmlAppendingTransformer">
+                                    <resource>META-INF/maven/com.fasterxml.jackson.core/jackson-annotations/pom.xml</resource>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.properties.PropertiesTransformer">
+                                    <resource>META-INF/maven/com.fasterxml.jackson.core/jackson-databind/pom.properties</resource>
+                                    <ordinalKey>ordinal</ordinalKey>
+                                    <alreadyMergedKey>already_merged</alreadyMergedKey>
+                                    <defaultOrdinal>0</defaultOrdinal>
+                                    <reverseOrder>false</reverseOrder>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.XmlAppendingTransformer">
+                                    <resource>META-INF/maven/com.fasterxml.jackson.core/jackson-databind/pom.xml</resource>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.properties.PropertiesTransformer">
+                                    <resource>META-INF/maven/org.apache.zookeeper/zookeeper/pom.properties</resource>
+                                    <ordinalKey>ordinal</ordinalKey>
+                                    <alreadyMergedKey>already_merged</alreadyMergedKey>
+                                    <defaultOrdinal>0</defaultOrdinal>
+                                    <reverseOrder>false</reverseOrder>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.XmlAppendingTransformer">
+                                    <resource>META-INF/maven/org.apache.zookeeper/zookeeper/pom.xml</resource>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.properties.PropertiesTransformer">
+                                    <resource>META-INF/maven/org.apache.commons/commons-text/pom.properties</resource>
+                                    <ordinalKey>ordinal</ordinalKey>
+                                    <alreadyMergedKey>already_merged</alreadyMergedKey>
+                                    <defaultOrdinal>0</defaultOrdinal>
+                                    <reverseOrder>false</reverseOrder>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.XmlAppendingTransformer">
+                                    <resource>META-INF/maven/org.apache.commons/commons-text/pom.xml</resource>
+                                </transformer>
+                            </transformers>
                         </configuration>
                     </execution>
                 </executions>
@@ -138,6 +339,25 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>3.6.1</version>
+            </plugin>
+            <plugin>
+                <!--Добавляем Implementation-Version в META-INF\MANIFEST.MF-->
+                <!--Добавляем Name: rt-fw.version, id: ${rt-fw-baseline.version} в META-INF\MANIFEST.MF-->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                        <manifestSection>
+                            <name>rt-fw.version</name>
+                            <manifestEntries>
+                                <id>3.4.2</id>
+                            </manifestEntries>
+                        </manifestSection>
+                    </archive>
+                </configuration>
             </plugin>
         </plugins>
     </build>

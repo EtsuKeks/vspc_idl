@@ -11,7 +11,7 @@
                      "rule": {
                          "from": "usl_vspc_idl_snp.addr table_from",
                          "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or table_from.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(table_from.deleted_flag, false)",
-                         "rule_cd": "r_usl_union_hab_s_vspc_idl-addr",
+                         "rule_cd": "r_usl_tn_hab_s_vspc_idl-addr",
                          "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
                          "timesheet_name": "ежедневно",
                          "relation_enabled": "Y",
@@ -153,6 +153,7 @@
                                  "agrmnt_claim_type_name": "Обязательность"
                              }
                          }
+
                 //Обязательность заполнения fk_dp_code для foreign key
                      ,{
                              "metrics": [
@@ -160,7 +161,7 @@
                                      "claims": [
                                          {
                                              "ai_flag": 0,
-                                             "claims_cd": "cl_usl_tn_s_vspc_idl-addr-cntry_sk",
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-addr-cntry_dp_code",
                                              "biz_task_name": "ППР Руководителей",
                                              "customer_name": "Тиден Николай Николаевич",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
@@ -169,11 +170,11 @@
                                      ],
                                      "metric": {
                                          "scen_cd": "RED-GREEN",
-                                         "metric_cd": "p_usl_tn_s_vspc_idl-addr-cntry_sk",
-                                         "metric_desc": "Поле cntry_sk всегда должно быть заполнено, если заполнено поле cntry_sk",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-addr-cntry_dp_code",
+                                         "metric_desc": "Поле cntry_dp_code всегда должно быть заполнено, если заполнено поле cntry_sk",
                                          "send_to_meta": 1,
                                          "threshold_val_1": 100,
-                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.cntry_sk IS NOT NULL AND table_from.cntry_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.cntry_sk IS NOT NULL AND table_from.cntry_dp_code IS NULL THEN 1 ELSE 0 END)",
                                          "claim_metric_type_name": "Доля (100% при отсутствии записей)",
                                          "metric_deviation_cnt_fld_num": 6
                                      }
@@ -183,7 +184,7 @@
                                      "claims": [
                                          {
                                              "ai_flag": 0,
-                                             "claims_cd": "cl_usl_tn_s_vspc_idl-addr-okato2_sk",
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-addr-okato2_dp_code",
                                              "biz_task_name": "ППР Руководителей",
                                              "customer_name": "Тиден Николай Николаевич",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
@@ -192,11 +193,11 @@
                                      ],
                                      "metric": {
                                          "scen_cd": "RED-GREEN",
-                                         "metric_cd": "p_usl_tn_s_vspc_idl-addr-okato2_sk",
-                                         "metric_desc": "Поле okato2_sk всегда должно быть заполнено, если заполнено поле okato2_sk",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-addr-okato2_dp_code",
+                                         "metric_desc": "Поле okato2_dp_code всегда должно быть заполнено, если заполнено поле okato2_sk",
                                          "send_to_meta": 1,
                                          "threshold_val_1": 100,
-                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.okato2_sk IS NOT NULL AND table_from.okato2_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.okato2_sk IS NOT NULL AND table_from.okato2_dp_code IS NULL THEN 1 ELSE 0 END)",
                                          "claim_metric_type_name": "Доля (100% при отсутствии записей)",
                                          "metric_deviation_cnt_fld_num": 7
                                      }
@@ -206,7 +207,7 @@
                                      "claims": [
                                          {
                                              "ai_flag": 0,
-                                             "claims_cd": "cl_usl_tn_s_vspc_idl-addr-rus_fed_subj_sk",
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-addr-rus_fed_subj_dp_code",
                                              "biz_task_name": "ППР Руководителей",
                                              "customer_name": "Тиден Николай Николаевич",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
@@ -215,11 +216,11 @@
                                      ],
                                      "metric": {
                                          "scen_cd": "RED-GREEN",
-                                         "metric_cd": "p_usl_tn_s_vspc_idl-addr-rus_fed_subj_sk",
-                                         "metric_desc": "Поле rus_fed_subj_sk всегда должно быть заполнено, если заполнено поле rus_fed_subj_sk",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-addr-rus_fed_subj_dp_code",
+                                         "metric_desc": "Поле rus_fed_subj_dp_code всегда должно быть заполнено, если заполнено поле rus_fed_subj_sk",
                                          "send_to_meta": 1,
                                          "threshold_val_1": 100,
-                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.rus_fed_subj_sk IS NOT NULL AND table_from.rus_fed_subj_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.rus_fed_subj_sk IS NOT NULL AND table_from.rus_fed_subj_dp_code IS NULL THEN 1 ELSE 0 END)",
                                          "claim_metric_type_name": "Доля (100% при отсутствии записей)",
                                          "metric_deviation_cnt_fld_num": 8
                                      }
@@ -230,9 +231,9 @@
                                  "crit_cd": "cr_usl_tn_s_vspc_idl-addr-",
                                  "crit_desc": "Поле  всегда должно быть заполнено у foreign key ",
                                  "dq_metacolumn": [
-                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.CNTRY_SK"  
-                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.OKATO2_SK"  
-                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.RUS_FED_SUBJ_SK"  
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.CNTRY_DP_CODE"  
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.OKATO2_DP_CODE"  
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR.RUS_FED_SUBJ_DP_CODE"  
                              ],
                                  "crit_condition": "Все записи",
                                  "crit_owner_fio": "",
@@ -240,8 +241,21 @@
                                  "agrmnt_claim_type_name": "Обязательность"
                              }
                       } 
+                     ]
+                 }
+                , {
+                     "rule": {
+                         "from": "usl_vspc_idl_snp.addr table_from",
+                         "where": "not coalesce(table_from.deleted_flag, false)",
+                         "rule_cd": "r_usl_uq_hab_s_vspc_idl-addr",
+                         "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
                 //Уникальность по SK
-                     ,{
+                     {
                              "metrics": [
                                  {
                                      "claims": [
@@ -288,7 +302,7 @@
                      "rule": {
                          "from": "usl_vspc_idl_snp.div_ table_from",
                          "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or table_from.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(table_from.deleted_flag, false)",
-                         "rule_cd": "r_usl_union_hab_s_vspc_idl-div_",
+                         "rule_cd": "r_usl_tn_hab_s_vspc_idl-div_",
                          "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
                          "timesheet_name": "ежедневно",
                          "relation_enabled": "Y",
@@ -430,6 +444,7 @@
                                  "agrmnt_claim_type_name": "Обязательность"
                              }
                          }
+
                 //Обязательность заполнения fk_dp_code для foreign key
                      ,{
                              "metrics": [
@@ -437,7 +452,7 @@
                                      "claims": [
                                          {
                                              "ai_flag": 0,
-                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_-div_time_zone_time_zone_rf_sk",
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_-div_time_zone_time_zone_rf_dp_code",
                                              "biz_task_name": "ППР Руководителей",
                                              "customer_name": "Тиден Николай Николаевич",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
@@ -446,11 +461,11 @@
                                      ],
                                      "metric": {
                                          "scen_cd": "RED-GREEN",
-                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_-div_time_zone_time_zone_rf_sk",
-                                         "metric_desc": "Поле div_time_zone_time_zone_rf_sk всегда должно быть заполнено, если заполнено поле div_time_zone_time_zone_rf_sk",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_-div_time_zone_time_zone_rf_dp_code",
+                                         "metric_desc": "Поле div_time_zone_time_zone_rf_dp_code всегда должно быть заполнено, если заполнено поле div_time_zone_time_zone_rf_sk",
                                          "send_to_meta": 1,
                                          "threshold_val_1": 100,
-                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.div_time_zone_time_zone_rf_sk IS NOT NULL AND table_from.div_time_zone_time_zone_rf_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.div_time_zone_time_zone_rf_sk IS NOT NULL AND table_from.div_time_zone_time_zone_rf_dp_code IS NULL THEN 1 ELSE 0 END)",
                                          "claim_metric_type_name": "Доля (100% при отсутствии записей)",
                                          "metric_deviation_cnt_fld_num": 6
                                      }
@@ -460,7 +475,7 @@
                                      "claims": [
                                          {
                                              "ai_flag": 0,
-                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_-legal_addr_sk",
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_-legal_addr_dp_code",
                                              "biz_task_name": "ППР Руководителей",
                                              "customer_name": "Тиден Николай Николаевич",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
@@ -469,11 +484,11 @@
                                      ],
                                      "metric": {
                                          "scen_cd": "RED-GREEN",
-                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_-legal_addr_sk",
-                                         "metric_desc": "Поле legal_addr_sk всегда должно быть заполнено, если заполнено поле legal_addr_sk",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_-legal_addr_dp_code",
+                                         "metric_desc": "Поле legal_addr_dp_code всегда должно быть заполнено, если заполнено поле legal_addr_sk",
                                          "send_to_meta": 1,
                                          "threshold_val_1": 100,
-                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.legal_addr_sk IS NOT NULL AND table_from.legal_addr_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.legal_addr_sk IS NOT NULL AND table_from.legal_addr_dp_code IS NULL THEN 1 ELSE 0 END)",
                                          "claim_metric_type_name": "Доля (100% при отсутствии записей)",
                                          "metric_deviation_cnt_fld_num": 7
                                      }
@@ -483,7 +498,7 @@
                                      "claims": [
                                          {
                                              "ai_flag": 0,
-                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_-parent_div_sk",
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_-parent_div_dp_code",
                                              "biz_task_name": "ППР Руководителей",
                                              "customer_name": "Тиден Николай Николаевич",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
@@ -492,11 +507,11 @@
                                      ],
                                      "metric": {
                                          "scen_cd": "RED-GREEN",
-                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_-parent_div_sk",
-                                         "metric_desc": "Поле parent_div_sk всегда должно быть заполнено, если заполнено поле parent_div_sk",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_-parent_div_dp_code",
+                                         "metric_desc": "Поле parent_div_dp_code всегда должно быть заполнено, если заполнено поле parent_div_sk",
                                          "send_to_meta": 1,
                                          "threshold_val_1": 100,
-                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.parent_div_sk IS NOT NULL AND table_from.parent_div_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.parent_div_sk IS NOT NULL AND table_from.parent_div_dp_code IS NULL THEN 1 ELSE 0 END)",
                                          "claim_metric_type_name": "Доля (100% при отсутствии записей)",
                                          "metric_deviation_cnt_fld_num": 8
                                      }
@@ -507,9 +522,9 @@
                                  "crit_cd": "cr_usl_tn_s_vspc_idl-div_-",
                                  "crit_desc": "Поле  всегда должно быть заполнено у foreign key ",
                                  "dq_metacolumn": [
-                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.DIV_TIME_ZONE_TIME_ZONE_RF_SK"  
-                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.LEGAL_ADDR_SK"  
-                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.PARENT_DIV_SK"  
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.DIV_TIME_ZONE_TIME_ZONE_RF_DP_CODE"  
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.LEGAL_ADDR_DP_CODE"  
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.PARENT_DIV_DP_CODE"  
                              ],
                                  "crit_condition": "Все записи",
                                  "crit_owner_fio": "",
@@ -517,8 +532,21 @@
                                  "agrmnt_claim_type_name": "Обязательность"
                              }
                       } 
+                     ]
+                 }
+                , {
+                     "rule": {
+                         "from": "usl_vspc_idl_snp.div_ table_from",
+                         "where": "not coalesce(table_from.deleted_flag, false)",
+                         "rule_cd": "r_usl_uq_hab_s_vspc_idl-div_",
+                         "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
                 //Уникальность по SK
-                     ,{
+                     {
                              "metrics": [
                                  {
                                      "claims": [
@@ -565,7 +593,7 @@
                      "rule": {
                          "from": "usl_vspc_idl_snp.terr_div_type table_from",
                          "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or table_from.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(table_from.deleted_flag, false)",
-                         "rule_cd": "r_usl_union_hab_s_vspc_idl-terr_div_type",
+                         "rule_cd": "r_usl_tn_hab_s_vspc_idl-terr_div_type",
                          "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
                          "timesheet_name": "ежедневно",
                          "relation_enabled": "Y",
@@ -707,10 +735,24 @@
                                  "agrmnt_claim_type_name": "Обязательность"
                              }
                          }
+
                 //Обязательность заполнения fk_dp_code для foreign key
 
+                     ]
+                 }
+                , {
+                     "rule": {
+                         "from": "usl_vspc_idl_snp.terr_div_type table_from",
+                         "where": "not coalesce(table_from.deleted_flag, false)",
+                         "rule_cd": "r_usl_uq_hab_s_vspc_idl-terr_div_type",
+                         "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
                 //Уникальность по SK
-                     ,{
+                     {
                              "metrics": [
                                  {
                                      "claims": [
@@ -757,7 +799,7 @@
                      "rule": {
                          "from": "usl_vspc_idl_snp.time_zone_rf table_from",
                          "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or table_from.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(table_from.deleted_flag, false)",
-                         "rule_cd": "r_usl_union_hab_s_vspc_idl-time_zone_rf",
+                         "rule_cd": "r_usl_tn_hab_s_vspc_idl-time_zone_rf",
                          "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
                          "timesheet_name": "ежедневно",
                          "relation_enabled": "Y",
@@ -899,10 +941,24 @@
                                  "agrmnt_claim_type_name": "Обязательность"
                              }
                          }
+
                 //Обязательность заполнения fk_dp_code для foreign key
 
+                     ]
+                 }
+                , {
+                     "rule": {
+                         "from": "usl_vspc_idl_snp.time_zone_rf table_from",
+                         "where": "not coalesce(table_from.deleted_flag, false)",
+                         "rule_cd": "r_usl_uq_hab_s_vspc_idl-time_zone_rf",
+                         "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
                 //Уникальность по SK
-                     ,{
+                     {
                              "metrics": [
                                  {
                                      "claims": [
@@ -951,7 +1007,7 @@
                      "rule": {
                          "from": "usl_vspc_idl_snp.addr_h table_from ",
                          "where": "'$$LOADINGIDS_ARRAY$$' = 'null' or table_from.ctl_loading in ($$LOADINGIDS_ARRAY$$)",
-                         "rule_cd": "r_usl_union_satellite_s_vspc_idl-addr_h",
+                         "rule_cd": "r_usl_tn_s_vspc_idl-addr_h",
                          "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
                          "timesheet_name": "ежедневно",
                          "relation_enabled": "Y",
@@ -1141,6 +1197,7 @@
                                  "agrmnt_claim_type_name": "Обязательность"
                              }
                          }
+
                     //Обязательность заполнения fk_dp_code для foreign key и для primary key
                      ,{
                              "metrics": [
@@ -1148,7 +1205,7 @@
                                      "claims": [
                                          {
                                              "ai_flag": 0,
-                                             "claims_cd": "cl_usl_tn_s_vspc_idl-addr_h-addr_sk",
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-addr_h-addr_dp_code",
                                              "biz_task_name": "ППР Руководителей",
                                              "customer_name": "Тиден Николай Николаевич",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
@@ -1157,11 +1214,11 @@
                                      ],
                                      "metric": {
                                          "scen_cd": "RED-GREEN",
-                                         "metric_cd": "p_usl_tn_s_vspc_idl-addr_h-addr_sk",
-                                         "metric_desc": "Поле addr_sk всегда должно быть заполнено, если заполнено поле addr_sk",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-addr_h-addr_dp_code",
+                                         "metric_desc": "Поле addr_dp_code всегда должно быть заполнено, если заполнено поле addr_sk",
                                          "send_to_meta": 1,
                                          "threshold_val_1": 100,
-                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.addr_sk IS NOT NULL AND table_from.addr_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.addr_sk IS NOT NULL AND table_from.addr_dp_code IS NULL THEN 1 ELSE 0 END)",
                                          "claim_metric_type_name": "Доля (100% при отсутствии записей)",
                                          "metric_deviation_cnt_fld_num": 8
                                      }
@@ -1172,7 +1229,7 @@
                                  "crit_cd": "cr_usl_tn_s_vspc_idl-addr_h-",
                                  "crit_desc": "Поле  всегда должно быть заполнено у foreign key ",
                                  "dq_metacolumn": [
-                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR_H.ADDR_SK"  
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.ADDR_H.ADDR_DP_CODE"  
                              ],
                                  "crit_condition": "Все записи",
                                  "crit_owner_fio": "",
@@ -1180,8 +1237,22 @@
                                  "agrmnt_claim_type_name": "Обязательность"
                              }
                       } 
+                     ]
+                 }
+                // Таблица usl_vspc_idl_snp.addr_h
+, {
+                     "rule": {
+                         "from": "usl_vspc_idl_snp.addr_h table_from ",
+                         "where": "",
+                         "rule_cd": "r_usl_un_s_vspc_idl-addr_h",
+                         "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
                    //Уникальность
-                     ,{
+                                              {
                              "metrics": [
                                  {
                                      "claims": [
@@ -1227,7 +1298,7 @@
                      "rule": {
                          "from": "usl_vspc_idl_snp.div_h table_from ",
                          "where": "'$$LOADINGIDS_ARRAY$$' = 'null' or table_from.ctl_loading in ($$LOADINGIDS_ARRAY$$)",
-                         "rule_cd": "r_usl_union_satellite_s_vspc_idl-div_h",
+                         "rule_cd": "r_usl_tn_s_vspc_idl-div_h",
                          "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
                          "timesheet_name": "ежедневно",
                          "relation_enabled": "Y",
@@ -1417,6 +1488,7 @@
                                  "agrmnt_claim_type_name": "Обязательность"
                              }
                          }
+
                     //Обязательность заполнения fk_dp_code для foreign key и для primary key
                      ,{
                              "metrics": [
@@ -1424,7 +1496,7 @@
                                      "claims": [
                                          {
                                              "ai_flag": 0,
-                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-div_sk",
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-div_dp_code",
                                              "biz_task_name": "ППР Руководителей",
                                              "customer_name": "Тиден Николай Николаевич",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
@@ -1433,11 +1505,11 @@
                                      ],
                                      "metric": {
                                          "scen_cd": "RED-GREEN",
-                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_h-div_sk",
-                                         "metric_desc": "Поле div_sk всегда должно быть заполнено, если заполнено поле div_sk",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_h-div_dp_code",
+                                         "metric_desc": "Поле div_dp_code всегда должно быть заполнено, если заполнено поле div_sk",
                                          "send_to_meta": 1,
                                          "threshold_val_1": 100,
-                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.div_sk IS NOT NULL AND table_from.div_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.div_sk IS NOT NULL AND table_from.div_dp_code IS NULL THEN 1 ELSE 0 END)",
                                          "claim_metric_type_name": "Доля (100% при отсутствии записей)",
                                          "metric_deviation_cnt_fld_num": 8
                                      }
@@ -1447,7 +1519,7 @@
                                      "claims": [
                                          {
                                              "ai_flag": 0,
-                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-fact_addr_sk",
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-fact_addr_dp_code",
                                              "biz_task_name": "ППР Руководителей",
                                              "customer_name": "Тиден Николай Николаевич",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
@@ -1456,11 +1528,11 @@
                                      ],
                                      "metric": {
                                          "scen_cd": "RED-GREEN",
-                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_h-fact_addr_sk",
-                                         "metric_desc": "Поле fact_addr_sk всегда должно быть заполнено, если заполнено поле fact_addr_sk",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_h-fact_addr_dp_code",
+                                         "metric_desc": "Поле fact_addr_dp_code всегда должно быть заполнено, если заполнено поле fact_addr_sk",
                                          "send_to_meta": 1,
                                          "threshold_val_1": 100,
-                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.fact_addr_sk IS NOT NULL AND table_from.fact_addr_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.fact_addr_sk IS NOT NULL AND table_from.fact_addr_dp_code IS NULL THEN 1 ELSE 0 END)",
                                          "claim_metric_type_name": "Доля (100% при отсутствии записей)",
                                          "metric_deviation_cnt_fld_num": 9
                                      }
@@ -1470,7 +1542,7 @@
                                      "claims": [
                                          {
                                              "ai_flag": 0,
-                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-pay_sys_prtcpnt_sk",
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-pay_sys_prtcpnt_dp_code",
                                              "biz_task_name": "ППР Руководителей",
                                              "customer_name": "Тиден Николай Николаевич",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
@@ -1479,11 +1551,11 @@
                                      ],
                                      "metric": {
                                          "scen_cd": "RED-GREEN",
-                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_h-pay_sys_prtcpnt_sk",
-                                         "metric_desc": "Поле pay_sys_prtcpnt_sk всегда должно быть заполнено, если заполнено поле pay_sys_prtcpnt_sk",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_h-pay_sys_prtcpnt_dp_code",
+                                         "metric_desc": "Поле pay_sys_prtcpnt_dp_code всегда должно быть заполнено, если заполнено поле pay_sys_prtcpnt_sk",
                                          "send_to_meta": 1,
                                          "threshold_val_1": 100,
-                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.pay_sys_prtcpnt_sk IS NOT NULL AND table_from.pay_sys_prtcpnt_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.pay_sys_prtcpnt_sk IS NOT NULL AND table_from.pay_sys_prtcpnt_dp_code IS NULL THEN 1 ELSE 0 END)",
                                          "claim_metric_type_name": "Доля (100% при отсутствии записей)",
                                          "metric_deviation_cnt_fld_num": 10
                                      }
@@ -1494,9 +1566,9 @@
                                  "crit_cd": "cr_usl_tn_s_vspc_idl-div_h-",
                                  "crit_desc": "Поле  всегда должно быть заполнено у foreign key ",
                                  "dq_metacolumn": [
-                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.DIV_SK"  
-                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.FACT_ADDR_SK"  
-                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.PAY_SYS_PRTCPNT_SK"  
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.DIV_DP_CODE"  
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.FACT_ADDR_DP_CODE"  
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_H.PAY_SYS_PRTCPNT_DP_CODE"  
                              ],
                                  "crit_condition": "Все записи",
                                  "crit_owner_fio": "",
@@ -1504,8 +1576,22 @@
                                  "agrmnt_claim_type_name": "Обязательность"
                              }
                       } 
+                     ]
+                 }
+                // Таблица usl_vspc_idl_snp.div_h
+, {
+                     "rule": {
+                         "from": "usl_vspc_idl_snp.div_h table_from ",
+                         "where": "",
+                         "rule_cd": "r_usl_un_s_vspc_idl-div_h",
+                         "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
                    //Уникальность
-                     ,{
+                                              {
                              "metrics": [
                                  {
                                      "claims": [
@@ -1551,7 +1637,7 @@
                      "rule": {
                          "from": "usl_vspc_idl_snp.div_type table_from ",
                          "where": "'$$LOADINGIDS_ARRAY$$' = 'null' or table_from.ctl_loading in ($$LOADINGIDS_ARRAY$$)",
-                         "rule_cd": "r_usl_union_satellite_s_vspc_idl-div_type",
+                         "rule_cd": "r_usl_tn_s_vspc_idl-div_type",
                          "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
                          "timesheet_name": "ежедневно",
                          "relation_enabled": "Y",
@@ -1741,6 +1827,7 @@
                                  "agrmnt_claim_type_name": "Обязательность"
                              }
                          }
+
                     //Обязательность заполнения fk_dp_code для foreign key и для primary key
                      ,{
                              "metrics": [
@@ -1748,7 +1835,7 @@
                                      "claims": [
                                          {
                                              "ai_flag": 0,
-                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_type-div_sk",
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_type-div_dp_code",
                                              "biz_task_name": "ППР Руководителей",
                                              "customer_name": "Тиден Николай Николаевич",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
@@ -1757,11 +1844,11 @@
                                      ],
                                      "metric": {
                                          "scen_cd": "RED-GREEN",
-                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_type-div_sk",
-                                         "metric_desc": "Поле div_sk всегда должно быть заполнено, если заполнено поле div_sk",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_type-div_dp_code",
+                                         "metric_desc": "Поле div_dp_code всегда должно быть заполнено, если заполнено поле div_sk",
                                          "send_to_meta": 1,
                                          "threshold_val_1": 100,
-                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.div_sk IS NOT NULL AND table_from.div_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.div_sk IS NOT NULL AND table_from.div_dp_code IS NULL THEN 1 ELSE 0 END)",
                                          "claim_metric_type_name": "Доля (100% при отсутствии записей)",
                                          "metric_deviation_cnt_fld_num": 8
                                      }
@@ -1771,7 +1858,7 @@
                                      "claims": [
                                          {
                                              "ai_flag": 0,
-                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_type-div_type_terr_div_type_sk",
+                                             "claims_cd": "cl_usl_tn_s_vspc_idl-div_type-div_type_terr_div_type_dp_code",
                                              "biz_task_name": "ППР Руководителей",
                                              "customer_name": "Тиден Николай Николаевич",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
@@ -1780,11 +1867,11 @@
                                      ],
                                      "metric": {
                                          "scen_cd": "RED-GREEN",
-                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_type-div_type_terr_div_type_sk",
-                                         "metric_desc": "Поле div_type_terr_div_type_sk всегда должно быть заполнено, если заполнено поле div_type_terr_div_type_sk",
+                                         "metric_cd": "p_usl_tn_s_vspc_idl-div_type-div_type_terr_div_type_dp_code",
+                                         "metric_desc": "Поле div_type_terr_div_type_dp_code всегда должно быть заполнено, если заполнено поле div_type_terr_div_type_sk",
                                          "send_to_meta": 1,
                                          "threshold_val_1": 100,
-                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.div_type_terr_div_type_sk IS NOT NULL AND table_from.div_type_terr_div_type_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "rule_impl_sql_text": "SUM(CASE WHEN table_from.div_type_terr_div_type_sk IS NOT NULL AND table_from.div_type_terr_div_type_dp_code IS NULL THEN 1 ELSE 0 END)",
                                          "claim_metric_type_name": "Доля (100% при отсутствии записей)",
                                          "metric_deviation_cnt_fld_num": 9
                                      }
@@ -1795,8 +1882,8 @@
                                  "crit_cd": "cr_usl_tn_s_vspc_idl-div_type-",
                                  "crit_desc": "Поле  всегда должно быть заполнено у foreign key ",
                                  "dq_metacolumn": [
-                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.DIV_SK"  
-                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.DIV_TYPE_TERR_DIV_TYPE_SK"  
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.DIV_DP_CODE"  
+                                 ,"HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_TYPE.DIV_TYPE_TERR_DIV_TYPE_DP_CODE"  
                              ],
                                  "crit_condition": "Все записи",
                                  "crit_owner_fio": "",
@@ -1804,8 +1891,22 @@
                                  "agrmnt_claim_type_name": "Обязательность"
                              }
                       } 
+                     ]
+                 }
+                // Таблица usl_vspc_idl_snp.div_type
+, {
+                     "rule": {
+                         "from": "usl_vspc_idl_snp.div_type table_from ",
+                         "where": "",
+                         "rule_cd": "r_usl_un_s_vspc_idl-div_type",
+                         "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
                    //Уникальность
-                     ,{
+                                              {
                              "metrics": [
                                  {
                                      "claims": [
@@ -1853,7 +1954,58 @@
     //Внутри продуктовая ссылочная целостность таблица usl_vspc_idl_snp.div_
                 ,{
                      "rule": {
-                         "from": "usl_vspc_idl_snp.div_ fk LEFT JOIN usl_vspc_idl_snp.addr AS pk ON pk.addr_sk = fk.legal_addr_sk AND fk.legal_addr_dp_code like 'vspc%' and not coalesce(pk.deleted_flag,FALSE)",
+                         "from": "usl_vspc_idl_snp.div_ fk LEFT JOIN usl_vspc_idl_snp.time_zone_rf AS pk ON pk.time_zone_rf_sk = fk.div_time_zone_time_zone_rf_sk AND fk.div_time_zone_time_zone_rf_dp_code like 'vspc%' and not coalesce(pk.deleted_flag,FALSE) LEFT JOIN (select e.metric_cd,e.key_val_01 from ESKKD_INFA.DQ_EXCLUDES e where coalesce(e.gap_fix_dt, from_unixtime(unix_timestamp('31.12.2999' , 'dd.MM.yyyy'), 'yyyy-MM-dd')) > current_date and e.key_val_01 is not null and e.metric_cd like 'p_usl_%') ex ON ex.key_val_01 = fk.div_sk",
+                         "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or fk.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(pk.deleted_flag, false) and not coalesce(fk.deleted_flag, false)",
+                         "rule_cd": "r_usl_ri_s_vspc_idl-div_-div_time_zone_time_zone_rf_sk",
+                         "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
+                         "timesheet_name": "ежедневно",
+                         "relation_enabled": "Y",
+                         "system_area_type": "{{ system_area_type }}"
+                     },
+                     "criterions": [
+                        {
+                             "metrics": [
+                                 {
+                                     "claims": [
+                                         {
+                                             "ai_flag": 0,
+                                             "claims_cd": "cl_usl_ri_s_vspc_idl-div_-div_time_zone_time_zone_rf_sk",
+                                             "biz_task_name": "ППР Руководителей",
+                                             "customer_name": "Тиден Николай Николаевич",
+                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
+                                             "business_proc_cd": "П1831"
+                                         }
+                                     ],
+                                     "metric": {
+                                         "scen_cd": "RED-GREEN",
+                                         "metric_cd": "p_usl_ri_s_vspc_idl-div_-div_time_zone_time_zone_rf_sk",
+                                         "metric_desc": "Для каждого значения внешнего ключа div_.div_time_zone_time_zone_rf_sk должна найтись запись в таблице time_zone_rf с тем же значением первичного ключа time_zone_rf_sk",
+                                         "send_to_meta": 1,
+                                         "threshold_val_1": 100,
+                                         "rule_impl_sql_text": "SUM(CASE WHEN ex.metric_cd='p_usl_ri_s_vspc_idl-div_-div_time_zone_time_zone_rf_sk' THEN 0 WHEN fk.div_time_zone_time_zone_rf_sk IS NOT NULL AND fk.div_time_zone_time_zone_rf_dp_code like 'vspc%' AND pk.time_zone_rf_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
+                                         "metric_deviation_cnt_fld_num": 1
+                                     }
+                                 }
+                             ],
+                             "criterion": {
+                                 "crit_cd": "cr_usl_ri_s_vspc_idl-div_-div_time_zone_time_zone_rf_sk",
+                                 "crit_desc": "Для каждого значения внешнего ключа должна найтись запись в таблице с тем же значением первичного ключа",
+                                 "dq_metacolumn": [
+                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.DIV_TIME_ZONE_TIME_ZONE_RF_SK"
+                             ],
+                                 "crit_condition": "Все записи",
+                                 "crit_owner_fio": "",
+                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
+                                 "agrmnt_claim_type_name": "Ссылочная целостность"
+                             }
+                         }
+                     ]
+                 }
+    //Внутри продуктовая ссылочная целостность таблица usl_vspc_idl_snp.div_
+                ,{
+                     "rule": {
+                         "from": "usl_vspc_idl_snp.div_ fk LEFT JOIN usl_vspc_idl_snp.addr AS pk ON pk.addr_sk = fk.legal_addr_sk AND fk.legal_addr_dp_code like 'vspc%' and not coalesce(pk.deleted_flag,FALSE) LEFT JOIN (select e.metric_cd,e.key_val_01 from ESKKD_INFA.DQ_EXCLUDES e where coalesce(e.gap_fix_dt, from_unixtime(unix_timestamp('31.12.2999' , 'dd.MM.yyyy'), 'yyyy-MM-dd')) > current_date and e.key_val_01 is not null and e.metric_cd like 'p_usl_%') ex ON ex.key_val_01 = fk.div_sk",
                          "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or fk.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(pk.deleted_flag, false) and not coalesce(fk.deleted_flag, false)",
                          "rule_cd": "r_usl_ri_s_vspc_idl-div_-legal_addr_sk",
                          "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
@@ -1881,7 +2033,7 @@
                                          "metric_desc": "Для каждого значения внешнего ключа div_.legal_addr_sk должна найтись запись в таблице addr с тем же значением первичного ключа addr_sk",
                                          "send_to_meta": 1,
                                          "threshold_val_1": 100,
-                                         "rule_impl_sql_text": "SUM(CASE WHEN fk.legal_addr_sk IS NOT NULL AND fk.legal_addr_dp_code like 'vspc%' AND pk.addr_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "rule_impl_sql_text": "SUM(CASE WHEN ex.metric_cd='p_usl_ri_s_vspc_idl-div_-legal_addr_sk' THEN 0 WHEN fk.legal_addr_sk IS NOT NULL AND fk.legal_addr_dp_code like 'vspc%' AND pk.addr_sk IS NULL THEN 1 ELSE 0 END)",
                                          "claim_metric_type_name": "Доля (100% при отсутствии записей)",
                                          "metric_deviation_cnt_fld_num": 1
                                      }
@@ -1904,7 +2056,7 @@
     //Внутри продуктовая ссылочная целостность таблица usl_vspc_idl_snp.div_
                 ,{
                      "rule": {
-                         "from": "usl_vspc_idl_snp.div_ fk LEFT JOIN usl_vspc_idl_snp.div_ AS pk ON pk.div_sk = fk.parent_div_sk AND fk.parent_div_dp_code like 'vspc%' and not coalesce(pk.deleted_flag,FALSE)",
+                         "from": "usl_vspc_idl_snp.div_ fk LEFT JOIN usl_vspc_idl_snp.div_ AS pk ON pk.div_sk = fk.parent_div_sk AND fk.parent_div_dp_code like 'vspc%' and not coalesce(pk.deleted_flag,FALSE) LEFT JOIN (select e.metric_cd,e.key_val_01 from ESKKD_INFA.DQ_EXCLUDES e where coalesce(e.gap_fix_dt, from_unixtime(unix_timestamp('31.12.2999' , 'dd.MM.yyyy'), 'yyyy-MM-dd')) > current_date and e.key_val_01 is not null and e.metric_cd like 'p_usl_%') ex ON ex.key_val_01 = fk.div_sk",
                          "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or fk.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(pk.deleted_flag, false) and not coalesce(fk.deleted_flag, false)",
                          "rule_cd": "r_usl_ri_s_vspc_idl-div_-parent_div_sk",
                          "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
@@ -1932,7 +2084,7 @@
                                          "metric_desc": "Для каждого значения внешнего ключа div_.parent_div_sk должна найтись запись в таблице div_ с тем же значением первичного ключа div_sk",
                                          "send_to_meta": 1,
                                          "threshold_val_1": 100,
-                                         "rule_impl_sql_text": "SUM(CASE WHEN fk.parent_div_sk IS NOT NULL AND fk.parent_div_dp_code like 'vspc%' AND pk.div_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "rule_impl_sql_text": "SUM(CASE WHEN ex.metric_cd='p_usl_ri_s_vspc_idl-div_-parent_div_sk' THEN 0 WHEN fk.parent_div_sk IS NOT NULL AND fk.parent_div_dp_code like 'vspc%' AND pk.div_sk IS NULL THEN 1 ELSE 0 END)",
                                          "claim_metric_type_name": "Доля (100% при отсутствии записей)",
                                          "metric_deviation_cnt_fld_num": 1
                                      }
@@ -1955,7 +2107,7 @@
     //Внутри продуктовая ссылочная целостность таблица usl_vspc_idl_snp.div_h
                 ,{
                      "rule": {
-                         "from": "usl_vspc_idl_snp.div_h fk LEFT JOIN usl_vspc_idl_snp.addr AS pk ON pk.addr_sk = fk.fact_addr_sk AND fk.fact_addr_dp_code like 'vspc%' and not coalesce(pk.deleted_flag,FALSE)",
+                         "from": "usl_vspc_idl_snp.div_h fk LEFT JOIN usl_vspc_idl_snp.addr AS pk ON pk.addr_sk = fk.fact_addr_sk AND fk.fact_addr_dp_code like 'vspc%' and not coalesce(pk.deleted_flag,FALSE) LEFT JOIN (select e.metric_cd,e.key_val_01 from ESKKD_INFA.DQ_EXCLUDES e where coalesce(e.gap_fix_dt, from_unixtime(unix_timestamp('31.12.2999' , 'dd.MM.yyyy'), 'yyyy-MM-dd')) > current_date and e.key_val_01 is not null and e.metric_cd like 'p_usl_%') ex ON ex.key_val_01 = fk.div_sk",
                          "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or fk.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(pk.deleted_flag, false)",
                          "rule_cd": "r_usl_ri_s_vspc_idl-div_h-fact_addr_sk",
                          "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
@@ -1983,7 +2135,7 @@
                                          "metric_desc": "Для каждого значения внешнего ключа div_h.fact_addr_sk должна найтись запись в таблице addr с тем же значением первичного ключа addr_sk",
                                          "send_to_meta": 1,
                                          "threshold_val_1": 100,
-                                         "rule_impl_sql_text": "SUM(CASE WHEN fk.fact_addr_sk IS NOT NULL AND fk.fact_addr_dp_code like 'vspc%' AND pk.addr_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "rule_impl_sql_text": "SUM(CASE WHEN ex.metric_cd='p_usl_ri_s_vspc_idl-div_h-fact_addr_sk' THEN 0 WHEN fk.fact_addr_sk IS NOT NULL AND fk.fact_addr_dp_code like 'vspc%' AND pk.addr_sk IS NULL THEN 1 ELSE 0 END)",
                                          "claim_metric_type_name": "Доля (100% при отсутствии записей)",
                                          "metric_deviation_cnt_fld_num": 1
                                      }
@@ -2006,7 +2158,7 @@
     //Внутри продуктовая ссылочная целостность таблица usl_vspc_idl_snp.div_type
                 ,{
                      "rule": {
-                         "from": "usl_vspc_idl_snp.div_type fk LEFT JOIN usl_vspc_idl_snp.terr_div_type AS pk ON pk.terr_div_type_sk = fk.div_type_terr_div_type_sk AND fk.div_type_terr_div_type_dp_code like 'vspc%' and not coalesce(pk.deleted_flag,FALSE)",
+                         "from": "usl_vspc_idl_snp.div_type fk LEFT JOIN usl_vspc_idl_snp.terr_div_type AS pk ON pk.terr_div_type_sk = fk.div_type_terr_div_type_sk AND fk.div_type_terr_div_type_dp_code like 'vspc%' and not coalesce(pk.deleted_flag,FALSE) LEFT JOIN (select e.metric_cd,e.key_val_01 from ESKKD_INFA.DQ_EXCLUDES e where coalesce(e.gap_fix_dt, from_unixtime(unix_timestamp('31.12.2999' , 'dd.MM.yyyy'), 'yyyy-MM-dd')) > current_date and e.key_val_01 is not null and e.metric_cd like 'p_usl_%') ex ON ex.key_val_01 = fk.div_sk",
                          "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or fk.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(pk.deleted_flag, false)",
                          "rule_cd": "r_usl_ri_s_vspc_idl-div_type-div_type_terr_div_type_sk",
                          "code_datahub": "CAP/KERNEL/USL/VSPC_IDL",
@@ -2034,7 +2186,7 @@
                                          "metric_desc": "Для каждого значения внешнего ключа div_type.div_type_terr_div_type_sk должна найтись запись в таблице terr_div_type с тем же значением первичного ключа terr_div_type_sk",
                                          "send_to_meta": 1,
                                          "threshold_val_1": 100,
-                                         "rule_impl_sql_text": "SUM(CASE WHEN fk.div_type_terr_div_type_sk IS NOT NULL AND fk.div_type_terr_div_type_dp_code like 'vspc%' AND pk.terr_div_type_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "rule_impl_sql_text": "SUM(CASE WHEN ex.metric_cd='p_usl_ri_s_vspc_idl-div_type-div_type_terr_div_type_sk' THEN 0 WHEN fk.div_type_terr_div_type_sk IS NOT NULL AND fk.div_type_terr_div_type_dp_code like 'vspc%' AND pk.terr_div_type_sk IS NULL THEN 1 ELSE 0 END)",
                                          "claim_metric_type_name": "Доля (100% при отсутствии записей)",
                                          "metric_deviation_cnt_fld_num": 1
                                      }
@@ -2229,58 +2381,8 @@
     
                 {
                      "rule": {
-                         "from": "usl_vspc_idl_snp.div_ AS fk LEFT JOIN usl_rdm_idl_spark_snp.time_zone_rf AS pk ON fk.div_time_zone_time_zone_rf_sk = pk.time_zone_rf_sk AND fk.div_time_zone_time_zone_rf_dp_code ='rdm_idl_spark' AND not coalesce(pk.deleted_flag,FALSE)",
-                         "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or fk.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(pk.deleted_flag, false) and not coalesce(fk.deleted_flag, false)",
-                         "rule_cd": "r_usl_gri_s_vspc_idl-rdm_idl_spark-div_-div_time_zone_time_zone_rf_sk",
-                         "code_datahub": "INTEGRAL#VSPC_IDL-RDM_IDL_SPARK",
-                         "timesheet_name": "ежедневно",
-                         "relation_enabled": "Y",
-                         "system_area_type": "{{ system_area_type }}"
-                     },
-                     "criterions": [
-                        {
-                             "metrics": [
-                                 {
-                                     "claims": [
-                                         {
-                                             "ai_flag": 0,
-                                             "claims_cd": "cl_usl_gri_s_vspc_idl-rdm_idl_spark-div_-div_time_zone_time_zone_rf_sk",
-                                             "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Тиден Николай Николаевич",
-                                             "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
-                                             "business_proc_cd": "П1831"
-                                         }
-                                     ],
-                                     "metric": {
-                                         "scen_cd": "RED-GREEN",
-                                         "metric_cd": "p_usl_gri_s_vspc_idl-rdm_idl_spark-div_-div_time_zone_time_zone_rf_sk",
-                                         "metric_desc": "Для каждого значения внешнего ключа div_.div_time_zone_time_zone_rf_sk должна найтись запись в таблице time_zone_rf с тем же значением первичного ключа time_zone_rf_sk",
-                                         "send_to_meta": 1,
-                                         "threshold_val_1": 100,
-                                         "rule_impl_sql_text": "SUM(CASE WHEN fk.div_time_zone_time_zone_rf_sk IS NOT NULL AND fk.div_time_zone_time_zone_rf_dp_code = 'rdm_idl_spark' AND pk.time_zone_rf_sk IS NULL THEN 1 ELSE 0 END)",
-                                         "claim_metric_type_name": "Доля (100% при отсутствии записей)",
-                                         "metric_deviation_cnt_fld_num": 1
-                                     }
-                                 }
-                             ],
-                             "criterion": {
-                                 "crit_cd": "cr_usl_gri_s_vspc_idl-rdm_idl_spark-div_-div_time_zone_time_zone_rf_sk",
-                                 "crit_desc": "Для каждого значения внешнего ключа должна найтись запись в таблице с тем же значением первичного ключа",
-                                 "dq_metacolumn": [
-                                 "HADOOP.{{ uslCluster }}.USL_VSPC_IDL_SNP.DIV_.DIV_TIME_ZONE_TIME_ZONE_RF_SK"
-                             ],
-                                 "crit_condition": "Все записи",
-                                 "crit_owner_fio": "",
-                                 "data_owner_name": "{{ data_owner_name }}", //переменная devops "Группа владельца данных"
-                                 "agrmnt_claim_type_name": "Ссылочная целостность"
-                             }
-                         }
-                     ]
-                 }
-                ,{
-                     "rule": {
-                         "from": "usl_vspc_idl_snp.div_h AS fk LEFT JOIN usl_rdm_idl_spark_snp.pay_sys_prtcpnt AS pk ON fk.pay_sys_prtcpnt_sk = pk.pay_sys_prtcpnt_sk AND fk.pay_sys_prtcpnt_dp_code ='rdm_idl_spark' AND not coalesce(pk.deleted_flag,FALSE)",
-                         "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or fk.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(pk.deleted_flag, false)",
+                         "from": "usl_vspc_idl_snp.div_h AS fk LEFT JOIN usl_rdm_idl_spark_snp.pay_sys_prtcpnt AS pk ON fk.pay_sys_prtcpnt_sk = pk.pay_sys_prtcpnt_sk AND fk.pay_sys_prtcpnt_dp_code like 'rdm%' LEFT JOIN (select e.metric_cd,e.key_val_01 from ESKKD_INFA.DQ_EXCLUDES e where coalesce(e.gap_fix_dt, from_unixtime(unix_timestamp('31.12.9999' , 'dd.MM.yyyy'), 'yyyy-MM-dd')) > current_date and e.key_val_01 is not null and e.metric_cd like 'p_usl_%') ex ON ex.key_val_01 = fk.div_sk",
+                         "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or fk.ctl_loading in ($$LOADINGIDS_ARRAY$$))   and fk.pay_sys_prtcpnt_dp_code like 'rdm%'",
                          "rule_cd": "r_usl_gri_s_vspc_idl-rdm_idl_spark-div_h-pay_sys_prtcpnt_sk",
                          "code_datahub": "INTEGRAL#VSPC_IDL-RDM_IDL_SPARK",
                          "timesheet_name": "ежедневно",
@@ -2307,7 +2409,7 @@
                                          "metric_desc": "Для каждого значения внешнего ключа div_h.pay_sys_prtcpnt_sk должна найтись запись в таблице pay_sys_prtcpnt с тем же значением первичного ключа pay_sys_prtcpnt_sk",
                                          "send_to_meta": 1,
                                          "threshold_val_1": 100,
-                                         "rule_impl_sql_text": "SUM(CASE WHEN fk.pay_sys_prtcpnt_sk IS NOT NULL AND fk.pay_sys_prtcpnt_dp_code = 'rdm_idl_spark' AND pk.pay_sys_prtcpnt_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "rule_impl_sql_text": "SUM(CASE WHEN ex.metric_cd='p_usl_gri_s_vspc_idl-rdm_idl_spark-div_h-pay_sys_prtcpnt_sk' THEN 0 WHEN fk.pay_sys_prtcpnt_sk IS NOT NULL AND pk.pay_sys_prtcpnt_sk IS NULL THEN 1 ELSE 0 END)",
                                          "claim_metric_type_name": "Доля (100% при отсутствии записей)",
                                          "metric_deviation_cnt_fld_num": 1
                                      }
@@ -2329,8 +2431,8 @@
                  }
                 ,{
                      "rule": {
-                         "from": "usl_vspc_idl_snp.addr AS fk LEFT JOIN usl_rdm_idl_spark_snp.rus_fed_subj AS pk ON fk.rus_fed_subj_sk = pk.rus_fed_subj_sk AND fk.rus_fed_subj_dp_code ='rdm_idl_spark' AND not coalesce(pk.deleted_flag,FALSE)",
-                         "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or fk.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(pk.deleted_flag, false) and not coalesce(fk.deleted_flag, false)",
+                         "from": "usl_vspc_idl_snp.addr AS fk LEFT JOIN usl_rdm_idl_spark_snp.rus_fed_subj AS pk ON fk.rus_fed_subj_sk = pk.rus_fed_subj_sk AND fk.rus_fed_subj_dp_code like 'rdm%' LEFT JOIN (select e.metric_cd,e.key_val_01 from ESKKD_INFA.DQ_EXCLUDES e where coalesce(e.gap_fix_dt, from_unixtime(unix_timestamp('31.12.9999' , 'dd.MM.yyyy'), 'yyyy-MM-dd')) > current_date and e.key_val_01 is not null and e.metric_cd like 'p_usl_%') ex ON ex.key_val_01 = fk.addr_sk",
+                         "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or fk.ctl_loading in ($$LOADINGIDS_ARRAY$$))  and not coalesce(fk.deleted_flag, false)  and fk.rus_fed_subj_dp_code like 'rdm%'",
                          "rule_cd": "r_usl_gri_s_vspc_idl-rdm_idl_spark-addr-rus_fed_subj_sk",
                          "code_datahub": "INTEGRAL#VSPC_IDL-RDM_IDL_SPARK",
                          "timesheet_name": "ежедневно",
@@ -2357,7 +2459,7 @@
                                          "metric_desc": "Для каждого значения внешнего ключа addr.rus_fed_subj_sk должна найтись запись в таблице rus_fed_subj с тем же значением первичного ключа rus_fed_subj_sk",
                                          "send_to_meta": 1,
                                          "threshold_val_1": 100,
-                                         "rule_impl_sql_text": "SUM(CASE WHEN fk.rus_fed_subj_sk IS NOT NULL AND fk.rus_fed_subj_dp_code = 'rdm_idl_spark' AND pk.rus_fed_subj_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "rule_impl_sql_text": "SUM(CASE WHEN ex.metric_cd='p_usl_gri_s_vspc_idl-rdm_idl_spark-addr-rus_fed_subj_sk' THEN 0 WHEN fk.rus_fed_subj_sk IS NOT NULL AND pk.rus_fed_subj_sk IS NULL THEN 1 ELSE 0 END)",
                                          "claim_metric_type_name": "Доля (100% при отсутствии записей)",
                                          "metric_deviation_cnt_fld_num": 1
                                      }
@@ -2379,8 +2481,8 @@
                  }
                 ,{
                      "rule": {
-                         "from": "usl_vspc_idl_snp.addr AS fk LEFT JOIN usl_rdm_idl_spark_snp.okato2 AS pk ON fk.okato2_sk = pk.okato2_sk AND fk.okato2_dp_code ='rdm_idl_spark' AND not coalesce(pk.deleted_flag,FALSE)",
-                         "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or fk.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(pk.deleted_flag, false) and not coalesce(fk.deleted_flag, false)",
+                         "from": "usl_vspc_idl_snp.addr AS fk LEFT JOIN usl_rdm_idl_spark_snp.okato2 AS pk ON fk.okato2_sk = pk.okato2_sk AND fk.okato2_dp_code like 'rdm%' LEFT JOIN (select e.metric_cd,e.key_val_01 from ESKKD_INFA.DQ_EXCLUDES e where coalesce(e.gap_fix_dt, from_unixtime(unix_timestamp('31.12.9999' , 'dd.MM.yyyy'), 'yyyy-MM-dd')) > current_date and e.key_val_01 is not null and e.metric_cd like 'p_usl_%') ex ON ex.key_val_01 = fk.addr_sk",
+                         "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or fk.ctl_loading in ($$LOADINGIDS_ARRAY$$))  and not coalesce(fk.deleted_flag, false)  and fk.okato2_dp_code like 'rdm%'",
                          "rule_cd": "r_usl_gri_s_vspc_idl-rdm_idl_spark-addr-okato2_sk",
                          "code_datahub": "INTEGRAL#VSPC_IDL-RDM_IDL_SPARK",
                          "timesheet_name": "ежедневно",
@@ -2407,7 +2509,7 @@
                                          "metric_desc": "Для каждого значения внешнего ключа addr.okato2_sk должна найтись запись в таблице okato2 с тем же значением первичного ключа okato2_sk",
                                          "send_to_meta": 1,
                                          "threshold_val_1": 100,
-                                         "rule_impl_sql_text": "SUM(CASE WHEN fk.okato2_sk IS NOT NULL AND fk.okato2_dp_code = 'rdm_idl_spark' AND pk.okato2_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "rule_impl_sql_text": "SUM(CASE WHEN ex.metric_cd='p_usl_gri_s_vspc_idl-rdm_idl_spark-addr-okato2_sk' THEN 0 WHEN fk.okato2_sk IS NOT NULL AND pk.okato2_sk IS NULL THEN 1 ELSE 0 END)",
                                          "claim_metric_type_name": "Доля (100% при отсутствии записей)",
                                          "metric_deviation_cnt_fld_num": 1
                                      }
@@ -2429,8 +2531,8 @@
                  }
                 ,{
                      "rule": {
-                         "from": "usl_vspc_idl_snp.addr AS fk LEFT JOIN usl_rdm_idl_spark_snp.cntry AS pk ON fk.cntry_sk = pk.cntry_sk AND fk.cntry_dp_code ='rdm_idl_spark' AND not coalesce(pk.deleted_flag,FALSE)",
-                         "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or fk.ctl_loading in ($$LOADINGIDS_ARRAY$$)) and not coalesce(pk.deleted_flag, false) and not coalesce(fk.deleted_flag, false)",
+                         "from": "usl_vspc_idl_snp.addr AS fk LEFT JOIN usl_rdm_idl_spark_snp.cntry AS pk ON fk.cntry_sk = pk.cntry_sk AND fk.cntry_dp_code like 'rdm%' LEFT JOIN (select e.metric_cd,e.key_val_01 from ESKKD_INFA.DQ_EXCLUDES e where coalesce(e.gap_fix_dt, from_unixtime(unix_timestamp('31.12.9999' , 'dd.MM.yyyy'), 'yyyy-MM-dd')) > current_date and e.key_val_01 is not null and e.metric_cd like 'p_usl_%') ex ON ex.key_val_01 = fk.addr_sk",
+                         "where": "('$$LOADINGIDS_ARRAY$$' = 'null' or fk.ctl_loading in ($$LOADINGIDS_ARRAY$$))  and not coalesce(fk.deleted_flag, false)  and fk.cntry_dp_code like 'rdm%'",
                          "rule_cd": "r_usl_gri_s_vspc_idl-rdm_idl_spark-addr-cntry_sk",
                          "code_datahub": "INTEGRAL#VSPC_IDL-RDM_IDL_SPARK",
                          "timesheet_name": "ежедневно",
@@ -2457,7 +2559,7 @@
                                          "metric_desc": "Для каждого значения внешнего ключа addr.cntry_sk должна найтись запись в таблице cntry с тем же значением первичного ключа cntry_sk",
                                          "send_to_meta": 1,
                                          "threshold_val_1": 100,
-                                         "rule_impl_sql_text": "SUM(CASE WHEN fk.cntry_sk IS NOT NULL AND fk.cntry_dp_code = 'rdm_idl_spark' AND pk.cntry_sk IS NULL THEN 1 ELSE 0 END)",
+                                         "rule_impl_sql_text": "SUM(CASE WHEN ex.metric_cd='p_usl_gri_s_vspc_idl-rdm_idl_spark-addr-cntry_sk' THEN 0 WHEN fk.cntry_sk IS NOT NULL AND pk.cntry_sk IS NULL THEN 1 ELSE 0 END)",
                                          "claim_metric_type_name": "Доля (100% при отсутствии записей)",
                                          "metric_deviation_cnt_fld_num": 1
                                      }

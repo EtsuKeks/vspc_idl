@@ -1,20 +1,5 @@
 package ru.sberbank.bigdata.dffess.vspc.impl;
 
-import ru.sberbank.bigdata.essa.common.master.app.DataProduct;
-import ru.sberbank.bigdata.essa.common.master.app.DataProductGenerator;
-import ru.sberbank.bigdata.essa.common.master.app.Etl;
-import ru.sberbank.bigdata.essa.common.master.app.EtlKit;
-import ru.sberbank.bigdata.essa.common.slave.templates.FinalConfiguration;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static ru.sberbank.bigdata.essa.common.master.app.forApp.SparkConfKeeper.ResourceConfig.HARD;
-import static ru.sberbank.bigdata.essa.common.master.app.forApp.SparkConfKeeper.ResourceConfig.LITE;
-
-import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.*;
-import static ru.sberbank.bigdata.essa.common.slave.app.CtlStatService.StatisticsType.DATA_PRODUCT;
-
 import ru.sberbank.bigdata.dffess.vspc.tables.addr.AddrConfiguration;
 import ru.sberbank.bigdata.dffess.vspc.tables.addrh.AddrHConfiguration;
 import ru.sberbank.bigdata.dffess.vspc.tables.div.DivConfiguration;
@@ -22,6 +7,19 @@ import ru.sberbank.bigdata.dffess.vspc.tables.divh.DivHConfiguration;
 import ru.sberbank.bigdata.dffess.vspc.tables.divtype.DivTypeConfiguration;
 import ru.sberbank.bigdata.dffess.vspc.tables.terrdivtype.TerrDivTypeConfiguration;
 import ru.sberbank.bigdata.dffess.vspc.tables.timezone.TimeZoneConfiguration;
+import ru.sberbank.bigdata.essa.common.master.app.DataProduct;
+import ru.sberbank.bigdata.essa.common.master.app.DataProductGenerator;
+import ru.sberbank.bigdata.essa.common.master.app.Etl;
+import ru.sberbank.bigdata.essa.common.master.app.EtlKit;
+import ru.sberbank.bigdata.essa.common.slave.templates.fin.FinalConfiguration;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.*;
+import static ru.sberbank.bigdata.essa.common.master.app.forApp.SparkConfKeeper.ResourceConfig.HARD;
+import static ru.sberbank.bigdata.essa.common.master.app.forApp.SparkConfKeeper.ResourceConfig.LITE;
+import static ru.sberbank.bigdata.essa.common.slave.app.CtlStatService.StatisticsType.DATA_PRODUCT;
 
 public class VspcDataProductGenerator implements DataProductGenerator {
 
@@ -52,7 +50,7 @@ public class VspcDataProductGenerator implements DataProductGenerator {
         //Etl stage = Etl.newInstance(TablesName.CHG_TRANS_HEAD, ChgTransHeadConfiguration.class, LITE);
 
         return EtlKit.newInstance("stage", HARD);
-                //.addEtl(stage);
+        //.addEtl(stage);
     }
 
     private static EtlKit snpKit(EtlKit preload) {

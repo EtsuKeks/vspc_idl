@@ -1,8 +1,8 @@
 package ru.sberbank.bigdata.dffess.vspc.impl;
 
 import org.apache.spark.sql.Column;
-import ru.sberbank.bigdata.essa.common.structure.MetadataKeeper;
 import ru.sberbank.bigdata.essa.common.slave.templates.TransformConfiguration;
+import ru.sberbank.bigdata.essa.common.structure.MetadataKeeper;
 import ru.sberbank.bigdata.essa.common.structure.SourceSchemaKeeper;
 
 import java.time.LocalDate;
@@ -16,18 +16,10 @@ import static ru.sberbank.bigdata.essa.common.utils.Expression.generatePartition
 public class VspcTransformConfiguration extends TransformConfiguration {
 
     private final SourceSchemaKeeper sourceSchemaKeeper;
-    private final MetadataKeeper metadataKeeper;
-    private final String today;
-    //??private String stgPath;
-
 
     public VspcTransformConfiguration() {
         super();
-        //??stgPath = moduleConfiguration.getValue(STG_PATH);
         sourceSchemaKeeper = new VspcSourceSchemaKeeper();
-        metadataKeeper = new VspcMetadataKeeper();
-        DateTimeFormatter formatterToStr = DateTimeFormatter.ofPattern(DATE_FORMAT);
-        today = LocalDate.now().format(formatterToStr);
     }
 
     @Override
@@ -46,8 +38,13 @@ public class VspcTransformConfiguration extends TransformConfiguration {
     }
 
     @Override
+    public String getIncrementDeepBeginDate() {
+        return "";
+    }
+
+    @Override
     public String getIncrCutOffDstDateString() {
-        DateTimeFormatter formatterToStr = DateTimeFormatter.ofPattern(PARTITION_FORMAT);
+        DateTimeFormatter formatterToStr = DateTimeFormatter.ofPattern(PARTITION_DAY_FORMAT);
         return LocalDate.now().minusDays(DEPTH_DELTA).format(formatterToStr);
     }
 
@@ -76,9 +73,4 @@ public class VspcTransformConfiguration extends TransformConfiguration {
     public boolean isNeedToRecalcStartDate() {
         return false;
     }
-
-    /*??@Override
-    public String getStagePath() {
-        return stgPath;
-    }*/
 }

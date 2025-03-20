@@ -24,7 +24,13 @@ workflows:
           active: false
         entities:
           - entity:
-              # usl_{{short_product_code}}_in.ebx_rep_m_sfs_0002_sfsdivision
+              # usl_vspc_idl_in.ebx_rep_m_rfzonetime_0002_rfzonetime
+              id: 953008916
+              statisticId: {{ archiveStat_FakeCardCode }}
+              profile: "{{ archiveProfile_FakeCardCode }}"
+              active: true
+          - entity:
+              # usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision
               id: 928039295
               statisticId: {{ archiveStat_FakeCardCode }}
               profile: "{{ archiveProfile_FakeCardCode }}"
@@ -134,8 +140,8 @@ workflows:
             prior_value: "{{ kafka_topic }}"
       notifications:
           - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru","SLSNTWRKDE_ess@sberbank.ru" ] }
-          - { status: "RUNNING", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru","SLSNTWRKDE_ess@sberbank.ru" ] }
-          - { status: "SUCCESS", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru","SLSNTWRKDE_ess@sberbank.ru" ] }
+          - { status: "RUNNING", emails: [ "SLSNTWRKDE_ess@sberbank.ru" ] }
+          - { status: "SUCCESS", emails: [ "SLSNTWRKDE_ess@sberbank.ru" ] }
 
   - "{{ logical_env_prefix }}USL_VSPC_IDL_INIT":
       name: "{{ logical_env_prefix }}USL_VSPC_IDL_INIT"
@@ -254,8 +260,8 @@ workflows:
             prior_value: "{{ kafka_topic }}"
       notifications:
           - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru","SLSNTWRKDE_ess@sberbank.ru" ] }
-          - { status: "RUNNING", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru","SLSNTWRKDE_ess@sberbank.ru" ] }
-          - { status: "SUCCESS", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru","SLSNTWRKDE_ess@sberbank.ru" ] }
+          - { status: "RUNNING", emails: [ "SLSNTWRKDE_ess@sberbank.ru" ] }
+          - { status: "SUCCESS", emails: [ "SLSNTWRKDE_ess@sberbank.ru" ] }
 
 entities:
   - entity:
@@ -265,4 +271,3 @@ entities:
       path: "\\data\\usl"
       storage: "HDFS"
       parent-id: 904000000
-

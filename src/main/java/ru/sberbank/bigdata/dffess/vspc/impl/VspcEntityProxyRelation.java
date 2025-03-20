@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VspcEntityProxyRelation implements EntityProxyRelation {
+
     private Map<String, String> relationMap;
 
     public VspcEntityProxyRelation() {
