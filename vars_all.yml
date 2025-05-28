@@ -1,4 +1,4 @@
-# 
+#
 # vars_all.yml
 #
 # Файл с переменными Ansible для всех сред
@@ -14,7 +14,7 @@
 vars: &commonVars
   logical_env_prefix: ""
   base_path: "/oozie-app/t/idl/vspc_idl"
-  
+
   file_path: "{{ base_path }}/init/"
   YARN_QUEUE: "vspc"
   debug_logical_env: ""
@@ -24,7 +24,7 @@ vars: &commonVars
   parallel_threads: 10
   debug_distributive_path: "{{ base_path }}/lib"
   debug_sk_off: "false"
-  build_version: "D-01.701.013"
+  build_version: "D-01.703.001"
   devops_distributive_jar: "vspc_idl-{{ build_version }}-jar-with-dependencies.jar"
 
   logical_env_prefix_with_slash: ""
@@ -64,9 +64,9 @@ stands:
       cluster_name: "sklsdpfess"
       spark_parameters_default: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=2G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=5 --conf spark.dynamicAllocation.maxExecutors=40 --conf spark.driver.memory=5G"
       spark_submit_kvno: "--conf spark.driver.extraJavaOptions='-Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false'"
-      spark_submit_ongf: "--command essaDebugSkOff=ON_GF"
+      appConf: "essa_debug_sk_off=ON_GF"
       spark_parameters: "{{ spark_parameters_default }}"
-      spark_parameters_init: "{{ spark_parameters_default }} {{ spark_submit_ongf }}"
+      spark_parameters_init: "{{ spark_parameters_default }}"
       hadoop_default_fs_uri: "hdfs://FESS-DEV"
       user_name: "u_sklsdpfess_s_usl_t_vspc_idl"
       USER_NAME: "u_sklsdpfess_s_usl_t_vspc_idl"
@@ -85,9 +85,9 @@ stands:
       cluster_name: "itsklsdpfess"
       spark_parameters_default: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=1G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=2 --conf spark.dynamicAllocation.maxExecutors=10 --conf spark.driver.memory=1G"
       spark_submit_kvno: "--conf spark.driver.extraJavaOptions='-Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false'"
-      spark_submit_ongf: "--command essaDebugSkOff=ON_GF"
+      appConf: "essa_debug_sk_off=ON_GF"
       spark_parameters: "{{ spark_parameters_default }}"
-      spark_parameters_init: "{{ spark_parameters_default }} {{ spark_submit_ongf }}"
+      spark_parameters_init: "{{ spark_parameters_default }}"
       hadoop_default_fs_uri: "hdfs://FESS-IFT"
       user_name: "u_itsklsdpfess_s_usl_t_vspc_idl"
       USER_NAME: "u_itsklsdpfess_s_usl_t_vspc_idl"
@@ -109,7 +109,7 @@ stands:
       cluster_name: "utarnsdpfess"
       spark_parameters_default: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.executor.memory=10G --conf spark.executor.cores=2 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=20G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=20G --conf spark.driver.memoryOverhead=10G --conf spark.executor.memoryOverhead=3G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=100 --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000"
       spark_submit_kvno: "--conf spark.driver.extraJavaOptions='-Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false'"
-      spark_submit_ongf: "--command essaDebugSkOff=ON_GF"
+#      spark_submit_ongf: "--command essa_debug_sk_off=ON_GF"
       spark_parameters: "{{ spark_parameters_default }}"
       spark_parameters_init: "{{ spark_parameters_default }}"
       hadoop_default_fs_uri: "hdfs://utarnsdpfess"
@@ -129,7 +129,7 @@ stands:
       cluster_name: "arn6sdpfess"
       spark_parameters_default: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.executor.memory=10G --conf spark.executor.cores=2 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=10G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=2G --conf spark.driver.memoryOverhead=5G --conf spark.executor.memoryOverhead=3G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=100 --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000"
       spark_submit_kvno: "--conf spark.driver.extraJavaOptions='-Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false'"
-      spark_submit_ongf: "--command essaDebugSkOff=ON_GF"
+#      spark_submit_ongf: "--command essa_debug_sk_off=ON_GF"
       spark_parameters: "{{ spark_parameters_default }}"
       spark_parameters_init: "{{ spark_parameters_default }}"
       hadoop_default_fs_uri: "hdfs://arnsdpfess2"
