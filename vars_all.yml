@@ -56,6 +56,8 @@ vars: &commonVars
 
   kafka_topic: "log-CI02619185-CI02619185"
 
+  sl_secman_sberca_role: "client_3y_AS_rsa"
+
 stands:
   # DEV
   - stand_inventory: sdpdevfess
@@ -73,7 +75,6 @@ stands:
       uslCluster: "sdpdevfess"
       system_area_type: "q_SDP_comm"
       log_level: "ESSA"
-      sl_secman_sberca_role: "client_3y_AS_rsa"
       archiveProfile_sfs: "Default"
       kafka_broker_list: "tvlsq-log000001.dev.df.sbrf.ru:9093,tvlsq-log000002.dev.df.sbrf.ru:9093,tvlsq-log000003.dev.df.sbrf.ru:9093,tvlsq-log000004.dev.df.sbrf.ru:9093,tvlsq-log000005.dev.df.sbrf.ru:9093,tvlsq-log000006.dev.df.sbrf.ru:9093"
 #      kafka_topic: "log-kafka-04"
