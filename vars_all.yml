@@ -22,9 +22,9 @@ vars: &commonVars
   data_sets: ""
 
   parallel_threads: 10
-  debug_distributive_path: "{{ base_path }}/lib"
+#  debug_distributive_path: "{{ base_path }}/lib"
   debug_sk_off: "false"
-  build_version: "D-01.703.003"
+  build_version: "D-01.703.004"
   devops_distributive_jar: "vspc_idl-{{ build_version }}-jar-with-dependencies.jar"
 
   logical_env_prefix_with_slash: ""
@@ -144,6 +144,7 @@ stands:
       log_level: "INFO"
       yarn_queue_init: "init"
       cert_enabled_flag: "true"
+      debug_sk_off: ""
       archiveProfile_FakeCardCode: "ts_espd"
       # https://confluence.delta.sbrf.ru/pages/viewpage.action?pageId=12061548095
       kafka_broker_list: "logapps-sk-01.log.df.sbrf.ru:9093,logapps-sk-02.log.df.sbrf.ru:9093,logapps-sk-03.log.df.sbrf.ru:9093,logapps-mc-01.log.df.sbrf.ru:9093,logapps-mc-02.log.df.sbrf.ru:9093,logapps-mc-03.log.df.sbrf.ru:9093"
