@@ -101,10 +101,6 @@ workflows:
             # Значения параметров Spark, которые можно передать в командную строку spark-submit.
             name: common_spark_parameters
             prior_value: "{{ spark_parameters }}"
-#        - param:
-#            # Содержит полный путь, от корня до имени файла  (без имен файлов) к корневому каталогу дистрибутива data-продукта
-#            name: debug_distributive_path
-#            prior_value: "{{ debug_distributive_path }}"
         - param:
             name: app_spark_parameters
             prior_value: "{{ appConf }}"
@@ -224,10 +220,6 @@ workflows:
             # Значения параметров Spark, которые можно передать в командную строку spark-submit.
             name: common_spark_parameters
             prior_value: "{{ spark_parameters_init }}"
-#        - param:
-#            # Содержит полный путь, от корня до имени файла  (без имен файлов) к корневому каталогу дистрибутива data-продукта
-#            name: debug_distributive_path
-#            prior_value: "{{ debug_distributive_path }}"
         - param:
             name: app_spark_parameters
             prior_value: "{{ appConf }}"
