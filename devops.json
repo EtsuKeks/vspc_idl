@@ -82,7 +82,7 @@
     "sql/ddl/ddl.usl.vspc_idl.v017.model_stg.9.4.0_fw_3.5.4.sql",
     "sql/ddl/ddl.usl.vspc_idl.v017.model.9.4.0_fw_3.5.4.sql"
   ],
-  "workflow_to_run" : [
+  "workflow_to_run_scenario" : [
     "USL_VSPC_IDL_INIT"
   ]
 }
