@@ -23,7 +23,7 @@ vars: &commonVars
 
   parallel_threads: 10
   debug_sk_off: "false"
-  build_version: "D-01.703.014"
+  build_version: "D-01.703.015"
   devops_distributive_jar: "vspc_idl-{{ build_version }}-jar-with-dependencies.jar"
 
   logical_env_prefix_with_slash: ""
@@ -65,7 +65,8 @@ stands:
       cluster_name: "sklsdpfess"
       spark_parameters_default: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=2G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=5 --conf spark.dynamicAllocation.maxExecutors=40 --conf spark.driver.memory=5G"
       spark_submit_kvno: "--conf spark.driver.extraJavaOptions='-Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false'"
-      appConf: "essa_debug_sk_off=ON_GF"
+      app_conf: ""
+      app_conf_init: "essa_debug_sk_off=ON_GF"
       spark_parameters: "{{ spark_parameters_default }}"
       spark_parameters_init: "{{ spark_parameters_default }}"
       hadoop_default_fs_uri: "hdfs://FESS-DEV"
@@ -85,7 +86,8 @@ stands:
       cluster_name: "itsklsdpfess"
       spark_parameters_default: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=1G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=2 --conf spark.dynamicAllocation.maxExecutors=10 --conf spark.driver.memory=1G"
       spark_submit_kvno: "--conf spark.driver.extraJavaOptions='-Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false'"
-      appConf: "essa_debug_sk_off=ON_GF"
+      app_conf: ""
+      app_conf_init: "essa_debug_sk_off=ON_GF"
       spark_parameters: "{{ spark_parameters_default }}"
       spark_parameters_init: "{{ spark_parameters_default }}"
       hadoop_default_fs_uri: "hdfs://FESS-IFT"
@@ -101,7 +103,6 @@ stands:
       archiveProfile_sfs: "Default"
       cert_enabled_flag: "true"
       kafka_broker_list: "tvlsq-log000001.dev.df.sbrf.ru:9093,tvlsq-log000002.dev.df.sbrf.ru:9093,tvlsq-log000003.dev.df.sbrf.ru:9093,tvlsq-log000004.dev.df.sbrf.ru:9093,tvlsq-log000005.dev.df.sbrf.ru:9093,tvlsq-log000006.dev.df.sbrf.ru:9093"
-      #      kafka_topic: "log-kafka-04"
 
   # RDT
   - stand_inventory: utarnsdpfess
@@ -110,8 +111,8 @@ stands:
       cluster_name: "utarnsdpfess"
       spark_parameters_default: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.executor.memory=10G --conf spark.executor.cores=2 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=20G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=20G --conf spark.driver.memoryOverhead=10G --conf spark.executor.memoryOverhead=3G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=100 --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000"
       spark_submit_kvno: "--conf spark.driver.extraJavaOptions='-Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false'"
-#      spark_submit_ongf: "--command essa_debug_sk_off=ON_GF"
-      appConf: ""
+      app_conf: ""
+      app_conf_init: "essa_debug_sk_off=ON_GF"
       spark_parameters: "{{ spark_parameters_default }}"
       spark_parameters_init: "{{ spark_parameters_default }}"
       hadoop_default_fs_uri: "hdfs://utarnsdpfess"
@@ -122,7 +123,6 @@ stands:
       log_level: "INFO"
       yarn_queue_init: "init"
       kafka_broker_list: "pvloq-log000209.log.df.sbrf.ru:9093,pvloq-log000210.log.df.sbrf.ru:9093,pvloq-log000211.log.df.sbrf.ru:9093,pvloq-log000212.log.df.sbrf.ru:9093,pvloq-log000213.log.df.sbrf.ru:9093,pvloq-log000214.log.df.sbrf.ru:9093,pvloq-log000215.log.df.sbrf.ru:9093,pvloq-log000216.log.df.sbrf.ru:9093,pvloq-log000217.log.df.sbrf.ru:9093,pvloq-log000218.log.df.sbrf.ru:9093,pvloq-log000219.log.df.sbrf.ru:9093,pvloq-log000220.log.df.sbrf.ru:9093,pvloq-log000221.log.df.sbrf.ru:9093,pvloq-log000222.log.df.sbrf.ru:9093,pvloq-log000223.log.df.sbrf.ru:9093"
-#      kafka_topic: "log-kafka-10"
 
   # PROM NEW
   - stand_inventory: arnsdpfess2
@@ -131,8 +131,8 @@ stands:
       cluster_name: "arn6sdpfess"
       spark_parameters_default: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.executor.memory=10G --conf spark.executor.cores=2 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=10G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=2G --conf spark.driver.memoryOverhead=5G --conf spark.executor.memoryOverhead=3G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=100 --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000"
       spark_submit_kvno: "--conf spark.driver.extraJavaOptions='-Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false'"
-      appConf: ""
-#      spark_submit_ongf: "--command essa_debug_sk_off=ON_GF"
+      app_conf: ""
+      app_conf_init: "essa_debug_sk_off=ON_GF"
       spark_parameters: "{{ spark_parameters_default }}"
       spark_parameters_init: "{{ spark_parameters_default }}"
       hadoop_default_fs_uri: "hdfs://arnsdpfess2"
@@ -147,4 +147,3 @@ stands:
       archiveProfile_FakeCardCode: "ts_espd"
       # https://confluence.delta.sbrf.ru/pages/viewpage.action?pageId=12061548095
       kafka_broker_list: "logapps-sk-01.log.df.sbrf.ru:9093,logapps-sk-02.log.df.sbrf.ru:9093,logapps-sk-03.log.df.sbrf.ru:9093,logapps-mc-01.log.df.sbrf.ru:9093,logapps-mc-02.log.df.sbrf.ru:9093,logapps-mc-03.log.df.sbrf.ru:9093"
-#      kafka_topic: "log-CI02619185-CI04734132"

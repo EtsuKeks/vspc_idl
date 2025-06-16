@@ -103,7 +103,7 @@ workflows:
             prior_value: "{{ spark_parameters }}"
         - param:
             name: app_spark_parameters
-            prior_value: "{{ appConf }}"
+            prior_value: "{{ app_conf }}"
         - param:
             # Признак (Y/пусто=N) отключения использования сервисов СК.
             name: debug_sk_off
@@ -222,7 +222,7 @@ workflows:
             prior_value: "{{ spark_parameters_init }}"
         - param:
             name: app_spark_parameters
-            prior_value: "{{ appConf }}"
+            prior_value: "{{ app_conf_init }}"
         - param:
             # Признак (Y/пусто=N) отключения использования сервисов СК.
             name: debug_sk_off
