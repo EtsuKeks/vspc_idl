@@ -1,0 +1,3106 @@
+{
+  "wellCode" : "vspc",
+  "productCtlEntityId" : "801005314",
+  "cefss" : "CI04734132",
+  "lineage" : [ {
+    "providerProductAlias" : "archive_rdm",
+    "providerDatasetCode" : "usl_vspc_idl_in.ebx_rep_m_rfzonetime_0002_rfzonetime"
+  }, {
+    "providerProductAlias" : "archive_rdm",
+    "providerDatasetCode" : "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision"
+  }, {
+    "providerProductAlias" : "archive_rdm",
+    "providerDatasetCode" : "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision_successors"
+  } ],
+  "archiveProviderEntities" : [ {
+    "providerProductAlias" : "archive_rdm",
+    "providerDatasetCode" : "usl_vspc_idl_in.ebx_rep_m_rfzonetime_0002_rfzonetime",
+    "snpCtlEntityId" : 953008916,
+    "snpInLineageFlag" : true
+  }, {
+    "providerProductAlias" : "archive_rdm",
+    "providerDatasetCode" : "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision",
+    "snpCtlEntityId" : 953018846,
+    "snpInLineageFlag" : true
+  }, {
+    "providerProductAlias" : "archive_rdm",
+    "providerDatasetCode" : "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision_successors",
+    "snpCtlEntityId" : 953018846,
+    "snpInLineageFlag" : true
+  } ],
+  "uslProviderEntities" : [ {
+    "providerProductAlias" : "usl_gar_fias_idl",
+    "ctlEntityId" : "801005480"
+  } ],
+  "products" : [ {
+    "alias" : "usl_vspc_idl",
+    "tables" : [ {
+      "databaseCode" : "usl_vspc_idl_snp",
+      "layer" : "SNP",
+      "tableCode" : "addr",
+      "datasets" : [ {
+        "datasetCode" : "addr.hub"
+      } ],
+      "uslTableType" : "HUB",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "addr",
+      "historyType" : "NONE",
+      "pk" : [ "addr_sk" ],
+      "columns" : [ {
+        "columnCode" : "addr_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_sk",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "city_name",
+        "dataType" : "STRING",
+        "attributeCode" : "city_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "cntry_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "@cntry",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "cntry_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "@cntry",
+        "fkProductCodes" : [ "usl_rdm_idl_spark" ],
+        "fkEntityCode" : "cntry",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "deleted_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "dirty_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "district_name",
+        "dataType" : "STRING",
+        "attributeCode" : "district_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "fias_code",
+        "dataType" : "STRING",
+        "attributeCode" : "fias_code",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "fias_code_addr_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "fias_code@addr>gar_fias",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "fias_code_addr_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "fias_code@addr>gar_fias",
+        "fkProductCodes" : [ "usl_gar_fias_idl" ],
+        "fkEntityCode" : "addr",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "house_num",
+        "dataType" : "STRING",
+        "attributeCode" : "house_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "idx_num",
+        "dataType" : "STRING",
+        "attributeCode" : "idx_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "locty_name",
+        "dataType" : "STRING",
+        "attributeCode" : "locty_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "okato2_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "@okato2",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "okato2_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "@okato2",
+        "fkProductCodes" : [ "usl_rdm_idl_spark" ],
+        "fkEntityCode" : "okato2",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "reg_addr_name",
+        "dataType" : "STRING",
+        "attributeCode" : "reg_addr_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "rus_fed_subj_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "@rus_fed_subj",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "rus_fed_subj_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "@rus_fed_subj",
+        "fkProductCodes" : [ "usl_rdm_idl_spark" ],
+        "fkEntityCode" : "rus_fed_subj",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "sid",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "src_txt",
+        "dataType" : "STRING",
+        "attributeCode" : "src_txt",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "street_name",
+        "dataType" : "STRING",
+        "attributeCode" : "street_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "type_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_vspc_idl_diff",
+      "layer" : "DIFF",
+      "tableCode" : "addr",
+      "datasets" : [ {
+        "datasetCode" : "addr.hub"
+      } ],
+      "uslTableType" : "HUB",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "addr",
+      "historyType" : "NONE",
+      "pk" : [ "addr_sk" ],
+      "columns" : [ {
+        "columnCode" : "addr_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_sk",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "city_name",
+        "dataType" : "STRING",
+        "attributeCode" : "city_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "cntry_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "@cntry",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "cntry_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "@cntry",
+        "fkProductCodes" : [ "usl_rdm_idl_spark" ],
+        "fkEntityCode" : "cntry",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_action",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_do",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_do",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_loading",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "deleted_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "dirty_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "district_name",
+        "dataType" : "STRING",
+        "attributeCode" : "district_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "fias_code",
+        "dataType" : "STRING",
+        "attributeCode" : "fias_code",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "fias_code_addr_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "fias_code@addr>gar_fias",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "fias_code_addr_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "fias_code@addr>gar_fias",
+        "fkProductCodes" : [ "usl_gar_fias_idl" ],
+        "fkEntityCode" : "addr",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "house_num",
+        "dataType" : "STRING",
+        "attributeCode" : "house_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "idx_num",
+        "dataType" : "STRING",
+        "attributeCode" : "idx_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "locty_name",
+        "dataType" : "STRING",
+        "attributeCode" : "locty_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "okato2_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "@okato2",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "okato2_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "@okato2",
+        "fkProductCodes" : [ "usl_rdm_idl_spark" ],
+        "fkEntityCode" : "okato2",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "reg_addr_name",
+        "dataType" : "STRING",
+        "attributeCode" : "reg_addr_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "rus_fed_subj_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "@rus_fed_subj",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "rus_fed_subj_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "@rus_fed_subj",
+        "fkProductCodes" : [ "usl_rdm_idl_spark" ],
+        "fkEntityCode" : "rus_fed_subj",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "sid",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "src_txt",
+        "dataType" : "STRING",
+        "attributeCode" : "src_txt",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "street_name",
+        "dataType" : "STRING",
+        "attributeCode" : "street_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "type_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_vspc_idl_snp",
+      "layer" : "SNP",
+      "tableCode" : "addr_h",
+      "datasets" : [ {
+        "datasetCode" : "addr.sat=h"
+      } ],
+      "uslTableType" : "SATELLITE",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "addr",
+      "startDateColumnCode" : "start_dt",
+      "endDateColumnCode" : "end_dt",
+      "granularity" : "DATE",
+      "historyType" : "PERIOD",
+      "pk" : [ "addr_sk", "start_dt" ],
+      "columns" : [ {
+        "columnCode" : "addr_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_sk",
+        "dataType" : "BIGINT",
+        "fkEntityCode" : "addr",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "address_okato2_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "address@okato2",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "address_okato2_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "address@okato2",
+        "fkProductCodes" : [ "usl_rdm_idl_spark" ],
+        "fkEntityCode" : "okato2",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "address_oktmo2_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "address@oktmo2",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "address_oktmo2_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "address@oktmo2",
+        "fkProductCodes" : [ "usl_rdm_idl_spark" ],
+        "fkEntityCode" : "oktmo2",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "end_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "p1month",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "end_dt",
+          "method" : "BUSINESS_HISTORY",
+          "unit" : "MONTH",
+          "size" : 1
+        }
+      }, {
+        "columnCode" : "standard_addr_txt",
+        "dataType" : "STRING",
+        "attributeCode" : "standard_addr_txt",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "start_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "type_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_vspc_idl_diff",
+      "layer" : "DIFF",
+      "tableCode" : "addr_h",
+      "datasets" : [ {
+        "datasetCode" : "addr.sat=h"
+      } ],
+      "uslTableType" : "SATELLITE",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "addr",
+      "startDateColumnCode" : "start_dt",
+      "endDateColumnCode" : "end_dt",
+      "granularity" : "DATE",
+      "historyType" : "PERIOD",
+      "pk" : [ "addr_sk", "start_dt" ],
+      "columns" : [ {
+        "columnCode" : "addr_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_sk",
+        "dataType" : "BIGINT",
+        "fkEntityCode" : "addr",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "address_okato2_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "address@okato2",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "address_okato2_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "address@okato2",
+        "fkProductCodes" : [ "usl_rdm_idl_spark" ],
+        "fkEntityCode" : "okato2",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "address_oktmo2_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "address@oktmo2",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "address_oktmo2_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "address@oktmo2",
+        "fkProductCodes" : [ "usl_rdm_idl_spark" ],
+        "fkEntityCode" : "oktmo2",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_action",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_do",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_do",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_loading",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "end_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "p1month",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "standard_addr_txt",
+        "dataType" : "STRING",
+        "attributeCode" : "standard_addr_txt",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "start_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "type_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_vspc_idl_snp",
+      "layer" : "SNP",
+      "tableCode" : "div_",
+      "datasets" : [ {
+        "datasetCode" : "div.hub"
+      } ],
+      "uslTableType" : "HUB",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "div",
+      "historyType" : "NONE",
+      "pk" : [ "div_sk" ],
+      "columns" : [ {
+        "columnCode" : "code",
+        "dataType" : "STRING",
+        "attributeCode" : "code",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "deleted_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "dirty_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_close_dt",
+        "dataType" : "DATE",
+        "attributeCode" : "div_close_dt",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_open_dt",
+        "dataType" : "DATE",
+        "attributeCode" : "div_open_dt",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_sk",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_time_zone_time_zone_rf_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "div_time_zone@time_zone_rf",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_time_zone_time_zone_rf_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "div_time_zone@time_zone_rf",
+        "fkProductCodes" : [ "usl_vspc_idl" ],
+        "fkEntityCode" : "time_zone_rf",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "full_reg_num",
+        "dataType" : "STRING",
+        "attributeCode" : "full_reg_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "legal_addr_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "legal@addr",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "legal_addr_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "legal@addr",
+        "fkProductCodes" : [ "usl_vspc_idl" ],
+        "fkEntityCode" : "addr",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "parent_div_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "parent@div",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "parent_div_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "parent@div",
+        "fkProductCodes" : [ "usl_vspc_idl" ],
+        "fkEntityCode" : "div",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "reg_ord",
+        "dataType" : "BIGINT",
+        "attributeCode" : "reg_ord",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "short_div_code",
+        "dataType" : "STRING",
+        "attributeCode" : "short_div_code",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "sid",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "subbranch_code",
+        "dataType" : "STRING",
+        "attributeCode" : "subbranch_code",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_vspc_idl_diff",
+      "layer" : "DIFF",
+      "tableCode" : "div_",
+      "datasets" : [ {
+        "datasetCode" : "div.hub"
+      } ],
+      "uslTableType" : "HUB",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "div",
+      "historyType" : "NONE",
+      "pk" : [ "div_sk" ],
+      "columns" : [ {
+        "columnCode" : "code",
+        "dataType" : "STRING",
+        "attributeCode" : "code",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_action",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_do",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_do",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_loading",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "deleted_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "dirty_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_close_dt",
+        "dataType" : "DATE",
+        "attributeCode" : "div_close_dt",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_open_dt",
+        "dataType" : "DATE",
+        "attributeCode" : "div_open_dt",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_sk",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_time_zone_time_zone_rf_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "div_time_zone@time_zone_rf",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_time_zone_time_zone_rf_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "div_time_zone@time_zone_rf",
+        "fkProductCodes" : [ "usl_vspc_idl" ],
+        "fkEntityCode" : "time_zone_rf",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "full_reg_num",
+        "dataType" : "STRING",
+        "attributeCode" : "full_reg_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "legal_addr_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "legal@addr",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "legal_addr_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "legal@addr",
+        "fkProductCodes" : [ "usl_vspc_idl" ],
+        "fkEntityCode" : "addr",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "parent_div_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "parent@div",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "parent_div_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "parent@div",
+        "fkProductCodes" : [ "usl_vspc_idl" ],
+        "fkEntityCode" : "div",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "reg_ord",
+        "dataType" : "BIGINT",
+        "attributeCode" : "reg_ord",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "short_div_code",
+        "dataType" : "STRING",
+        "attributeCode" : "short_div_code",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "sid",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "subbranch_code",
+        "dataType" : "STRING",
+        "attributeCode" : "subbranch_code",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_vspc_idl_snp",
+      "layer" : "SNP",
+      "tableCode" : "div_div_relation",
+      "datasets" : [ {
+        "datasetCode" : "div&div_relation.link"
+      } ],
+      "uslTableType" : "LINK",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "div&div_relation",
+      "startDateColumnCode" : "start_dt",
+      "endDateColumnCode" : "end_dt",
+      "historyType" : "PERIOD",
+      "pk" : [ "start_dt", "div_div_relation_sk" ],
+      "columns" : [ {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "deleted_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_div_relation_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_div_relation_sk",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "end_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "p1month",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "end_dt",
+          "method" : "BUSINESS_HISTORY",
+          "unit" : "MONTH",
+          "size" : 1
+        }
+      }, {
+        "columnCode" : "sid",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "source_div_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "source@div",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "source_div_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "source@div",
+        "fkProductCodes" : [ "usl_vspc_idl" ],
+        "fkEntityCode" : "div",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "start_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "successor_div_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "successor@div",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "successor_div_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "successor@div",
+        "fkProductCodes" : [ "usl_vspc_idl" ],
+        "fkEntityCode" : "div",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_vspc_idl_diff",
+      "layer" : "DIFF",
+      "tableCode" : "div_div_relation",
+      "datasets" : [ {
+        "datasetCode" : "div&div_relation.link"
+      } ],
+      "uslTableType" : "LINK",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "div&div_relation",
+      "startDateColumnCode" : "start_dt",
+      "endDateColumnCode" : "end_dt",
+      "historyType" : "PERIOD",
+      "pk" : [ "start_dt", "div_div_relation_sk" ],
+      "columns" : [ {
+        "columnCode" : "ctl_action",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_do",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_do",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_loading",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "deleted_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_div_relation_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_div_relation_sk",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "end_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "p1month",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "sid",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "source_div_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "source@div",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "source_div_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "source@div",
+        "fkProductCodes" : [ "usl_vspc_idl" ],
+        "fkEntityCode" : "div",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "start_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "successor_div_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "successor@div",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "successor_div_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "successor@div",
+        "fkProductCodes" : [ "usl_vspc_idl" ],
+        "fkEntityCode" : "div",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_vspc_idl_snp",
+      "layer" : "SNP",
+      "tableCode" : "div_h",
+      "datasets" : [ {
+        "datasetCode" : "div.sat=h"
+      } ],
+      "uslTableType" : "SATELLITE",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "div",
+      "startDateColumnCode" : "start_dt",
+      "endDateColumnCode" : "end_dt",
+      "granularity" : "DATE",
+      "historyType" : "PERIOD",
+      "pk" : [ "div_sk", "start_dt" ],
+      "columns" : [ {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "disabled_access_equipment_flag",
+        "dataType" : "BOOLEAN",
+        "attributeCode" : "disabled_access_equipment_flag",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_name",
+        "dataType" : "STRING",
+        "attributeCode" : "div_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_sk",
+        "dataType" : "BIGINT",
+        "fkEntityCode" : "div",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "end_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "fact_addr_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "fact@addr",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "fact_addr_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "fact@addr",
+        "fkProductCodes" : [ "usl_vspc_idl" ],
+        "fkEntityCode" : "addr",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "p1month",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "end_dt",
+          "method" : "BUSINESS_HISTORY",
+          "unit" : "MONTH",
+          "size" : 1
+        }
+      }, {
+        "columnCode" : "pay_sys_prtcpnt_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "@pay_sys_prtcpnt",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "pay_sys_prtcpnt_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "@pay_sys_prtcpnt",
+        "fkProductCodes" : [ "usl_rdm_idl_spark" ],
+        "fkEntityCode" : "pay_sys_prtcpnt",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "start_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_vspc_idl_diff",
+      "layer" : "DIFF",
+      "tableCode" : "div_h",
+      "datasets" : [ {
+        "datasetCode" : "div.sat=h"
+      } ],
+      "uslTableType" : "SATELLITE",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "div",
+      "startDateColumnCode" : "start_dt",
+      "endDateColumnCode" : "end_dt",
+      "granularity" : "DATE",
+      "historyType" : "PERIOD",
+      "pk" : [ "div_sk", "start_dt" ],
+      "columns" : [ {
+        "columnCode" : "ctl_action",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_do",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_do",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_loading",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "disabled_access_equipment_flag",
+        "dataType" : "BOOLEAN",
+        "attributeCode" : "disabled_access_equipment_flag",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_name",
+        "dataType" : "STRING",
+        "attributeCode" : "div_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_sk",
+        "dataType" : "BIGINT",
+        "fkEntityCode" : "div",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "end_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "fact_addr_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "fact@addr",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "fact_addr_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "fact@addr",
+        "fkProductCodes" : [ "usl_vspc_idl" ],
+        "fkEntityCode" : "addr",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "p1month",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "pay_sys_prtcpnt_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "@pay_sys_prtcpnt",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "pay_sys_prtcpnt_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "@pay_sys_prtcpnt",
+        "fkProductCodes" : [ "usl_rdm_idl_spark" ],
+        "fkEntityCode" : "pay_sys_prtcpnt",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "start_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_vspc_idl_snp",
+      "layer" : "SNP",
+      "tableCode" : "div_type",
+      "datasets" : [ {
+        "datasetCode" : "div.sat=type"
+      } ],
+      "uslTableType" : "SATELLITE",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "div",
+      "startDateColumnCode" : "start_dt",
+      "endDateColumnCode" : "end_dt",
+      "granularity" : "DATE",
+      "historyType" : "PERIOD",
+      "pk" : [ "div_sk", "start_dt" ],
+      "columns" : [ {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_sk",
+        "dataType" : "BIGINT",
+        "fkEntityCode" : "div",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_type_terr_div_type_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "div_type@terr_div_type",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_type_terr_div_type_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "div_type@terr_div_type",
+        "fkProductCodes" : [ "usl_vspc_idl" ],
+        "fkEntityCode" : "terr_div_type",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "end_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "p1month",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "end_dt",
+          "method" : "BUSINESS_HISTORY",
+          "unit" : "MONTH",
+          "size" : 1
+        }
+      }, {
+        "columnCode" : "start_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_vspc_idl_diff",
+      "layer" : "DIFF",
+      "tableCode" : "div_type",
+      "datasets" : [ {
+        "datasetCode" : "div.sat=type"
+      } ],
+      "uslTableType" : "SATELLITE",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "div",
+      "startDateColumnCode" : "start_dt",
+      "endDateColumnCode" : "end_dt",
+      "granularity" : "DATE",
+      "historyType" : "PERIOD",
+      "pk" : [ "div_sk", "start_dt" ],
+      "columns" : [ {
+        "columnCode" : "ctl_action",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_do",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_do",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_loading",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_sk",
+        "dataType" : "BIGINT",
+        "fkEntityCode" : "div",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_type_terr_div_type_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "div_type@terr_div_type",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_type_terr_div_type_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "div_type@terr_div_type",
+        "fkProductCodes" : [ "usl_vspc_idl" ],
+        "fkEntityCode" : "terr_div_type",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "end_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "p1month",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "start_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_vspc_idl_snp",
+      "layer" : "SNP",
+      "tableCode" : "terr_div_type",
+      "datasets" : [ {
+        "datasetCode" : "terr_div_type.hub"
+      } ],
+      "uslTableType" : "HUB",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "terr_div_type",
+      "historyType" : "NONE",
+      "pk" : [ "terr_div_type_sk" ],
+      "columns" : [ {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "deleted_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "dirty_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_type_code",
+        "dataType" : "STRING",
+        "attributeCode" : "div_type_code",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "sid",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "terr_div_type_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "terr_div_type_sk",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_vspc_idl_diff",
+      "layer" : "DIFF",
+      "tableCode" : "terr_div_type",
+      "datasets" : [ {
+        "datasetCode" : "terr_div_type.hub"
+      } ],
+      "uslTableType" : "HUB",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "terr_div_type",
+      "historyType" : "NONE",
+      "pk" : [ "terr_div_type_sk" ],
+      "columns" : [ {
+        "columnCode" : "ctl_action",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_do",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_do",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_loading",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "deleted_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "dirty_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "div_type_code",
+        "dataType" : "STRING",
+        "attributeCode" : "div_type_code",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "sid",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "terr_div_type_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "terr_div_type_sk",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_vspc_idl_snp",
+      "layer" : "SNP",
+      "tableCode" : "time_zone_rf",
+      "datasets" : [ {
+        "datasetCode" : "time_zone_rf.hub"
+      } ],
+      "uslTableType" : "HUB",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "time_zone_rf",
+      "historyType" : "NONE",
+      "pk" : [ "time_zone_rf_sk" ],
+      "columns" : [ {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "deleted_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "dirty_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "sid",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "time_zone_abbr_code",
+        "dataType" : "STRING",
+        "attributeCode" : "time_zone_abbr_code",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "time_zone_code",
+        "dataType" : "STRING",
+        "attributeCode" : "time_zone_code",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "time_zone_msk_shift_val",
+        "dataType" : "STRING",
+        "attributeCode" : "time_zone_msk_shift_val",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "time_zone_name",
+        "dataType" : "STRING",
+        "attributeCode" : "time_zone_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "time_zone_rf_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "time_zone_rf_sk",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "time_zone_wrld_shift_val",
+        "dataType" : "STRING",
+        "attributeCode" : "time_zone_wrld_shift_val",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_vspc_idl_diff",
+      "layer" : "DIFF",
+      "tableCode" : "time_zone_rf",
+      "datasets" : [ {
+        "datasetCode" : "time_zone_rf.hub"
+      } ],
+      "uslTableType" : "HUB",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "time_zone_rf",
+      "historyType" : "NONE",
+      "pk" : [ "time_zone_rf_sk" ],
+      "columns" : [ {
+        "columnCode" : "ctl_action",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_do",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_do",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_loading",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "deleted_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "dirty_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "sid",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "time_zone_abbr_code",
+        "dataType" : "STRING",
+        "attributeCode" : "time_zone_abbr_code",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "time_zone_code",
+        "dataType" : "STRING",
+        "attributeCode" : "time_zone_code",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "time_zone_msk_shift_val",
+        "dataType" : "STRING",
+        "attributeCode" : "time_zone_msk_shift_val",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "time_zone_name",
+        "dataType" : "STRING",
+        "attributeCode" : "time_zone_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "time_zone_rf_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "time_zone_rf_sk",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "time_zone_wrld_shift_val",
+        "dataType" : "STRING",
+        "attributeCode" : "time_zone_wrld_shift_val",
+        "instanceCodeFlag" : false
+      } ]
+    } ],
+    "instanceCodes" : [ "" ]
+  }, {
+    "alias" : "archive_rdm",
+    "tables" : [ {
+      "databaseCode" : "usl_vspc_idl_in_snp_snp",
+      "layer" : "SNP",
+      "tableCode" : "ebx_rep_m_rfzonetime_0002_rfzonetime",
+      "datasets" : [ {
+        "datasetCode" : "usl_vspc_idl_in.ebx_rep_m_rfzonetime_0002_rfzonetime"
+      } ],
+      "historyType" : "NONE",
+      "columns" : [ {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT"
+      } ]
+    }, {
+      "databaseCode" : "usl_vspc_idl_in_snp_snp",
+      "layer" : "SNP",
+      "tableCode" : "ebx_rep_m_sfs_0002_sfsdivision",
+      "datasets" : [ {
+        "datasetCode" : "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision"
+      } ],
+      "historyType" : "NONE",
+      "columns" : [ {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT"
+      } ]
+    }, {
+      "databaseCode" : "usl_vspc_idl_in_snp_snp",
+      "layer" : "SNP",
+      "tableCode" : "ebx_rep_m_sfs_0002_sfsdivision_successors",
+      "datasets" : [ {
+        "datasetCode" : "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision_successors"
+      } ],
+      "historyType" : "NONE",
+      "columns" : [ {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT"
+      } ]
+    } ],
+    "instanceCodes" : [ "" ]
+  }, {
+    "alias" : "usl_gar_fias_idl",
+    "tables" : [ {
+      "databaseCode" : "usl_gar_fias_idl_snp",
+      "layer" : "SNP",
+      "tableCode" : "addr",
+      "datasets" : [ {
+        "datasetCode" : "addr.hub"
+      } ],
+      "uslTableType" : "HUB",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "addr",
+      "historyType" : "NONE",
+      "pk" : [ "addr_sk" ],
+      "columns" : [ {
+        "columnCode" : "addr_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_sk",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "deleted_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "dirty_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "sid",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "type_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_gar_fias_idl_diff",
+      "layer" : "DIFF",
+      "tableCode" : "addr",
+      "datasets" : [ {
+        "datasetCode" : "addr.hub"
+      } ],
+      "uslTableType" : "HUB",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "addr",
+      "historyType" : "NONE",
+      "pk" : [ "addr_sk" ],
+      "columns" : [ {
+        "columnCode" : "addr_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_sk",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_action",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_do",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_do",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_loading",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "deleted_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "dirty_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "sid",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "type_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_gar_fias_idl_snp",
+      "layer" : "SNP",
+      "tableCode" : "addr_h",
+      "datasets" : [ {
+        "datasetCode" : "addr.sat=h"
+      } ],
+      "uslTableType" : "SATELLITE",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "addr",
+      "startDateColumnCode" : "start_dt",
+      "endDateColumnCode" : "end_dt",
+      "granularity" : "DATE",
+      "historyType" : "PERIOD",
+      "pk" : [ "addr_sk", "start_dt" ],
+      "columns" : [ {
+        "columnCode" : "addr_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_building_num",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_building_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_carplace_num",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_carplace_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_city_name",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_city_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_construct_num",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_construct_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_district_name",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_district_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_house_num",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_house_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_housing_num",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_housing_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_isactive_flag",
+        "dataType" : "BOOLEAN",
+        "attributeCode" : "addr_gar_fias_isactive_flag",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_letter_num",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_letter_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_local_name",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_local_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_placement_num",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_placement_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_plan_struct_name",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_plan_struct_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_room_num",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_room_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_stead_num",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_stead_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_street_name",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_street_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_sk",
+        "dataType" : "BIGINT",
+        "fkEntityCode" : "addr",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "address_okato2_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "address@okato2",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "address_okato2_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "address@okato2",
+        "fkProductCodes" : [ "usl_rdm_idl_spark" ],
+        "fkEntityCode" : "okato2",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "address_oktmo2_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "address@oktmo2",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "address_oktmo2_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "address@oktmo2",
+        "fkProductCodes" : [ "usl_rdm_idl_spark" ],
+        "fkEntityCode" : "oktmo2",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "city_as_addr_obj_types_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "city@as_addr_obj_types>city",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "city_as_addr_obj_types_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "city@as_addr_obj_types>city",
+        "fkProductCodes" : [ "usl_gar_fias_idl" ],
+        "fkEntityCode" : "as_addr_obj_types",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "district_as_addr_obj_types_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "district@as_addr_obj_types>district",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "district_as_addr_obj_types_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "district@as_addr_obj_types>district",
+        "fkProductCodes" : [ "usl_gar_fias_idl" ],
+        "fkEntityCode" : "as_addr_obj_types",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "end_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "house_as_addr_obj_types_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "house@as_addr_obj_types>house",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "house_as_addr_obj_types_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "house@as_addr_obj_types>house",
+        "fkProductCodes" : [ "usl_gar_fias_idl" ],
+        "fkEntityCode" : "as_addr_obj_types",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "local_as_addr_obj_types_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "local@as_addr_obj_types>local",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "local_as_addr_obj_types_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "local@as_addr_obj_types>local",
+        "fkProductCodes" : [ "usl_gar_fias_idl" ],
+        "fkEntityCode" : "as_addr_obj_types",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "p1month",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "end_dt",
+          "method" : "BUSINESS_HISTORY",
+          "unit" : "MONTH",
+          "size" : 1
+        }
+      }, {
+        "columnCode" : "placement_as_addr_obj_types_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "placement@as_addr_obj_types>placement",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "placement_as_addr_obj_types_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "placement@as_addr_obj_types>placement",
+        "fkProductCodes" : [ "usl_gar_fias_idl" ],
+        "fkEntityCode" : "as_addr_obj_types",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "plan_struct_as_addr_obj_types_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "plan_struct@as_addr_obj_types>plan_struct",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "plan_struct_as_addr_obj_types_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "plan_struct@as_addr_obj_types>plan_struct",
+        "fkProductCodes" : [ "usl_gar_fias_idl" ],
+        "fkEntityCode" : "as_addr_obj_types",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "postal_num",
+        "dataType" : "STRING",
+        "attributeCode" : "postal_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "region_as_addr_obj_types_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "region@as_addr_obj_types>region",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "region_as_addr_obj_types_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "region@as_addr_obj_types>region",
+        "fkProductCodes" : [ "usl_gar_fias_idl" ],
+        "fkEntityCode" : "as_addr_obj_types",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "room_as_addr_obj_types_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "room@as_addr_obj_types>room",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "room_as_addr_obj_types_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "room@as_addr_obj_types>room",
+        "fkProductCodes" : [ "usl_gar_fias_idl" ],
+        "fkEntityCode" : "as_addr_obj_types",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "rus_fed_subj_fns_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "@rus_fed_subj_fns",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "rus_fed_subj_fns_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "@rus_fed_subj_fns",
+        "fkProductCodes" : [ "usl_rdm_idl_spark" ],
+        "fkEntityCode" : "rus_fed_subj_fns",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "start_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "street_as_addr_obj_types_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "street@as_addr_obj_types>street",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "street_as_addr_obj_types_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "street@as_addr_obj_types>street",
+        "fkProductCodes" : [ "usl_gar_fias_idl" ],
+        "fkEntityCode" : "as_addr_obj_types",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "type_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_gar_fias_idl_diff",
+      "layer" : "DIFF",
+      "tableCode" : "addr_h",
+      "datasets" : [ {
+        "datasetCode" : "addr.sat=h"
+      } ],
+      "uslTableType" : "SATELLITE",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "addr",
+      "startDateColumnCode" : "start_dt",
+      "endDateColumnCode" : "end_dt",
+      "granularity" : "DATE",
+      "historyType" : "PERIOD",
+      "pk" : [ "addr_sk", "start_dt" ],
+      "columns" : [ {
+        "columnCode" : "addr_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_building_num",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_building_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_carplace_num",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_carplace_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_city_name",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_city_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_construct_num",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_construct_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_district_name",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_district_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_house_num",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_house_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_housing_num",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_housing_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_isactive_flag",
+        "dataType" : "BOOLEAN",
+        "attributeCode" : "addr_gar_fias_isactive_flag",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_letter_num",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_letter_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_local_name",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_local_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_placement_num",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_placement_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_plan_struct_name",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_plan_struct_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_room_num",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_room_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_stead_num",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_stead_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_gar_fias_street_name",
+        "dataType" : "STRING",
+        "attributeCode" : "addr_gar_fias_street_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "addr_sk",
+        "dataType" : "BIGINT",
+        "fkEntityCode" : "addr",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "address_okato2_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "address@okato2",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "address_okato2_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "address@okato2",
+        "fkProductCodes" : [ "usl_rdm_idl_spark" ],
+        "fkEntityCode" : "okato2",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "address_oktmo2_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "address@oktmo2",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "address_oktmo2_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "address@oktmo2",
+        "fkProductCodes" : [ "usl_rdm_idl_spark" ],
+        "fkEntityCode" : "oktmo2",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "city_as_addr_obj_types_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "city@as_addr_obj_types>city",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "city_as_addr_obj_types_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "city@as_addr_obj_types>city",
+        "fkProductCodes" : [ "usl_gar_fias_idl" ],
+        "fkEntityCode" : "as_addr_obj_types",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_action",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_do",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_do",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_loading",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "district_as_addr_obj_types_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "district@as_addr_obj_types>district",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "district_as_addr_obj_types_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "district@as_addr_obj_types>district",
+        "fkProductCodes" : [ "usl_gar_fias_idl" ],
+        "fkEntityCode" : "as_addr_obj_types",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "end_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "house_as_addr_obj_types_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "house@as_addr_obj_types>house",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "house_as_addr_obj_types_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "house@as_addr_obj_types>house",
+        "fkProductCodes" : [ "usl_gar_fias_idl" ],
+        "fkEntityCode" : "as_addr_obj_types",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "local_as_addr_obj_types_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "local@as_addr_obj_types>local",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "local_as_addr_obj_types_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "local@as_addr_obj_types>local",
+        "fkProductCodes" : [ "usl_gar_fias_idl" ],
+        "fkEntityCode" : "as_addr_obj_types",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "p1month",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "placement_as_addr_obj_types_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "placement@as_addr_obj_types>placement",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "placement_as_addr_obj_types_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "placement@as_addr_obj_types>placement",
+        "fkProductCodes" : [ "usl_gar_fias_idl" ],
+        "fkEntityCode" : "as_addr_obj_types",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "plan_struct_as_addr_obj_types_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "plan_struct@as_addr_obj_types>plan_struct",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "plan_struct_as_addr_obj_types_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "plan_struct@as_addr_obj_types>plan_struct",
+        "fkProductCodes" : [ "usl_gar_fias_idl" ],
+        "fkEntityCode" : "as_addr_obj_types",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "postal_num",
+        "dataType" : "STRING",
+        "attributeCode" : "postal_num",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "region_as_addr_obj_types_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "region@as_addr_obj_types>region",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "region_as_addr_obj_types_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "region@as_addr_obj_types>region",
+        "fkProductCodes" : [ "usl_gar_fias_idl" ],
+        "fkEntityCode" : "as_addr_obj_types",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "room_as_addr_obj_types_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "room@as_addr_obj_types>room",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "room_as_addr_obj_types_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "room@as_addr_obj_types>room",
+        "fkProductCodes" : [ "usl_gar_fias_idl" ],
+        "fkEntityCode" : "as_addr_obj_types",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "rus_fed_subj_fns_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "@rus_fed_subj_fns",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "rus_fed_subj_fns_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "@rus_fed_subj_fns",
+        "fkProductCodes" : [ "usl_rdm_idl_spark" ],
+        "fkEntityCode" : "rus_fed_subj_fns",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "start_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "street_as_addr_obj_types_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "street@as_addr_obj_types>street",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "street_as_addr_obj_types_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "street@as_addr_obj_types>street",
+        "fkProductCodes" : [ "usl_gar_fias_idl" ],
+        "fkEntityCode" : "as_addr_obj_types",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "type_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_gar_fias_idl_snp",
+      "layer" : "SNP",
+      "tableCode" : "as_addr_obj_types",
+      "datasets" : [ {
+        "datasetCode" : "as_addr_obj_types.hub"
+      } ],
+      "uslTableType" : "HUB",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "as_addr_obj_types",
+      "historyType" : "NONE",
+      "pk" : [ "as_addr_obj_types_sk" ],
+      "columns" : [ {
+        "columnCode" : "as_addr_obj_types_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_addr_obj_types_name",
+        "dataType" : "STRING",
+        "attributeCode" : "as_addr_obj_types_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_addr_obj_types_sk",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "deleted_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "dirty_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "level_as_object_levels_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "level@as_object_levels",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "level_as_object_levels_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "level@as_object_levels",
+        "fkProductCodes" : [ "usl_gar_fias_idl" ],
+        "fkEntityCode" : "as_object_levels",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "sid",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "type_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_gar_fias_idl_diff",
+      "layer" : "DIFF",
+      "tableCode" : "as_addr_obj_types",
+      "datasets" : [ {
+        "datasetCode" : "as_addr_obj_types.hub"
+      } ],
+      "uslTableType" : "HUB",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "as_addr_obj_types",
+      "historyType" : "NONE",
+      "pk" : [ "as_addr_obj_types_sk" ],
+      "columns" : [ {
+        "columnCode" : "as_addr_obj_types_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_addr_obj_types_name",
+        "dataType" : "STRING",
+        "attributeCode" : "as_addr_obj_types_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_addr_obj_types_sk",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_action",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_do",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_do",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_loading",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "deleted_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "dirty_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "level_as_object_levels_dp_code",
+        "dataType" : "STRING",
+        "attributeCode" : "level@as_object_levels",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "level_as_object_levels_sk",
+        "dataType" : "BIGINT",
+        "attributeCode" : "level@as_object_levels",
+        "fkProductCodes" : [ "usl_gar_fias_idl" ],
+        "fkEntityCode" : "as_object_levels",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "sid",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "type_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_gar_fias_idl_snp",
+      "layer" : "SNP",
+      "tableCode" : "as_addr_obj_types_h",
+      "datasets" : [ {
+        "datasetCode" : "as_addr_obj_types.sat=h"
+      } ],
+      "uslTableType" : "SATELLITE",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "as_addr_obj_types",
+      "startDateColumnCode" : "start_dt",
+      "endDateColumnCode" : "end_dt",
+      "granularity" : "DATE",
+      "historyType" : "PERIOD",
+      "pk" : [ "as_addr_obj_types_sk", "start_dt" ],
+      "columns" : [ {
+        "columnCode" : "as_addr_obj_types_code",
+        "dataType" : "STRING",
+        "attributeCode" : "as_addr_obj_types_code",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_addr_obj_types_desc_txt",
+        "dataType" : "STRING",
+        "attributeCode" : "as_addr_obj_types_desc_txt",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_addr_obj_types_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_addr_obj_types_isactive_flag",
+        "dataType" : "BOOLEAN",
+        "attributeCode" : "as_addr_obj_types_isactive_flag",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_addr_obj_types_short_name",
+        "dataType" : "STRING",
+        "attributeCode" : "as_addr_obj_types_short_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_addr_obj_types_sk",
+        "dataType" : "BIGINT",
+        "fkEntityCode" : "as_addr_obj_types",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "end_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "p1month",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "end_dt",
+          "method" : "BUSINESS_HISTORY",
+          "unit" : "MONTH",
+          "size" : 1
+        }
+      }, {
+        "columnCode" : "start_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "type_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_gar_fias_idl_diff",
+      "layer" : "DIFF",
+      "tableCode" : "as_addr_obj_types_h",
+      "datasets" : [ {
+        "datasetCode" : "as_addr_obj_types.sat=h"
+      } ],
+      "uslTableType" : "SATELLITE",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "as_addr_obj_types",
+      "startDateColumnCode" : "start_dt",
+      "endDateColumnCode" : "end_dt",
+      "granularity" : "DATE",
+      "historyType" : "PERIOD",
+      "pk" : [ "as_addr_obj_types_sk", "start_dt" ],
+      "columns" : [ {
+        "columnCode" : "as_addr_obj_types_code",
+        "dataType" : "STRING",
+        "attributeCode" : "as_addr_obj_types_code",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_addr_obj_types_desc_txt",
+        "dataType" : "STRING",
+        "attributeCode" : "as_addr_obj_types_desc_txt",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_addr_obj_types_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_addr_obj_types_isactive_flag",
+        "dataType" : "BOOLEAN",
+        "attributeCode" : "as_addr_obj_types_isactive_flag",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_addr_obj_types_short_name",
+        "dataType" : "STRING",
+        "attributeCode" : "as_addr_obj_types_short_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_addr_obj_types_sk",
+        "dataType" : "BIGINT",
+        "fkEntityCode" : "as_addr_obj_types",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_action",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_do",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_do",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_loading",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "end_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "p1month",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "start_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "type_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_gar_fias_idl_snp",
+      "layer" : "SNP",
+      "tableCode" : "as_object_levels",
+      "datasets" : [ {
+        "datasetCode" : "as_object_levels.hub"
+      } ],
+      "uslTableType" : "HUB",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "as_object_levels",
+      "historyType" : "NONE",
+      "pk" : [ "as_object_levels_sk" ],
+      "columns" : [ {
+        "columnCode" : "as_object_levels_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_object_levels_level_code",
+        "dataType" : "STRING",
+        "attributeCode" : "as_object_levels_level_code",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_object_levels_sk",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "deleted_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "dirty_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "sid",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_gar_fias_idl_diff",
+      "layer" : "DIFF",
+      "tableCode" : "as_object_levels",
+      "datasets" : [ {
+        "datasetCode" : "as_object_levels.hub"
+      } ],
+      "uslTableType" : "HUB",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "as_object_levels",
+      "historyType" : "NONE",
+      "pk" : [ "as_object_levels_sk" ],
+      "columns" : [ {
+        "columnCode" : "as_object_levels_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_object_levels_level_code",
+        "dataType" : "STRING",
+        "attributeCode" : "as_object_levels_level_code",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_object_levels_sk",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_action",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_do",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_do",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_loading",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "deleted_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "dirty_flag",
+        "dataType" : "BOOLEAN",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "sid",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_gar_fias_idl_snp",
+      "layer" : "SNP",
+      "tableCode" : "as_object_levels_h",
+      "datasets" : [ {
+        "datasetCode" : "as_object_levels.sat=h"
+      } ],
+      "uslTableType" : "SATELLITE",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "as_object_levels",
+      "startDateColumnCode" : "start_dt",
+      "endDateColumnCode" : "end_dt",
+      "granularity" : "DATE",
+      "historyType" : "PERIOD",
+      "pk" : [ "as_object_levels_sk", "start_dt" ],
+      "columns" : [ {
+        "columnCode" : "as_object_levels_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_object_levels_isactive_flag",
+        "dataType" : "BOOLEAN",
+        "attributeCode" : "as_object_levels_isactive_flag",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_object_levels_name",
+        "dataType" : "STRING",
+        "attributeCode" : "as_object_levels_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_object_levels_short_name",
+        "dataType" : "STRING",
+        "attributeCode" : "as_object_levels_short_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_object_levels_sk",
+        "dataType" : "BIGINT",
+        "fkEntityCode" : "as_object_levels",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "end_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "p1month",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "end_dt",
+          "method" : "BUSINESS_HISTORY",
+          "unit" : "MONTH",
+          "size" : 1
+        }
+      }, {
+        "columnCode" : "start_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      } ]
+    }, {
+      "databaseCode" : "usl_gar_fias_idl_diff",
+      "layer" : "DIFF",
+      "tableCode" : "as_object_levels_h",
+      "datasets" : [ {
+        "datasetCode" : "as_object_levels.sat=h"
+      } ],
+      "uslTableType" : "SATELLITE",
+      "uslIdentificationType" : "SURROGATE",
+      "entityCode" : "as_object_levels",
+      "startDateColumnCode" : "start_dt",
+      "endDateColumnCode" : "end_dt",
+      "granularity" : "DATE",
+      "historyType" : "PERIOD",
+      "pk" : [ "as_object_levels_sk", "start_dt" ],
+      "columns" : [ {
+        "columnCode" : "as_object_levels_dp_code",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_object_levels_isactive_flag",
+        "dataType" : "BOOLEAN",
+        "attributeCode" : "as_object_levels_isactive_flag",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_object_levels_name",
+        "dataType" : "STRING",
+        "attributeCode" : "as_object_levels_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_object_levels_short_name",
+        "dataType" : "STRING",
+        "attributeCode" : "as_object_levels_short_name",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "as_object_levels_sk",
+        "dataType" : "BIGINT",
+        "fkEntityCode" : "as_object_levels",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_action",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "ctl_do",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_do",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_loading",
+        "dataType" : "BIGINT",
+        "instanceCodeFlag" : false,
+        "partition" : {
+          "originColumnCode" : "ctl_loading",
+          "method" : "NONE"
+        }
+      }, {
+        "columnCode" : "ctl_validfrom",
+        "dataType" : "TIMESTAMP",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "end_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "p1month",
+        "dataType" : "STRING",
+        "instanceCodeFlag" : false
+      }, {
+        "columnCode" : "start_dt",
+        "dataType" : "DATE",
+        "instanceCodeFlag" : false
+      } ]
+    } ],
+    "instanceCodes" : [ "" ]
+  } ],
+  "entities" : [ {
+    "entityCode" : "addr",
+    "manFlag" : false,
+    "uslIdentificationType" : "SURROGATE",
+    "attributes" : [ {
+      "attributeCode" : "@addr",
+      "fkEntityCode" : "addr"
+    }, {
+      "attributeCode" : "@cntry",
+      "fkEntityCode" : "cntry"
+    }, {
+      "attributeCode" : "@okato2",
+      "fkEntityCode" : "okato2"
+    }, {
+      "attributeCode" : "@rus_fed_subj",
+      "fkEntityCode" : "rus_fed_subj"
+    }, {
+      "attributeCode" : "address@okato2",
+      "fkEntityCode" : "okato2"
+    }, {
+      "attributeCode" : "address@oktmo2",
+      "fkEntityCode" : "oktmo2"
+    }, {
+      "attributeCode" : "city_name"
+    }, {
+      "attributeCode" : "deleted_flag"
+    }, {
+      "attributeCode" : "dirty_flag"
+    }, {
+      "attributeCode" : "district_name"
+    }, {
+      "attributeCode" : "fias_code"
+    }, {
+      "attributeCode" : "fias_code@addr>gar_fias",
+      "fkEntityCode" : "addr"
+    }, {
+      "attributeCode" : "gold@addr",
+      "fkEntityCode" : "addr"
+    }, {
+      "attributeCode" : "gold_sid"
+    }, {
+      "attributeCode" : "house_num"
+    }, {
+      "attributeCode" : "idx_num"
+    }, {
+      "attributeCode" : "instance_code"
+    }, {
+      "attributeCode" : "locty_name"
+    }, {
+      "attributeCode" : "migration_flag"
+    }, {
+      "attributeCode" : "p_wo"
+    }, {
+      "attributeCode" : "reg_addr_name"
+    }, {
+      "attributeCode" : "sid"
+    }, {
+      "attributeCode" : "src_txt"
+    }, {
+      "attributeCode" : "standard_addr_txt"
+    }, {
+      "attributeCode" : "street_name"
+    }, {
+      "attributeCode" : "subset_code"
+    }, {
+      "attributeCode" : "system__external_dt"
+    }, {
+      "attributeCode" : "system__hub_dt"
+    }, {
+      "attributeCode" : "type_code"
+    } ]
+  }, {
+    "entityCode" : "as_addr_obj_types",
+    "manFlag" : false,
+    "uslIdentificationType" : "SURROGATE",
+    "attributes" : [ {
+      "attributeCode" : "@as_addr_obj_types",
+      "fkEntityCode" : "as_addr_obj_types"
+    }, {
+      "attributeCode" : "dirty_flag"
+    }, {
+      "attributeCode" : "sid"
+    }, {
+      "attributeCode" : "type_code"
+    } ]
+  }, {
+    "entityCode" : "as_object_levels",
+    "manFlag" : false,
+    "uslIdentificationType" : "SURROGATE",
+    "attributes" : [ {
+      "attributeCode" : "@as_object_levels",
+      "fkEntityCode" : "as_object_levels"
+    }, {
+      "attributeCode" : "dirty_flag"
+    }, {
+      "attributeCode" : "sid"
+    } ]
+  }, {
+    "entityCode" : "cntry",
+    "manFlag" : false,
+    "uslIdentificationType" : "SURROGATE",
+    "attributes" : [ {
+      "attributeCode" : "@cntry",
+      "fkEntityCode" : "cntry"
+    }, {
+      "attributeCode" : "dirty_flag"
+    }, {
+      "attributeCode" : "sid"
+    } ]
+  }, {
+    "entityCode" : "div",
+    "manFlag" : false,
+    "uslIdentificationType" : "SURROGATE",
+    "attributes" : [ {
+      "attributeCode" : "@div",
+      "fkEntityCode" : "div"
+    }, {
+      "attributeCode" : "@pay_sys_prtcpnt",
+      "fkEntityCode" : "pay_sys_prtcpnt"
+    }, {
+      "attributeCode" : "code"
+    }, {
+      "attributeCode" : "deleted_flag"
+    }, {
+      "attributeCode" : "dirty_flag"
+    }, {
+      "attributeCode" : "disabled_access_equipment_flag"
+    }, {
+      "attributeCode" : "div_close_dt"
+    }, {
+      "attributeCode" : "div_name"
+    }, {
+      "attributeCode" : "div_open_dt"
+    }, {
+      "attributeCode" : "div_time_zone@time_zone_rf",
+      "fkEntityCode" : "time_zone_rf"
+    }, {
+      "attributeCode" : "div_type@terr_div_type",
+      "fkEntityCode" : "terr_div_type"
+    }, {
+      "attributeCode" : "fact@addr",
+      "fkEntityCode" : "addr"
+    }, {
+      "attributeCode" : "full_reg_num"
+    }, {
+      "attributeCode" : "gold@div",
+      "fkEntityCode" : "div"
+    }, {
+      "attributeCode" : "gold_sid"
+    }, {
+      "attributeCode" : "instance_code"
+    }, {
+      "attributeCode" : "legal@addr",
+      "fkEntityCode" : "addr"
+    }, {
+      "attributeCode" : "migration_flag"
+    }, {
+      "attributeCode" : "p_wo"
+    }, {
+      "attributeCode" : "parent@div",
+      "fkEntityCode" : "div"
+    }, {
+      "attributeCode" : "reg_ord"
+    }, {
+      "attributeCode" : "short_div_code"
+    }, {
+      "attributeCode" : "sid"
+    }, {
+      "attributeCode" : "subbranch_code"
+    }, {
+      "attributeCode" : "subset_code"
+    }, {
+      "attributeCode" : "system__external_dt"
+    }, {
+      "attributeCode" : "system__hub_dt"
+    }, {
+      "attributeCode" : "type_code"
+    } ]
+  }, {
+    "entityCode" : "div&div_relation",
+    "manFlag" : false,
+    "uslIdentificationType" : "SURROGATE",
+    "attributes" : [ {
+      "attributeCode" : "@div&div_relation",
+      "fkEntityCode" : "div&div_relation"
+    }, {
+      "attributeCode" : "deleted_flag"
+    }, {
+      "attributeCode" : "dirty_flag"
+    }, {
+      "attributeCode" : "gold@div&div_relation",
+      "fkEntityCode" : "div&div_relation"
+    }, {
+      "attributeCode" : "gold_sid"
+    }, {
+      "attributeCode" : "instance_code"
+    }, {
+      "attributeCode" : "migration_flag"
+    }, {
+      "attributeCode" : "p_wo"
+    }, {
+      "attributeCode" : "sid"
+    }, {
+      "attributeCode" : "source@div",
+      "fkEntityCode" : "div"
+    }, {
+      "attributeCode" : "subset_code"
+    }, {
+      "attributeCode" : "successor@div",
+      "fkEntityCode" : "div"
+    }, {
+      "attributeCode" : "system__external_dt"
+    }, {
+      "attributeCode" : "system__hub_dt"
+    }, {
+      "attributeCode" : "type_code"
+    } ]
+  }, {
+    "entityCode" : "okato2",
+    "manFlag" : false,
+    "uslIdentificationType" : "SURROGATE",
+    "attributes" : [ {
+      "attributeCode" : "@okato2",
+      "fkEntityCode" : "okato2"
+    }, {
+      "attributeCode" : "dirty_flag"
+    }, {
+      "attributeCode" : "sid"
+    } ]
+  }, {
+    "entityCode" : "oktmo2",
+    "manFlag" : false,
+    "uslIdentificationType" : "SURROGATE",
+    "attributes" : [ {
+      "attributeCode" : "@oktmo2",
+      "fkEntityCode" : "oktmo2"
+    }, {
+      "attributeCode" : "dirty_flag"
+    }, {
+      "attributeCode" : "sid"
+    } ]
+  }, {
+    "entityCode" : "pay_sys_prtcpnt",
+    "manFlag" : false,
+    "uslIdentificationType" : "SURROGATE",
+    "attributes" : [ {
+      "attributeCode" : "@pay_sys_prtcpnt",
+      "fkEntityCode" : "pay_sys_prtcpnt"
+    }, {
+      "attributeCode" : "dirty_flag"
+    }, {
+      "attributeCode" : "sid"
+    } ]
+  }, {
+    "entityCode" : "rus_fed_subj",
+    "manFlag" : false,
+    "uslIdentificationType" : "SURROGATE",
+    "attributes" : [ {
+      "attributeCode" : "@rus_fed_subj",
+      "fkEntityCode" : "rus_fed_subj"
+    }, {
+      "attributeCode" : "dirty_flag"
+    }, {
+      "attributeCode" : "sid"
+    } ]
+  }, {
+    "entityCode" : "terr_div_type",
+    "manFlag" : false,
+    "uslIdentificationType" : "SURROGATE",
+    "attributes" : [ {
+      "attributeCode" : "@terr_div_type",
+      "fkEntityCode" : "terr_div_type"
+    }, {
+      "attributeCode" : "deleted_flag"
+    }, {
+      "attributeCode" : "dirty_flag"
+    }, {
+      "attributeCode" : "div_type_code"
+    }, {
+      "attributeCode" : "gold@terr_div_type",
+      "fkEntityCode" : "terr_div_type"
+    }, {
+      "attributeCode" : "gold_sid"
+    }, {
+      "attributeCode" : "instance_code"
+    }, {
+      "attributeCode" : "migration_flag"
+    }, {
+      "attributeCode" : "p_wo"
+    }, {
+      "attributeCode" : "sid"
+    }, {
+      "attributeCode" : "subset_code"
+    }, {
+      "attributeCode" : "system__external_dt"
+    }, {
+      "attributeCode" : "system__hub_dt"
+    }, {
+      "attributeCode" : "type_code"
+    } ]
+  }, {
+    "entityCode" : "time_zone_rf",
+    "manFlag" : false,
+    "uslIdentificationType" : "SURROGATE",
+    "attributes" : [ {
+      "attributeCode" : "@time_zone_rf",
+      "fkEntityCode" : "time_zone_rf"
+    }, {
+      "attributeCode" : "deleted_flag"
+    }, {
+      "attributeCode" : "dirty_flag"
+    }, {
+      "attributeCode" : "gold@time_zone_rf",
+      "fkEntityCode" : "time_zone_rf"
+    }, {
+      "attributeCode" : "gold_sid"
+    }, {
+      "attributeCode" : "instance_code"
+    }, {
+      "attributeCode" : "migration_flag"
+    }, {
+      "attributeCode" : "p_wo"
+    }, {
+      "attributeCode" : "sid"
+    }, {
+      "attributeCode" : "subset_code"
+    }, {
+      "attributeCode" : "system__external_dt"
+    }, {
+      "attributeCode" : "system__hub_dt"
+    }, {
+      "attributeCode" : "time_zone_abbr_code"
+    }, {
+      "attributeCode" : "time_zone_code"
+    }, {
+      "attributeCode" : "time_zone_msk_shift_val"
+    }, {
+      "attributeCode" : "time_zone_name"
+    }, {
+      "attributeCode" : "time_zone_wrld_shift_val"
+    }, {
+      "attributeCode" : "type_code"
+    } ]
+  } ]
+}

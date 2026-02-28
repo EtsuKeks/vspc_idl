@@ -394,3 +394,43 @@ stored as parquet
 location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/partitions_statistic';
 
 msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.partitions_statistic;
+
+
+drop table if exists usl_{{ logical_env_prefix }}vspc_idl_stg.chg_div_h;
+create external table usl_{{ logical_env_prefix }}vspc_idl_stg.chg_div_h(
+    fulldivcode string,
+    fullname string,
+    shortdivcode string,
+    closedate TIMESTAMP,
+    opendate TIMESTAMP,
+    headdivisioncode string,
+    subbranch_code string,
+    requisitesdivision_bic string,
+    requisitesdivision_registrationnum string,
+    address_locationaddress string,
+    address_addrfact_fiascode string,
+    address_addrfact_timezone string,
+    serving_isdisabledequip boolean,
+    gold_fias_code string,
+    address_addrfact_postcode string,
+    address_postcode string,
+    address_addrfact_addrarea_areaname string,
+    address_addrfact_addrplace_placename string,
+    address_subjectcode string,
+    address_addrfact_addrcity_cityname string,
+    address_addrfact_addrhouse_housenumbers string,
+    address_addrfact_addrstreet_streetname string,
+    address_country string,
+    address_addrfact_okatocode string,
+    address_addrfact_oktmocode string,
+    address_subjectcode string,
+    address_legaladdrdoc string,
+    gold_okato string,
+    gold_oktmo string,
+    start_dt DATE,
+    end_dt DATE
+)
+stored as parquet
+location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/chg_div_h';
+
+msck repair table usl_{{ logical_env_prefix }}vspc_idl1_stg.chg_div_h;

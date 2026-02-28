@@ -2,7 +2,9 @@ package ru.sberbank.bigdata.dffess.vspc.impl;
 
 import ru.sberbank.bigdata.dffess.vspc.tables.addr.AddrConfiguration;
 import ru.sberbank.bigdata.dffess.vspc.tables.addrh.AddrHConfiguration;
+import ru.sberbank.bigdata.dffess.vspc.tables.chgdivh.ChgDivHConfiguration;
 import ru.sberbank.bigdata.dffess.vspc.tables.div.DivConfiguration;
+import ru.sberbank.bigdata.dffess.vspc.tables.divdivrelation.DivDivRelationConfiguration;
 import ru.sberbank.bigdata.dffess.vspc.tables.divh.DivHConfiguration;
 import ru.sberbank.bigdata.dffess.vspc.tables.divtype.DivTypeConfiguration;
 import ru.sberbank.bigdata.dffess.vspc.tables.terrdivtype.TerrDivTypeConfiguration;
@@ -47,25 +49,27 @@ public class VspcDataProductGenerator implements DataProductGenerator {
     }
 
     private static EtlKit preloadKit() {
-        //Etl stage = Etl.newInstance(TablesName.CHG_TRANS_HEAD, ChgTransHeadConfiguration.class, LITE);
+        Etl chgdivh = Etl.newInstance(CHG_DIVH, ChgDivHConfiguration.class, LITE);
 
-        return EtlKit.newInstance("stage", HARD);
-        //.addEtl(stage);
+        return EtlKit.newInstance("stage", HARD)
+            .addEtl(chgdivh);
     }
 
     private static EtlKit snpKit(EtlKit preload) {
         Etl addr = Etl.newInstance(ADDR, AddrConfiguration.class, LITE).addDependency(preload);
         Etl addrh = Etl.newInstance(ADDRH, AddrHConfiguration.class, LITE).addDependency(preload);
         Etl div = Etl.newInstance(DIV, DivConfiguration.class, LITE).addDependency(preload);
+        Etl divdivrelation = Etl.newInstance(DIVDIVRELATION, DivDivRelationConfiguration.class, LITE).addDependency(preload);
         Etl divh = Etl.newInstance(DIVH, DivHConfiguration.class, LITE).addDependency(preload);
         Etl divtype = Etl.newInstance(DIVTYPE, DivTypeConfiguration.class, LITE).addDependency(preload);
         Etl terrdivtype = Etl.newInstance(TERRDIVTYPE, TerrDivTypeConfiguration.class, LITE).addDependency(preload);
         Etl timezone = Etl.newInstance(TIMEZONE, TimeZoneConfiguration.class, LITE).addDependency(preload);
 
         addrh = addrh.addDependency(addr);
-        div = div.addDependency(timezone);
-        divh = divh.addDependency(div).addDependency(addr);
-        divtype = divtype.addDependency(div);
+        div = div.addDependency(timezone).addDependency(addr).addDependency(addrh);
+        divh = divh.addDependency(div).addDependency(addr).addDependency(addrh);
+        divtype = divtype.addDependency(div).addDependency(divh).addDependency(terrdivtype);
+        divdivrelation = divdivrelation.addDependency(div).addDependency(divh);
 
         return EtlKit.newInstance("vspc_idl", HARD)
                 .addEtl(timezone)
@@ -74,6 +78,7 @@ public class VspcDataProductGenerator implements DataProductGenerator {
                 .addEtl(div)
                 .addEtl(divh)
                 .addEtl(divtype)
-                .addEtl(terrdivtype);
+                .addEtl(terrdivtype)
+                .addEtl(divdivrelation);
     }
 }

@@ -34,7 +34,6 @@ public class TerrDivTypeTransformer implements EntityTransformer {
                         col(DIVISIONTYPE00).as(DIV_TYPE_CODE),
                         col(DIVISIONTYPE00).as(TERR_DIV_TYPE_SK),
                         lit(false).as(DIRTY_FLAG)
-
                 ).distinct();
 
         terrdivtype = terrdivtype.select(

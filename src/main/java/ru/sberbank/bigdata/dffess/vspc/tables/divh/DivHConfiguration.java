@@ -1,5 +1,7 @@
 package ru.sberbank.bigdata.dffess.vspc.tables.divh;
 
+import ru.sberbank.bigdata.dffess.vspc.impl.loader.DataLoaderHistMix;
+import ru.sberbank.bigdata.dffess.vspc.impl.mover.HistMovingNoCacheGenerator;
 import ru.sberbank.bigdata.dffess.vspc.impl.VspcEtlConfiguration;
 import ru.sberbank.bigdata.essa.common.slave.app.EtlLoadingStrategy;
 import ru.sberbank.bigdata.essa.common.slave.compress.CompressedTablesGenerator;
@@ -30,7 +32,7 @@ public class DivHConfiguration extends VspcEtlConfiguration {
 
             @Override
             public DataLoader getDataLoader() {
-                return new DataLoaderHistSnp();
+                return new DataLoaderHistMix();
             }
 
             @Override
@@ -40,7 +42,7 @@ public class DivHConfiguration extends VspcEtlConfiguration {
 
             @Override
             public MovingTablesGenerator getMovingTablesGenerator() {
-                return new HistMovingGenerator();
+                return new HistMovingNoCacheGenerator();
             }
         };
     }

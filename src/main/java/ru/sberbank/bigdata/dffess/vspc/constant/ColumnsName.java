@@ -11,6 +11,7 @@ public final class ColumnsName {
     public static final String ADDRESS_ADDRFACT_ADDPLACE_PLACENAME = "address_addrfact_addrplace_placename";
     public static final String ADDRESS_ADDRFACT_ADDRSTREET_STREETNAME = "address_addrfact_addrstreet_streetname";
     public static final String ADDRESS_ADDRFACT_FIASCODE = "address_addrfact_fiascode";
+    public static final String ADDRESS_OKTMO2_CODE = "address_addrfact_oktmocode";
     public static final String ADDRESS_OKATO2_CODE = "address_addrfact_okatocode";
     public static final String ADDRESS_ADDRFACT_POSTCODE = "address_addrfact_postcode";
     public static final String ADDRESS_ADDRFACT_TIMEZONE = "address_addrfact_timezone";
@@ -28,6 +29,11 @@ public final class ColumnsName {
     public static final String REQUSITEDIVISION_BIC = "requisitesdivision_bic";
     public static final String DIV_REQUISITEDIVISION_REGISTRATIONNUM = "requisitesdivision_registrationnum";
     public static final String SHORTDIVCODE = "shortdivcode";
+    public static final String ADDRESS_FIASCODE_DURTY = "durty_fias_code";
+    public static final String ADDRESS_FIASCODE_DP_CODE = "fias_code_addr_dp_code";
+    public static final String ADDRESS_FIASCODE_SK = "fias_code_addr_sk";
+    public static final String ADDRESS_TYPE_CODE = "type_code";
+    public static final String ADDRESS_STANDARD_ADDRESS_TXT = "standard_addr_txt";
 
     // EBX_REP_M_RFCZONETIME_0002_RFCZONETIME
     public static final String ABBREVIATION = "abbreviation";
@@ -56,6 +62,10 @@ public final class ColumnsName {
     public static final String ADDR_LOCTY_NAME = "locty_name";
     public static final String ADDR_OKATO2_DP_CODE = "okato2_dp_code";
     public static final String ADDR_OKATO2_SK = "okato2_sk";
+
+    public static final String ADDR_OKTMO2_SK = "oktmo2_sk";
+    public static final String ADDR_OKTMO2_DP_CODE = "oktmo2_dp_code";
+
     public static final String ADDR_REG_ADDR_NAME = "reg_addr_name";
     public static final String ADDR_REG_FED_SUBJ_DP_CODE = "rus_fed_subj_dp_code";
     public static final String ADDR_RUS_FED_SUBJ_SK = "rus_fed_subj_sk";
@@ -86,6 +96,7 @@ public final class ColumnsName {
     public static final String DIV_FACT_ADDR_SK = "fact_addr_sk";
     public static final String DIV_PAY_SYS_PRTCPNT_DP_CODE = "pay_sys_prtcpnt_dp_code";
     public static final String DIV_PAY_SYS_PRTCPNT_SK = "pay_sys_prtcpnt_sk";
+    public static final String DIV_DISABLED_ACCESS_EQUIPMENT = "disabled_access_equipment_flag";
 
     // DIV_TYPE
     public static final String DIV_TYPE_TERR_DIV_TYPE_DP_CODE = "div_type_terr_div_type_dp_code";

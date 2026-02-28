@@ -18,3 +18,5 @@ zeromq/**
 .vscode/
 .sberstack/*
 .sberstack
+.gigaide
+.gigaide/*

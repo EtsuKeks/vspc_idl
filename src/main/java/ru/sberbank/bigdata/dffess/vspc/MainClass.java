@@ -18,7 +18,7 @@ public class MainClass {
                 new VspcDataProductGenerator(),
                 ctlAdapter,
                 new SparkAppRunnerGenerator()
-        );
+        ).withKiller("USL_VSPC_IDL","MAIN_ACTION");
         dpr.run();
 
         System.out.println("FINISHED MAIN VSPC_IDL");

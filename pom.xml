@@ -6,20 +6,20 @@
 
     <groupId>ru.sberbank.bigdata.dffess.ssd</groupId>
     <artifactId>vspc_idl</artifactId>
-    <version>D-01.703.016</version>
+    <version>D-02.001.001</version>
 
     <properties>
-        <essa.common.version>2.2.2</essa.common.version>
+        <essa.common.version>2.2.6-SNAPSHOT</essa.common.version>
         <java.version>1.8</java.version>
         <jetty.version>9.4.53.v20231009</jetty.version>
         <avro.version>1.11.4</avro.version>
         <jackson.version>2.12.7.1</jackson.version>
         <jackson-annotations.version>2.12.2</jackson-annotations.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <skclient.version>1.30.0</skclient.version>
+        <skclient.version>1.30.1</skclient.version>
         <zookeeper.version>3.9.2</zookeeper.version>
         <commons-text.version>1.10.0</commons-text.version>
-        <rt-fw-baseline.version>3.6.3</rt-fw-baseline.version>
+        <rt-fw-baseline.version>3.10.0</rt-fw-baseline.version>
     </properties>
 
     <dependencies>

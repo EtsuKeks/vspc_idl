@@ -29,7 +29,7 @@ public class DivTransformer implements EntityTransformer {
                                       EntityStaticService entityStaticService, TransformConfiguration transformConfiguration,
                                       EntityProxyRelation entityProxyRelation, LoggerWrapper loggerWrapper) {
 
-        Dataset<Row> div_raw = sparkWrapper.getDataset(transformConfiguration.getSnpSrcSchema(EBX_REP_M_SFS_0002_SFSDIVISION), EBX_REP_M_SFS_0002_SFSDIVISION);
+        Dataset<Row> div_raw = sparkWrapper.getDataset(transformConfiguration.getSnpSrcSchema(CHG_DIVH), CHG_DIVH);
 
         div_raw = div_raw.select(
                 col(FULLDIVCODE).as(SID),
@@ -53,20 +53,12 @@ public class DivTransformer implements EntityTransformer {
                 when(col(ADDRESS_ADDRFACT_TIMEZONE).equalTo("USZ1"), "KALT")
                         .otherwise(col(ADDRESS_ADDRFACT_TIMEZONE)).as(DIV_TIME_ZONE_TIME_ZONE_SK),
 
-                lit(null).as(ADDR_IDX_NUM),
-                lit(null).as(ADDR_DISTRICT_NAME),
-                lit(null).as(ADDR_LOCTY_NAME),
-                lit(null).as(ADDR_REG_ADDR_NAME),
                 col(ADDRESS_LEGAL_LOCATIONADDRESS).as(ADDR_SRC_TXT),
-                lit(null).as(ADDR_CITY_NAME),
-                lit(null).as(ADDR_FIAS_CODE),
-                lit(null).as(ADDR_HOUSE_NUM),
-                lit(null).as(ADDR_STREET_NAME),
-                lit(null).as(ADDR_CNTRY_SK),
-                lit(null).as(ADDR_OKATO2_SK),
-                lit(null).as(ADDR_RUS_FED_SUBJ_SK)
+                col("address_addrfact_fiascode").as(ADDRESS_FIASCODE_DURTY),
+                col("gold_okato").as(ADDR_OKATO2_SK),
+                col("gold_oktmo").as(ADDR_OKTMO2_SK)
 
-        ).distinct();
+                ).distinct();
 
         Dataset<Row> div = div_raw.select(
                 col(SID).as(SID),
@@ -81,8 +73,8 @@ public class DivTransformer implements EntityTransformer {
                 lit(DATA_PRODUCT).as(DIV_PARENT_DIV_DP_CODE),
 
                 when(col(ADDR_SRC_TXT).isNotNull(), AddrTransformer.getKey("|")).otherwise(null).as(DIV_LEGAL_ADDR_SK),
+                when(col(ADDR_SRC_TXT).isNotNull(), lit(DATA_PRODUCT)).otherwise(null).as(DIV_LEGAL_ADDR_DP_CODE),
 
-                lit(DATA_PRODUCT).as(DIV_LEGAL_ADDR_DP_CODE),
                 lit(false).as(DIRTY_FLAG),
 
                 col(DIV_FULL_REG_NUM).as(DIV_FULL_REG_NUM),
