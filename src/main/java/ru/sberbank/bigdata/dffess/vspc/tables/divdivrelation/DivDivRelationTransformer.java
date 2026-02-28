@@ -17,11 +17,11 @@ import java.util.Map;
 
 import static org.apache.spark.sql.functions.*;
 import static org.apache.spark.sql.functions.col;
-import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.DIRTY_FLAG;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.DIV;
 import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DATA_PRODUCT;
 import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.getCtlValidFromStr;
 import static ru.sberbank.bigdata.essa.common.constant.CommonColumnName.*;
+import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
 
 public class DivDivRelationTransformer implements EntityTransformer {
 

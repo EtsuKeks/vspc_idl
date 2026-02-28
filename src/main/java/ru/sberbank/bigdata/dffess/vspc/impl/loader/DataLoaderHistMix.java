@@ -13,6 +13,7 @@ import ru.sberbank.bigdata.essa.common.slave.templates.TransformConfiguration;
 import ru.sberbank.bigdata.essa.common.structure.TableConfiguration;
 import ru.sberbank.bigdata.essa.common.utils.EntityStaticService;
 
+import static java.util.Arrays.asList;
 import static org.apache.spark.sql.expressions.Window.partitionBy;
 import static org.apache.spark.sql.functions.*;
 import static org.apache.spark.sql.types.DataTypes.StringType;

@@ -116,6 +116,13 @@ public final class ColumnsName {
     public static final String TIME_ZONE_SK = "time_zone_rf_sk";
     public static final String TIME_ZONE_WRLD_SHIFT_VAL = "time_zone_wrld_shift_val";
 
+    public static final String DIV_DIV_RELATION_DP_CODE = "div_div_relation_dp_code";
+    public static final String DIV_DIV_RELATION_SK = "div_div_relation_sk";
+    public static final String SOURCE_DIV_SK = "source_div_sk";
+    public static final String SOURCE_DIV_DP_CODE = "source_div_dp_code";
+    public static final String SUCCESSOR_DIV_SK = "successor_div_sk";
+    public static final String SUCCESSOR_DIV_DP_CODE = "successor_div_dp_code";
+
     private ColumnsName() {
         //no_op
     }

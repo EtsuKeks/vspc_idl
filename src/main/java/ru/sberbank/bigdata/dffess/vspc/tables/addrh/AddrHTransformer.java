@@ -58,21 +58,18 @@ public class AddrHTransformer implements EntityTransformer {
         Dataset<Row> addr = addr_fact.union(addr_legal).distinct();
 
         addr = addr.select(
-                getKey("|").as(ADDR_SK),
+                AddrTransformer.getKey("|").as(ADDR_SK),
 
                 col(ADDRESS_STANDARD_ADDRESS_TXT).as(ADDRESS_STANDARD_ADDRESS_TXT),
                 col(ADDR_FIAS_CODE).as(ADDR_FIAS_CODE),
-                lit(DATA_PRODUCT).as(ADDR_DP_CODE),
                 col(ADDR_OKATO2_SK).as(ADDR_OKATO2_SK),
-                col(ADDR_OKTMO2_SK).as(ADDR_OKTMO2_SK),
-
-                lit(">non_stndrt").as(ADDRESS_TYPE_CODE)
+                col(ADDR_OKTMO2_SK).as(ADDR_OKTMO2_SK)
 
         ).distinct();
 
         Dataset<Row> addrh = addr.select(
                 lit(VspcConstant.getCtlValidFromStr()).as(CTL_VALIDFROM),
-                AddrTransformer.getKey("|").as(ADDR_SK),
+                col(ADDR_SK).as(ADDR_SK),
                 lit(VspcConstant.DATA_PRODUCT).as(ADDR_DP_CODE),
                 col(ADDRESS_STANDARD_ADDRESS_TXT).as(ADDRESS_STANDARD_ADDRESS_TXT),
                 lit(false).as(DIRTY_FLAG),

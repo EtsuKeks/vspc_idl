@@ -17,11 +17,9 @@ import java.util.Map;
 
 import static org.apache.spark.sql.functions.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
-import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.DISABLED_ACCESS_EQUIPMENT;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.*;
-import static ru.sberbank.bigdata.essa.common.constant.CommonColumnName.CTL_VALIDFROM;
-import static ru.sberbank.bigdata.essa.common.constant.CommonColumnName.DELETED_FLAG;
+import static ru.sberbank.bigdata.essa.common.constant.CommonColumnName.*;
 
 public class DivHTransformer implements EntityTransformer {
 
@@ -32,7 +30,7 @@ public class DivHTransformer implements EntityTransformer {
 
         Dataset<Row> div_raw = sparkWrapper.getDataset(transformConfiguration.getSnpSrcSchema(CHG_DIVH), CHG_DIVH);
 
-        divh_raw = divh_raw.select(
+        Dataset<Row> divh_raw = div_raw.select(
                 col(FULLDIVCODE).as(DIV_SK),
                 col(FULLNAME).as(DIV_H_NAME),
                 col(FULLDIVCODE).as(DIV_CODE),
