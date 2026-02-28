@@ -416,7 +416,6 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.chg_div_h(
     address_postcode string,
     address_addrfact_addrarea_areaname string,
     address_addrfact_addrplace_placename string,
-    address_subjectcode string,
     address_addrfact_addrcity_cityname string,
     address_addrfact_addrhouse_housenumbers string,
     address_addrfact_addrstreet_streetname string,

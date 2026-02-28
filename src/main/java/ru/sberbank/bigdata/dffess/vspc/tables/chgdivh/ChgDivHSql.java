@@ -30,7 +30,6 @@ public class ChgDivHSql {
                     "     address_postcode, " +
                     "     address_addrfact_addrarea_areaname, " +
                     "     address_addrfact_addrplace_placename, " +
-                    "     address_subjectcode, " +
                     "     address_addrfact_addrcity_cityname, " +
                     "     address_addrfact_addrhouse_housenumbers, " +
                     "     address_addrfact_addrstreet_streetname, " +
@@ -116,13 +115,13 @@ public class ChgDivHSql {
                     "     address_postcode, " +
                     "     address_addrfact_addrarea_areaname, " +
                     "     address_addrfact_addrplace_placename, " +
-                    "     address_subjectcode, " +
                     "     address_addrfact_addrcity_cityname, " +
                     "     address_addrfact_addrhouse_housenumbers, " +
                     "     address_addrfact_addrstreet_streetname, " +
                     "     address_country, " +
                     "     address_addrfact_okatocode, " +
                     "     address_addrfact_oktmocode, " +
+                    "     address_subjectcode, " +
                     "     address_legaladdrdoc, " +
                     "     okato2_gold.sid as gold_okato, " +
                     "     oktmo2_gold.sid as gold_oktmo, " +
