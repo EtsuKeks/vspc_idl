@@ -50,8 +50,8 @@ public class AddrHTransformer implements EntityTransformer {
                 col(ADDRESS_LEGAL_LOCATIONADDRESS).as(ADDRESS_STANDARD_ADDRESS_TXT),
                 col("gold_fias_code").as(ADDR_FIAS_CODE),
                 col("address_addrfact_fiascode").as(ADDRESS_FIASCODE_DURTY),
-                col('gold_okato').as(ADDR_OKATO2_SK),
-                col('gold_oktmo').as(ADDR_OKTMO2_SK)
+                col("gold_okato").as(ADDR_OKATO2_SK),
+                col("gold_oktmo").as(ADDR_OKTMO2_SK)
 
         ).where(col(ADDRESS_LEGAL_LOCATIONADDRESS).isNotNull());
 
