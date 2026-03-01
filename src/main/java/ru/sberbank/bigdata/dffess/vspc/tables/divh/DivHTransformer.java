@@ -65,10 +65,10 @@ public class DivHTransformer implements EntityTransformer {
                 when(col(DIV_PAY_SYS_PRTCPNT_SK).isNotNull(), col(DIV_PAY_SYS_PRTCPNT_SK)).otherwise(null).as(DIV_PAY_SYS_PRTCPNT_SK),
                 when(col(DIV_PAY_SYS_PRTCPNT_SK).isNotNull(), lit(RDM_IDL_SPARK)).otherwise(null).as(DIV_PAY_SYS_PRTCPNT_DP_CODE),
 
-                lit(DATA_PRODUCT).as(DIV_FACT_ADDR_DP_CODE),
 
                 when(col(ADDR_SRC_TXT).isNotNull(), AddrTransformer.getKey("|")).otherwise(null).as(DIV_FACT_ADDR_SK),
                 when(col(ADDR_SRC_TXT).isNotNull(), lit(DATA_PRODUCT)).otherwise(null).as(DIV_FACT_ADDR_DP_CODE),
+
                 col(DIV_DISABLED_ACCESS_EQUIPMENT).as(DIV_DISABLED_ACCESS_EQUIPMENT),
 
                 lit(false).as(DIRTY_FLAG),
