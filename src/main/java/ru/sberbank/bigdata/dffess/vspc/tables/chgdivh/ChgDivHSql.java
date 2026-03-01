@@ -55,40 +55,27 @@ public class ChgDivHSql {
                     " on vsp_fias.address_addrfact_fiascode = gar_fias_addr.sid " +
                     " left join (  " +
                     "     select   " +
-                    "         okato2.okato2_sk,  " +
-                    "         okato2.sid  " +
+                    "         distinct sid" +
                     "     from   " +
                     "         usl_rdm_idl_spark_snp.okato2  " +
-                    "     inner join   " +
-                    "         usl_rdm_idl_spark_snp.okato2_h  " +
-                    "             on okato2.okato2_sk = okato2_h.okato2_sk  " +
-                    "             and current_date() >= okato2_h.start_dt " +
-                    "             and current_date() <= okato2_h.end_dt " +
                     "         where   " +
-                    "             NOT COALESCE(okato2.deleted_flag, FALSE)    " +
-                    "                 " +
+                    "             NOT COALESCE(deleted_flag, FALSE)    " +
+                    "             AND NOT COALESCE(dirty_flag, FALSE)    " +
                     " ) okato2_gold  " +
                     "     on okato2_gold.sid = addr.address_addrfact_okatocode  " +
                     " left join (  " +
                     "     select   " +
-                    "         oktmo2.oktmo2_sk,  " +
-                    "         oktmo2.sid  " +
+                    "         distinct sid  " +
                     "     from   " +
                     "         usl_rdm_idl_spark_snp.oktmo2  " +
-                    "     inner join   " +
-                    "         usl_rdm_idl_spark_snp.oktmo2_h  " +
-                    "             on oktmo2.oktmo2_sk = oktmo2_h.oktmo2_sk  " +
-                    "             and current_date >= oktmo2_h.start_dt " +
-                    "             and current_date <= oktmo2_h.end_dt " +
                     "         where   " +
-                    "             NOT COALESCE(oktmo2.deleted_flag, FALSE)   " +
-                    "                 " +
+                    "             NOT COALESCE(deleted_flag, FALSE)   " +
+                    "             AND NOT COALESCE(dirty_flag, FALSE)    " +
                     " ) oktmo2_gold  " +
                     "     on oktmo2_gold.sid = addr.address_addrfact_oktmocode " +
                     " left join (  " +
                     "     select " +
-                    "         distinct " +
-                    "             sid  " +
+                    "         distinct sid" +
                     "     from " +
                     "         usl_rdm_idl_spark_snp.pay_sys_prtcpnt  " +
                     "     WHERE  " +
@@ -314,40 +301,27 @@ public class ChgDivHSql {
                     "     on vsp_fias.address_addrfact_fiascode = gar_fias_addr.sid " +
                     " left join (  " +
                     "     select   " +
-                    "         okato2.okato2_sk,  " +
-                    "         okato2.sid  " +
+                    "         distinct sid  " +
                     "     from   " +
                     "         usl_rdm_idl_spark_snp.okato2  " +
-                    "     inner join   " +
-                    "         usl_rdm_idl_spark_snp.okato2_h  " +
-                    "             on okato2.okato2_sk = okato2_h.okato2_sk  " +
-                    "             and current_date() >= okato2_h.start_dt " +
-                    "             and current_date() <= okato2_h.end_dt " +
                     "         where   " +
-                    "             NOT COALESCE(okato2.deleted_flag, FALSE)    " +
-                    "                 " +
+                    "             NOT COALESCE(deleted_flag, FALSE)    " +
+                    "             AND NOT COALESCE(dirty_flag, FALSE)    " +
                     " ) okato2_gold  " +
                     "     on okato2_gold.sid = vsp_fias.address_addrfact_okatocode  " +
                     " left join (  " +
                     "     select   " +
-                    "         oktmo2.oktmo2_sk,  " +
-                    "         oktmo2.sid  " +
+                    "         distinct sid  " +
                     "     from   " +
                     "         usl_rdm_idl_spark_snp.oktmo2  " +
-                    "     inner join   " +
-                    "         usl_rdm_idl_spark_snp.oktmo2_h  " +
-                    "             on oktmo2.oktmo2_sk = oktmo2_h.oktmo2_sk  " +
-                    "             and current_date >= oktmo2_h.start_dt " +
-                    "             and current_date <= oktmo2_h.end_dt " +
                     "         where   " +
-                    "             NOT COALESCE(oktmo2.deleted_flag, FALSE)   " +
-                    "                 " +
+                    "             NOT COALESCE(deleted_flag, FALSE) " +
+                    "             AND NOT COALESCE(dirty_flag, FALSE)    " +
                     " ) oktmo2_gold  " +
                     "     on oktmo2_gold.sid = vsp_fias.address_addrfact_oktmocode " +
                     " left join (  " +
                     "     select " +
-                    "         distinct " +
-                    "             sid  " +
+                    "          distinct sid  " +
                     "     from " +
                     "         usl_rdm_idl_spark_snp.pay_sys_prtcpnt  " +
                     "     WHERE  " +
