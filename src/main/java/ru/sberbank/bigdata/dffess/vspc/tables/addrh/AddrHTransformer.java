@@ -34,7 +34,7 @@ public class AddrHTransformer implements EntityTransformer {
         Dataset<Row> addr_raw = sparkWrapper.getDataset(transformConfiguration.getSnpSrcSchema(CHG_DIVH), CHG_DIVH);
 
         Dataset<Row> addr_fact = addr_raw.select(
-
+                col(ADDRESS_LOCATIONADDRESS).as(ADDR_SRC_TXT),
                 col(ADDRESS_LOCATIONADDRESS).as(ADDRESS_STANDARD_ADDRESS_TXT),
 
                 lit(null).as(ADDR_FIAS_CODE),
@@ -46,7 +46,7 @@ public class AddrHTransformer implements EntityTransformer {
         ).where(col(ADDRESS_LOCATIONADDRESS).isNotNull());
 
         Dataset<Row> addr_legal = addr_raw.select(
-
+                col(ADDRESS_LEGAL_LOCATIONADDRESS).as(ADDR_SRC_TXT),
                 col(ADDRESS_LEGAL_LOCATIONADDRESS).as(ADDRESS_STANDARD_ADDRESS_TXT),
                 col("gold_fias_code").as(ADDR_FIAS_CODE),
                 col("address_addrfact_fiascode").as(ADDRESS_FIASCODE_DURTY),
