@@ -432,4 +432,4 @@ create external table usl_{{ logical_env_prefix }}vspc_idl_stg.chg_div_h(
 stored as parquet
 location '/data/usl/{{ logical_env_prefix_with_slash }}vspc_idl/stg/chg_div_h';
 
-msck repair table usl_{{ logical_env_prefix }}vspc_idl1_stg.chg_div_h;
+msck repair table usl_{{ logical_env_prefix }}vspc_idl_stg.chg_div_h;
