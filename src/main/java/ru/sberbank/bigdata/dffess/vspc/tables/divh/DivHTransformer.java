@@ -36,6 +36,9 @@ public class DivHTransformer implements EntityTransformer {
                 col(FULLDIVCODE).as(DIV_CODE),
                 col(REQUSITEDIVISION_BIC).as(DIV_PAY_SYS_PRTCPNT_SK),
 
+                to_date(col(CLOSEDATE)).as(DIV_CLOSEDATE),
+                to_date(col(OPENDATE)).as(DIV_OPENDATE),
+
                 col(START_DT).as(START_DT),
                 col(END_DT).as(END_DT),
 
