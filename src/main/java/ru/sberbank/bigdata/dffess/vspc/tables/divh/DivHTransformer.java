@@ -41,8 +41,6 @@ public class DivHTransformer implements EntityTransformer {
 
                 //col(ColumnsName.ADDRESS_LOCATIONADDRESS).as(ColumnsName.DIV_FACT_ADDR_SK),
 
-                col(ADDRESS_LOCATIONADDRESS).as(ADDR_SRC_TXT),
-
                 col("serving_isdisabledequip").as(DIV_DISABLED_ACCESS_EQUIPMENT),
 
                 col(ADDRESS_LOCATIONADDRESS).as(ADDR_SRC_TXT),
