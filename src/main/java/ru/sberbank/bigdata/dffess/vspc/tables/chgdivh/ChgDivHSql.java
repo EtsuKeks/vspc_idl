@@ -62,7 +62,7 @@ public class ChgDivHSql {
                     "             NOT COALESCE(deleted_flag, FALSE)    " +
                     "             AND NOT COALESCE(dirty_flag, FALSE)    " +
                     " ) okato2_gold  " +
-                    "     on okato2_gold.sid = addr.address_addrfact_okatocode  " +
+                    "     on okato2_gold.sid = vsp_fias.address_addrfact_okatocode  " +
                     " left join (  " +
                     "     select   " +
                     "         distinct sid  " +
@@ -72,7 +72,7 @@ public class ChgDivHSql {
                     "             NOT COALESCE(deleted_flag, FALSE)   " +
                     "             AND NOT COALESCE(dirty_flag, FALSE)    " +
                     " ) oktmo2_gold  " +
-                    "     on oktmo2_gold.sid = addr.address_addrfact_oktmocode " +
+                    "     on oktmo2_gold.sid = vsp_fias.address_addrfact_oktmocode " +
                     " left join (  " +
                     "     select " +
                     "         distinct sid" +
