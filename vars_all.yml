@@ -51,6 +51,7 @@ vars: &commonVars
   kafka_topic: "log-CI02619185-CI02619185"
 
   CTL_PROFILE_NAME_gar_fias_idl: "{{ CTL_PROFILE_NAME }}"
+  CTL_PROFILE_NAME_rdm_idl_spark: "{{ CTL_PROFILE_NAME }}"
   rtwf_log_level: "INFO"
   debug_program_units: ""
   max_increment_depth_days: 10
