@@ -28,6 +28,7 @@ workflows:
         numAttempts: 3
         retryDelayMs: 10000
         entities:
+          # Возможность добавить доп. зависимость для запуска потока https://confluence.sberbank.ru/display/USL/USL+specific+mart.yaml+parameters
           - entity:
               # usl_vspc_idl_in.ebx_rep_m_rfzonetime_0002_rfzonetime SNP
               id: 953008916
@@ -48,6 +49,13 @@ workflows:
               #name: "{{ logical_env_prefix }}usl_gar_fias_idl"
               statisticId: 12
               profile: "{{ CTL_PROFILE_NAME_gar_fias_idl }}"
+              active: false
+          - entity:
+              # Входной data-продукт ЕСС usl.rdm_idl_spark IDL - Справочники во временном владении УКД, original ctl entity 801005231
+              id: "801{{ logical_env_ctl_entity_logenv_number }}5231"
+              #name: "{{ logical_env_prefix }}usl_rdm_idl_spark"
+              statisticId: 12
+              profile: "{{ CTL_PROFILE_NAME_rdm_idl_spark }}"
               active: false
 
       params:
@@ -154,7 +162,9 @@ workflows:
             name: app_spark_parameters
             prior_value: "{{ app_conf }}"
       notifications:
-          - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru" ] }
+        - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru","SLSNTWRKDE_ess@sberbank.ru" ] }
+        - { status: "RUNNING", emails: [ "SLSNTWRKDE_ess@sberbank.ru" ] }
+        - { status: "SUCCESS", emails: [ "SLSNTWRKDE_ess@sberbank.ru" ] }
   - "{{ logical_env_prefix }}USL_VSPC_IDL_INIT":
       name: "{{ logical_env_prefix }}USL_VSPC_IDL_INIT"
       category: "VSPC"
@@ -276,7 +286,9 @@ workflows:
             name: app_spark_parameters
             prior_value: "{{ app_conf }}"
       notifications:
-          - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru" ] }
+        - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru","SLSNTWRKDE_ess@sberbank.ru" ] }
+        - { status: "RUNNING", emails: [ "SLSNTWRKDE_ess@sberbank.ru" ] }
+        - { status: "SUCCESS", emails: [ "SLSNTWRKDE_ess@sberbank.ru" ] }
 
 entities:
   - entity:
