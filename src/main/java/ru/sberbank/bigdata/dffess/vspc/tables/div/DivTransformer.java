@@ -36,8 +36,8 @@ public class DivTransformer implements EntityTransformer {
                 col(FULLDIVCODE).as(DIV_SK),
                 col(FULLDIVCODE).as(DIV_CODE),
                 col(SHORTDIVCODE).as(DIV_SHORT_DIV_CODE),
-                to_date(col(CLOSEDATE)).as(DIV_CLOSEDATE),
-                to_date(col(OPENDATE)).as(DIV_OPENDATE),
+                col(CLOSEDATE).as(DIV_CLOSEDATE),
+                col(OPENDATE).as(DIV_OPENDATE),
                 concat(lit("0"), col(FULLDIVCODE)).as(DIV_SUBBRANCH_CODE),
                 col(HEADDIVISIONCODE).as(DIV_PARENT_DIV_SK),
 

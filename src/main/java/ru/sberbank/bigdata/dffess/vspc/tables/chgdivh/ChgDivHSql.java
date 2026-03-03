@@ -15,8 +15,8 @@ public class ChgDivHSql {
                     "     fulldivcode, " +
                     "     fullname, " +
                     "     shortdivcode, " +
-                    "     closedate, " +
-                    "     opendate, " +
+                    "     cast(closedate as date) as closedate, " +
+                    "     cast(opendate as date) as opendate,  " +
                     "     headdivisioncode, " +
                     "     '0'||fulldivcode as subbranch_code, " +
                     "     pay_sys_prtcpnt.sid as requisitesdivision_bic, " +
@@ -88,8 +88,8 @@ public class ChgDivHSql {
                     "     fulldivcode, " +
                     "     fullname, " +
                     "     shortdivcode, " +
-                    "     closedate, " +
-                    "     opendate, " +
+                    "     cast(closedate as date) as closedate, " +
+                    "     cast(opendate as date) as opendate,  " +
                     "     headdivisioncode, " +
                     "     div_subbranch_code as subbranch_code, " +
                     "     pay_sys_prtcpnt.sid as requisitesdivision_bic, " +
