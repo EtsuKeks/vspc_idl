@@ -75,11 +75,11 @@ public class AddrHTransformer implements EntityTransformer {
                 lit(false).as(DIRTY_FLAG),
                 lit(false).as(DELETED_FLAG),
 
-                when(col(ADDR_OKATO2_SK).isNotNull(), col(ADDR_OKATO2_SK)).as(ADDR_OKATO2_SK),
-                when(col(ADDR_OKATO2_SK).isNotNull(), lit(RDM_IDL_SPARK)).as(ADDR_OKATO2_DP_CODE),
+                when(col(ADDR_OKATO2_SK).isNotNull(), col(ADDR_OKATO2_SK)).as(ADDRH_OKATO2_SK),
+                when(col(ADDR_OKATO2_SK).isNotNull(), lit(RDM_IDL_SPARK)).as(ADDRH_OKATO2_DP_CODE),
 
-                when(col(ADDR_OKTMO2_SK).isNotNull(), col(ADDR_OKTMO2_SK)).as(ADDR_OKTMO2_SK),
-                when(col(ADDR_OKTMO2_SK).isNotNull(), lit(RDM_IDL_SPARK)).as(ADDR_OKTMO2_DP_CODE),
+                when(col(ADDR_OKTMO2_SK).isNotNull(), col(ADDR_OKTMO2_SK)).as(ADDRH_OKTMO2_SK),
+                when(col(ADDR_OKTMO2_SK).isNotNull(), lit(RDM_IDL_SPARK)).as(ADDRH_OKTMO2_DP_CODE),
 
                 lit(">non_stndrt").as(ADDRESS_TYPE_CODE)
         ).distinct();

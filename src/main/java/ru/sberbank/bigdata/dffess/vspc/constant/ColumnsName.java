@@ -73,7 +73,11 @@ public final class ColumnsName {
     public static final String ADDR_STREET_NAME = "street_name";
 
     // ADDR_H
-    public static final String ADDR_STANDART_ADDRESS_TXT = "standard_addr_txt";
+    public static final String ADDRH_OKATO2_DP_CODE = "address_okato2_dp_code";
+    public static final String ADDRH_OKATO2_SK = "address_okato2_sk";
+
+    public static final String ADDRH_OKTMO2_SK = "address_oktmo2_sk";
+    public static final String ADDRH_OKTMO2_DP_CODE = "address_oktmo2_dp_code";
 
     // DIV_
     public static final String DIV_CODE = "code";
