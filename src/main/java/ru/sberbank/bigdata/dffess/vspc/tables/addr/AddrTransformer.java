@@ -146,7 +146,7 @@ public class AddrTransformer implements EntityTransformer {
                         .when(col(ADDRESS_SUBJECTCODE).equalTo("Эвенкийский АО"), "760")
                         .when(col(ADDRESS_SUBJECTCODE).equalTo("Ямало-Ненецкий АО"), "766")
                         .when(col(ADDRESS_SUBJECTCODE).equalTo("Ярославская область"), "630")
-                        .when(col(ADDRESS_SUBJECTCODE).equalTo("Не субъект РФ"), "0")
+                        .when(col(ADDRESS_SUBJECTCODE).equalTo("Не субъект РФ"), lit(null))
                         .as(ADDR_RUS_FED_SUBJ_SK)
 
         ).where(col(ADDRESS_LOCATIONADDRESS).isNotNull());
@@ -187,10 +187,13 @@ public class AddrTransformer implements EntityTransformer {
                 col(ADDR_HOUSE_NUM).as(ADDR_HOUSE_NUM),
                 col(ADDR_STREET_NAME).as(ADDR_STREET_NAME),
                 lit(DATA_PRODUCT).as(ADDR_DP_CODE),
-                col(ADDR_RUS_FED_SUBJ_SK).as(ADDR_RUS_FED_SUBJ_SK),
-                lit(RDM_IDL_SPARK).as(ADDR_REG_FED_SUBJ_DP_CODE),
-                col(ADDR_CNTRY_SK).as(ADDR_CNTRY_SK),
-                lit(RDM_IDL_SPARK).as(ADDR_CNTRY_DP_CODE),
+
+                when(col(ADDR_RUS_FED_SUBJ_SK).isNotNull(), col(ADDR_RUS_FED_SUBJ_SK)).as(ADDR_RUS_FED_SUBJ_SK),
+                when(col(ADDR_RUS_FED_SUBJ_SK).isNotNull(), lit(RDM_IDL_SPARK)).as(ADDR_REG_FED_SUBJ_DP_CODE),
+
+                when(col(ADDR_CNTRY_SK).isNotNull(), col(ADDR_CNTRY_SK)).as(ADDR_CNTRY_SK),
+                when(col(ADDR_CNTRY_SK).isNotNull(), lit(RDM_IDL_SPARK)).as(ADDR_CNTRY_DP_CODE),
+
                 col(ADDR_OKATO2_SK).as(ADDR_OKATO2_SK),
                 lit(RDM_IDL_SPARK).as(ADDR_OKATO2_DP_CODE),
                 lit(false).as(DIRTY_FLAG),
@@ -203,6 +206,7 @@ public class AddrTransformer implements EntityTransformer {
         ).distinct();
 
         Map<String, String> columnEntities = new HashMap<>();
+
         columnEntities.put(ADDR_RUS_FED_SUBJ_SK, "rus_fed_subj");
         columnEntities.put(ADDR_CNTRY_SK, "cntry");
         columnEntities.put(ADDR_OKATO2_SK, "okato2");

@@ -85,8 +85,8 @@ public class AddrHTransformer implements EntityTransformer {
         ).distinct();
 
         Map<String, String> columnEntities = new HashMap<>();
-        columnEntities.put(ADDR_OKATO2_SK, "okato2");
-        columnEntities.put(ADDR_OKTMO2_SK, "oktmo2");
+        columnEntities.put(ADDRH_OKATO2_SK, "okato2");
+        columnEntities.put(ADDRH_OKTMO2_SK, "oktmo2");
 
         addrh = skClientWrapper.incrementSk(addrh, ADDRH, columnEntities, transformConfiguration);
 
