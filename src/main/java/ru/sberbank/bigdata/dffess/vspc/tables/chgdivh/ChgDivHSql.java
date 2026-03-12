@@ -218,22 +218,22 @@ public class ChgDivHSql {
                     "                         '0'||fulldivcode as div_subbranch_code, " +
                     "                         requisitesdivision_bic, " +
                     "                         requisitesdivision_registrationnum, " +
-                    "                         nullif(trim(address_locationaddress), '') as , " +
-                    "                         nullif(trim(address_addrfact_fiascode), '') as , " +
-                    "                         nullif(trim(address_addrfact_timezone), '') as ," +
-                    "                         nullif(trim(serving_isdisabledequip), '') as ," +
+                    "                         nullif(trim(address_locationaddress), '') as address_locationaddress, " +
+                    "                         nullif(trim(address_addrfact_fiascode), '') as address_addrfact_fiascode, " +
+                    "                         nullif(trim(address_addrfact_timezone), '') as address_addrfact_timezone," +
+                    "                         nullif(trim(serving_isdisabledequip), '') as serving_isdisabledequip," +
                     "                         nullif(trim(address_addrfact_postcode),'') as address_addrfact_postcode, " +
                     "                         nullif(trim(address_postcode),'') as address_postcode, " +
-                    "                         nullif(trim(address_addrfact_addrarea_areaname), '') as ," +
-                    "                         nullif(trim(address_addrfact_addrplace_placename), '') as ," +
-                    "                         nullif(trim(address_subjectcode), '') as ," +
-                    "                         nullif(trim(address_addrfact_addrcity_cityname), '') as ," +
-                    "                         nullif(trim(address_addrfact_addrhouse_housenumbers), '') as ," +
-                    "                         nullif(trim(address_addrfact_addrstreet_streetname), '') as ," +
-                    "                         nullif(trim(address_country," +
-                    "                         nullif(trim(address_addrfact_okatocode), '') as ," +
-                    "                         nullif(trim(address_addrfact_oktmocode), '') as ," +
-                    "                         nullif(trim(address_legaladdrdoc), '') as , " +
+                    "                         nullif(trim(address_addrfact_addrarea_areaname), '') as address_addrfact_addrarea_areaname," +
+                    "                         nullif(trim(address_addrfact_addrplace_placename), '') as address_addrfact_addrplace_placename," +
+                    "                         nullif(trim(address_subjectcode), '') as address_subjectcode," +
+                    "                         nullif(trim(address_addrfact_addrcity_cityname), '') as address_addrfact_addrcity_cityname," +
+                    "                         nullif(trim(address_addrfact_addrhouse_housenumbers), '') as address_addrfact_addrhouse_housenumbers," +
+                    "                         nullif(trim(address_addrfact_addrstreet_streetname), '') as address_addrfact_addrstreet_streetname," +
+                    "                         nullif(trim(address_country), '') as address_country," +
+                    "                         nullif(trim(address_addrfact_okatocode), '') as address_addrfact_okatocode," +
+                    "                         nullif(trim(address_addrfact_oktmocode), '') as address_addrfact_oktmocode," +
+                    "                         nullif(trim(address_legaladdrdoc), '') as address_legaladdrdoc, " +
                     "                         hash( " +
                     "                             fulldivcode, " +
                     "                             fullname, " +
