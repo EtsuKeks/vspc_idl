@@ -58,7 +58,7 @@ public class DivTransformer implements EntityTransformer {
                 col("gold_okato").as(ADDR_OKATO2_SK),
                 col("gold_oktmo").as(ADDR_OKTMO2_SK)
 
-                ).distinct();
+                ).filter(" coalesce(end_dt, '9999-12-31') = '9999-12-31' ").distinct();
 
         Dataset<Row> div = div_raw.select(
                 col(SID).as(SID),

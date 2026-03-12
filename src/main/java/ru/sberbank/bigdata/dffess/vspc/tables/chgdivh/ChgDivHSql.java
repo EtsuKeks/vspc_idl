@@ -39,7 +39,9 @@ public class ChgDivHSql {
                     "     address_subjectcode, " +
                     "     address_legaladdrdoc, " +
                     "     okato2_gold.sid as gold_okato, " +
-                    "     oktmo2_gold.sid as gold_oktmo " +
+                    "     oktmo2_gold.sid as gold_oktmo, " +
+                    "     cast(current_date() as date) as start_dt, " +
+                    "     cast('9999-12-31' as date) end_dt " +
                     " FROM  " +
                     "     usl_vspc_idl_in_snp.ebx_rep_m_sfs_0002_sfsdivision vsp_fias  " +
                     " left join (  " +
