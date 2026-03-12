@@ -21,23 +21,23 @@ public class ChgDivHSql {
                     "     '0'||fulldivcode as subbranch_code, " +
                     "     pay_sys_prtcpnt.sid as requisitesdivision_bic, " +
                     "     requisitesdivision_registrationnum, " +
-                    "     address_locationaddress, " +
+                    "     nullif(trim(address_locationaddress),'') as address_locationaddress, " +
                     "     lower(address_addrfact_fiascode) as address_addrfact_fiascode, " +
                     "     address_addrfact_timezone,  " +
                     "     case when serving_isdisabledequip = 1 then true else false end serving_isdisabledequip,  " +
                     "     gar_fias_addr.sid as gold_fias_code, " +
-                    "     address_addrfact_postcode, " +
-                    "     address_postcode, " +
-                    "     address_addrfact_addrarea_areaname, " +
-                    "     address_addrfact_addrplace_placename, " +
-                    "     address_addrfact_addrcity_cityname, " +
-                    "     address_addrfact_addrhouse_housenumbers, " +
-                    "     address_addrfact_addrstreet_streetname, " +
-                    "     address_country, " +
-                    "     address_addrfact_okatocode, " +
-                    "     address_addrfact_oktmocode, " +
-                    "     address_subjectcode, " +
-                    "     address_legaladdrdoc, " +
+                    "     nullif(trim(address_addrfact_postcode),'') as address_addrfact_postcode, " +
+                    "     nullif(trim(address_postcode),'') as address_postcode, " +
+                    "     nullif(trim(address_addrfact_addrarea_areaname),'') as address_addrfact_addrarea_areaname, " +
+                    "     nullif(trim(address_addrfact_addrplace_placename),'') as address_addrfact_addrplace_placename, " +
+                    "     nullif(trim(address_addrfact_addrcity_cityname),'') as address_addrfact_addrcity_cityname, " +
+                    "     nullif(trim(address_addrfact_addrhouse_housenumbers),'') as address_addrfact_addrhouse_housenumbers, " +
+                    "     nullif(trim(address_addrfact_addrstreet_streetname),'') as address_addrfact_addrstreet_streetname, " +
+                    "     nullif(trim(address_country),'') as address_country, " +
+                    "     nullif(trim(address_addrfact_okatocode),'') as address_addrfact_okatocode, " +
+                    "     nullif(trim(address_addrfact_oktmocode),'') as address_addrfact_oktmocode, " +
+                    "     nullif(trim(address_subjectcode),'') as address_subjectcode, " +
+                    "     nullif(trim(address_legaladdrdoc),'') as address_legaladdrdoc, " +
                     "     okato2_gold.sid as gold_okato, " +
                     "     oktmo2_gold.sid as gold_oktmo, " +
                     "     cast(current_date() as date) as start_dt, " +
@@ -131,7 +131,8 @@ public class ChgDivHSql {
                     "         lower(address_addrfact_fiascode)as address_addrfact_fiascode, " +
                     "         address_addrfact_timezone," +
                     "         case when serving_isdisabledequip = 1 then true else false end serving_isdisabledequip," +
-                    "         address_postcode," +
+                    "         address_addrfact_postcode, " +
+                    "         address_postcode, " +
                     "         address_addrfact_addrarea_areaname," +
                     "         address_addrfact_addrplace_placename," +
                     "         address_subjectcode," +
@@ -160,6 +161,7 @@ public class ChgDivHSql {
                     "                 address_addrfact_fiascode, " +
                     "                 address_addrfact_timezone," +
                     "                 serving_isdisabledequip," +
+                    "                 address_addrfact_postcode," +
                     "                 address_postcode," +
                     "                 address_addrfact_addrarea_areaname," +
                     "                 address_addrfact_addrplace_placename," +
@@ -189,6 +191,7 @@ public class ChgDivHSql {
                     "                     address_addrfact_fiascode, " +
                     "                     address_addrfact_timezone," +
                     "                     serving_isdisabledequip," +
+                    "                     address_addrfact_postcode," +
                     "                     address_postcode," +
                     "                     address_addrfact_addrarea_areaname," +
                     "                     address_addrfact_addrplace_placename," +
@@ -215,27 +218,28 @@ public class ChgDivHSql {
                     "                         '0'||fulldivcode as div_subbranch_code, " +
                     "                         requisitesdivision_bic, " +
                     "                         requisitesdivision_registrationnum, " +
-                    "                         address_locationaddress, " +
-                    "                         address_addrfact_fiascode, " +
-                    "                         address_addrfact_timezone," +
-                    "                         serving_isdisabledequip," +
-                    "                         COALESCE(nullif(address_addrfact_postcode,''), address_postcode) AS address_postcode," +
-                    "                         address_addrfact_addrarea_areaname," +
-                    "                         address_addrfact_addrplace_placename," +
-                    "                         address_subjectcode," +
-                    "                         address_addrfact_addrcity_cityname," +
-                    "                         address_addrfact_addrhouse_housenumbers," +
-                    "                         address_addrfact_addrstreet_streetname," +
-                    "                         address_country," +
-                    "                         address_addrfact_okatocode," +
-                    "                         address_addrfact_oktmocode," +
-                    "                         address_legaladdrdoc, " +
+                    "                         nullif(trim(address_locationaddress), '') as , " +
+                    "                         nullif(trim(address_addrfact_fiascode), '') as , " +
+                    "                         nullif(trim(address_addrfact_timezone), '') as ," +
+                    "                         nullif(trim(serving_isdisabledequip), '') as ," +
+                    "                         nullif(trim(address_addrfact_postcode),'') as address_addrfact_postcode, " +
+                    "                         nullif(trim(address_postcode),'') as address_postcode, " +
+                    "                         nullif(trim(address_addrfact_addrarea_areaname), '') as ," +
+                    "                         nullif(trim(address_addrfact_addrplace_placename), '') as ," +
+                    "                         nullif(trim(address_subjectcode), '') as ," +
+                    "                         nullif(trim(address_addrfact_addrcity_cityname), '') as ," +
+                    "                         nullif(trim(address_addrfact_addrhouse_housenumbers), '') as ," +
+                    "                         nullif(trim(address_addrfact_addrstreet_streetname), '') as ," +
+                    "                         nullif(trim(address_country," +
+                    "                         nullif(trim(address_addrfact_okatocode), '') as ," +
+                    "                         nullif(trim(address_addrfact_oktmocode), '') as ," +
+                    "                         nullif(trim(address_legaladdrdoc), '') as , " +
                     "                         hash( " +
                     "                             fulldivcode, " +
                     "                             fullname, " +
                     "                             requisitesdivision_bic, " +
-                    "                             address_locationaddress, " +
-                    "                             address_addrfact_fiascode, " +
+                    "                             nullif(trim(address_locationaddress), ''), " +
+                    "                             nullif(trim(address_addrfact_fiascode), ''), " +
                     "                             serving_isdisabledequip  " +
                     "                         ) hash, " +
                     "                         ctl_validfrom AS start_dt " +
@@ -257,27 +261,28 @@ public class ChgDivHSql {
                     "                         '0'||fulldivcode as div_subbranch_code, " +
                     "                         requisitesdivision_bic, " +
                     "                         requisitesdivision_registrationnum, " +
-                    "                         address_locationaddress, " +
-                    "                         address_addrfact_fiascode, " +
-                    "                         address_addrfact_timezone," +
+                    "                         nullif(trim(address_locationaddress), '') as address_locationaddress, " +
+                    "                         nullif(trim(address_addrfact_fiascode), '') as address_addrfact_fiascode, " +
+                    "                         nullif(trim(address_addrfact_timezone), '') as address_addrfact_timezone," +
                     "                         serving_isdisabledequip," +
-                    "                         COALESCE(nullif(address_addrfact_postcode,''), address_postcode) AS address_postcode," +
-                    "                         address_addrfact_addrarea_areaname," +
-                    "                         address_addrfact_addrplace_placename," +
-                    "                         address_subjectcode," +
-                    "                         address_addrfact_addrcity_cityname," +
-                    "                         address_addrfact_addrhouse_housenumbers," +
-                    "                         address_addrfact_addrstreet_streetname," +
-                    "                         address_country," +
-                    "                         address_addrfact_okatocode," +
-                    "                         address_addrfact_oktmocode," +
-                    "                         address_legaladdrdoc," +
+                    "                         nullif(trim(address_addrfact_postcode),'') as address_addrfact_postcode, " +
+                    "                         nullif(trim(address_postcode),'') as address_postcode, " +
+                    "                         nullif(trim(address_addrfact_addrarea_areaname), '') as address_addrfact_addrarea_areaname," +
+                    "                         nullif(trim(address_addrfact_addrplace_placename), '') as address_addrfact_addrplace_placename," +
+                    "                         nullif(trim(address_subjectcode), '') as address_subjectcode," +
+                    "                         nullif(trim(address_addrfact_addrcity_cityname), '') as address_addrfact_addrcity_cityname," +
+                    "                         nullif(trim(address_addrfact_addrhouse_housenumbers), '') as address_addrfact_addrhouse_housenumbers," +
+                    "                         nullif(trim(address_addrfact_addrstreet_streetname), '') as address_addrfact_addrstreet_streetname," +
+                    "                         nullif(trim(address_country), '') as address_country," +
+                    "                         nullif(trim(address_addrfact_okatocode), '') as address_addrfact_okatocode," +
+                    "                         nullif(trim(address_addrfact_oktmocode), '') as address_addrfact_oktmocode," +
+                    "                         nullif(trim(address_legaladdrdoc), '') as address_legaladdrdoc," +
                     "                         hash(" +
                     "                             fulldivcode, " +
                     "                             fullname, " +
                     "                             requisitesdivision_bic, " +
-                    "                             address_locationaddress, " +
-                    "                             address_addrfact_fiascode, " +
+                    "                             nullif(trim(address_locationaddress), ''), " +
+                    "                             nullif(trim(address_addrfact_fiascode), ''), " +
                     "                             serving_isdisabledequip " +
                     "                         ) hash," +
                     "                         CURRENT_DATE() AS start_dt " +
