@@ -128,7 +128,7 @@ public class ChgDivHSql {
                     "         requisitesdivision_bic, " +
                     "         requisitesdivision_registrationnum, " +
                     "         address_locationaddress, " +
-                    "         lower(address_addrfact_fiascode)as address_addrfact_fiascode, " +
+                    "         lower(address_addrfact_fiascode) as address_addrfact_fiascode, " +
                     "         address_addrfact_timezone," +
                     "         case when serving_isdisabledequip = 1 then true else false end serving_isdisabledequip," +
                     "         address_addrfact_postcode, " +
