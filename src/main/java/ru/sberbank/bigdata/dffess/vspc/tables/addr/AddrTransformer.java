@@ -45,6 +45,7 @@ public class AddrTransformer implements EntityTransformer {
 
                 col(ADDRESS_ADDRFACT_ADDRSTREET_HOUSENUMBERS).as(ADDR_HOUSE_NUM),
                 col(ADDRESS_ADDRFACT_ADDRSTREET_STREETNAME).as(ADDR_STREET_NAME),
+
                 when(col(ADDRESS_COUNTRY).equalTo("РОССИЯ(RU)"), "643").when(col(ADDRESS_COUNTRY).equalTo("ИНДИЯ(IN)"), "356").otherwise(null).as(ADDR_CNTRY_SK),
 
                 lit(null).as(ADDR_OKATO2_SK),
@@ -206,6 +207,31 @@ public class AddrTransformer implements EntityTransformer {
                 lit(">non_stndrt").as(ADDRESS_TYPE_CODE)
 
         ).distinct();
+
+        addr = addr.groupBy(col(SID), col(ADDR_SK))
+                .agg(
+                        max(col(ADDR_IDX_NUM)).as(ADDR_IDX_NUM),
+                        max(col(ADDR_DISTRICT_NAME)).as(ADDR_DISTRICT_NAME),
+                        max(col(ADDR_LOCTY_NAME)).as(ADDR_LOCTY_NAME),
+                        max(col(ADDR_REG_ADDR_NAME)).as(ADDR_REG_ADDR_NAME),
+                        max(col(ADDR_SRC_TXT)).as(ADDR_SRC_TXT),
+                        max(col(ADDR_CITY_NAME)).as(ADDR_CITY_NAME),
+                        max(col(ADDR_FIAS_CODE)).as(ADDR_FIAS_CODE),
+                        max(col(ADDR_HOUSE_NUM)).as(ADDR_HOUSE_NUM),
+                        max(col(ADDR_STREET_NAME)).as(ADDR_STREET_NAME),
+                        max(col(ADDR_DP_CODE)).as(ADDR_DP_CODE),
+                        max(col(ADDR_RUS_FED_SUBJ_SK)).as(ADDR_RUS_FED_SUBJ_SK),
+                        max(col(ADDR_REG_FED_SUBJ_DP_CODE)).as(ADDR_REG_FED_SUBJ_DP_CODE),
+                        max(col(ADDR_CNTRY_SK)).as(ADDR_CNTRY_SK),
+                        max(col(ADDR_CNTRY_DP_CODE)).as(ADDR_CNTRY_DP_CODE),
+                        max(col(ADDR_OKATO2_SK)).as(ADDR_OKATO2_SK),
+                        max(col(ADDR_OKATO2_DP_CODE)).as(ADDR_OKATO2_DP_CODE),
+                        max(col(DIRTY_FLAG)).as(DIRTY_FLAG),
+                        max(col(DELETED_FLAG)).as(DELETED_FLAG),
+                        max(col(ADDRESS_FIASCODE_SK)).as(ADDRESS_FIASCODE_SK),
+                        max(col(ADDRESS_FIASCODE_DP_CODE)).as(ADDRESS_FIASCODE_DP_CODE),
+                        max(col(ADDRESS_TYPE_CODE)).as(ADDRESS_TYPE_CODE)
+                ).distinct();
 
         Map<String, String> columnEntities = new HashMap<>();
 
