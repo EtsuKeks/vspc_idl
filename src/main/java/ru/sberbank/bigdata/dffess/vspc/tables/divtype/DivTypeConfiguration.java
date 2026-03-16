@@ -5,7 +5,7 @@ import ru.sberbank.bigdata.essa.common.slave.app.EtlLoadingStrategy;
 import ru.sberbank.bigdata.essa.common.slave.compress.CompressedTablesGenerator;
 import ru.sberbank.bigdata.essa.common.slave.compress.SimpleCompressedTableGenerator;
 import ru.sberbank.bigdata.essa.common.slave.loading.DataLoader;
-import ru.sberbank.bigdata.essa.common.slave.loading.DataLoaderHubDiff;
+import ru.sberbank.bigdata.essa.common.slave.loading.DataLoaderHistSnp;
 import ru.sberbank.bigdata.essa.common.slave.move.HistMovingGenerator;
 import ru.sberbank.bigdata.essa.common.slave.move.MovingTablesGenerator;
 import ru.sberbank.bigdata.essa.common.slave.templates.EntityTransformer;
