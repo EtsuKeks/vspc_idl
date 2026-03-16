@@ -61,6 +61,7 @@ public class DivTransformer implements EntityTransformer {
                 ).filter(" coalesce(end_dt, '9999-12-31') = '9999-12-31' ").distinct();
 
         Dataset<Row> div = div_raw.select(
+                col(DELETED_FLAG).as(DELETED_FLAG),
                 col(SID).as(SID),
                 col(DIV_SK).as(DIV_SK),
                 lit(DATA_PRODUCT).as(DIV_DP_CODE),

@@ -27,6 +27,7 @@ public class TimeZoneTransformer implements EntityTransformer {
 
         Dataset<Row> timezone = sparkWrapper.getDataset(transformConfiguration.getSnpSrcSchema(EBX_REP_M_RFCZONETIME_0002_RFCZONETIME), EBX_REP_M_RFCZONETIME_0002_RFCZONETIME);
         timezone = timezone.select(
+                        col(DELETED_FLAG).as(DELETED_FLAG),
                         when(col(ABBREVIATION).equalTo("USZ1"), "KALT").otherwise(col(ABBREVIATION)).as(SID),
                         when(col(ABBREVIATION).equalTo("USZ1"), "KALT").otherwise(col(ABBREVIATION)).as(TIME_ZONE_ABBR_CODE),
                         col(CODE).as(TIME_ZONE_CODE),
