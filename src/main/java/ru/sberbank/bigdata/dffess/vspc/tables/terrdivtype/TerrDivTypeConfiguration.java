@@ -30,7 +30,7 @@ public class TerrDivTypeConfiguration extends VspcEtlConfiguration {
 
             @Override
             public DataLoader getDataLoader() {
-                return new DataLoaderHubSnp();
+                return new DataLoaderHubDiff();
             }
 
             @Override

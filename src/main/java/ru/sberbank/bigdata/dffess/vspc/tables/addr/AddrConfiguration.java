@@ -5,7 +5,7 @@ import ru.sberbank.bigdata.essa.common.slave.app.EtlLoadingStrategy;
 import ru.sberbank.bigdata.essa.common.slave.compress.CompressedTablesGenerator;
 import ru.sberbank.bigdata.essa.common.slave.compress.SimpleCompressedTableGenerator;
 import ru.sberbank.bigdata.essa.common.slave.loading.DataLoader;
-import ru.sberbank.bigdata.essa.common.slave.loading.DataLoaderHubSnp;
+import ru.sberbank.bigdata.essa.common.slave.loading.DataLoaderHubDiff;
 import ru.sberbank.bigdata.essa.common.slave.move.AllMovingGenerator;
 import ru.sberbank.bigdata.essa.common.slave.move.MovingTablesGenerator;
 import ru.sberbank.bigdata.essa.common.slave.templates.EntityTransformer;
@@ -30,7 +30,7 @@ public class AddrConfiguration extends VspcEtlConfiguration {
 
             @Override
             public DataLoader getDataLoader() {
-                return new DataLoaderHubSnp();
+                return new DataLoaderHubDiff();
             }
 
             @Override
