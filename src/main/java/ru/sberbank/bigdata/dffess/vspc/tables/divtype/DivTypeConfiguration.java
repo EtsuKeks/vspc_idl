@@ -30,7 +30,7 @@ public class DivTypeConfiguration extends VspcEtlConfiguration {
 
             @Override
             public DataLoader getDataLoader() {
-                return new DataLoaderHubDiff();
+                return new DataLoaderHistSnp();
             }
 
             @Override

@@ -32,7 +32,7 @@ public class DivTypeTransformer implements EntityTransformer {
         Dataset<Row> divtype = sparkWrapper.getDataset(transformConfiguration.getSnpSrcSchema(TablesName.EBX_REP_M_SFS_0002_SFSDIVISION), TablesName.EBX_REP_M_SFS_0002_SFSDIVISION);
         divtype = divtype
                 .select(
-                        col(DELETED_FLAG).as(DELETED_FLAG),
+                        lit(false).as(DELETED_FLAG),
                         lit(VspcConstant.getCtlValidFromStr()).as(CTL_VALIDFROM),
                         col(ColumnsName.FULLDIVCODE).as(ColumnsName.DIV_SK),
                         lit(VspcConstant.DATA_PRODUCT).as(ColumnsName.DIV_DP_CODE),
