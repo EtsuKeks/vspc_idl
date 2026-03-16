@@ -17,6 +17,7 @@ import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.EBX_REP_M_RFCZ
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.TIMEZONE;
 import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DATA_PRODUCT;
 import static ru.sberbank.bigdata.essa.common.constant.CommonColumnName.SID;
+import static ru.sberbank.bigdata.essa.common.constant.CommonColumnName.DELETED_FLAG;
 
 public class TimeZoneTransformer implements EntityTransformer {
 

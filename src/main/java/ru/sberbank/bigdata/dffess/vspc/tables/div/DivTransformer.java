@@ -21,6 +21,7 @@ import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DATA_PRODUCT;
 import static ru.sberbank.bigdata.essa.common.constant.CommonColumnName.SID;
+import static ru.sberbank.bigdata.essa.common.constant.CommonColumnName.DELETED_FLAG;
 
 public class DivTransformer implements EntityTransformer {
 

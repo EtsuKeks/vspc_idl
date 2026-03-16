@@ -20,6 +20,7 @@ import java.util.Map;
 import static org.apache.spark.sql.functions.col;
 import static org.apache.spark.sql.functions.lit;
 import static ru.sberbank.bigdata.essa.common.constant.CommonColumnName.CTL_VALIDFROM;
+import static ru.sberbank.bigdata.essa.common.constant.CommonColumnName.DELETED_FLAG;
 
 public class DivTypeTransformer implements EntityTransformer {
 

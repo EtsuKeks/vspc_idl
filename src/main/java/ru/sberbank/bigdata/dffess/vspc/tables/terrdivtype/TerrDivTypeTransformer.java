@@ -18,6 +18,7 @@ import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.EBX_REP_M_SFS_
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.TERRDIVTYPE;
 import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DATA_PRODUCT;
 import static ru.sberbank.bigdata.essa.common.constant.CommonColumnName.SID;
+import static ru.sberbank.bigdata.essa.common.constant.CommonColumnName.DELETED_FLAG;
 
 public class TerrDivTypeTransformer implements EntityTransformer {
 
