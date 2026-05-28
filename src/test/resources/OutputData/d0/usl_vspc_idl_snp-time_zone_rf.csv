@@ -1,0 +1,12 @@
+ctl_loading;ctl_validfrom;deleted_flag;dirty_flag;sid;time_zone_abbr_code;time_zone_code;time_zone_name;time_zone_wrld_shift_val;time_zone_rf_dp_code;time_zone_rf_sk;time_zone_msk_shift_val
+104112451;2026-05-06T11:48:44.300+03:00;false;false;MAGT;MAGT;10;Магаданское время;UTC+11;vspc_idl;314000000000000008;MSK+8
+104112451;2026-05-06T11:48:44.300+03:00;false;false;SAMT;SAMT;3;Самарское время;UTC+4;vspc_idl;314000000000000006;MSK+1
+104112451;2026-05-06T11:48:44.300+03:00;false;false;KRAT;KRAT;6;Красноярское время;UTC+7;vspc_idl;314000000000000002;MSK+4
+104112451;2026-05-06T11:48:44.300+03:00;false;false;IRKT;IRKT;7;Иркутское время;UTC+8;vspc_idl;314000000000000009;MSK+5
+104112451;2026-05-06T11:48:44.300+03:00;false;false;VLAT;VLAT;9;Владивостокское время;UTC+10;vspc_idl;314000000000000010;MSK+7
+104112451;2026-05-06T11:48:44.300+03:00;false;false;PETT;PETT;11;Камчатское время;UTC+12;vspc_idl;314000000000000001;MSK+9
+104112451;2026-05-06T11:48:44.300+03:00;false;false;YEKT;YEKT;4;Екатеринбургское время;UTC+5;vspc_idl;314000000000000004;MSK+2
+104112451;2026-05-06T11:48:44.300+03:00;false;false;KALT;KALT;1;Калининградское время;UTC+2;vspc_idl;314000000000000003;MSK-1
+104112451;2026-05-06T11:48:44.300+03:00;false;false;OMST;OMST;5;Омское время;UTC+6;vspc_idl;314000000000000005;MSK+3
+104112451;2026-05-06T11:48:44.300+03:00;false;false;YAKT;YAKT;8;Якутское время;UTC+9;vspc_idl;314000000000000000;MSK+6
+104112451;2026-05-06T11:48:44.300+03:00;false;false;MSK;MSK;2;Московское время;UTC+3;vspc_idl;314000000000000007;MSK+0
