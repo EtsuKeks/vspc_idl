@@ -2,6 +2,7 @@ package ru.sberbank.bigdata.dffess.vspc.transformations;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
+import org.apache.spark.sql.expressions.Window;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
 import ru.sberbank.bigdata.sl.rt.core.App;
 
@@ -52,6 +53,13 @@ public class DivHTransformation extends BaseTransformation {
                 lit(null).as(ADDR_OKTMO2_SID)
 
         ).distinct();
+
+        // Дедубликация по SID
+        divh_raw = divh_raw
+                .withColumn("_test_dedup_rn",
+                        row_number().over(Window.partitionBy(col(DIV_SID)).orderBy(col(DIV_OPENDATE).desc())))
+                .filter(col("_test_dedup_rn").equalTo(1))
+                .drop("_test_dedup_rn");
 
         Dataset<Row> divh = divh_raw.select(
                 col(DIV_SID).as(DIV_SID),
