@@ -94,7 +94,7 @@ stands:
       YARN_QUEUE: "default"
       uslCluster: "sdpiftfess"
       system_area_type: "q_SDP_ESS"
-      org_lvl2_name: "СП.Управление моделирования и исследования данных"
+      #org_lvl2_name: "СП.Управление моделирования и исследования данных"
       archiveProfile_sfs: "Default"
       kafka_broker_list: "tvlsq-log000001.dev.df.sbrf.ru:9093,tvlsq-log000002.dev.df.sbrf.ru:9093,tvlsq-log000003.dev.df.sbrf.ru:9093,tvlsq-log000004.dev.df.sbrf.ru:9093,tvlsq-log000005.dev.df.sbrf.ru:9093,tvlsq-log000006.dev.df.sbrf.ru:9093"
 
