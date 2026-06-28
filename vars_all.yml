@@ -55,7 +55,8 @@ vars: &commonVars
   rtwf_log_level: "INFO"
   debug_program_units: ""
   max_increment_depth_days: 10
-  spark_parameters_zookeeper: "--conf spark.driver.extraJavaOptions='-Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false -Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dzookeeper.sasl.client=true -Dzookeeper.sasl.clientconfig=Client' --conf spark.executor.extraJavaOptions='-Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false -Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dzookeeper.sasl.client=true -Dzookeeper.sasl.clientconfig=Client'"
+  #spark_parameters_zookeeper: "--conf spark.driver.extraJavaOptions='-Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false -Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dzookeeper.sasl.client=true -Dzookeeper.sasl.clientconfig=Client' --conf spark.executor.extraJavaOptions='-Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false -Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dzookeeper.sasl.client=true -Dzookeeper.sasl.clientconfig=Client'"
+  spark_parameters_zookeeper: ""
 
 stands:
   # DEV
