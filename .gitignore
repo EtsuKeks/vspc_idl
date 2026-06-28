@@ -3,6 +3,7 @@
 *.iws
 *.ids
 .idea/
+.idea
 metastore_db/
 /out/
 **/target/
@@ -20,3 +21,4 @@ zeromq/**
 .sberstack
 .gigaide
 .gigaide/*
+.gigaide/

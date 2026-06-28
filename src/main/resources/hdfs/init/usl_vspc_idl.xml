@@ -31,6 +31,8 @@
             <argument>/oozie-app/t/idl/vspc_idl/lib</argument>  			 <!-- 6 -->
             <argument>${devops_distributive_jar}</argument>	         <!-- 7 -->
             <argument>${wf:conf('user.name')}</argument>        <!-- 8 -->
+            <env-var>sl_secman_host=${wf:conf('sl.secman.host')}</env-var> <!-- пробрасываем параметр sl.secman.host из 'профиля ctl' в StartLauncher.sh -->
+            <env-var>ssk_tgt_tgs_renew_h=${wf:conf('ssk_tgt_tgs_renew_h')}</env-var>
             <file>StartLauncher.sh#StartLauncher.sh</file>
             <file>kvno_command.sh#kvno_command.sh</file>
         </shell>
