@@ -23,7 +23,7 @@ vars: &commonVars
 
   parallel_threads: 10
   debug_sk_off: ""
-  build_version: "D-02.103.002"
+  build_version: "D-02.103.003"
   devops_distributive_jar: "vspc_idl-{{ build_version }}-jar-with-dependencies.jar"
 
   logical_env_prefix_with_slash: ""
@@ -55,8 +55,6 @@ vars: &commonVars
   rtwf_log_level: "INFO"
   debug_program_units: ""
   max_increment_depth_days: 10
-  #spark_parameters_zookeeper: "--conf spark.driver.extraJavaOptions='-Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false -Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dzookeeper.sasl.client=true -Dzookeeper.sasl.clientconfig=Client' --conf spark.executor.extraJavaOptions='-Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false -Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dzookeeper.sasl.client=true -Dzookeeper.sasl.clientconfig=Client'"
-  spark_parameters_zookeeper: ""
 
 stands:
   # DEV
@@ -67,8 +65,8 @@ stands:
       spark_parameters_default: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=2G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=5 --conf spark.dynamicAllocation.maxExecutors=40 --conf spark.driver.memory=5G"
       app_conf: "essa_debug_sk_off=false"
       app_conf_init: "essa_debug_sk_off=false"
-      spark_parameters: "{{ spark_parameters_default }} {{ spark_parameters_zookeeper }}"
-      spark_parameters_init: "{{ spark_parameters_default }} {{ spark_parameters_zookeeper }}"
+      spark_parameters: "{{ spark_parameters_default }}"
+      spark_parameters_init: "{{ spark_parameters_default }}"
       hadoop_default_fs_uri: "hdfs://FESS-DEV"
       user_name: "u_sklsdpfess_s_usl_t_vspc_idl"
       USER_NAME: "u_sklsdpfess_s_usl_t_vspc_idl"
@@ -85,8 +83,8 @@ stands:
       spark_parameters_default: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=1G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=2 --conf spark.dynamicAllocation.maxExecutors=10 --conf spark.driver.memory=1G"
       app_conf: "essa_debug_sk_off=false"
       app_conf_init: "essa_debug_sk_off=false"
-      spark_parameters: "{{ spark_parameters_default }} {{ spark_parameters_zookeeper }}"
-      spark_parameters_init: "{{ spark_parameters_default }} {{ spark_parameters_zookeeper }}"
+      spark_parameters: "{{ spark_parameters_default }}"
+      spark_parameters_init: "{{ spark_parameters_default }}"
       hadoop_default_fs_uri: "hdfs://iftbalsdpfess"
       user_name: "u_itbalsdpfess_s_usl_t_vspc_idl"
       USER_NAME: "u_itbalsdpfess_s_usl_t_vspc_idl"
@@ -107,8 +105,8 @@ stands:
       spark_parameters_default: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.executor.memory=10G --conf spark.executor.cores=2 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=20G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=20G --conf spark.driver.memoryOverhead=10G --conf spark.executor.memoryOverhead=3G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=100 --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000"
       app_conf: "essa_debug_sk_off=false"
       app_conf_init: "essa_debug_sk_off=false"
-      spark_parameters: "{{ spark_parameters_default }} {{ spark_parameters_zookeeper }}"
-      spark_parameters_init: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.executor.memory=10G --conf spark.executor.cores=2 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=20G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=20G --conf spark.driver.memoryOverhead=10G --conf spark.executor.memoryOverhead=3G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=300 --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000 {{ spark_parameters_zookeeper }}"
+      spark_parameters: "{{ spark_parameters_default }}"
+      spark_parameters_init: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.executor.memory=10G --conf spark.executor.cores=2 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=20G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=20G --conf spark.driver.memoryOverhead=10G --conf spark.executor.memoryOverhead=3G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=300 --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000"
       hadoop_default_fs_uri: "hdfs://utarnsdpfess"
       user_name: "u_utarnsdpfess_s_usl_t_vspc_idl"
       USER_NAME: "u_utarnsdpfess_s_usl_t_vspc_idl"
@@ -125,8 +123,8 @@ stands:
       spark_parameters_default: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.executor.memory=10G --conf spark.executor.cores=2 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=10G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=20G --conf spark.driver.memoryOverhead=5G --conf spark.executor.memoryOverhead=3G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=100 --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000"
       app_conf: "essa_debug_sk_off=false"
       app_conf_init: "essa_debug_sk_off=false"
-      spark_parameters: "{{ spark_parameters_default }} {{ spark_parameters_zookeeper }}"
-      spark_parameters_init: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.executor.memory=10G --conf spark.executor.cores=2 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=10G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=20G --conf spark.driver.memoryOverhead=5G --conf spark.executor.memoryOverhead=3G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=300 --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000 {{ spark_parameters_zookeeper }}"
+      spark_parameters: "{{ spark_parameters_default }}"
+      spark_parameters_init: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.executor.memory=10G --conf spark.executor.cores=2 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=10G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=20G --conf spark.driver.memoryOverhead=5G --conf spark.executor.memoryOverhead=3G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=300 --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000"
       hadoop_default_fs_uri: "hdfs://arnsdpfess2"
       user_name: "u_arn6sdpfess_s_usl_t_vspc_idl"
       USER_NAME: "u_arn6sdpfess_s_usl_t_vspc_idl"
