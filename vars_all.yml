@@ -23,7 +23,7 @@ vars: &commonVars
 
   parallel_threads: 10
   debug_sk_off: ""
-  build_version: "D-02.103.005"
+  build_version: "D-02.103.006"
   devops_distributive_jar: "vspc_idl-{{ build_version }}-jar-with-dependencies.jar"
 
   logical_env_prefix_with_slash: ""
