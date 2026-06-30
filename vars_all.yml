@@ -23,7 +23,7 @@ vars: &commonVars
 
   parallel_threads: 10
   debug_sk_off: ""
-  build_version: "D-02.103.007"
+  build_version: "D-02.103.008"
   devops_distributive_jar: "vspc_idl-{{ build_version }}-jar-with-dependencies.jar"
 
   logical_env_prefix_with_slash: ""
@@ -79,7 +79,7 @@ stands:
   - stand_inventory: iftbalsdpfess
     vars:
       <<: *commonVars
-      cluster_name: "iftbalsdpfess"
+      cluster_name: "itbalsdpfess"
       spark_parameters_default: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=1G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=2 --conf spark.dynamicAllocation.maxExecutors=10 --conf spark.driver.memory=1G"
       app_conf: "essa_debug_sk_off=false"
       app_conf_init: "essa_debug_sk_off=false"
@@ -91,7 +91,7 @@ stands:
       yarn_queue: "default"
       resourceGroup: "default"
       YARN_QUEUE: "default"
-      uslCluster: "sdpiftfess"
+      uslCluster: "iftbalsdpfess"
       system_area_type: "q_SDP_ESS"
       #org_lvl2_name: "СП.Управление моделирования и исследования данных"
       archiveProfile_sfs: "Default"
