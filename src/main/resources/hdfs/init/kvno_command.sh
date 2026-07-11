@@ -131,7 +131,10 @@ do
   sorted_container_codes_and_hosts=$(echo "$container_codes_and_hosts" | jq -s 'sort_by(.code)')
   server_host=$(echo "$sorted_container_codes_and_hosts" | jq -r '.[0].host')
   container_code=$(echo "$sorted_container_codes_and_hosts" | jq -r '.[0].code')
-	if [[ -n "$server_host" ]]; then break; fi
+	if [ -n "$server_host" ] && [ "$server_host" != "null" ]; then
+    echo "Успех! Найден host: $server_host (code: $container_code)"
+    break
+  fi
 done
 if [[ -z "${server_host}" ]]; then
 	echo "Server host not found in any Service Discovery: "$sd_hosts_list
