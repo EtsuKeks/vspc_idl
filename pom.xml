@@ -13,7 +13,7 @@
     <parent>
         <groupId>ru.sberbank.bigdata.sl.rt</groupId>
         <artifactId>rt-fw-baseline</artifactId>
-        <version>3.14.0-SNAPSHOT</version>
+        <version>3.16.1</version>
     </parent>
 
     <properties>
