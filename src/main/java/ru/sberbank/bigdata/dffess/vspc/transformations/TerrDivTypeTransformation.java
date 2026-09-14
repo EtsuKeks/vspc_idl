@@ -10,11 +10,10 @@ import static org.apache.spark.sql.functions.col;
 import static org.apache.spark.sql.functions.lit;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DP_CODE;
-import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.EBX_REP_M_SFS_0002_SFSDIVISION;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.TERRDIVTYPE;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.TERRDIVTYPE_DS_CODE;
 import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DATA_PRODUCT;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.VSPC_SNP_SRC_SCHEMA;
+import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.SRC_PROVIDER_SFSDIVISION;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 
 public class TerrDivTypeTransformation extends BaseTransformation {
@@ -28,7 +27,7 @@ public class TerrDivTypeTransformation extends BaseTransformation {
 
     @Override
     public void run() {
-        Dataset<Row> terrdivtype = selectFrom(VSPC_SNP_SRC_SCHEMA, EBX_REP_M_SFS_0002_SFSDIVISION);
+        Dataset<Row> terrdivtype = read(SRC_PROVIDER_SFSDIVISION).kap803Usl().snp().get();
         terrdivtype = terrdivtype
                 .select(
                         col(DIVISIONTYPE00).as(SID),

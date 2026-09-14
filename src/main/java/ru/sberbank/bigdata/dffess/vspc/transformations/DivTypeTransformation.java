@@ -26,9 +26,8 @@ import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.DIVTYPE;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.DIVTYPE_DS_CODE;
 import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DATA_PRODUCT;
 import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DP_CODE;
-import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.EBX_REP_M_SFS_0002_SFSDIVISION;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.TERRDIVTYPE;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.VSPC_SNP_SRC_SCHEMA;
+import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.SRC_PROVIDER_SFSDIVISION;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.END_DT_FIELD_NAME;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.PLUS_INFINITY_DT;
@@ -45,7 +44,7 @@ public class DivTypeTransformation extends BaseTransformation {
 
     @Override
     public void run() {
-        Dataset<Row> divtype = selectFrom(VSPC_SNP_SRC_SCHEMA, EBX_REP_M_SFS_0002_SFSDIVISION);
+        Dataset<Row> divtype = read(SRC_PROVIDER_SFSDIVISION).kap803Usl().snp().get();
         divtype = divtype
                 .select(
                         lit(false).as(DELETED_FLAG),

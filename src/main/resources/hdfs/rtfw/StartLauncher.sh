@@ -41,20 +41,26 @@ pwd
 ls -lah
 echo "end_ls"
 
-#вызываем запуск расчёта дата-продукта с двумя аргументами - loading_id, CTL URL
-if false; then
-  java -Xmx2G -XX:MetaspaceSize=100M \
-  -classpath /usr/sdp/current/spark3-client/jars/*:${devops_distributive_jar_local} \
-  ru.sberbank.bigdata.dffess.vspc.MainClassSpawnedApp ${loading_id} ${ctl}
-else
-  spark-submit --files ${user_ticket_cache_file_name} --master yarn --deploy-mode cluster --queue vspc \
-  --name "loading_id=${loading_id}:wf_name=usl_vspc_idl:pu=all" --conf spark.yarn.maxAppAttempts=1 \
-  --conf spark.driver.extraJavaOptions='-Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false' \
-  --conf spark.executor.extraJavaOptions='-Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false' \
-  --conf spark.executorEnv.KRB5CCNAME=${user_ticket_cache_file_name} \
-  --conf spark.yarn.appMasterEnv.RTFW_KERBEROS_TICKET_CACHE_FILE=${user_ticket_cache_file_name} \
-  --conf spark.yarn.appMasterEnv.KRB5CCNAME=${user_ticket_cache_file_name} --driver-memory 12G \
-  --conf 'spark.driver.extraJavaOptions=-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dzookeeper.sasl.client=true -Dzookeeper.sasl.clientconfig=Client' \
-  --conf 'spark.executor.extraJavaOptions=-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dzookeeper.sasl.client=true -Dzookeeper.sasl.clientconfig=Client' \
-  --class ru.sberbank.bigdata.dffess.vspc.MainClass ${devops_distributive_jar_local} ${loading_id} ${ctl}
-fi
+export SPARK_SUBMIT_OPTS="$SPARK_SUBMIT_OPTS -Djava.security.krb5.conf=/etc/krb5.conf -Djavax.security.auth.useSubjectCredsOnly=false -Dsun.security.jgss.native=true"
+export HADOOP_OPTS="$HADOOP_OPTS -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false"
+export YARN_OPTS="$YARN_OPTS -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false"
+export HBASE_OPTS="$HBASE_OPTS -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false"
+
+#вызываем запуск расчёта дата-продукта с двумя аргументами - loading_id, CTL URL.
+#Целевой способ запуска (инструкция RT-FW 6.3): JAR запускается как Java-приложение через
+#единую точку входа RtfwLauncher, который сам создаёт Spark-сессию из параметров CTL-потока
+#и авто-рассчитывает spark.yarn.access.hadoopFileSystems (см. раздел 6.3 инструкции).
+#Третий аргумент RtfwLauncher - main-класс data-продукта (Spark-точка входа, запускается как
+#единственный дочерний SpawnedApp). Параметры spark.*, требуемые для java-запуска
+#(KRB5CCNAME, zookeeper jaas, hadoopFileSystems), задаются в spark_parameters CTL-потока.
+java -Xmx2G -XX:MetaspaceSize=100M \
+  -Dsun.security.jgss.native=true \
+  -Djavax.security.auth.useSubjectCredsOnly=false \
+  -DRTFW_KERBEROS_TICKET_CACHE_FILE=${user_ticket_cache_file_name} \
+  -classpath /usr/sdp/current/spark3-client/jars/*:/usr/sdp/current/hive-metastore/lib/*:${devops_distributive_jar_local} \
+  ru.sberbank.bigdata.sl.rt.core.RtfwLauncher \
+  ${loading_id} ${ctl} ru.sberbank.bigdata.dffess.vspc.MainClass
+
+java_main_status=$?
+echo "data-продукт vspc_idl (RtfwLauncher) завершён со статусом $java_main_status"
+exit $java_main_status

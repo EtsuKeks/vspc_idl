@@ -30,7 +30,7 @@ public class MainClassSpawnedApp {
             HashMap<String, String> CUSTOM_SPARK_PARAMS = getCustomSparkParams(RTFW_KERBEROS_TICKET_CACHE_FILE);
 
             App app = App.createJvmApp("main", args)
-                    .setSpawnedAppSparkSessionParams(CUSTOM_SPARK_PARAMS)
+                    .setUserSparkSessionParams(CUSTOM_SPARK_PARAMS)
                     .build();
 
             SpawnedApp addr = app.createSpawnedApp(AddrTransformation.CODE, AddrTransformation.class, AddrTransformation.SETS);

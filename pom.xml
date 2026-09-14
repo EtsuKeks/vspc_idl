@@ -5,7 +5,7 @@
 
     <groupId>ru.sberbank.bigdata.dffess.ssd</groupId>
     <artifactId>vspc_idl</artifactId>
-    <version>D-02.102.006</version>
+    <version>D-02.104.001</version>
     <packaging>jar</packaging>
 
     <name>vspc_idl</name>
@@ -29,6 +29,10 @@
         <commons-lang.version>2.6</commons-lang.version>
         <hadoop.minicluster.version>3.3.4</hadoop.minicluster.version>
         <commons-lang3.version>3.18.0</commons-lang3.version>
+        <!-- Тест-харнесс TimeZoneTransformationTest рассчитан на Windows + JDK<=17 (Spark 3.5 + MiniDFSCluster + winutils).
+             На dev-машинах (например macOS + JDK 21) он физически не выполним: по умолчанию исключаем RT-FW юнит-тесты из
+             сборки. Вернуть их можно на совместимом окружении: -Drt.fw.test.excludes= -->
+        <rt.fw.test.excludes>ru/sberbank/bigdata/sl/rt/**/*.class</rt.fw.test.excludes>
     </properties>
 
     <repositories>
@@ -195,10 +199,13 @@
                     <includes>
                         <include>**/*Test.*</include>
                     </includes>
+                    <excludes>
+                        <exclude>${rt.fw.test.excludes}</exclude>
+                    </excludes>
                     <environmentVariables>
                         <HADOOP_HOME>${project.basedir}/src/test/resources/apache-hadoop-3.1.3-winutils</HADOOP_HOME>
                         <PATH>
-                            ${project.basedir}/src/test/resources/apache-hadoop-3.1.3-winutils/bin${path.separator}data/usl/test/${path.separator}
+                            ${project.basedir}/src/test/resources/apache-hadoop-3.1.3-winutils/bin${path.separator}${env.PATH}
                         </PATH>
                     </environmentVariables>
                 </configuration>

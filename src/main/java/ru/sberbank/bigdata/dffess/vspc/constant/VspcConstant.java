@@ -16,6 +16,11 @@ public class VspcConstant {
     public static final String GAR_FIAS_IDL = "gar_fias_idl";
     public static final String VSPC_SNP_SRC_SCHEMA = "usl_vspc_idl_in_snp";
 
+    // Коды входных наборов данных (providerDatasetCode из design-time metadata) для чтения через RT-FW Reader.
+    // Без суффикса слоя: Reader сам добавляет _snp/_diff в зависимости от выбранной опции чтения.
+    public static final String SRC_PROVIDER_SFSDIVISION = "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision";
+    public static final String SRC_PROVIDER_RFCZONETIME = "usl_vspc_idl_in.ebx_rep_m_rfzonetime_0002_rfzonetime";
+
     public static final DateTimeFormatter DF_TS = DateTimeFormatter.ofPattern(TIMESTAMP_PATTERN);
 
     public static String getCtlValidFromStr() {

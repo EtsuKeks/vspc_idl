@@ -1,0 +1,300 @@
+categories:
+  - category:
+      id: -1
+      name: "VSPC"
+      parent_id: "{{ CTL_PARENT_ID_K803 }}"
+      action: "k803"
+      deleted: false
+workflows:
+############################################################Spark CTL Yaml ############################################################
+# docs sigma https://confluence.sberbank.ru/display/USL/CAP+process+flow+control+service
+############################################################One Instance CTL Yaml #####################################################
+  - "{{ logical_env_prefix }}USL_VSPC_IDL":
+      name: "{{ logical_env_prefix }}USL_VSPC_IDL"
+      category: "VSPC"
+      profile: "{{ CTL_PROFILE_NAME }}"
+      singleLoading: true
+      type: principal
+      orchestrator: oozie
+      killyarnjobonerror: false
+      schedule_params:
+        eventAwaitStrategy: "and"
+        cron:
+          expression: "* * * * *"
+          active: false
+        faultTolerance: true
+        abortOnFailure: false
+        descheduleOnFailure: true
+        numAttempts: 3
+        retryDelayMs: 10000
+        entities:
+          # Возможность добавить доп. зависимость для запуска потока https://confluence.sberbank.ru/display/USL/USL+specific+mart.yaml+parameters
+          - entity:
+              # usl_vspc_idl_in.ebx_rep_m_rfzonetime_0002_rfzonetime SNP
+              id: 953008916
+              statisticId: {{ archiveStat_FakeCardCode }}
+              profile: "{{ archiveProfile_FakeCardCode }}"
+              active: true
+          # Возможность добавить доп. зависимость для запуска потока https://confluence.sberbank.ru/display/USL/USL+specific+mart.yaml+parameters
+          - entity:
+              # usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision SNP
+              # usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision_successors SNP
+              id: 953018846
+              statisticId: {{ archiveStat_FakeCardCode }}
+              profile: "{{ archiveProfile_FakeCardCode }}"
+              active: true
+          - entity:
+              # Входной data-продукт ЕСС usl.gar_fias_idl IDL - ГАР ФИАС, original ctl entity 801005480
+              id: "801{{ logical_env_ctl_entity_logenv_number }}5480"
+              #name: "{{ logical_env_prefix }}usl_gar_fias_idl"
+              statisticId: 12
+              profile: "{{ CTL_PROFILE_NAME_gar_fias_idl }}"
+              active: true
+          - entity:
+              # Входной data-продукт ЕСС usl.rdm_idl_spark IDL - Справочники во временном владении УКД, original ctl entity 801005231
+              id: "801{{ logical_env_ctl_entity_logenv_number }}5231"
+              #name: "{{ logical_env_prefix }}usl_rdm_idl_spark"
+              statisticId: 12
+              profile: "{{ CTL_PROFILE_NAME_rdm_idl_spark }}"
+              active: true
+
+      params:
+        - param:
+            # Пользователь под которым запускается процесс
+            name: user.name
+            prior_value: "u_{{ cluster_name }}_s_usl_{{ logical_env_prefix }}t_vspc_idl"
+        - param:
+            # Путь до приложения
+            name: oozie.wf.application.path
+            prior_value: "{{ file_path }}usl_vspc_idl.xml"
+        - param:
+            # Имя запускаемого .jar-файла.
+            name: devops_distributive_jar
+            prior_value: "{{ devops_distributive_jar }}"
+        - param:
+            # Полный путь в HDFS к .keytab-файлу для ТУЗ data-продукта, не включающий имени самого файла и его расширения.
+            name: user_keytab_path
+            prior_value: "/keytab/"
+        - param:
+            # Область (realm) Kerberos.
+            name: kerberos_realm
+            prior_value: "{{ kerberos_realm }}"
+        - param:
+            # E-mail владельца сертификата data-продукта. Требуется для формирования тела запроса к SecMan при получении сертификата из хранилища типа SberCA.
+            name: secman_cert_owner_email
+            prior_value: "{{ secman_cert_owner_email }}"
+        - param:
+            # Код очереди Yarn, в которой запускаются Spark-приложения data-продукта.
+            name: yarn_queue
+            prior_value: "{{ yarn_queue }}"
+        - param:
+            # Минимальная дата бизнес-истории, начиная с которой должны загружаться бизнес-историчные данные
+            name: starting_business_date
+            prior_value:  "{{ starting_business_date }}"
+        - param:
+            # Максимальное число дней в прошлое от текущей даты, обновляемое при инкрементальной загрузке. Этот параметр необходим для исключения случаев, когда изменение на источнике затрагивает настолько давнюю дату бизнес-истории
+            name: max_increment_depth_days
+            prior_value:  "{{ max_increment_depth_days }}"
+        - param:
+            # Принудительный запуск следующей загрузки как восстановительной. Пустое значение эквивалентно значению false.
+            name: recover_flag
+            prior_value:  "{{ recover_flag }}"
+        - param:
+            #  Полная версия data-продукта, явным образом указанная администратором сопровождения как подтверждение информированного решения о том, что необходимо выполнить запуск загрузки как восстановительной
+            name: recover_version
+            prior_value:  ""
+        - param:
+            # Список мнемокодов наборов данных, которые требуется обновить data-продукту при следующем запуске
+            name: data_sets
+            prior_value: "{{ data_sets }}"
+        - param:
+            # Число одновременно запускаемых нитей исполнения в коде data-продукта
+            name: parallel_threads
+            prior_value: "{{ parallel_threads }}"
+        - param:
+            # Число дней, которые хранятся данные в таблице ctl_log
+            name: calc_logs_depth_days
+            prior_value: "365"
+        - param:
+            # Определяет детальность сообщений, отправляемых в ТСЖ, варианты ALL/DEBUG/INFO/WARN/ERROR.
+            name: log_level
+            prior_value: "{{ rtwf_log_level }}"
+        - param:
+            # Признак включения функциональности сертификации.
+            name: cert_enabled_flag
+            prior_value: "true"
+        - param:
+            #  Признак включения функциональности восстановительной загрузки.
+            name: recover_enabled_flag
+            prior_value:  "false"
+        - param:
+            # Логика обработки параметра полностью аналогична параметру program_units, с одной разницей: допускается указывать только список ПЕ без фильтров..
+            name: debug_program_units
+            prior_value: "{{ debug_program_units }}"
+        - param:
+            # Переопределение номера статистики, в которой archive-продукт-поставщик данного data-продукта ЕСС регистрирует в CTL, после завершения загрузки, факты изменения данных в таблице реплики
+            name: change_stat_override
+            prior_value: ""
+        - param:
+            # Значения параметров Spark, которые можно передать в командную строку spark-submit.
+            name: common_spark_parameters
+            prior_value: "{{ spark_parameters }}"
+        - param:
+            # Признак (Y/пусто=N) отключения использования сервисов СК.
+            name: debug_sk_off
+            prior_value: "{{ debug_sk_off }}"
+        - param:
+            # Значение идентификатора загрузки, на состояние по завершению которой требуется откатить данные data-продукта после запуска загрузки данного потока
+            name: rollback_loading_id
+            prior_value: ""
+        - param:
+            # Число часов до истечения тикетов tgt (data-продукта) и tgs (ССК), при котором их необходимо обновить на стороне клиентского артефакта ССК
+            name: ssk_tgt_tgs_renew_h
+            prior_value: 12
+        - param:
+            name: sl.logger.kafka_broker_list
+            prior_value: "{{ kafka_broker_list }}"
+        # for RT-FW logger
+        - param:
+            name: sl.logger.kafka_topic
+            prior_value: "{{ kafka_topic }}"
+        - param:
+            name: app_spark_parameters
+            prior_value: "{{ app_conf }}"
+      notifications:
+        - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru","SLSNTWRKDE_ess@sberbank.ru" ] }
+        - { status: "RUNNING", emails: [ "SLSNTWRKDE_ess@sberbank.ru" ] }
+        - { status: "SUCCESS", emails: [ "SLSNTWRKDE_ess@sberbank.ru" ] }
+  - "{{ logical_env_prefix }}USL_VSPC_IDL_INIT":
+      name: "{{ logical_env_prefix }}USL_VSPC_IDL_INIT"
+      category: "VSPC"
+      profile: "{{ CTL_PROFILE_NAME }}"
+      singleLoading: true
+      type: principal
+      orchestrator: oozie
+      killyarnjobonerror: false
+      schedule_params:
+        eventAwaitStrategy: "and"
+        cron:
+          expression: "* * * * *"
+          active: false
+      params:
+        - param:
+            # Пользователь под которым запускается процесс
+            name: user.name
+            prior_value: "u_{{ cluster_name }}_s_usl_{{ logical_env_prefix }}t_vspc_idl"
+        - param:
+            # Путь до приложения
+            name: oozie.wf.application.path
+            prior_value: "{{ file_path }}usl_vspc_idl.xml"
+        - param:
+            # Имя запускаемого .jar-файла.
+            name: devops_distributive_jar
+            prior_value: "{{ devops_distributive_jar }}"
+        - param:
+            # Полный путь в HDFS к .keytab-файлу для ТУЗ data-продукта, не включающий имени самого файла и его расширения.
+            name: user_keytab_path
+            prior_value: "/keytab/"
+        - param:
+            # Область (realm) Kerberos.
+            name: kerberos_realm
+            prior_value: "{{ kerberos_realm }}"
+        - param:
+            # E-mail владельца сертификата data-продукта. Требуется для формирования тела запроса к SecMan при получении сертификата из хранилища типа SberCA.
+            name: secman_cert_owner_email
+            prior_value: "{{ secman_cert_owner_email }}"
+        - param:
+            # Код очереди Yarn, в которой запускаются Spark-приложения data-продукта.
+            name: yarn_queue
+            prior_value: "{{ yarn_queue_init }}"
+        - param:
+            # Минимальная дата бизнес-истории, начиная с которой должны загружаться бизнес-историчные данные
+            name: starting_business_date
+            prior_value:  "{{ starting_business_date }}"
+        - param:
+            # Минимальные даты технической истории, начиная с которой в инициализирующем режиме должны загружаться данные из hist-таблиц Первичных данных КАП
+            name: starting_technical_date
+            prior_value:  ""
+        - param:
+            # Принудительный запуск следующей загрузки как восстановительной. Пустое значение эквивалентно значению false.
+            name: recover_flag
+            prior_value:  "{{ recover_flag }}"
+        - param:
+            #  Полная версия data-продукта, явным образом указанная администратором сопровождения как подтверждение информированного решения о том, что необходимо выполнить запуск загрузки как восстановительной
+            name: recover_version
+            prior_value:  ""
+        - param:
+            # Признак очистки таблиц соответствия ССК при инициализирующей загрузке.
+            name: sk_greenfield
+            prior_value: ""
+        - param:
+            # Список мнемокодов наборов данных, которые требуется обновить data-продукту при следующем запуске
+            name: data_sets
+            prior_value: "{{ data_sets }}"
+        - param:
+            # Число одновременно запускаемых нитей исполнения в коде data-продукта
+            name: parallel_threads
+            prior_value: "{{ parallel_threads }}"
+        - param:
+            # Число дней, которые хранятся данные в таблице ctl_log
+            name: calc_logs_depth_days
+            prior_value: "365"
+        - param:
+            # Определяет детальность сообщений, отправляемых в ТСЖ, варианты ALL/DEBUG/INFO/WARN/ERROR.
+            name: log_level
+            prior_value: "{{ rtwf_log_level }}"
+        - param:
+            # Признак включения функциональности сертификации.
+            name: cert_enabled_flag
+            prior_value: "true"
+        - param:
+            #  Признак включения функциональности восстановительной загрузки.
+            name: recover_enabled_flag
+            prior_value:  "false"
+        - param:
+            #  Перечисление списка ПЕ и загружаемых ими секций для выполнения инициализирующей загрузки в ручном режиме. Такой режим предусматривает последовательную, набор секций за набором секций, загрузку под ручным управлением команды ВПО.
+            name: program_units
+            prior_value:  ""
+        - param:
+            # Признак необходимости создавать difference data (то есть набор удалений и добавлений).
+            name: init_diff_flag
+            prior_value: ""
+        - param:
+            # Значения параметров Spark, которые можно передать в командную строку spark-submit.
+            name: common_spark_parameters
+            prior_value: "{{ spark_parameters }}"
+        - param:
+            # Признак (Y/пусто=N) отключения использования сервисов СК.
+            name: debug_sk_off
+            prior_value: "{{ debug_sk_off }}"
+        - param:
+            # Значение идентификатора загрузки, на состояние по завершению которой требуется откатить данные data-продукта после запуска загрузки данного потока
+            name: rollback_loading_id
+            prior_value: ""
+        - param:
+            # Число часов до истечения тикетов tgt (data-продукта) и tgs (ССК), при котором их необходимо обновить на стороне клиентского артефакта ССК
+            name: ssk_tgt_tgs_renew_h
+            prior_value: 12
+        - param:
+            name: sl.logger.kafka_broker_list
+            prior_value: "{{ kafka_broker_list }}"
+        # for RT-FW logger
+        - param:
+            name: sl.logger.kafka_topic
+            prior_value: "{{ kafka_topic }}"
+        - param:
+            name: app_spark_parameters
+            prior_value: "{{ app_conf }}"
+      notifications:
+        - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru","SLSNTWRKDE_ess@sberbank.ru" ] }
+        - { status: "RUNNING", emails: [ "SLSNTWRKDE_ess@sberbank.ru" ] }
+        - { status: "SUCCESS", emails: [ "SLSNTWRKDE_ess@sberbank.ru" ] }
+
+entities:
+  - entity:
+      # original entity id 801005314
+      id: "801{{ logical_env_ctl_entity_logenv_number }}5314"
+      name: "{{ logical_env_prefix }}usl_vspc_idl"
+      path: "\\data\\usl"
+      storage: "HDFS"
+      parent-id: 904000000

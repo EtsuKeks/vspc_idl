@@ -9,11 +9,10 @@ import static java.lang.String.format;
 import static org.apache.spark.sql.functions.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DP_CODE;
-import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.EBX_REP_M_RFCZONETIME_0002_RFCZONETIME;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.TIMEZONE;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.TIMEZONE_DS_CODE;
 import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DATA_PRODUCT;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.VSPC_SNP_SRC_SCHEMA;
+import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.SRC_PROVIDER_RFCZONETIME;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 
 public class TimeZoneTransformation extends BaseTransformation {
@@ -27,7 +26,7 @@ public class TimeZoneTransformation extends BaseTransformation {
 
     @Override
     public void run() {
-        Dataset<Row> slice = selectFrom(VSPC_SNP_SRC_SCHEMA, EBX_REP_M_RFCZONETIME_0002_RFCZONETIME)
+        Dataset<Row> slice = read(SRC_PROVIDER_RFCZONETIME).kap803Usl().snp().get()
                 .select(
                         lit(false).as(DELETED_FLAG),
                         when(col(ABBREVIATION).equalTo("USZ1"), "KALT").otherwise(col(ABBREVIATION)).as(SID),
