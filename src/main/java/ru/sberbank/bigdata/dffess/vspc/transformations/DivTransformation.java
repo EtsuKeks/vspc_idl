@@ -85,12 +85,14 @@ public class DivTransformation extends BaseTransformation {
                 lit(DATA_PRODUCT).as(DIV_TIME_ZONE_TIME_ZONE_DP_CODE)
         ).distinct();
 
-        // Дедубликация по SID
-        div = div
-                .withColumn("_test_dedup_rn",
-                        row_number().over(Window.partitionBy(col(SID)).orderBy(col(DIV_LEGAL_ADDR_SID).asc())))
-                .filter(col("_test_dedup_rn").equalTo(1))
-                .drop("_test_dedup_rn");
+        // Дедупликация по SID защищает инкремент от дублей реплики; в INIT набор уже уникален (семантика release/3.0)
+        if (isIncrement()) {
+            div = div
+                    .withColumn("_dedup_rn",
+                            row_number().over(Window.partitionBy(col(SID)).orderBy(col(DIV_LEGAL_ADDR_SID).asc())))
+                    .filter(col("_dedup_rn").equalTo(1))
+                    .drop("_dedup_rn");
+        }
 
         Map<String, String> columnEntities = new HashMap<>();
         columnEntities.put(DIV_SID, DIV);

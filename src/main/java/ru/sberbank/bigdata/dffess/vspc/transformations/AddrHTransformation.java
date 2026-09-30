@@ -1,5 +1,6 @@
 package ru.sberbank.bigdata.dffess.vspc.transformations;
 
+import org.apache.spark.sql.Column;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
@@ -70,8 +71,20 @@ public class AddrHTransformation extends BaseTransformation {
 
         ).distinct();
 
-        Dataset<Row> addrh = addr.select(
-                lit(VspcConstant.getCtlValidFromStr()).cast("date").as(START_DT_FIELD_NAME),
+        // ESSA-правило дат (DataLoaderHistDiff): INIT — 1900-01-01; INCR — новый ключ 1900-01-01, существующий ctl_validfrom - 1
+        Column startDt;
+        Dataset<Row> addrFlagged = addr;
+        if (isIncrement()) {
+            addrFlagged = flagNewKeys(addr, ADDRH, ADDR_SID);
+            startDt = when(col(NEW_KEY_FLAG), lit(VspcConstant.MIN_BUSINESS_DT))
+                    .otherwise(date_sub(lit(VspcConstant.getCtlValidFromStr()).cast("date"), 1))
+                    .cast("date").as(START_DT_FIELD_NAME);
+        } else {
+            startDt = lit(VspcConstant.MIN_BUSINESS_DT).cast("date").as(START_DT_FIELD_NAME);
+        }
+
+        Dataset<Row> addrh = addrFlagged.select(
+                startDt,
                 lit(PLUS_INFINITY_DT).cast("date").as(END_DT_FIELD_NAME),
                 col(ADDR_SID).as(ADDR_SID),
                 lit(VspcConstant.DATA_PRODUCT).as(ADDR_DP_CODE),

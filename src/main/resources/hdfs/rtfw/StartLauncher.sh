@@ -10,10 +10,10 @@ user_keytab_path_local=tmp.keytab
 export SPARK_HOME=/usr/sdp/current/spark3-client
 
 hdfs dfs -get ${user_keytab_path} ${user_keytab_path_local}
-kinit -kt ${user_keytab_path_local} ${user_principal}
+kinit_command="kinit -kt ${user_keytab_path_local} ${user_principal}"
+echo kinit_command : ${kinit_command}
+eval "$kinit_command" || eval "$kinit_command" || eval "$kinit_command"
 kinit -R
-
-klist
 
 #получаем ссылку на кеш тикета, который в дальнейшем будет передаваться в драйвер.
 user_ticket_cache_path=`klist |grep FILE: | awk -F: '{print $3}'`
@@ -26,20 +26,21 @@ export RTFW_KERBEROS_TICKET_CACHE_FILE=${user_ticket_cache_file_name}
 
 cp ${user_ticket_cache_path} .
 
-#удаляем кейтаб файл
+# for SK multi
+user=${8}
+instance_code=""
+# tgt_tgs_renew_h приходит из параметров CTL-потока (oozie экспортирует их в окружение shell-action)
+kvno_tgt_tgs_renew=${ssk_tgt_tgs_renew_h}
+echo "bash kvno_command.sh \"${KRB5CCNAME}\" \"$kinit_command\" \"$user\" \"$instance_code\" \"$sl_secman_host\" \"$kvno_tgt_tgs_renew\""
+hdfs dfs -get /oozie-app/t/idl/vspc_idl/init/kvno_command.sh
+bash kvno_command.sh "${KRB5CCNAME}" "$kinit_command" "$user" "$instance_code" "${sl_secman_host}" "${kvno_tgt_tgs_renew}"
+
+cp ${user_ticket_cache_path} . 2>/dev/null || true
+
+#удаляем кейтаб файл (после всех использований: fallback-kinit внутри kvno_command)
 rm ${user_keytab_path_local}
 
-# for SK multi
-hdfs dfs -get /oozie-app/t/idl/vspc_idl/init/kvno_command.sh
-kvno_command=$(bash kvno_command.sh $KRB5CCNAME)
-echo ---------------- kvno_command begin ----------------
-$kvno_command
-echo $? kvno_result
-
-echo "start_ls"
-pwd
-ls -lah
-echo "end_ls"
+klist -c ${KRB5CCNAME}
 
 export SPARK_SUBMIT_OPTS="$SPARK_SUBMIT_OPTS -Djava.security.krb5.conf=/etc/krb5.conf -Djavax.security.auth.useSubjectCredsOnly=false -Dsun.security.jgss.native=true"
 export HADOOP_OPTS="$HADOOP_OPTS -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false"

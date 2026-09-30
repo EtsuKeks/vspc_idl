@@ -1,5 +1,6 @@
 package ru.sberbank.bigdata.dffess.vspc.transformations;
 
+import org.apache.spark.sql.Column;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.expressions.Window;
@@ -12,8 +13,10 @@ import java.util.Map;
 
 import static java.lang.String.format;
 import static org.apache.spark.sql.functions.col;
+import static org.apache.spark.sql.functions.date_sub;
 import static org.apache.spark.sql.functions.lit;
 import static org.apache.spark.sql.functions.row_number;
+import static org.apache.spark.sql.functions.when;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.DIRTY_FLAG;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.DIVISIONTYPE00;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.DIV_DP_CODE;
@@ -45,10 +48,22 @@ public class DivTypeTransformation extends BaseTransformation {
     @Override
     public void run() {
         Dataset<Row> divtype = read(SRC_PROVIDER_SFSDIVISION).kap803Usl().snp().get();
+
+        // ESSA-правило дат (DataLoaderHistSnp): INIT — 1900-01-01; INCR — новый ключ 1900-01-01, существующий ctl_validfrom - 1
+        Column startDt;
+        if (isIncrement()) {
+            divtype = flagNewKeys(divtype, DIVTYPE, DIV_SID);
+            startDt = when(col(NEW_KEY_FLAG), lit(VspcConstant.MIN_BUSINESS_DT))
+                    .otherwise(date_sub(lit(VspcConstant.getCtlValidFromStr()).cast("date"), 1))
+                    .cast("date").as(START_DT_FIELD_NAME);
+        } else {
+            startDt = lit(VspcConstant.MIN_BUSINESS_DT).cast("date").as(START_DT_FIELD_NAME);
+        }
+
         divtype = divtype
                 .select(
                         lit(false).as(DELETED_FLAG),
-                        lit(VspcConstant.getCtlValidFromStr()).cast("date").as(START_DT_FIELD_NAME),
+                        startDt,
                         lit(PLUS_INFINITY_DT).cast("date").as(END_DT_FIELD_NAME),
                         col(FULLDIVCODE).as(DIV_SID),
                         lit(DATA_PRODUCT).as(DIV_DP_CODE),
@@ -57,12 +72,14 @@ public class DivTypeTransformation extends BaseTransformation {
                         lit(false).as(DIRTY_FLAG)
                 ).distinct();
 
-        // Дедубликация по SID
-        divtype = divtype
-                .withColumn("_test_dedup_rn",
-                        row_number().over(Window.partitionBy(col(DIV_SID)).orderBy(col(DIV_TYPE_TERR_DIV_TYPE_SID).asc())))
-                .filter(col("_test_dedup_rn").equalTo(1))
-                .drop("_test_dedup_rn");
+        // Дедупликация по SID защищает инкремент от дублей реплики; в INIT набор уже уникален (семантика release/3.0)
+        if (isIncrement()) {
+            divtype = divtype
+                    .withColumn("_dedup_rn",
+                            row_number().over(Window.partitionBy(col(DIV_SID)).orderBy(col(DIV_TYPE_TERR_DIV_TYPE_SID).asc())))
+                    .filter(col("_dedup_rn").equalTo(1))
+                    .drop("_dedup_rn");
+        }
 
         Map<String, String> columnEntities = new HashMap<>();
         columnEntities.put(DIV_TYPE_TERR_DIV_TYPE_SID, TERRDIVTYPE);

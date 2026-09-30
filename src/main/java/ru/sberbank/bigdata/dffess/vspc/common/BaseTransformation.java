@@ -25,6 +25,7 @@ import static ru.sberbank.bigdata.sl.rt.reader.constants.ReaderConstants.*;
 
 public abstract class BaseTransformation extends Transformation {
     public static final String SID = "sid";
+    public static final String NEW_KEY_FLAG = "_etl_new_key";
     protected static String SHORT_PRODUCT_CODE;
     public static String STGTMP_SCHEMA;
     public static String STG_SCHEMA;
@@ -52,6 +53,14 @@ public abstract class BaseTransformation extends Transformation {
         System.setProperty("service_init_greenfield", app.ctx().getProperty("sk_greenfield", "false"));
         if (!app.ctx().getLogEnv().isEmpty()) {
             System.setProperty("app_log_env", app.ctx().getLogEnv());
+        }
+        String turboBoost = app.ctx().getProperty("turbo_boost", "");
+        if (!turboBoost.isEmpty()) {
+            System.setProperty("turbo_boost", turboBoost);
+        }
+        String serviceInstanceCode = app.ctx().getProperty("service_instance_code", "");
+        if (!serviceInstanceCode.isEmpty()) {
+            System.setProperty("service_instance_code", serviceInstanceCode);
         }
 
         // Инициализация статических переменных
@@ -131,6 +140,28 @@ public abstract class BaseTransformation extends Transformation {
         SparkSession spark = app.getSparkSession();
         String schemaPath = spark.sessionState().catalog().getDatabaseMetadata(targetSchema).locationUri().getPath();
         return spark.read().parquet(format("%1$s/%2$s", schemaPath, targetTable));
+    }
+
+    /**
+     * Признак инкрементального режима текущей загрузки.
+     */
+    protected boolean isIncrement() {
+        return app.ctx().getLoadMode() == App.LoadMode.INCREMENT;
+    }
+
+    /**
+     * Помечает строки набора флагом {@link #NEW_KEY_FLAG}: ключ отсутствует в текущем SNP
+     * (новый ключ бизнес-истории). Используется для воспроизведения ESSA-правила дат:
+     * для новых ключей start_dt = 1900-01-01, для существующих — ctl_validfrom - 1.
+     */
+    protected Dataset<Row> flagNewKeys(Dataset<Row> df, String snpTable, String pkColumn) {
+        Dataset<Row> existingKeys = readTable(SNP_SCHEMA, snpTable)
+                .select(col(pkColumn).as("_etl_pk"))
+                .distinct();
+        return df.join(existingKeys, df.col(pkColumn).equalTo(existingKeys.col("_etl_pk")), "left")
+                .withColumn(NEW_KEY_FLAG,
+                        when(existingKeys.col("_etl_pk").isNotNull(), lit(false)).otherwise(lit(true)))
+                .drop(existingKeys.col("_etl_pk"));
     }
 
     protected Dataset<Row> addSk(Dataset<Row> mappedDfwc,
@@ -273,7 +304,7 @@ public abstract class BaseTransformation extends Transformation {
 
         Dataset<Row> resDataSet = df;
 
-        // Пропускаем генерацию SK, если SK_ENABLED в значении false и если был запущен IDL isCorpCgcIdlIn в значении false
+        // Пропускаем генерацию SK, если включен параметр debug_sk_off.
         // В этом случае все _sk поля будут иметь тип данных Long
         if (skEnabled) {
             // Обращаемся к сервису, если датасет не пустой

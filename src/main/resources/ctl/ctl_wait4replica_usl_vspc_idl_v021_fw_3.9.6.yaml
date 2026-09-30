@@ -137,7 +137,7 @@ workflows:
             prior_value: ""
         - param:
             # Значения параметров Spark, которые можно передать в командную строку spark-submit.
-            name: common_spark_parameters
+            name: spark_parameters
             prior_value: "{{ spark_parameters }}"
         - param:
             # Признак (Y/пусто=N) отключения использования сервисов СК.
@@ -158,9 +158,6 @@ workflows:
         - param:
             name: sl.logger.kafka_topic
             prior_value: "{{ kafka_topic }}"
-        - param:
-            name: app_spark_parameters
-            prior_value: "{{ app_conf }}"
       notifications:
         - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru","SLSNTWRKDE_ess@sberbank.ru" ] }
         - { status: "RUNNING", emails: [ "SLSNTWRKDE_ess@sberbank.ru" ] }
@@ -261,7 +258,7 @@ workflows:
             prior_value: ""
         - param:
             # Значения параметров Spark, которые можно передать в командную строку spark-submit.
-            name: common_spark_parameters
+            name: spark_parameters
             prior_value: "{{ spark_parameters }}"
         - param:
             # Признак (Y/пусто=N) отключения использования сервисов СК.
@@ -282,9 +279,6 @@ workflows:
         - param:
             name: sl.logger.kafka_topic
             prior_value: "{{ kafka_topic }}"
-        - param:
-            name: app_spark_parameters
-            prior_value: "{{ app_conf }}"
       notifications:
         - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru","SLSNTWRKDE_ess@sberbank.ru" ] }
         - { status: "RUNNING", emails: [ "SLSNTWRKDE_ess@sberbank.ru" ] }

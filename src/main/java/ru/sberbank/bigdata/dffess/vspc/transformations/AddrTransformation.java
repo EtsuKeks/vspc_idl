@@ -245,6 +245,7 @@ public class AddrTransformation extends BaseTransformation {
         columnEntities.put(ADDR_RUS_FED_SUBJ_SID, "rus_fed_subj");
         columnEntities.put(ADDR_CNTRY_SID, "cntry");
         columnEntities.put(ADDR_OKATO2_SID, "okato2");
+        columnEntities.put(ADDRESS_FIASCODE_SID, "addr");
 
         Dataset<Row> result = addSk(addr, ADDR, columnEntities);
 

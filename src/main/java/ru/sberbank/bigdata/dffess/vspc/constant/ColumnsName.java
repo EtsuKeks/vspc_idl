@@ -23,7 +23,7 @@ public final class ColumnsName {
     public static final String FULLNAME = "fullname";
     public static final String HEADDIVISIONCODE = "headdivisioncode";
     public static final String OPENDATE = "opendate";
-    public static final String REQUSITEDIVISION_BIC = "requisitesdivision_bic";
+    public static final String PAY_SYS_PRTCPNT_SRC_COLUMN = "requisitesdivision_bic";
     public static final String DIV_REQUISITEDIVISION_REGISTRATIONNUM = "requisitesdivision_registrationnum";
     public static final String SHORTDIVCODE = "shortdivcode";
     public static final String ADDRESS_FIASCODE_DURTY = "durty_fias_code";

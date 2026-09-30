@@ -14,7 +14,9 @@ import static java.lang.String.format;
 import static org.apache.spark.sql.functions.coalesce;
 import static org.apache.spark.sql.functions.col;
 import static org.apache.spark.sql.functions.concat_ws;
+import static org.apache.spark.sql.functions.date_sub;
 import static org.apache.spark.sql.functions.lit;
+import static org.apache.spark.sql.functions.when;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.DIV;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.DIVDIVRELATION;
@@ -53,9 +55,20 @@ public class DivDivRelationTransformation extends BaseTransformation {
                         "   WHERE TRIM(lower(successor.successors_successorstype)) = 'правопреемник' "
         ).distinct();
 
+        // ESSA-правило дат (DataLoaderLinkHistDiff): INIT — 1900-01-01; INCR — новый ключ 1900-01-01, существующий ctl_validfrom - 1
+        Column startDt;
+        if (isIncrement()) {
+            divsuccessor = flagNewKeys(divsuccessor, DIVDIVRELATION, DIV_DIV_RELATION_SID);
+            startDt = when(col(NEW_KEY_FLAG), lit(VspcConstant.MIN_BUSINESS_DT))
+                    .otherwise(date_sub(lit(VspcConstant.getCtlValidFromStr()).cast("date"), 1))
+                    .cast("date").as(START_DT_FIELD_NAME);
+        } else {
+            startDt = lit(VspcConstant.MIN_BUSINESS_DT).cast("date").as(START_DT_FIELD_NAME);
+        }
+
         divsuccessor = divsuccessor
                 .select(
-                        lit(VspcConstant.getCtlValidFromStr()).cast("date").as(START_DT_FIELD_NAME),
+                        startDt,
                         lit(PLUS_INFINITY_DT).cast("date").as(END_DT_FIELD_NAME),
                         getKey("|").as(SID),
                         getKey("|").as(DIV_DIV_RELATION_SID),

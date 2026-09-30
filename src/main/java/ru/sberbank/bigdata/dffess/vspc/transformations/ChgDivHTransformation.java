@@ -122,7 +122,7 @@ public class ChgDivHTransformation extends BaseTransformation {
                 "     address_addrfact_timezone," +
                 "     serving_isdisabledequip," +
                 "     gar_fias_addr.sid as gold_fias_code,  " +
-                "     address_addrfact_postcode, " +
+                "     cast(null as string) as address_addrfact_postcode, " +
                 "     address_postcode, " +
                 "     address_addrfact_addrarea_areaname, " +
                 "     address_addrfact_addrplace_placename, " +

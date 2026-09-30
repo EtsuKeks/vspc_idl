@@ -19,7 +19,6 @@ import ru.sberbank.bigdata.sl.rt.util.RtfwLogger;
 
 import java.util.HashMap;
 
-import static ru.sberbank.bigdata.sl.rt.coordinator.model.loading.SparkParams.SPARK_KERBEROS_ACCESS_HADOOP_FILE_SYSTEMS;
 import static ru.sberbank.bigdata.sl.rt.core.CoreLogMessageBuilder.CORE_021;
 
 public class MainClassSpawnedApp {
@@ -61,12 +60,14 @@ public class MainClassSpawnedApp {
 
     private static @NotNull HashMap<String, String> getCustomSparkParams(String RTFW_KERBEROS_TICKET_CACHE_FILE) {
         HashMap<String, String> CUSTOM_SPARK_PARAMS = new HashMap<>();
-        CUSTOM_SPARK_PARAMS.put(SPARK_KERBEROS_ACCESS_HADOOP_FILE_SYSTEMS, "");
-        CUSTOM_SPARK_PARAMS.put("spark.driver.extraJavaOptions", "'-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf'");
-        CUSTOM_SPARK_PARAMS.put("spark.executor.extraJavaOptions", "'-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf'");
-        CUSTOM_SPARK_PARAMS.put("spark.yarn.appMasterEnv.KRB5CCNAME", RTFW_KERBEROS_TICKET_CACHE_FILE);
-        CUSTOM_SPARK_PARAMS.put("spark.executorEnv.KRB5CCNAME", RTFW_KERBEROS_TICKET_CACHE_FILE);
-        CUSTOM_SPARK_PARAMS.put("spark.driverEnv.KRB5CCNAME", RTFW_KERBEROS_TICKET_CACHE_FILE);
+        // spark.yarn.access.hadoopFileSystems НЕ переопределяем — RtfwLauncher авто-рассчитывает его из metadata
+        CUSTOM_SPARK_PARAMS.put("spark.driver.extraJavaOptions", "-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf");
+        CUSTOM_SPARK_PARAMS.put("spark.executor.extraJavaOptions", "-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf");
+        if (RTFW_KERBEROS_TICKET_CACHE_FILE != null && !RTFW_KERBEROS_TICKET_CACHE_FILE.isEmpty()) {
+            CUSTOM_SPARK_PARAMS.put("spark.yarn.appMasterEnv.KRB5CCNAME", RTFW_KERBEROS_TICKET_CACHE_FILE);
+            CUSTOM_SPARK_PARAMS.put("spark.executorEnv.KRB5CCNAME", RTFW_KERBEROS_TICKET_CACHE_FILE);
+            CUSTOM_SPARK_PARAMS.put("spark.driverEnv.KRB5CCNAME", RTFW_KERBEROS_TICKET_CACHE_FILE);
+        }
         return CUSTOM_SPARK_PARAMS;
     }
 }

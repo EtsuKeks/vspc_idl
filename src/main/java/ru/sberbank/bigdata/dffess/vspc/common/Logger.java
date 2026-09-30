@@ -77,7 +77,7 @@ public class Logger {
     }
 
     public void logDebug(String title, boolean kibanaPosting) {
-        log(debug(title));
+        log(debug(title), kibanaPosting);
     }
 
 }

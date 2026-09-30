@@ -35,7 +35,7 @@ public class DivHTransformation extends BaseTransformation {
                 col(FULLDIVCODE).as(DIV_SID),
                 col(FULLNAME).as(DIV_H_NAME),
                 col(FULLDIVCODE).as(DIV_CODE),
-                col(REQUSITEDIVISION_BIC).as(DIV_PAY_SYS_PRTCPNT_SID),
+                col(PAY_SYS_PRTCPNT_SRC_COLUMN).as(DIV_PAY_SYS_PRTCPNT_SID),
 
                 to_date(col(CLOSEDATE)).as(DIV_CLOSEDATE),
                 to_date(col(OPENDATE)).as(DIV_OPENDATE),
@@ -54,12 +54,22 @@ public class DivHTransformation extends BaseTransformation {
 
         ).distinct();
 
-        // Дедубликация по SID
-        divh_raw = divh_raw
-                .withColumn("_test_dedup_rn",
-                        row_number().over(Window.partitionBy(col(DIV_SID)).orderBy(col(DIV_OPENDATE).desc())))
-                .filter(col("_test_dedup_rn").equalTo(1))
-                .drop("_test_dedup_rn");
+        if (isIncrement()) {
+            // ESSA-правило дат (DataLoaderHistMix, INCR): новый ключ DIV_SID — 1900-01-01, существующий — ctl_validfrom - 1;
+            // end_dt остаётся passthrough из stg. Дедупликация защищает инкремент от дублей реплики;
+            // в INIT периоды бизнес-истории div_h сохраняются как есть (семантика release/3.0)
+            divh_raw = flagNewKeys(divh_raw, DIVH, DIV_SID);
+            divh_raw = divh_raw
+                    .withColumn(START_DT_FIELD_NAME,
+                            when(col(NEW_KEY_FLAG), lit(MIN_BUSINESS_DT))
+                                    .otherwise(date_sub(lit(getCtlValidFromStr()).cast("date"), 1))
+                                    .cast("date"))
+                    .drop(NEW_KEY_FLAG)
+                    .withColumn("_dedup_rn",
+                            row_number().over(Window.partitionBy(col(DIV_SID)).orderBy(col(DIV_OPENDATE).desc())))
+                    .filter(col("_dedup_rn").equalTo(1))
+                    .drop("_dedup_rn");
+        }
 
         Dataset<Row> divh = divh_raw.select(
                 col(DIV_SID).as(DIV_SID),
