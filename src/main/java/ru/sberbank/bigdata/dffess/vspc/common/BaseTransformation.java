@@ -10,6 +10,7 @@ import ru.sberbank.bigdata.sl.rt.core.exceptions.TransformationException;
 import ru.sberbank.bigdata.sl.rt.logger.core.LogMessage;
 import ru.sberbank.bigdata.sl.rt.logger.core.LogType;
 import ru.sberbank.bigdata.sl.rt.validation.ApplicationParameters;
+import ru.sberbank.bigdata.sl.sk.SkCommonException;
 import ru.sberbank.bigdata.sl.sk.client.SkClient;
 import ru.sberbank.bigdata.sl.sk.client.SkClientException;
 
@@ -120,26 +121,21 @@ public abstract class BaseTransformation extends Transformation {
         DIFF_SCHEMA = "usl_" + logEnvPrefix + SHORT_PRODUCT_CODE + "_diff";
     }
 
-    protected void saveTable(Dataset<?> entityDataset, String targetSchema, String targetTable, SaveMode saveMode) {
+    /**
+     * Техническая запись (только *_stg/*_stgtmp — контроль PUB_013) штатным методом фреймворка:
+     * external parquet по локации схемы, дроп+пересоздание таблицы по схеме набора, REFRESH,
+     * salting-ребаланс. saveMode игнорируется: фреймворковый метод всегда пишет с перезаписью.
+     */
+    protected void saveTable(Dataset<Row> entityDataset, String targetSchema, String targetTable, SaveMode saveMode) {
         if (entityDataset != null) {
-            SparkSession spark = app.getSparkSession();
-            String tableName = targetSchema + "." + targetTable;
-            String schemaPath = spark.sessionState().catalog().getDatabaseMetadata(targetSchema).locationUri().getPath();
-            entityDataset
-                    .write().option("path", format("%1$s/%2$s", schemaPath, targetTable))
-                    .format("parquet")
-                    .mode(saveMode)
-                    .saveAsTable(tableName);
-            spark.sql("REFRESH TABLE " + tableName);
-            spark.sql("ANALYZE TABLE " + tableName + " COMPUTE STATISTICS");
-            logger.logInfo(format("Таблица %s сохранена", tableName));
+            saveToExternalTemporaryTable(entityDataset, targetSchema, targetTable);
+            app.getSparkSession().sql(format("ANALYZE TABLE %s.%s COMPUTE STATISTICS", targetSchema, targetTable));
+            logger.logInfo(format("Таблица %s.%s сохранена", targetSchema, targetTable));
         }
     }
 
     protected Dataset<Row> readTable(String targetSchema, String targetTable) {
-        SparkSession spark = app.getSparkSession();
-        String schemaPath = spark.sessionState().catalog().getDatabaseMetadata(targetSchema).locationUri().getPath();
-        return spark.read().parquet(format("%1$s/%2$s", schemaPath, targetTable));
+        return app.getSparkSession().sql(format("select * from %s.%s", targetSchema, targetTable));
     }
 
     /**
@@ -310,6 +306,19 @@ public abstract class BaseTransformation extends Transformation {
             // Обращаемся к сервису, если датасет не пустой
             if (!resDataSet.isEmpty()) {
 
+                // Воспроизведение протокола ESSA SkClientWrapper.initSk: при инициализирующей загрузке
+                // сущность сначала онбордится в ССК (bulk load натуральных ключей), затем мапится.
+                // Для исторических ESSA-лоадеров (AddrH/DivH/DivType вызывали incrementSk безусловно)
+                // онбординг отключается переопределением skInitOnLoad().
+                if (!isIncrement() && skInitOnLoad()) {
+                    try {
+                        Map<Integer, Dataset<Row>> initResult = getSkClient().init(tableName, resDataSet);
+                        resDataSet = initResult.get(0);
+                    } catch (SkCommonException e) {
+                        throw new SkClientException(e.getMessage(), e);
+                    }
+                }
+
                 resDataSet = getSkClient().map(resDataSet, attributeCodes)
                         .drop(getColumnsFromAttributes(attributeCodes).toArray(new String[0]));
 
@@ -325,6 +334,16 @@ public abstract class BaseTransformation extends Transformation {
         }
 
         return resDataSet;
+    }
+
+    /**
+     * Онбординг сущности в ССК при инициализирующей загрузке (протокол ESSA SkClientWrapper.initSk:
+     * bulk load натуральных ключей через skClient.init перед map).
+     * Исторические ESSA-лоадеры (AddrH/DivH/DivType) вызывали incrementSk даже в INIT-режиме —
+     * соответствующие трансформации возвращают false.
+     */
+    protected boolean skInitOnLoad() {
+        return true;
     }
 
     public List<String> getColumnsFromAttributes(List<String> attributeCodes) {

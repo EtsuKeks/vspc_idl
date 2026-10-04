@@ -44,9 +44,11 @@ public final class ColumnsName {
     // common
     public static final String ADDR_DP_CODE = "addr_dp_code";
     public static final String ADDR_SID = "addr_sid";
+    public static final String ADDR_SK = "addr_sk";
     public static final String DIRTY_FLAG = "dirty_flag";
     public static final String DIV_DP_CODE = "div_dp_code";
     public static final String DIV_SID = "div_sid";
+    public static final String DIV_SK = "div_sk";
 
     // ADDR
     public static final String ADDR_CITY_NAME = "city_name";
@@ -118,6 +120,7 @@ public final class ColumnsName {
 
     public static final String DIV_DIV_RELATION_DP_CODE = "div_div_relation_dp_code";
     public static final String DIV_DIV_RELATION_SID = "div_div_relation_sid";
+    public static final String DIV_DIV_RELATION_SK = "div_div_relation_sk";
     public static final String SOURCE_DIV_SID = "source_div_sid";
     public static final String SOURCE_DIV_DP_CODE = "source_div_dp_code";
     public static final String SUCCESSOR_DIV_SID = "successor_div_sid";

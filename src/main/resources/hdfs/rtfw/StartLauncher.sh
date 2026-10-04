@@ -32,7 +32,7 @@ instance_code=""
 # tgt_tgs_renew_h приходит из параметров CTL-потока (oozie экспортирует их в окружение shell-action)
 kvno_tgt_tgs_renew=${ssk_tgt_tgs_renew_h}
 echo "bash kvno_command.sh \"${KRB5CCNAME}\" \"$kinit_command\" \"$user\" \"$instance_code\" \"$sl_secman_host\" \"$kvno_tgt_tgs_renew\""
-hdfs dfs -get /oozie-app/t/idl/vspc_idl/init/kvno_command.sh
+# kvno_command.sh лежит в том же каталоге дистрибутива и локализуется oozie через <file> в usl_vspc_idl.xml
 bash kvno_command.sh "${KRB5CCNAME}" "$kinit_command" "$user" "$instance_code" "${sl_secman_host}" "${kvno_tgt_tgs_renew}"
 
 cp ${user_ticket_cache_path} . 2>/dev/null || true
@@ -41,6 +41,10 @@ cp ${user_ticket_cache_path} . 2>/dev/null || true
 rm ${user_keytab_path_local}
 
 klist -c ${KRB5CCNAME}
+
+# jar лежит в дистрибутиве в hdfs/lib (раскладка devops.json) — локализуем как в release/3.0
+echo "hdfs dfs -get ${app_jar} ${devops_distributive_jar_local}"
+hdfs dfs -get ${app_jar} ${devops_distributive_jar_local}
 
 export SPARK_SUBMIT_OPTS="$SPARK_SUBMIT_OPTS -Djava.security.krb5.conf=/etc/krb5.conf -Djavax.security.auth.useSubjectCredsOnly=false -Dsun.security.jgss.native=true"
 export HADOOP_OPTS="$HADOOP_OPTS -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false"

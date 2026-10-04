@@ -16,16 +16,16 @@ import static org.apache.spark.sql.functions.col;
 import static org.apache.spark.sql.functions.concat_ws;
 import static org.apache.spark.sql.functions.date_sub;
 import static org.apache.spark.sql.functions.lit;
+import static org.apache.spark.sql.functions.lower;
+import static org.apache.spark.sql.functions.trim;
 import static org.apache.spark.sql.functions.when;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.DIV;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.DIVDIVRELATION;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.DIVDIVRELATION_DS_CODE;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DP_CODE;
-import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.EBX_REP_M_SFS_0002_SFSDIVISION;
-import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.EBX_REP_M_SFS_0002_SFSDIVISION_SUCCESSORS;
 import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DATA_PRODUCT;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.VSPC_SNP_SRC_SCHEMA;
+import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DP_CODE;
+import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.SRC_PROVIDER_SFSDIVISION;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.END_DT_FIELD_NAME;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.PLUS_INFINITY_DT;
@@ -42,33 +42,26 @@ public class DivDivRelationTransformation extends BaseTransformation {
 
     @Override
     public void run() {
-        Dataset<Row> divsuccessor = selectSQL(
-                "SELECT \n" +
-                        "   successor.id as source_id, \n" +
-                        "   sfs1.fulldivcode as source_sid, \n" +
-                        "   sfs2.fulldivcode as successor_sid \n" +
-                        " FROM " + VSPC_SNP_SRC_SCHEMA + "." + EBX_REP_M_SFS_0002_SFSDIVISION_SUCCESSORS + " as successor \n" +
-                        "   LEFT JOIN " + VSPC_SNP_SRC_SCHEMA + "." + EBX_REP_M_SFS_0002_SFSDIVISION + " as sfs1 \n" +
-                        "       on successor.id = sfs1.id \n" +
-                        "   LEFT JOIN " + VSPC_SNP_SRC_SCHEMA + "." + EBX_REP_M_SFS_0002_SFSDIVISION + " as sfs2 \n" +
-                        "       on successor.successors_id_successor = sfs2.id " +
-                        "   WHERE TRIM(lower(successor.successors_successorstype)) = 'правопреемник' "
-        ).distinct();
+        // Чтение через штатный RT-FW Reader (провайдеры объявлены в lineage metadata.json).
+        // Эквивалент прежнего SQL: successor LEFT JOIN sfsdivision x2 + TRIM(lower(...))='правопреемник'.
+        Dataset<Row> successors = read(VspcConstant.SRC_PROVIDER_SFSDIVISION_SUCCESSORS).kap803Usl().snp().get();
+        Dataset<Row> divisions = read(SRC_PROVIDER_SFSDIVISION).kap803Usl().snp().get();
 
-        // ESSA-правило дат (DataLoaderLinkHistDiff): INIT — 1900-01-01; INCR — новый ключ 1900-01-01, существующий ctl_validfrom - 1
-        Column startDt;
-        if (isIncrement()) {
-            divsuccessor = flagNewKeys(divsuccessor, DIVDIVRELATION, DIV_DIV_RELATION_SID);
-            startDt = when(col(NEW_KEY_FLAG), lit(VspcConstant.MIN_BUSINESS_DT))
-                    .otherwise(date_sub(lit(VspcConstant.getCtlValidFromStr()).cast("date"), 1))
-                    .cast("date").as(START_DT_FIELD_NAME);
-        } else {
-            startDt = lit(VspcConstant.MIN_BUSINESS_DT).cast("date").as(START_DT_FIELD_NAME);
-        }
+        Dataset<Row> sfsSource = divisions.select(col("id").as("sfs_source_id"), col("fulldivcode").as("source_sid"));
+        Dataset<Row> sfsSuccessor = divisions.select(col("id").as("sfs_successor_id"), col("fulldivcode").as("successor_sid"));
+
+        Dataset<Row> divsuccessor = successors
+                .select(col("id").as("source_id"),
+                        col("successors_id_successor"),
+                        col("successors_successorstype"))
+                .join(sfsSource, col("source_id").equalTo(col("sfs_source_id")), "left")
+                .join(sfsSuccessor, col("successors_id_successor").equalTo(col("sfs_successor_id")), "left")
+                .where(trim(lower(col("successors_successorstype"))).equalTo(lit("правопреемник")))
+                .select("source_id", "source_sid", "successor_sid")
+                .distinct();
 
         divsuccessor = divsuccessor
                 .select(
-                        startDt,
                         lit(PLUS_INFINITY_DT).cast("date").as(END_DT_FIELD_NAME),
                         getKey("|").as(SID),
                         getKey("|").as(DIV_DIV_RELATION_SID),
@@ -90,6 +83,21 @@ public class DivDivRelationTransformation extends BaseTransformation {
         columnEntities.put(SUCCESSOR_DIV_SID, DIV);
 
         Dataset<Row> result = addSk(divsuccessor, DIVDIVRELATION, columnEntities);
+
+        // ESSA-правило дат (DataLoaderLinkHistDiff): INIT — 1900-01-01; INCR — новый ключ 1900-01-01,
+        // существующий ctl_validfrom - 1. Новизна ключа определяется ПОСЛЕ генерации СК по
+        // div_div_relation_sk: в SNP есть только *_sk, а *_sid на этом этапе уже дропнуты.
+        Column startDt;
+        if (isIncrement()) {
+            result = flagNewKeys(result, DIVDIVRELATION, DIV_DIV_RELATION_SK);
+            startDt = when(col(NEW_KEY_FLAG), lit(VspcConstant.MIN_BUSINESS_DT))
+                    .otherwise(date_sub(lit(VspcConstant.getCtlValidFromStr()).cast("date"), 1))
+                    .cast("date");
+            result = result.drop(NEW_KEY_FLAG);
+        } else {
+            startDt = lit(VspcConstant.MIN_BUSINESS_DT).cast("date");
+        }
+        result = result.withColumn(START_DT_FIELD_NAME, startDt);
 
         publish(result)
                 .recordsetMasks(sets)

@@ -30,21 +30,13 @@ public class TerrDivTypeTransformation extends BaseTransformation {
         Dataset<Row> terrdivtype = read(SRC_PROVIDER_SFSDIVISION).kap803Usl().snp().get();
         terrdivtype = terrdivtype
                 .select(
+                        lit(false).as(DELETED_FLAG),
                         col(DIVISIONTYPE00).as(SID),
                         lit(DATA_PRODUCT).as(TERR_DIV_TYPE_DP_CODE),
                         col(DIVISIONTYPE00).as(DIV_TYPE_CODE),
                         col(DIVISIONTYPE00).as(TERR_DIV_TYPE_SID),
                         lit(false).as(DIRTY_FLAG)
                 ).distinct();
-
-        terrdivtype = terrdivtype.select(
-                lit(false).as(DELETED_FLAG),
-                col(TERR_DIV_TYPE_SID).as(SID),
-                lit(DATA_PRODUCT).as(TERR_DIV_TYPE_DP_CODE),
-                col(DIV_TYPE_CODE).as(DIV_TYPE_CODE),
-                col(TERR_DIV_TYPE_SID).as(TERR_DIV_TYPE_SID),
-                lit(false).as(DIRTY_FLAG)
-        ).distinct();
 
         Dataset<Row> result = addSk(terrdivtype, TERRDIVTYPE, "@terr_div_type");
 

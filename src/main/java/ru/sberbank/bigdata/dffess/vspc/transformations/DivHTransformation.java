@@ -54,23 +54,6 @@ public class DivHTransformation extends BaseTransformation {
 
         ).distinct();
 
-        if (isIncrement()) {
-            // ESSA-правило дат (DataLoaderHistMix, INCR): новый ключ DIV_SID — 1900-01-01, существующий — ctl_validfrom - 1;
-            // end_dt остаётся passthrough из stg. Дедупликация защищает инкремент от дублей реплики;
-            // в INIT периоды бизнес-истории div_h сохраняются как есть (семантика release/3.0)
-            divh_raw = flagNewKeys(divh_raw, DIVH, DIV_SID);
-            divh_raw = divh_raw
-                    .withColumn(START_DT_FIELD_NAME,
-                            when(col(NEW_KEY_FLAG), lit(MIN_BUSINESS_DT))
-                                    .otherwise(date_sub(lit(getCtlValidFromStr()).cast("date"), 1))
-                                    .cast("date"))
-                    .drop(NEW_KEY_FLAG)
-                    .withColumn("_dedup_rn",
-                            row_number().over(Window.partitionBy(col(DIV_SID)).orderBy(col(DIV_OPENDATE).desc())))
-                    .filter(col("_dedup_rn").equalTo(1))
-                    .drop("_dedup_rn");
-        }
-
         Dataset<Row> divh = divh_raw.select(
                 col(DIV_SID).as(DIV_SID),
                 col(DIV_H_NAME).as(DIV_H_NAME),
@@ -101,9 +84,39 @@ public class DivHTransformation extends BaseTransformation {
 
         Dataset<Row> result = addSk(divh, DIVH, columnEntities);
 
+        if (isIncrement()) {
+            // ESSA-правило дат (DataLoaderHistMix, INCR): новый ключ — 1900-01-01, существующий — ctl_validfrom - 1;
+            // end_dt остаётся passthrough из stg. Новизна ключа определяется ПОСЛЕ генерации СК по div_sk
+            // (в SNP есть только *_sk, а *_sid на этом этапе уже дропнуты). Дедупликация защищает инкремент
+            // от дублей реплики (тайбрейк end_dt — детерминированный выбор при равных opendate);
+            // в INIT периоды бизнес-истории div_h сохраняются как есть (семантика release/3.0).
+            // Отличие от ESSA HistMix: ESSA ставил входящим end_dt=9999 и сам закрывал прошлую версию
+            // (another_ctl_validfrom−2); здесь то же делает rt-fw-publisher (PERIOD_WITH_REWRITE) — штатные
+            // сценарии совпадают, а переоткрытие ранее закрытого ключа даёт start=ctl_validfrom−1 с разрывом
+            // вместо ESSA-перекрытия 1900 — целевое поведение подтверждается прогоном INIT+INCR на DEV.
+            result = flagNewKeys(result, DIVH, DIV_SK);
+            result = result
+                    .withColumn(START_DT_FIELD_NAME,
+                            when(col(NEW_KEY_FLAG), lit(MIN_BUSINESS_DT))
+                                    .otherwise(date_sub(lit(getCtlValidFromStr()).cast("date"), 1))
+                                    .cast("date"))
+                    .drop(NEW_KEY_FLAG)
+                    .withColumn("_dedup_rn",
+                            row_number().over(Window.partitionBy(col(DIV_SK))
+                                    .orderBy(col(DIV_OPENDATE).desc(), col(END_DT_FIELD_NAME).desc())))
+                    .filter(col("_dedup_rn").equalTo(1))
+                    .drop("_dedup_rn");
+        }
+
         publish(result)
                 .recordsetMasks(sets)
                 .launch();
+    }
+
+    @Override
+    protected boolean skInitOnLoad() {
+        // ESSA-лоадер этой таблицы вызывал incrementSk (map) безусловно, включая INIT
+        return false;
     }
 
     public static void main(String[] args) {

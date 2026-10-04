@@ -13,14 +13,6 @@ public class Logger {
         this.app = app;
     }
 
-    public void setLog4jLogger(org.apache.log4j.Logger log4jLogger) {
-        this.log4jLogger = log4jLogger;
-    }
-
-    public void setApp(App app) {
-        this.app = app;
-    }
-
     public static LogMessage info(String title) {
         return new LogMessage("", LogType.TECH_INFO, title);
     }
@@ -33,8 +25,12 @@ public class Logger {
         return new LogMessage("", LogType.TECH_DEBUG, title);
     }
 
-    public void log(LogMessage message, boolean kibanaPosting) {
-        if (kibanaPosting && app != null) {
+    /**
+     * Штатный канал журналирования RT-FW (App.log -> rt-fw-logger / ТС Журналирование);
+     * echo в log4j оставлен для stdout/YARN-логов.
+     */
+    public void log(LogMessage message) {
+        if (app != null) {
             app.log(message);
         }
         if (log4jLogger != null) {
@@ -52,32 +48,16 @@ public class Logger {
         }
     }
 
-    public void log(LogMessage message) {
-        log(message, false);
-    }
-
     public void logInfo(String title) {
-        logInfo(title, false);
-    }
-
-    public void logInfo(String title, boolean kibanaPosting) {
-        log(info(title), kibanaPosting);
+        log(info(title));
     }
 
     public void logError(String title) {
-        logError(title, false);
-    }
-
-    public void logError(String title, boolean kibanaPosting) {
-        log(error(title), kibanaPosting);
+        log(error(title));
     }
 
     public void logDebug(String title) {
-        logDebug(title, false);
-    }
-
-    public void logDebug(String title, boolean kibanaPosting) {
-        log(debug(title), kibanaPosting);
+        log(debug(title));
     }
 
 }

@@ -35,6 +35,11 @@
     },
     {
       "providerProductAlias": "archive_rdm",
+      "providerDatasetCode": "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision_successors",
+      "consumerDatasetCode": "div&div_relation.link"
+    },
+    {
+      "providerProductAlias": "archive_rdm",
       "providerDatasetCode": "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision",
       "consumerDatasetCode": "div.sat=type"
     },
@@ -58,7 +63,12 @@
       "providerProductAlias": "archive_rdm",
       "providerDatasetCode": "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision",
 
-      "diffCtlEntityId": 928039295
+      "diffCtlEntityId": 953018846
+    }, {
+      "providerProductAlias": "archive_rdm",
+      "providerDatasetCode": "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision_successors",
+
+      "diffCtlEntityId": 953018846
     }],
   "uslProviderEntities" : [ {
     "providerProductAlias" : "usl_gar_fias_idl",

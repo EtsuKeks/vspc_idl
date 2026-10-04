@@ -71,20 +71,7 @@ public class AddrHTransformation extends BaseTransformation {
 
         ).distinct();
 
-        // ESSA-правило дат (DataLoaderHistDiff): INIT — 1900-01-01; INCR — новый ключ 1900-01-01, существующий ctl_validfrom - 1
-        Column startDt;
-        Dataset<Row> addrFlagged = addr;
-        if (isIncrement()) {
-            addrFlagged = flagNewKeys(addr, ADDRH, ADDR_SID);
-            startDt = when(col(NEW_KEY_FLAG), lit(VspcConstant.MIN_BUSINESS_DT))
-                    .otherwise(date_sub(lit(VspcConstant.getCtlValidFromStr()).cast("date"), 1))
-                    .cast("date").as(START_DT_FIELD_NAME);
-        } else {
-            startDt = lit(VspcConstant.MIN_BUSINESS_DT).cast("date").as(START_DT_FIELD_NAME);
-        }
-
-        Dataset<Row> addrh = addrFlagged.select(
-                startDt,
+        Dataset<Row> addrh = addr.select(
                 lit(PLUS_INFINITY_DT).cast("date").as(END_DT_FIELD_NAME),
                 col(ADDR_SID).as(ADDR_SID),
                 lit(VspcConstant.DATA_PRODUCT).as(ADDR_DP_CODE),
@@ -108,9 +95,30 @@ public class AddrHTransformation extends BaseTransformation {
 
         Dataset<Row> result = addSk(addrh, ADDRH, columnEntities);
 
+        // ESSA-правило дат (DataLoaderHistDiff): INIT — 1900-01-01; INCR — новый ключ 1900-01-01,
+        // существующий ctl_validfrom - 1. Новизна ключа определяется ПОСЛЕ генерации СК по addr_sk:
+        // в SNP есть только *_sk, а *_sid на этом этапе уже дропнуты.
+        Column startDt;
+        if (isIncrement()) {
+            result = flagNewKeys(result, ADDRH, ADDR_SK);
+            startDt = when(col(NEW_KEY_FLAG), lit(VspcConstant.MIN_BUSINESS_DT))
+                    .otherwise(date_sub(lit(VspcConstant.getCtlValidFromStr()).cast("date"), 1))
+                    .cast("date");
+            result = result.drop(NEW_KEY_FLAG);
+        } else {
+            startDt = lit(VspcConstant.MIN_BUSINESS_DT).cast("date");
+        }
+        result = result.withColumn(START_DT_FIELD_NAME, startDt);
+
         publish(result)
                 .recordsetMasks(sets)
                 .launch();
+    }
+
+    @Override
+    protected boolean skInitOnLoad() {
+        // ESSA-лоадер этой таблицы вызывал incrementSk (map) безусловно, включая INIT
+        return false;
     }
 
     public static void main(String[] args) {

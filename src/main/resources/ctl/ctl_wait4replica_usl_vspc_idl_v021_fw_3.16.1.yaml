@@ -118,7 +118,7 @@ workflows:
         - param:
             # Определяет детальность сообщений, отправляемых в ТСЖ, варианты ALL/DEBUG/INFO/WARN/ERROR.
             name: log_level
-            prior_value: "{{ rtwf_log_level }}"
+            prior_value: "{{ rtfw_log_level }}"
         - param:
             # Признак включения функциональности сертификации.
             name: cert_enabled_flag
@@ -127,10 +127,6 @@ workflows:
             #  Признак включения функциональности восстановительной загрузки.
             name: recover_enabled_flag
             prior_value:  "false"
-        - param:
-            # Логика обработки параметра полностью аналогична параметру program_units, с одной разницей: допускается указывать только список ПЕ без фильтров..
-            name: debug_program_units
-            prior_value: "{{ debug_program_units }}"
         - param:
             # Переопределение номера статистики, в которой archive-продукт-поставщик данного data-продукта ЕСС регистрирует в CTL, после завершения загрузки, факты изменения данных в таблице реплики
             name: change_stat_override
@@ -239,7 +235,7 @@ workflows:
         - param:
             # Определяет детальность сообщений, отправляемых в ТСЖ, варианты ALL/DEBUG/INFO/WARN/ERROR.
             name: log_level
-            prior_value: "{{ rtwf_log_level }}"
+            prior_value: "{{ rtfw_log_level }}"
         - param:
             # Признак включения функциональности сертификации.
             name: cert_enabled_flag
@@ -248,10 +244,6 @@ workflows:
             #  Признак включения функциональности восстановительной загрузки.
             name: recover_enabled_flag
             prior_value:  "false"
-        - param:
-            #  Перечисление списка ПЕ и загружаемых ими секций для выполнения инициализирующей загрузки в ручном режиме. Такой режим предусматривает последовательную, набор секций за набором секций, загрузку под ручным управлением команды ВПО.
-            name: program_units
-            prior_value:  ""
         - param:
             # Признак необходимости создавать difference data (то есть набор удалений и добавлений).
             name: init_diff_flag
