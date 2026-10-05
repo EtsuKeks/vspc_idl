@@ -3,7 +3,6 @@ package ru.sberbank.bigdata.dffess.vspc.transformations;
 import org.apache.spark.sql.Column;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
-import org.apache.spark.sql.expressions.Window;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
 import ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant;
 import ru.sberbank.bigdata.sl.rt.core.App;
@@ -14,13 +13,14 @@ import java.util.Map;
 
 import static java.lang.String.format;
 import static org.apache.spark.sql.functions.col;
+import static org.apache.spark.sql.functions.concat;
 import static org.apache.spark.sql.functions.current_date;
 import static org.apache.spark.sql.functions.date_add;
 import static org.apache.spark.sql.functions.date_sub;
 import static org.apache.spark.sql.functions.lit;
 import static org.apache.spark.sql.functions.max;
-import static org.apache.spark.sql.functions.row_number;
 import static org.apache.spark.sql.functions.when;
+import static org.apache.spark.sql.functions.xxhash64;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.DIRTY_FLAG;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.DIVISIONTYPE00;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.DIV_DP_CODE;
@@ -28,6 +28,7 @@ import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.DIV_SID;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.DIV_SK;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.DIV_TYPE_TERR_DIV_TYPE_DP_CODE;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.DIV_TYPE_TERR_DIV_TYPE_SID;
+import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.DIV_TYPE_TERR_DIV_TYPE_SK;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.FULLDIVCODE;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.DIV;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.DIVTYPE;
@@ -65,15 +66,6 @@ public class DivTypeTransformation extends BaseTransformation {
                         lit(false).as(DIRTY_FLAG)
                 ).distinct();
 
-        // Дедупликация по SID защищает инкремент от дублей реплики; в INIT набор уже уникален (семантика release/3.0)
-        if (isIncrement()) {
-            divtype = divtype
-                    .withColumn("_dedup_rn",
-                            row_number().over(Window.partitionBy(col(DIV_SID)).orderBy(col(DIV_TYPE_TERR_DIV_TYPE_SID).asc())))
-                    .filter(col("_dedup_rn").equalTo(1))
-                    .drop("_dedup_rn");
-        }
-
         Map<String, String> columnEntities = new HashMap<>();
         columnEntities.put(DIV_TYPE_TERR_DIV_TYPE_SID, TERRDIVTYPE);
         columnEntities.put(DIV_SID, DIV);
@@ -96,8 +88,40 @@ public class DivTypeTransformation extends BaseTransformation {
         if (isIncrement()) {
             Column plusInfinityDate = lit(PLUS_INFINITY_DT).cast("date");
             Column openVersion = col(END_DT_FIELD_NAME).equalTo(plusInfinityDate);
-            Dataset<Row> snpDivtype = readTable(SNP_SCHEMA, DIVTYPE)
-                    .where(col(DELETED_FLAG).isNull().or(col(DELETED_FLAG).notEqual(true)));
+            Dataset<Row> snpDivtype = readTable(SNP_SCHEMA, DIVTYPE);
+
+            // Отсев неизменившихся бизнес-ключей (аналог ESSA EQUALS): hash по бизнес-атрибутам БЕЗ
+            // start_dt/end_dt/p1month/ctl_* — так же, как ESSA MergeService.getStringHash (exclude =
+            // START_DT/END_DT/PARTITION_COLUMN_MONTH). Ключ (div ↔ тип), у которого есть открытая
+            // SNP-версия с теми же бизнес-атрибутами, не попадает в publisher и не создаёт лишнюю
+            // версию (в 3.0 он давал EQUALS и версия не пересоздавалась).
+            Dataset<Row> openSnpHash = snpDivtype.where(openVersion)
+                    .select(
+                            col(DIV_SK).as("_etl_snp_div_sk"),
+                            xxhash64(concat(
+                                    when(col(DIV_SK).isNotNull(), col(DIV_SK).cast("string")).otherwise(lit("")),
+                                    when(col(DIV_TYPE_TERR_DIV_TYPE_SK).isNotNull(), col(DIV_TYPE_TERR_DIV_TYPE_SK).cast("string")).otherwise(lit("")),
+                                    when(col(DIV_TYPE_TERR_DIV_TYPE_DP_CODE).isNotNull(), col(DIV_TYPE_TERR_DIV_TYPE_DP_CODE).cast("string")).otherwise(lit("")),
+                                    when(col(DIV_DP_CODE).isNotNull(), col(DIV_DP_CODE).cast("string")).otherwise(lit(""))
+                            )).as("_etl_snp_hash"))
+                    .distinct();
+
+            // Полный набор входящих div_sk ДО hash-отсева (DEFECT C): closingRows строится по нему,
+            // а не по result после отсева, иначе неизменившиеся ключи (отсеянные hash'ом) ложно
+            // закрывались бы как «исчезнувшие из реплики» и выпадали из активного среза.
+            Dataset<Row> incomingDivSk = result.select(col(DIV_SK).as("_etl_inc_div_sk"));
+
+            result = result
+                    .withColumn("_etl_inc_hash", xxhash64(concat(
+                            when(col(DIV_SK).isNotNull(), col(DIV_SK).cast("string")).otherwise(lit("")),
+                            when(col(DIV_TYPE_TERR_DIV_TYPE_SK).isNotNull(), col(DIV_TYPE_TERR_DIV_TYPE_SK).cast("string")).otherwise(lit("")),
+                            when(col(DIV_TYPE_TERR_DIV_TYPE_DP_CODE).isNotNull(), col(DIV_TYPE_TERR_DIV_TYPE_DP_CODE).cast("string")).otherwise(lit("")),
+                            when(col(DIV_DP_CODE).isNotNull(), col(DIV_DP_CODE).cast("string")).otherwise(lit(""))
+                    )))
+                    .join(openSnpHash,
+                            col(DIV_SK).equalTo(col("_etl_snp_div_sk")).and(col("_etl_inc_hash").equalTo(col("_etl_snp_hash"))),
+                            "left_anti")
+                    .drop("_etl_inc_hash");
 
             // Состояние ключей SNP: есть ли открытая версия и когда ключ последний раз закрывался
             Dataset<Row> snpKeyState = snpDivtype.groupBy(col(DIV_SK).as("_etl_state_div_sk")).agg(
@@ -118,7 +142,7 @@ public class DivTypeTransformation extends BaseTransformation {
             // Закрывающие строки: открытые версии SNP, чьи ключи не пришли в текущем инкременте
             Dataset<Row> openVersions = snpDivtype.where(openVersion);
             Dataset<Row> closingRows = openVersions
-                    .join(result.select(col(DIV_SK).as("_etl_inc_div_sk")),
+                    .join(incomingDivSk,
                             openVersions.col(DIV_SK).equalTo(col("_etl_inc_div_sk")), "left_anti")
                     .withColumn(END_DT_FIELD_NAME, date_sub(current_date(), 1));
 

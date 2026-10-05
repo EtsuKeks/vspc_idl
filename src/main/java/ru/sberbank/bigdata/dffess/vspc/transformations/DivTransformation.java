@@ -2,7 +2,6 @@ package ru.sberbank.bigdata.dffess.vspc.transformations;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
-import org.apache.spark.sql.expressions.Window;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
 import ru.sberbank.bigdata.sl.rt.core.App;
 
@@ -84,15 +83,6 @@ public class DivTransformation extends BaseTransformation {
                 col(DIV_TIME_ZONE_TIME_ZONE_SID).as(DIV_TIME_ZONE_TIME_ZONE_SID),
                 lit(DATA_PRODUCT).as(DIV_TIME_ZONE_TIME_ZONE_DP_CODE)
         ).distinct();
-
-        // Дедупликация по SID защищает инкремент от дублей реплики; в INIT набор уже уникален (семантика release/3.0)
-        if (isIncrement()) {
-            div = div
-                    .withColumn("_dedup_rn",
-                            row_number().over(Window.partitionBy(col(SID)).orderBy(col(DIV_LEGAL_ADDR_SID).asc())))
-                    .filter(col("_dedup_rn").equalTo(1))
-                    .drop("_dedup_rn");
-        }
 
         Map<String, String> columnEntities = new HashMap<>();
         columnEntities.put(DIV_SID, DIV);

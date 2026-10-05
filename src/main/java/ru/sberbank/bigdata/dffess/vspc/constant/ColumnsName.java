@@ -96,13 +96,16 @@ public final class ColumnsName {
     public static final String DIV_H_NAME = "div_name";
     public static final String DIV_FACT_ADDR_DP_CODE = "fact_addr_dp_code";
     public static final String DIV_FACT_ADDR_SID = "fact_addr_sid";
+    public static final String DIV_FACT_ADDR_SK = "fact_addr_sk";
     public static final String DIV_PAY_SYS_PRTCPNT_DP_CODE = "pay_sys_prtcpnt_dp_code";
     public static final String DIV_PAY_SYS_PRTCPNT_SID = "pay_sys_prtcpnt_sid";
+    public static final String DIV_PAY_SYS_PRTCPNT_SK = "pay_sys_prtcpnt_sk";
     public static final String DIV_DISABLED_ACCESS_EQUIPMENT = "disabled_access_equipment_flag";
 
     // DIV_TYPE
     public static final String DIV_TYPE_TERR_DIV_TYPE_DP_CODE = "div_type_terr_div_type_dp_code";
     public static final String DIV_TYPE_TERR_DIV_TYPE_SID = "div_type_terr_div_type_sid";
+    public static final String DIV_TYPE_TERR_DIV_TYPE_SK = "div_type_terr_div_type_sk";
 
     // TERR_DIV_TYPE
     public static final String DIV_TYPE_CODE = "div_type_code";

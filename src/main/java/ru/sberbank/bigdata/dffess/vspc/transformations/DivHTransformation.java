@@ -2,7 +2,6 @@ package ru.sberbank.bigdata.dffess.vspc.transformations;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
-import org.apache.spark.sql.expressions.Window;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
 import ru.sberbank.bigdata.sl.rt.core.App;
 
@@ -85,27 +84,57 @@ public class DivHTransformation extends BaseTransformation {
         Dataset<Row> result = addSk(divh, DIVH, columnEntities);
 
         if (isIncrement()) {
+            // Отсев неизменившихся бизнес-ключей (аналог ESSA EQUALS, DataLoaderHistMix/VspcMetadataKeeper):
+            // hash считается по бизнес-атрибутам БЕЗ start_dt/end_dt/p1month/ctl_* — так же, как ESSA
+            // MergeService.getStringHash (exclude = START_DT/END_DT/PARTITION_COLUMN_MONTH). Ключ, у которого
+            // есть открытая SNP-версия с теми же бизнес-атрибутами, не попадает в publisher и не создаёт
+            // лишнюю версию (в 3.0 он давал EQUALS и версия не пересоздавалась).
+            Dataset<Row> openSnp = readTable(SNP_SCHEMA, DIVH)
+                    .where(col(END_DT_FIELD_NAME).equalTo(lit(PLUS_INFINITY_DT).cast("date")))
+                    .select(
+                            col(DIV_SK).as("_etl_snp_div_sk"),
+                            xxhash64(concat(
+                                    when(col(DIV_SK).isNotNull(), col(DIV_SK).cast("string")).otherwise(lit("")),
+                                    when(col(DIV_H_NAME).isNotNull(), col(DIV_H_NAME).cast("string")).otherwise(lit("")),
+                                    when(col(DIV_DP_CODE).isNotNull(), col(DIV_DP_CODE).cast("string")).otherwise(lit("")),
+                                    when(col(DIV_PAY_SYS_PRTCPNT_SK).isNotNull(), col(DIV_PAY_SYS_PRTCPNT_SK).cast("string")).otherwise(lit("")),
+                                    when(col(DIV_PAY_SYS_PRTCPNT_DP_CODE).isNotNull(), col(DIV_PAY_SYS_PRTCPNT_DP_CODE).cast("string")).otherwise(lit("")),
+                                    when(col(DIV_FACT_ADDR_SK).isNotNull(), col(DIV_FACT_ADDR_SK).cast("string")).otherwise(lit("")),
+                                    when(col(DIV_FACT_ADDR_DP_CODE).isNotNull(), col(DIV_FACT_ADDR_DP_CODE).cast("string")).otherwise(lit("")),
+                                    when(col(DIV_DISABLED_ACCESS_EQUIPMENT).isNotNull(), col(DIV_DISABLED_ACCESS_EQUIPMENT).cast("string")).otherwise(lit(""))
+                            )).as("_etl_snp_hash"))
+                    .distinct();
+
             // ESSA-правило дат (DataLoaderHistMix, INCR): новый ключ — 1900-01-01, существующий — ctl_validfrom - 1;
             // end_dt остаётся passthrough из stg. Новизна ключа определяется ПОСЛЕ генерации СК по div_sk
-            // (в SNP есть только *_sk, а *_sid на этом этапе уже дропнуты). Дедупликация защищает инкремент
-            // от дублей реплики (тайбрейк end_dt — детерминированный выбор при равных opendate);
-            // в INIT периоды бизнес-истории div_h сохраняются как есть (семантика release/3.0).
+            // (в SNP есть только *_sk, а *_sid на этом этапе уже дропнуты).
             // Отличие от ESSA HistMix: ESSA ставил входящим end_dt=9999 и сам закрывал прошлую версию
             // (another_ctl_validfrom−2); здесь то же делает rt-fw-publisher (PERIOD_WITH_REWRITE) — штатные
             // сценарии совпадают, а переоткрытие ранее закрытого ключа даёт start=ctl_validfrom−1 с разрывом
             // вместо ESSA-перекрытия 1900 — целевое поведение подтверждается прогоном INIT+INCR на DEV.
+            result = result
+                    .withColumn("_etl_inc_hash", xxhash64(concat(
+                            when(col(DIV_SK).isNotNull(), col(DIV_SK).cast("string")).otherwise(lit("")),
+                            when(col(DIV_H_NAME).isNotNull(), col(DIV_H_NAME).cast("string")).otherwise(lit("")),
+                            when(col(DIV_DP_CODE).isNotNull(), col(DIV_DP_CODE).cast("string")).otherwise(lit("")),
+                            when(col(DIV_PAY_SYS_PRTCPNT_SK).isNotNull(), col(DIV_PAY_SYS_PRTCPNT_SK).cast("string")).otherwise(lit("")),
+                            when(col(DIV_PAY_SYS_PRTCPNT_DP_CODE).isNotNull(), col(DIV_PAY_SYS_PRTCPNT_DP_CODE).cast("string")).otherwise(lit("")),
+                            when(col(DIV_FACT_ADDR_SK).isNotNull(), col(DIV_FACT_ADDR_SK).cast("string")).otherwise(lit("")),
+                            when(col(DIV_FACT_ADDR_DP_CODE).isNotNull(), col(DIV_FACT_ADDR_DP_CODE).cast("string")).otherwise(lit("")),
+                            when(col(DIV_DISABLED_ACCESS_EQUIPMENT).isNotNull(), col(DIV_DISABLED_ACCESS_EQUIPMENT).cast("string")).otherwise(lit(""))
+                    )))
+                    .join(openSnp,
+                            col(DIV_SK).equalTo(col("_etl_snp_div_sk")).and(col("_etl_inc_hash").equalTo(col("_etl_snp_hash"))),
+                            "left_anti")
+                    .drop("_etl_inc_hash");
+
             result = flagNewKeys(result, DIVH, DIV_SK);
             result = result
                     .withColumn(START_DT_FIELD_NAME,
                             when(col(NEW_KEY_FLAG), lit(MIN_BUSINESS_DT))
                                     .otherwise(date_sub(lit(getCtlValidFromStr()).cast("date"), 1))
                                     .cast("date"))
-                    .drop(NEW_KEY_FLAG)
-                    .withColumn("_dedup_rn",
-                            row_number().over(Window.partitionBy(col(DIV_SK))
-                                    .orderBy(col(DIV_OPENDATE).desc(), col(END_DT_FIELD_NAME).desc())))
-                    .filter(col("_dedup_rn").equalTo(1))
-                    .drop("_dedup_rn");
+                    .drop(NEW_KEY_FLAG);
         }
 
         publish(result)

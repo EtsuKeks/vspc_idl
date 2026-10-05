@@ -14,7 +14,7 @@
   "sast_conf": "devsecops-config.yml",
   "emails": "SLSNTWRKDE_ess@sberbank.ru dvilapshin@sberbank.ru",
   "run_hive_script_sql": true,
-  "jira_task_release": "SSDVC-803",
+  "jira_task_release": "VSPCIDL-266",
   "nexus3": {
     "ci_it_service": "CI02619185",
     "ci_as_fp": "CI04734132"
@@ -23,17 +23,15 @@
     "pom_path": "pom.xml",
     "set_path": "src/main/resources/devops/ci-settings.xml"
   },
-
   "ess": {
     "meta": [
       "usl/certification/cap_certification_usl.vspc_idl_v021_fw_3.9.6.json"
-    ], 
+    ],
     "kkd-spod": [
       "usl/certification/dq.vspc_idl.v021_fw_3.9.6.json"
     ],
     "well": "vspc"
   },
-
   "distrib_files": [
     {
       "source": "src/main/resources/ctl/*",
@@ -51,7 +49,6 @@
       "source": "src/main/resources/docs/*",
       "destination": "docs/"
     },
-
     {
       "source": "src/main/resources/hdfs/*",
       "destination": "hdfs/"
@@ -82,10 +79,12 @@
     "sql/ddl/ddl.usl.vspc_idl.v021.model.9.47.0_fw_3.9.6.sql",
     "sql/ddl/ddl.usl.vspc_idl.v021.model_stg.9.47.0_fw_3.9.6.sql.sql"
   ],
-  "workflow_to_run_scenario" : [
+  "workflow_to_run_scenario": [
     {
       "step": "step-1",
-      "workflows": ["USL_VSPC_IDL_INIT"]
+      "workflows": [
+        "USL_VSPC_IDL_INIT"
+      ]
     }
   ]
 }

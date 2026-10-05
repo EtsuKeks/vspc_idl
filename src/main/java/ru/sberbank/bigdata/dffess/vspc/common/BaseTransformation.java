@@ -22,6 +22,8 @@ import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
 import static java.util.stream.Collectors.toList;
 import static org.apache.spark.sql.functions.*;
+import static ru.sberbank.bigdata.sl.rt.core.Constants.END_DT_FIELD_NAME;
+import static ru.sberbank.bigdata.sl.rt.core.Constants.PLUS_INFINITY_DT;
 import static ru.sberbank.bigdata.sl.rt.reader.constants.ReaderConstants.*;
 
 public abstract class BaseTransformation extends Transformation {
@@ -146,12 +148,18 @@ public abstract class BaseTransformation extends Transformation {
     }
 
     /**
-     * Помечает строки набора флагом {@link #NEW_KEY_FLAG}: ключ отсутствует в текущем SNP
-     * (новый ключ бизнес-истории). Используется для воспроизведения ESSA-правила дат:
-     * для новых ключей start_dt = 1900-01-01, для существующих — ctl_validfrom - 1.
+     * Помечает строки набора флагом {@link #NEW_KEY_FLAG}: ключ отсутствует среди ТЕКУЩЕ-ОТКРЫТЫХ
+     * записей SNP (end_dt = PLUS_INFINITY_DT, "бесконечность") — то есть это новый ключ бизнес-истории.
+     *
+     * Воспроизводит ESSA-правило дат (DataLoaderHistMix / DataLoaderLinkHistDiff, INCR-ветка):
+     * "новизна" определяется по modifiableData = ТОЛЬКО партиция MAX_DATE (конец_периода = '9999-12-31'
+     * == PLUS_INFINITY_DT), а НЕ по всей истории SNP. Т.е. действительно новый ключ (отсутствует среди
+     * сейчас-открытых записей, даже если в прошлом он был закрыт и в истории лежит его старая версия)
+     * получает start_dt = 1900-01-01, а существующий (открытый) ключ — ctl_validfrom - 1.
      */
     protected Dataset<Row> flagNewKeys(Dataset<Row> df, String snpTable, String pkColumn) {
         Dataset<Row> existingKeys = readTable(SNP_SCHEMA, snpTable)
+                .where(col(END_DT_FIELD_NAME).equalTo(lit(PLUS_INFINITY_DT).cast("date")))
                 .select(col(pkColumn).as("_etl_pk"))
                 .distinct();
         return df.join(existingKeys, df.col(pkColumn).equalTo(existingKeys.col("_etl_pk")), "left")
