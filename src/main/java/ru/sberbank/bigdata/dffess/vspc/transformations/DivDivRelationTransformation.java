@@ -64,7 +64,7 @@ public class DivDivRelationTransformation extends BaseTransformation {
                 .select(
                         lit(PLUS_INFINITY_DT).cast("date").as(END_DT_FIELD_NAME),
                         getKey("|").as(SID),
-                        getKey("|").as(DIV_DIV_RELATION_SID),
+
                         lit(DATA_PRODUCT).as(DIV_DIV_RELATION_DP_CODE),
 
                         col("source_sid").as(SOURCE_DIV_SID),
@@ -78,11 +78,17 @@ public class DivDivRelationTransformation extends BaseTransformation {
                 ).distinct();
 
         Map<String, String> columnEntities = new HashMap<>();
-        columnEntities.put(DIV_DIV_RELATION_SID, DIVDIVRELATION);
+        // Только FK source/successor генерируются через ССК-сервер (как в 3.0: columnEntities =
+        // {SOURCE_DIV_SK→DIV, SUCCESSOR_DIV_SK→DIV}). Link-сущность div_div_relation в ССК НЕ онбордится,
+        // её ключ материализуется натурально ниже.
         columnEntities.put(SOURCE_DIV_SID, DIV);
         columnEntities.put(SUCCESSOR_DIV_SID, DIV);
 
         Dataset<Row> result = addSk(divsuccessor, DIVDIVRELATION, columnEntities);
+
+        // div_div_relation_sk — натуральный ключ (getKey("|") = concat_ws("|", source_sid, successor_sid)),
+        // материализуется напрямую, НЕ через ССК. Соответствие 3.0, где essa initSk удалял @DIVDIVRELATION.
+        result = result.withColumn(DIV_DIV_RELATION_SK, col(SID));
 
         // ESSA-правило дат (DataLoaderLinkHistDiff): INIT — 1900-01-01; INCR — новый ключ 1900-01-01,
         // существующий ctl_validfrom - 1. Новизна ключа определяется ПОСЛЕ генерации СК по
@@ -102,6 +108,15 @@ public class DivDivRelationTransformation extends BaseTransformation {
         publish(result)
                 .recordsetMasks(sets)
                 .launch();
+    }
+
+    /**
+     * Link-сущность div_div_relation в ССК НЕ онбордится (как в 3.0, где essa initSk удалял @DIVDIVRELATION):
+     * в ССК генерируются только FK source_div_sk/successor_div_sk, а div_div_relation_sk — натуральный ключ.
+     */
+    @Override
+    protected boolean skInitOnLoad() {
+        return false;
     }
 
 

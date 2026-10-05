@@ -98,6 +98,12 @@ public class AddrHTransformation extends BaseTransformation {
         // ESSA-правило дат (DataLoaderHistDiff): INIT — 1900-01-01; INCR — новый ключ 1900-01-01,
         // существующий ctl_validfrom - 1. Новизна ключа определяется ПОСЛЕ генерации СК по addr_sk:
         // в SNP есть только *_sk, а *_sid на этом этапе уже дропнуты.
+        // Соответствие 3.0 (битовое): закрытие предыдущей версии при изменении ключа делает
+        // rt-fw-publisher (PERIOD_WITH_REWRITE): end_dt = date_sub(min(новый start_dt ключа), 1),
+        // а новый start_dt открытой версии = date_sub(ctl_validfrom, 1) => итог date_sub(ctl_validfrom, 2)
+        // == 3.0 date_sub(ANOTHER_CTL_VALIDFROM, 2). Ручные closing-строки НЕ эмитим (publisher входящий
+        // end_dt прошлой версии игнорирует и перезакрывает сам — своя эмиссия дала бы дубль).
+        // Ключи, исчезнувшие из реплики (нет в инкременте), НЕ закрываются — как в 3.0 DataLoaderHistDiff.
         Column startDt;
         if (isIncrement()) {
             result = flagNewKeys(result, ADDRH, ADDR_SK);

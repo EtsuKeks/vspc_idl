@@ -53,9 +53,8 @@ vars: &commonVars
   CTL_PROFILE_NAME_gar_fias_idl: "{{ CTL_PROFILE_NAME }}"
   CTL_PROFILE_NAME_rdm_idl_spark: "{{ CTL_PROFILE_NAME }}"
   rtfw_log_level: "INFO"
-  # В ESSA параметр не потреблялся ни одним лоадером (инертен в release/3.0); в RT-FW publisher
-  # активно поднимает start_dt новых ключей PERIOD-таблиц с 1900 до now-N. Для семантики 3.0 — пусто.
-  max_increment_depth_days: ""
+  # Глубина окна инкремента (число дней) — для соответствия release/3.0 (эталон 3051e47: max_increment_depth_days: 10).
+  max_increment_depth_days: 10
 
 stands:
   # DEV

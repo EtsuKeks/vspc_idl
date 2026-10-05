@@ -109,7 +109,12 @@ public class DivHTransformation extends BaseTransformation {
             // end_dt остаётся passthrough из stg. Новизна ключа определяется ПОСЛЕ генерации СК по div_sk
             // (в SNP есть только *_sk, а *_sid на этом этапе уже дропнуты).
             // Отличие от ESSA HistMix: ESSA ставил входящим end_dt=9999 и сам закрывал прошлую версию
-            // (another_ctl_validfrom−2); здесь то же делает rt-fw-publisher (PERIOD_WITH_REWRITE) — штатные
+            // (another_ctl_validfrom−2); здесь то же делает rt-fw-publisher (PERIOD_WITH_REWRITE). Закрытие
+            // битово совпадает: publisher закрывает предыдущую (открытую) версию
+            // end_dt = date_sub(min(новый start_dt ключа), 1), а новый start_dt открытой версии =
+            // date_sub(ctl_validfrom, 1) => итог date_sub(ctl_validfrom, 2) == 3.0 date_sub(another_ctl_validfrom, 2).
+            // Ручные closing-строки НЕ эмитим (publisher входящий end_dt прошлой версии игнорирует и
+            // перезакрывает сам — своя эмиссия была бы неэффективна и могла дать дубль). Штатные
             // сценарии совпадают, а переоткрытие ранее закрытого ключа даёт start=ctl_validfrom−1 с разрывом
             // вместо ESSA-перекрытия 1900 — целевое поведение подтверждается прогоном INIT+INCR на DEV.
             result = result
