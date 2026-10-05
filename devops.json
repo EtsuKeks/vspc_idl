@@ -28,7 +28,7 @@
       "usl/certification/cap_certification_usl.vspc_idl_v021_fw_3.9.6.json"
     ],
     "kkd-spod": [
-      "usl/certification/dq.vspc_idl.v022_fw_3.9.6.json"
+      "usl/certification/dq.vspc_idl.v022_fw_3.16.1.json"
     ],
     "well": "vspc"
   },
@@ -75,7 +75,7 @@
     }
   ],
   "template_files": [
-    "usl/certification/dq.vspc_idl.v022_fw_3.9.6.json",
+    "usl/certification/dq.vspc_idl.v022_fw_3.16.1.json",
     "sql/ddl/ddl.usl.vspc_idl.v021.model.9.47.0_fw_3.9.6.sql",
     "sql/ddl/ddl.usl.vspc_idl.v021.model_stg.9.47.0_fw_3.9.6.sql.sql"
   ],
