@@ -22,10 +22,10 @@ public class TablesName {
     public static final String TIMEZONE_DS_CODE = TIMEZONE + ".hub";
     public static final String DIVDIVRELATION_DS_CODE = "div&div_relation.link";
 
-    //source
-    public static final String EBX_REP_M_SFS_0002_SFSDIVISION = "ebx_rep_m_sfs_0002_sfsdivision";
-    public static final String EBX_REP_M_SFS_0002_SFSDIVISION_SUCCESSORS = "ebx_rep_m_sfs_0002_sfsdivision_successors";
-    public static final String EBX_REP_M_RFCZONETIME_0002_RFCZONETIME = "ebx_rep_m_rfzonetime_0002_rfzonetime";
+    //source (УНСИ replaces ebx replicas)
+    public static final String R_M_SFS_0006_SFSDIVISION = "r_m_sfs_0006_sfsdivision";
+    public static final String R_M_SFS_0006_SUCCESSORS = "r_m_sfs_0006_successors";
+    public static final String R_M_RFCZONETIME_0002_RFCZONETIME = "r_m_rfzonetime_0002_rfzonetime";
 
     //temporary
     public static final String CHG_DIVH = "chg_div_h";

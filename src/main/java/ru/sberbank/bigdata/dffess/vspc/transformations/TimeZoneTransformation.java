@@ -41,7 +41,13 @@ public class TimeZoneTransformation extends BaseTransformation {
                 ).where(col(ABBREVIATION).isNotNull())
                 .distinct();
 
-        Dataset<Row> result = addSk(slice, TIMEZONE, "@time_zone_rf");
+        // time_zone_rf_sk — НАТУРАЛЬНЫЙ ключ, строго как в 3.0: essa initSk удалял @"time_zone_rf"
+        // из атрибутов ССК, а у хаба нет FK-атрибутов -> в skClient.map не уходит ничего, ключ остаётся
+        // значением SELECT (abbreviation/USZ1->KALT). Материализуем его напрямую (аналог эталона R3),
+        // _sid дропаем.
+        Dataset<Row> result = slice
+                .withColumn("time_zone_rf_sk", col(SID))
+                .drop(TIME_ZONE_SID);
 
         publish(result)
             .recordsetMasks(sets)

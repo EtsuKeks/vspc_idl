@@ -62,7 +62,7 @@ public class ChgDivHTransformation extends BaseTransformation {
                     "     cast(current_date() as date) as start_dt, " +
                     "     cast('9999-12-31' as date) end_dt " +
                     " FROM  " +
-                    "     usl_vspc_idl_in_snp.ebx_rep_m_sfs_0002_sfsdivision vsp_fias  " +
+                    "     unsi_sp_sfs_006_snp_snp.r_m_sfs_0006_sfsdivision vsp_fias  " +
                     " left join (  " +
                     "     select " +
                     "         distinct " +
@@ -243,49 +243,6 @@ public class ChgDivHTransformation extends BaseTransformation {
                 "                         nullif(trim(address_locationaddress), '') as address_locationaddress, " +
                 "                         nullif(trim(address_addrfact_fiascode), '') as address_addrfact_fiascode, " +
                 "                         nullif(trim(address_addrfact_timezone), '') as address_addrfact_timezone," +
-                "                         nullif(trim(serving_isdisabledequip), '') as serving_isdisabledequip," +
-                "                         nullif(trim(address_addrfact_postcode),'') as address_addrfact_postcode, " +
-                "                         nullif(trim(address_postcode),'') as address_postcode, " +
-                "                         nullif(trim(address_addrfact_addrarea_areaname), '') as address_addrfact_addrarea_areaname," +
-                "                         nullif(trim(address_addrfact_addrplace_placename), '') as address_addrfact_addrplace_placename," +
-                "                         nullif(trim(address_subjectcode), '') as address_subjectcode," +
-                "                         nullif(trim(address_addrfact_addrcity_cityname), '') as address_addrfact_addrcity_cityname," +
-                "                         nullif(trim(address_addrfact_addrhouse_housenumbers), '') as address_addrfact_addrhouse_housenumbers," +
-                "                         nullif(trim(address_addrfact_addrstreet_streetname), '') as address_addrfact_addrstreet_streetname," +
-                "                         nullif(trim(address_country), '') as address_country," +
-                "                         nullif(trim(address_addrfact_okatocode), '') as address_addrfact_okatocode," +
-                "                         nullif(trim(address_addrfact_oktmocode), '') as address_addrfact_oktmocode," +
-                "                         nullif(trim(address_legaladdrdoc), '') as address_legaladdrdoc, " +
-                "                         hash( " +
-                "                             fulldivcode, " +
-                "                             fullname, " +
-                "                             requisitesdivision_bic, " +
-                "                             nullif(trim(address_locationaddress), ''), " +
-                "                             nullif(trim(address_addrfact_fiascode), ''), " +
-                "                             serving_isdisabledequip  " +
-                "                         ) hash, " +
-                "                         ctl_validfrom AS start_dt " +
-                "                     FROM " +
-                "                         usl_vspc_idl_in_diff.ebx_rep_d_sfs_0002_sfsdivision " +
-                "                     WHERE " +
-                "                         snapshot_ LIKE '%DIF%' " +
-                "                         AND ctl_do = 'R' " +
-                " " +
-                "                     UNION " +
-                " " +
-                "                     SELECT " +
-                "                         fulldivcode, " +
-                "                         fullname, " +
-                "                         shortdivcode, " +
-                "                         closedate, " +
-                "                         opendate, " +
-                "                         headdivisioncode, " +
-                "                         '0'||fulldivcode as div_subbranch_code, " +
-                "                         requisitesdivision_bic, " +
-                "                         requisitesdivision_registrationnum, " +
-                "                         nullif(trim(address_locationaddress), '') as address_locationaddress, " +
-                "                         nullif(trim(address_addrfact_fiascode), '') as address_addrfact_fiascode, " +
-                "                         nullif(trim(address_addrfact_timezone), '') as address_addrfact_timezone," +
                 "                         serving_isdisabledequip," +
                 "                         nullif(trim(address_addrfact_postcode),'') as address_addrfact_postcode, " +
                 "                         nullif(trim(address_postcode),'') as address_postcode, " +
@@ -309,7 +266,7 @@ public class ChgDivHTransformation extends BaseTransformation {
                 "                         ) hash," +
                 "                         CURRENT_DATE() AS start_dt " +
                 "                     FROM " +
-                "                         usl_vspc_idl_in_snp.ebx_rep_m_sfs_0002_sfsdivision " +
+                "                         unsi_sp_sfs_006_snp_snp.r_m_sfs_0006_sfsdivision " +
                 "                 ) t " +
                 "             ) t1  " +
                 "             WHERE " +

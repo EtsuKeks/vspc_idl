@@ -5,8 +5,8 @@ import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
 import ru.sberbank.bigdata.sl.rt.core.App;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.List;
 
 import static java.lang.String.format;
 import static org.apache.spark.sql.functions.*;
@@ -84,13 +84,23 @@ public class DivTransformation extends BaseTransformation {
                 lit(DATA_PRODUCT).as(DIV_TIME_ZONE_TIME_ZONE_DP_CODE)
         ).distinct();
 
-        Map<String, String> columnEntities = new HashMap<>();
-        columnEntities.put(DIV_SID, DIV);
-        columnEntities.put(DIV_PARENT_DIV_SID, DIV);
-        columnEntities.put(DIV_LEGAL_ADDR_SID, ADDR);
-        columnEntities.put(DIV_TIME_ZONE_TIME_ZONE_SID, TIMEZONE);
+        // Собственный PK хаба (div_sk) — НАТУРАЛЬНЫЙ, строго как в 3.0: там essa initSk удалял @"div" из
+        // атрибутов ССК, поэтому в skClient.map уходили ТОЛЬКО FK-атрибуты, а div_sk оставался значением
+        // SELECT (FULLDIVCODE). Воспроизводим то же самое: явный список FK-attributeCode (без собственного
+        // div_sk) -> div_sk становится суррогатом FK'ов, а собственный ключ материализуется натурально ниже.
+        List<String> fkAttributes = Arrays.asList(
+                "parent@div",
+                "legal@addr",
+                "div_time_zone@time_zone_rf"
+        );
 
-        Dataset<Row> result = addSk(div, DIV, columnEntities);
+        // Онбординг сущности div в ССК на INIT сохраняется (skInitOnLoad()=true -> skClient.init),
+        // чтобы сателлиты div_h/divtype/divdivrelation продолжали переиспользовать суррогаты @div.
+        Dataset<Row> result = addSk(div, DIV, fkAttributes);
+
+        // div_sk — натуральный ключ (SID == FULLDIVCODE), материализуется напрямую, НЕ через ССК
+        // (аналог эталона R3 DivDivRelation). Тип BIGINT кастует publisher по DDL, как в 3.0.
+        result = result.withColumn(DIV_SK, col(SID)).drop(DIV_SID);
 
         publish(result)
                 .recordsetMasks(sets)

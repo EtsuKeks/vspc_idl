@@ -38,7 +38,12 @@ public class TerrDivTypeTransformation extends BaseTransformation {
                         lit(false).as(DIRTY_FLAG)
                 ).distinct();
 
-        Dataset<Row> result = addSk(terrdivtype, TERRDIVTYPE, "@terr_div_type");
+        // terr_div_type_sk — НАТУРАЛЬНЫЙ ключ, строго как в 3.0: essa initSk удалял @"terr_div_type"
+        // из атрибутов ССК, а у хаба нет FK-атрибутов -> в skClient.map не уходит ничего, терр-ключ остаётся
+        // значением SELECT (DIVISIONTYPE00). Материализуем его напрямую (аналог эталона R3), _sid дропаем.
+        Dataset<Row> result = terrdivtype
+                .withColumn("terr_div_type_sk", col(SID))
+                .drop(TERR_DIV_TYPE_SID);
 
         publish(result)
                 .recordsetMasks(sets)

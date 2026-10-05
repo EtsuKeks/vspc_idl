@@ -49,14 +49,14 @@ workflows:
               #name: "{{ logical_env_prefix }}usl_gar_fias_idl"
               statisticId: 12
               profile: "{{ CTL_PROFILE_NAME_gar_fias_idl }}"
-              active: true
+              active: false
           - entity:
               # Входной data-продукт ЕСС usl.rdm_idl_spark IDL - Справочники во временном владении УКД, original ctl entity 801005231
               id: "801{{ logical_env_ctl_entity_logenv_number }}5231"
               #name: "{{ logical_env_prefix }}usl_rdm_idl_spark"
               statisticId: 12
               profile: "{{ CTL_PROFILE_NAME_rdm_idl_spark }}"
-              active: true
+              active: false
 
       params:
         - param:

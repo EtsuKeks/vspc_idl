@@ -6,8 +6,8 @@ import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
 import ru.sberbank.bigdata.sl.rt.core.App;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.List;
 
 import static java.lang.String.format;
 import static org.apache.spark.sql.functions.coalesce;
@@ -240,14 +240,24 @@ public class AddrTransformation extends BaseTransformation {
                         max(col(ADDRESS_TYPE_CODE)).as(ADDRESS_TYPE_CODE)
                 ).distinct();
 
-        Map<String, String> columnEntities = new HashMap<>();
-        columnEntities.put(ADDR_SID, ADDR);
-        columnEntities.put(ADDR_RUS_FED_SUBJ_SID, "rus_fed_subj");
-        columnEntities.put(ADDR_CNTRY_SID, "cntry");
-        columnEntities.put(ADDR_OKATO2_SID, "okato2");
-        columnEntities.put(ADDRESS_FIASCODE_SID, "addr");
+        // Собственный PK хаба (addr_sk) — НАТУРАЛЬНЫЙ, строго как в 3.0: там essa initSk удалял @"addr"
+        // из атрибутов ССК, поэтому в skClient.map уходили ТОЛЬКО FK-атрибуты, а addr_sk оставался значением
+        // SELECT (getKey("|")). Воспроизводим то же самое: явный список FK-attributeCode (без собственного
+        // addr_sk) -> addr_sk становится суррогатом FK'ов, а собственный ключ материализуется натурально ниже.
+        List<String> fkAttributes = Arrays.asList(
+                "@rus_fed_subj",
+                "@cntry",
+                "@okato2",
+                "fias_code@addr"
+        );
 
-        Dataset<Row> result = addSk(addr, ADDR, columnEntities);
+        // Онбординг сущности addr в ССК на INIT сохраняется (skInitOnLoad()=true -> skClient.init),
+        // чтобы сателлиты addr_h/legal_addr_sk продолжали переиспользовать суррогаты @addr.
+        Dataset<Row> result = addSk(addr, ADDR, fkAttributes);
+
+        // addr_sk — натуральный ключ (SID == getKey("|")), материализуется напрямую, НЕ через ССК
+        // (аналог эталона R3 DivDivRelation). Тип BIGINT кастует publisher по DDL, как в 3.0.
+        result = result.withColumn(ADDR_SK, col(SID)).drop(ADDR_SID);
 
         publish(result)
                 .recordsetMasks(sets)
