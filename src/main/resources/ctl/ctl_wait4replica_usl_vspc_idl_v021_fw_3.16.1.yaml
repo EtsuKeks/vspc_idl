@@ -30,16 +30,16 @@ workflows:
         entities:
           # Возможность добавить доп. зависимость для запуска потока https://confluence.sberbank.ru/display/USL/USL+specific+mart.yaml+parameters
           - entity:
-              # unsi_sp_rfznt_002.r_m_rfzonetime_0002_rfzonetime SNP
-              id: 912080145
+              # usl_vspc_idl_in.ebx_rep_m_rfzonetime_0002_rfzonetime SNP
+              id: 953008916
               statisticId: {{ archiveStat_FakeCardCode }}
               profile: "{{ archiveProfile_FakeCardCode }}"
               active: true
           # Возможность добавить доп. зависимость для запуска потока https://confluence.sberbank.ru/display/USL/USL+specific+mart.yaml+parameters
           - entity:
-              # unsi_sp_sfs_006.r_m_sfs_0006_sfsdivision SNP
-              # unsi_sp_sfs_006.r_m_sfs_0006_successors SNP
-              id: 912080349
+              # usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision SNP
+              # usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision_successors SNP
+              id: 953018846
               statisticId: {{ archiveStat_FakeCardCode }}
               profile: "{{ archiveProfile_FakeCardCode }}"
               active: true
@@ -49,14 +49,14 @@ workflows:
               #name: "{{ logical_env_prefix }}usl_gar_fias_idl"
               statisticId: 12
               profile: "{{ CTL_PROFILE_NAME_gar_fias_idl }}"
-              active: false
+              active: true
           - entity:
               # Входной data-продукт ЕСС usl.rdm_idl_spark IDL - Справочники во временном владении УКД, original ctl entity 801005231
               id: "801{{ logical_env_ctl_entity_logenv_number }}5231"
               #name: "{{ logical_env_prefix }}usl_rdm_idl_spark"
               statisticId: 12
               profile: "{{ CTL_PROFILE_NAME_rdm_idl_spark }}"
-              active: false
+              active: true
 
       params:
         - param:

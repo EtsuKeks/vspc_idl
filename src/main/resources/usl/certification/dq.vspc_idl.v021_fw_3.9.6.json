@@ -27,7 +27,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-addr-addr_dp_code",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -63,7 +63,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-addr-addr_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -99,7 +99,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-addr-ctl_loading",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -135,7 +135,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-addr-ctl_validfrom",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -171,7 +171,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-addr-sid",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -228,7 +228,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-addr-cntry_dp_code",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -264,7 +264,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-addr-fias_code_addr_dp_code",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -300,7 +300,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-addr-okato2_dp_code",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -336,7 +336,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-addr-rus_fed_subj_dp_code",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -405,7 +405,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_uq_s_vspc_idl-addr-addr_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -470,7 +470,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_-ctl_loading",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -506,7 +506,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_-ctl_validfrom",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -542,7 +542,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_-div_dp_code",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -578,7 +578,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_-div_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -614,7 +614,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_-sid",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -671,7 +671,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_-div_time_zone_time_zone_rf_dp_code",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -707,7 +707,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_-legal_addr_dp_code",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -743,7 +743,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_-parent_div_dp_code",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -811,7 +811,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_uq_s_vspc_idl-div_-div_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -876,7 +876,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-terr_div_type-ctl_loading",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -912,7 +912,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-terr_div_type-ctl_validfrom",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -948,7 +948,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-terr_div_type-sid",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -984,7 +984,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-terr_div_type-terr_div_type_dp_code",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -1020,7 +1020,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-terr_div_type-terr_div_type_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -1093,7 +1093,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_uq_s_vspc_idl-terr_div_type-terr_div_type_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -1158,7 +1158,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-time_zone_rf-ctl_loading",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -1194,7 +1194,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-time_zone_rf-ctl_validfrom",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -1230,7 +1230,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-time_zone_rf-sid",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -1266,7 +1266,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-time_zone_rf-time_zone_rf_dp_code",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -1302,7 +1302,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-time_zone_rf-time_zone_rf_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -1375,7 +1375,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_uq_s_vspc_idl-time_zone_rf-time_zone_rf_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -1442,7 +1442,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-addr_h-addr_dp_code",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -1478,7 +1478,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-addr_h-addr_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -1514,7 +1514,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-addr_h-ctl_loading",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -1550,7 +1550,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-addr_h-ctl_validfrom",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -1586,7 +1586,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-addr_h-end_dt",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -1622,7 +1622,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-addr_h-p1month",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -1658,7 +1658,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-addr_h-start_dt",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -1717,7 +1717,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-addr_h-addr_dp_code-pk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -1753,7 +1753,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-addr_h-address_okato2_dp_code",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -1789,7 +1789,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-addr_h-address_oktmo2_dp_code",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -1857,7 +1857,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_uq_s_vspc_idl-addr_h-addr_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -1923,7 +1923,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-ctl_loading",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -1959,7 +1959,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-ctl_validfrom",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -1995,7 +1995,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-div_dp_code",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -2031,7 +2031,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-div_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -2067,7 +2067,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-end_dt",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -2103,7 +2103,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-p1month",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -2139,7 +2139,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-start_dt",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -2198,7 +2198,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-div_dp_code-pk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -2234,7 +2234,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-fact_addr_dp_code",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -2270,7 +2270,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_h-pay_sys_prtcpnt_dp_code",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -2338,7 +2338,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_uq_s_vspc_idl-div_h-div_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -2404,7 +2404,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_type-ctl_loading",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -2440,7 +2440,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_type-ctl_validfrom",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -2476,7 +2476,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_type-div_dp_code",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -2512,7 +2512,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_type-div_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -2548,7 +2548,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_type-end_dt",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -2584,7 +2584,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_type-p1month",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -2620,7 +2620,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_type-start_dt",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -2679,7 +2679,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_type-div_dp_code-pk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -2715,7 +2715,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_type-div_type_terr_div_type_dp_code",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -2782,7 +2782,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_uq_s_vspc_idl-div_type-div_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -2850,7 +2850,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_div_relation-ctl_loading",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -2886,7 +2886,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_div_relation-ctl_validfrom",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -2922,7 +2922,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_div_relation-div_div_relation_dp_code",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -2958,7 +2958,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_div_relation-div_div_relation_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -2994,7 +2994,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_div_relation-end_dt",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -3030,7 +3030,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_div_relation-p1month",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -3066,7 +3066,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_div_relation-sid",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -3102,7 +3102,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_div_relation-start_dt",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -3162,7 +3162,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_div_relation-source_div_dp_code",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -3198,7 +3198,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_tn_s_vspc_idl-div_div_relation-successor_div_dp_code",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -3266,7 +3266,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_uq_s_vspc_idl-div_div_relation-div_div_relation_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -3334,7 +3334,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_ri_s_vspc_idl-div_-div_time_zone_time_zone_rf_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -3397,7 +3397,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_ri_s_vspc_idl-div_-legal_addr_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -3460,7 +3460,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_ri_s_vspc_idl-div_-parent_div_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -3523,7 +3523,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_ri_s_vspc_idl-div_div_relation-source_div_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -3586,7 +3586,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_ri_s_vspc_idl-div_div_relation-successor_div_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -3649,7 +3649,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_ri_s_vspc_idl-div_h-fact_addr_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -3712,7 +3712,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_ri_s_vspc_idl-div_type-div_type_terr_div_type_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -3776,7 +3776,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_bh_s_vspc_idl-addr_h",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -3841,7 +3841,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_bh_s_vspc_idl-div_div_relation",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -3906,7 +3906,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_bh_s_vspc_idl-div_h",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -3971,7 +3971,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_bh_s_vspc_idl-div_type",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -4038,7 +4038,7 @@
                                         "ai_flag": 0,
                                         "claims_cd": "cl_usl_tv_oblg_attr_s_vspc_idl-addr-src_txt-gar_fias",
                                         "biz_task_name": "ППР Руководителей",
-                                        "customer_name": "Лапухов Виктор Витальевич",
+                                        "customer_name": "Шукюров Виталий Вагифович",
                                         "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                         "business_proc_cd": "П1831"
                                     }
@@ -4101,7 +4101,7 @@
                                         "ai_flag": 0,
                                         "claims_cd": "cl_usl_tv_oblg_attr_s_vspc_idl-addr-src_txt-gar_fias>house",
                                         "biz_task_name": "ППР Руководителей",
-                                        "customer_name": "Лапухов Виктор Витальевич",
+                                        "customer_name": "Шукюров Виталий Вагифович",
                                         "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                         "business_proc_cd": "П1831"
                                     }
@@ -4164,7 +4164,7 @@
                                         "ai_flag": 0,
                                         "claims_cd": "cl_usl_tv_oblg_attr_s_vspc_idl-addr-src_txt-gar_fias>house>carplace",
                                         "biz_task_name": "ППР Руководителей",
-                                        "customer_name": "Лапухов Виктор Витальевич",
+                                        "customer_name": "Шукюров Виталий Вагифович",
                                         "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                         "business_proc_cd": "П1831"
                                     }
@@ -4227,7 +4227,7 @@
                                         "ai_flag": 0,
                                         "claims_cd": "cl_usl_tv_oblg_attr_s_vspc_idl-addr-src_txt-gar_fias>house>placement",
                                         "biz_task_name": "ППР Руководителей",
-                                        "customer_name": "Лапухов Виктор Витальевич",
+                                        "customer_name": "Шукюров Виталий Вагифович",
                                         "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                         "business_proc_cd": "П1831"
                                     }
@@ -4290,7 +4290,7 @@
                                         "ai_flag": 0,
                                         "claims_cd": "cl_usl_tv_oblg_attr_s_vspc_idl-addr-src_txt-gar_fias>house>placement>room",
                                         "biz_task_name": "ППР Руководителей",
-                                        "customer_name": "Лапухов Виктор Витальевич",
+                                        "customer_name": "Шукюров Виталий Вагифович",
                                         "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                         "business_proc_cd": "П1831"
                                     }
@@ -4353,7 +4353,7 @@
                                         "ai_flag": 0,
                                         "claims_cd": "cl_usl_tv_oblg_attr_s_vspc_idl-addr-src_txt-gar_fias>stead",
                                         "biz_task_name": "ППР Руководителей",
-                                        "customer_name": "Лапухов Виктор Витальевич",
+                                        "customer_name": "Шукюров Виталий Вагифович",
                                         "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                         "business_proc_cd": "П1831"
                                     }
@@ -4429,7 +4429,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_gri_s_vspc_idl-gar_fias_idl-addr-fias_code_addr_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -4500,7 +4500,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_gri_s_vspc_idl-rdm_idl_spark-addr-cntry_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -4562,7 +4562,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_gri_s_vspc_idl-rdm_idl_spark-addr-okato2_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -4624,7 +4624,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_gri_s_vspc_idl-rdm_idl_spark-addr-rus_fed_subj_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -4686,7 +4686,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_gri_s_vspc_idl-rdm_idl_spark-addr_h-address_okato2_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -4748,7 +4748,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_gri_s_vspc_idl-rdm_idl_spark-addr_h-address_oktmo2_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }
@@ -4810,7 +4810,7 @@
                                              "ai_flag": 0,
                                              "claims_cd": "cl_usl_gri_s_vspc_idl-rdm_idl_spark-div_h-pay_sys_prtcpnt_sk",
                                              "biz_task_name": "ППР Руководителей",
-                                             "customer_name": "Лапухов Виктор Витальевич",
+                                             "customer_name": "Шукюров Виталий Вагифович",
                                              "org_lvl2_name": "{{ org_lvl2_name }}", //переменная devops "Блок заказчика. Подразделение заказчика"
                                              "business_proc_cd": "П1831"
                                          }

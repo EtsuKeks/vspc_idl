@@ -12,9 +12,9 @@
   "sq_binary_folder": "target",
   "sq_options": "",
   "sast_conf": "devsecops-config.yml",
-  "emails": "SLSNTWRKDE_ess@sberbank.ru dvilapshin@sberbank.ru",
+  "emails": "SLSNTWRKDE_ess@sberbank.ru dvilapshin@sberbank.ru TRuKarimullin@sberbank.ru",
   "run_hive_script_sql": true,
-  "jira_task_release": "VSPCIDL-266",
+  "jira_task_release": "VSPCIDL-267",
   "nexus3": {
     "ci_it_service": "CI02619185",
     "ci_as_fp": "CI04734132"
@@ -28,7 +28,7 @@
       "usl/certification/cap_certification_usl.vspc_idl_v021_fw_3.9.6.json"
     ],
     "kkd-spod": [
-      "usl/certification/dq.vspc_idl.v022_fw_3.16.1.json"
+      "usl/certification/dq.vspc_idl.v021_fw_3.9.6.json"
     ],
     "well": "vspc"
   },
@@ -75,7 +75,7 @@
     }
   ],
   "template_files": [
-    "usl/certification/dq.vspc_idl.v022_fw_3.16.1.json",
+    "usl/certification/dq.vspc_idl.v021_fw_3.9.6.json",
     "sql/ddl/ddl.usl.vspc_idl.v021.model.9.47.0_fw_3.9.6.sql",
     "sql/ddl/ddl.usl.vspc_idl.v021.model_stg.9.47.0_fw_3.9.6.sql.sql"
   ],
