@@ -73,8 +73,10 @@ public final class ColumnsName {
     // ADDR_H
     public static final String ADDRH_OKATO2_DP_CODE = "address_okato2_dp_code";
     public static final String ADDRH_OKATO2_SID = "address_okato2_sid";
+    public static final String ADDRH_OKATO2_SK = "address_okato2_sk";
 
     public static final String ADDRH_OKTMO2_SID = "address_oktmo2_sid";
+    public static final String ADDRH_OKTMO2_SK = "address_oktmo2_sk";
     public static final String ADDRH_OKTMO2_DP_CODE = "address_oktmo2_dp_code";
 
     // DIV_
@@ -125,8 +127,10 @@ public final class ColumnsName {
     public static final String DIV_DIV_RELATION_SID = "div_div_relation_sid";
     public static final String DIV_DIV_RELATION_SK = "div_div_relation_sk";
     public static final String SOURCE_DIV_SID = "source_div_sid";
+    public static final String SOURCE_DIV_SK = "source_div_sk";
     public static final String SOURCE_DIV_DP_CODE = "source_div_dp_code";
     public static final String SUCCESSOR_DIV_SID = "successor_div_sid";
+    public static final String SUCCESSOR_DIV_SK = "successor_div_sk";
     public static final String SUCCESSOR_DIV_DP_CODE = "successor_div_dp_code";
 
     private ColumnsName() {
