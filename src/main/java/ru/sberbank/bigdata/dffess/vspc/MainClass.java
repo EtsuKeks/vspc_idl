@@ -15,6 +15,7 @@ import ru.sberbank.bigdata.sl.rt.core.Transformation;
 import ru.sberbank.bigdata.sl.rt.core.exceptions.AppException;
 import ru.sberbank.bigdata.sl.rt.logger.core.LogMessage;
 import ru.sberbank.bigdata.sl.rt.util.RtfwLogger;
+import ru.sberbank.bigdata.sl.rt.validation.ApplicationParameters;
 
 import static ru.sberbank.bigdata.sl.rt.core.CoreLogMessageBuilder.CORE_021;
 
@@ -22,9 +23,11 @@ public class MainClass {
 
     public static void main(String... args) {
         try {
-            App app = App.create("main", args)
-                    .autoSparkSession(true)
-                    .build();
+            App app = App.create("main", args).autoSparkSession(true).build();
+
+            if ("true".equals(app.ctx().getProperty(ApplicationParameters.DEBUG_SK_OFF.getParamName(), ""))) {
+                throw new IllegalStateException("Запуск без ССК запрещён: debug_sk_off=true");
+            }
 
             Transformation addr = new AddrTransformation(app);
             Transformation addrh = new AddrHTransformation(app);
@@ -53,6 +56,7 @@ public class MainClass {
             app.addTransformation(terrdivtype);
             app.addTransformation(timezone);
 
+            app.ctx().metadata2().getConsumers(app.ctx().getProductCode()).get(0).markChanged();
             app.run();
 
         } catch (Exception e) {
