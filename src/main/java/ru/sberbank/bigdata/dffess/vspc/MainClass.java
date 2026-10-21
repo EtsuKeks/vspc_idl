@@ -56,7 +56,6 @@ public class MainClass {
             app.addTransformation(terrdivtype);
             app.addTransformation(timezone);
 
-            app.ctx().metadata2().getConsumers(app.ctx().getProductCode()).get(0).markChanged();
             app.run();
 
         } catch (Exception e) {
