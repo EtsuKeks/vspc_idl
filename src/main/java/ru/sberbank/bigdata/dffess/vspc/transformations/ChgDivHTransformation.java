@@ -2,7 +2,6 @@ package ru.sberbank.bigdata.dffess.vspc.transformations;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
-import org.apache.spark.sql.SaveMode;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
 import ru.sberbank.bigdata.sl.rt.core.App;
 
@@ -18,18 +17,12 @@ public class ChgDivHTransformation extends BaseTransformation {
 
     @Override
     public void run() {
-        Dataset<Row> preselect = selectSQL(getPreselectSQL(app.ctx().getLoadMode()))
-                .distinct();
-        saveTable(preselect, STG_SCHEMA, CHG_DIVH, SaveMode.Overwrite);
-    }
-
-    public static void main(String[] args) {
-        runApp(args, ChgDivHTransformation::new);
+        Dataset<Row> preselect = app.getSparkSession().sql(getPreselectSQL(app.ctx().getLoadMode())).distinct();
+        saveTable(preselect, STG_SCHEMA, CHG_DIVH);
     }
 
     public static String getPreselectSQL(App.LoadMode loadMode) {
-        // Если инкрементальная загрузка
-        if (loadMode.equals(App.LoadMode.INCREMENT)) { // Берем из snp
+        if (loadMode.equals(App.LoadMode.INCREMENT)) {
             return " SELECT  " +
                     "     fulldivcode, " +
                     "     fullname, " +
@@ -106,7 +99,6 @@ public class ChgDivHTransformation extends BaseTransformation {
                     " on vsp_fias.requisitesdivision_bic = pay_sys_prtcpnt.sid ";
         }
 
-        // Если инициализирующая загрузка
         return  "  SELECT" +
                 "     fulldivcode, " +
                 "     fullname, " +
