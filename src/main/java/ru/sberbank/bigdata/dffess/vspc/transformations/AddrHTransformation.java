@@ -1,36 +1,28 @@
 package ru.sberbank.bigdata.dffess.vspc.transformations;
 
-import org.apache.spark.sql.Column;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
 import ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant;
 import ru.sberbank.bigdata.sl.rt.core.App;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
-import static java.lang.String.format;
 import static org.apache.spark.sql.functions.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
-import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.ADDR;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.ADDRH;
-import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.ADDRH_DS_CODE;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.CHG_DIVH;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DP_CODE;
 import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.RDM_IDL_SPARK;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.END_DT_FIELD_NAME;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.PLUS_INFINITY_DT;
-import static ru.sberbank.bigdata.sl.rt.core.Constants.START_DT_FIELD_NAME;
 
 public class AddrHTransformation extends BaseTransformation {
 
     public static final String CODE = ADDRH;
-    public static final String SETS = format("%s.%s", DP_CODE, ADDRH_DS_CODE);
 
     public AddrHTransformation(App app) {
-        super(app, CODE, SETS);
+        super(app, CODE);
     }
 
     @Override
@@ -88,46 +80,8 @@ public class AddrHTransformation extends BaseTransformation {
                 lit(">non_stndrt").as(ADDRESS_TYPE_CODE)
         ).distinct();
 
-        Map<String, String> columnEntities = new HashMap<>();
-        columnEntities.put(ADDR_SID, ADDR);
-        columnEntities.put(ADDRH_OKATO2_SID, "okato2");
-        columnEntities.put(ADDRH_OKTMO2_SID, "oktmo2");
+        Dataset<Row> result = addSk(addrh, ADDRH, Arrays.asList("@addr", "address@okato2", "address@oktmo2"));
 
-        Dataset<Row> result = addSk(addrh, ADDRH, columnEntities);
-
-        // ESSA-правило дат (DataLoaderHistDiff): INIT — 1900-01-01; INCR — новый ключ 1900-01-01,
-        // существующий ctl_validfrom - 1. Новизна ключа определяется ПОСЛЕ генерации СК по addr_sk:
-        // в SNP есть только *_sk, а *_sid на этом этапе уже дропнуты.
-        // Соответствие 3.0 (битовое): закрытие предыдущей версии при изменении ключа делает
-        // rt-fw-publisher (PERIOD_WITH_REWRITE): end_dt = date_sub(min(новый start_dt ключа), 1),
-        // а новый start_dt открытой версии = date_sub(ctl_validfrom, 1) => итог date_sub(ctl_validfrom, 2)
-        // == 3.0 date_sub(ANOTHER_CTL_VALIDFROM, 2). Ручные closing-строки НЕ эмитим (publisher входящий
-        // end_dt прошлой версии игнорирует и перезакрывает сам — своя эмиссия дала бы дубль).
-        // Ключи, исчезнувшие из реплики (нет в инкременте), НЕ закрываются — как в 3.0 DataLoaderHistDiff.
-        Column startDt;
-        if (isIncrement()) {
-            result = flagNewKeys(result, ADDRH, ADDR_SK);
-            startDt = when(col(NEW_KEY_FLAG), lit(VspcConstant.MIN_BUSINESS_DT))
-                    .otherwise(date_sub(lit(VspcConstant.getCtlValidFromStr()).cast("date"), 1))
-                    .cast("date");
-            result = result.drop(NEW_KEY_FLAG);
-        } else {
-            startDt = lit(VspcConstant.MIN_BUSINESS_DT).cast("date");
-        }
-        result = result.withColumn(START_DT_FIELD_NAME, startDt);
-
-        publish(result)
-                .recordsetMasks(sets)
-                .launch();
-    }
-
-    @Override
-    protected boolean skInitOnLoad() {
-        // ESSA-лоадер этой таблицы вызывал incrementSk (map) безусловно, включая INIT
-        return false;
-    }
-
-    public static void main(String[] args) {
-        runApp(args, AddrHTransformation::new);
+        publishVspc(result);
     }
 }
