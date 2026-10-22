@@ -5,26 +5,22 @@ import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
 import ru.sberbank.bigdata.sl.rt.core.App;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
-import static java.lang.String.format;
 import static org.apache.spark.sql.functions.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.*;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.END_DT_FIELD_NAME;
-import static ru.sberbank.bigdata.sl.rt.core.Constants.PLUS_INFINITY_DT;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.START_DT_FIELD_NAME;
 
 public class DivHTransformation extends BaseTransformation {
 
     public static final String CODE = DIVH;
-    public static final String SETS = format("%s.%s", DP_CODE, DIVH_DS_CODE);
 
     public DivHTransformation(App app) {
-        super(app, CODE, SETS);
+        super(app, CODE);
     }
 
     @Override
@@ -42,8 +38,6 @@ public class DivHTransformation extends BaseTransformation {
 
                 col(START_DT_FIELD_NAME).cast("date").as(START_DT_FIELD_NAME),
                 col(END_DT_FIELD_NAME).cast("date").as(END_DT_FIELD_NAME),
-
-                //col(ColumnsName.ADDRESS_LOCATIONADDRESS).as(ColumnsName.DIV_FACT_ADDR_SID),
 
                 col("serving_isdisabledequip").as(DIV_DISABLED_ACCESS_EQUIPMENT),
 
@@ -77,84 +71,8 @@ public class DivHTransformation extends BaseTransformation {
                 col(END_DT_FIELD_NAME).as(END_DT_FIELD_NAME)
         ).distinct();
 
-        Map<String, String> columnEntities = new HashMap<>();
-        columnEntities.put(DIV_SID, DIV);
-        columnEntities.put(DIV_PAY_SYS_PRTCPNT_SID, "pay_sys_prtcpnt");
-        columnEntities.put(DIV_FACT_ADDR_SID, ADDR);
+        Dataset<Row> result = addSk(divh, DIVH, Arrays.asList("@div", "@pay_sys_prtcpnt", "fact@addr"));
 
-        Dataset<Row> result = addSk(divh, DIVH, columnEntities);
-
-        if (isIncrement()) {
-            // Отсев неизменившихся бизнес-ключей (аналог ESSA EQUALS, DataLoaderHistMix/VspcMetadataKeeper):
-            // hash считается по бизнес-атрибутам БЕЗ start_dt/end_dt/p1month/ctl_* — так же, как ESSA
-            // MergeService.getStringHash (exclude = START_DT/END_DT/PARTITION_COLUMN_MONTH). Ключ, у которого
-            // есть открытая SNP-версия с теми же бизнес-атрибутами, не попадает в publisher и не создаёт
-            // лишнюю версию (в 3.0 он давал EQUALS и версия не пересоздавалась).
-            Dataset<Row> openSnp = readTable(SNP_SCHEMA, DIVH)
-                    .where(col(END_DT_FIELD_NAME).equalTo(lit(PLUS_INFINITY_DT).cast("date")))
-                    .select(
-                            col(DIV_SK).as("_etl_snp_div_sk"),
-                            xxhash64(concat(
-                                    when(col(DIV_SK).isNotNull(), col(DIV_SK).cast("string")).otherwise(lit("")),
-                                    when(col(DIV_H_NAME).isNotNull(), col(DIV_H_NAME).cast("string")).otherwise(lit("")),
-                                    when(col(DIV_DP_CODE).isNotNull(), col(DIV_DP_CODE).cast("string")).otherwise(lit("")),
-                                    when(col(DIV_PAY_SYS_PRTCPNT_SK).isNotNull(), col(DIV_PAY_SYS_PRTCPNT_SK).cast("string")).otherwise(lit("")),
-                                    when(col(DIV_PAY_SYS_PRTCPNT_DP_CODE).isNotNull(), col(DIV_PAY_SYS_PRTCPNT_DP_CODE).cast("string")).otherwise(lit("")),
-                                    when(col(DIV_FACT_ADDR_SK).isNotNull(), col(DIV_FACT_ADDR_SK).cast("string")).otherwise(lit("")),
-                                    when(col(DIV_FACT_ADDR_DP_CODE).isNotNull(), col(DIV_FACT_ADDR_DP_CODE).cast("string")).otherwise(lit("")),
-                                    when(col(DIV_DISABLED_ACCESS_EQUIPMENT).isNotNull(), col(DIV_DISABLED_ACCESS_EQUIPMENT).cast("string")).otherwise(lit(""))
-                            )).as("_etl_snp_hash"))
-                    .distinct();
-
-            // ESSA-правило дат (DataLoaderHistMix, INCR): новый ключ — 1900-01-01, существующий — ctl_validfrom - 1;
-            // end_dt остаётся passthrough из stg. Новизна ключа определяется ПОСЛЕ генерации СК по div_sk
-            // (в SNP есть только *_sk, а *_sid на этом этапе уже дропнуты).
-            // Отличие от ESSA HistMix: ESSA ставил входящим end_dt=9999 и сам закрывал прошлую версию
-            // (another_ctl_validfrom−2); здесь то же делает rt-fw-publisher (PERIOD_WITH_REWRITE). Закрытие
-            // битово совпадает: publisher закрывает предыдущую (открытую) версию
-            // end_dt = date_sub(min(новый start_dt ключа), 1), а новый start_dt открытой версии =
-            // date_sub(ctl_validfrom, 1) => итог date_sub(ctl_validfrom, 2) == 3.0 date_sub(another_ctl_validfrom, 2).
-            // Ручные closing-строки НЕ эмитим (publisher входящий end_dt прошлой версии игнорирует и
-            // перезакрывает сам — своя эмиссия была бы неэффективна и могла дать дубль). Штатные
-            // сценарии совпадают, а переоткрытие ранее закрытого ключа даёт start=ctl_validfrom−1 с разрывом
-            // вместо ESSA-перекрытия 1900 — целевое поведение подтверждается прогоном INIT+INCR на DEV.
-            result = result
-                    .withColumn("_etl_inc_hash", xxhash64(concat(
-                            when(col(DIV_SK).isNotNull(), col(DIV_SK).cast("string")).otherwise(lit("")),
-                            when(col(DIV_H_NAME).isNotNull(), col(DIV_H_NAME).cast("string")).otherwise(lit("")),
-                            when(col(DIV_DP_CODE).isNotNull(), col(DIV_DP_CODE).cast("string")).otherwise(lit("")),
-                            when(col(DIV_PAY_SYS_PRTCPNT_SK).isNotNull(), col(DIV_PAY_SYS_PRTCPNT_SK).cast("string")).otherwise(lit("")),
-                            when(col(DIV_PAY_SYS_PRTCPNT_DP_CODE).isNotNull(), col(DIV_PAY_SYS_PRTCPNT_DP_CODE).cast("string")).otherwise(lit("")),
-                            when(col(DIV_FACT_ADDR_SK).isNotNull(), col(DIV_FACT_ADDR_SK).cast("string")).otherwise(lit("")),
-                            when(col(DIV_FACT_ADDR_DP_CODE).isNotNull(), col(DIV_FACT_ADDR_DP_CODE).cast("string")).otherwise(lit("")),
-                            when(col(DIV_DISABLED_ACCESS_EQUIPMENT).isNotNull(), col(DIV_DISABLED_ACCESS_EQUIPMENT).cast("string")).otherwise(lit(""))
-                    )))
-                    .join(openSnp,
-                            col(DIV_SK).equalTo(col("_etl_snp_div_sk")).and(col("_etl_inc_hash").equalTo(col("_etl_snp_hash"))),
-                            "left_anti")
-                    .drop("_etl_inc_hash");
-
-            result = flagNewKeys(result, DIVH, DIV_SK);
-            result = result
-                    .withColumn(START_DT_FIELD_NAME,
-                            when(col(NEW_KEY_FLAG), lit(MIN_BUSINESS_DT))
-                                    .otherwise(date_sub(lit(getCtlValidFromStr()).cast("date"), 1))
-                                    .cast("date"))
-                    .drop(NEW_KEY_FLAG);
-        }
-
-        publish(result)
-                .recordsetMasks(sets)
-                .launch();
-    }
-
-    @Override
-    protected boolean skInitOnLoad() {
-        // ESSA-лоадер этой таблицы вызывал incrementSk (map) безусловно, включая INIT
-        return false;
-    }
-
-    public static void main(String[] args) {
-        runApp(args, DivHTransformation::new);
+        publishVspc(result);
     }
 }
