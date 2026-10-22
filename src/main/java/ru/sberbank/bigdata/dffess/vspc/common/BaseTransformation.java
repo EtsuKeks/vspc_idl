@@ -2,6 +2,7 @@ package ru.sberbank.bigdata.dffess.vspc.common;
 
 import org.apache.spark.sql.*;
 import org.apache.spark.sql.types.DataTypes;
+import ru.sberbank.bigdata.dffess.vspc.common.publish.VspcPublisher;
 import ru.sberbank.bigdata.sl.rt.core.App;
 import ru.sberbank.bigdata.sl.rt.core.AppContext;
 import ru.sberbank.bigdata.sl.rt.core.Transformation;
@@ -19,11 +20,9 @@ import static java.util.stream.Collectors.toList;
 import static org.apache.spark.sql.functions.*;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.END_DT_FIELD_NAME;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.PLUS_INFINITY_DT;
-import static ru.sberbank.bigdata.sl.rt.reader.constants.ReaderConstants.*;
 
 public abstract class BaseTransformation extends Transformation {
     public static final String SID = "sid";
-    public static final String NEW_KEY_FLAG = "_etl_new_key";
     protected static String SHORT_PRODUCT_CODE;
     public static String STGTMP_SCHEMA;
     public static String STG_SCHEMA;
@@ -80,15 +79,16 @@ public abstract class BaseTransformation extends Transformation {
         return app.getSparkSession().sql(format("select * from %s.%s", targetSchema, targetTable));
     }
 
-    protected Dataset<Row> flagNewKeys(Dataset<Row> df, String snpTable, String pkColumn) {
-        Dataset<Row> existingKeys = readTable(SNP_SCHEMA, snpTable)
-                .where(col(END_DT_FIELD_NAME).equalTo(lit(PLUS_INFINITY_DT).cast("date")))
-                .select(col(pkColumn).as("_etl_pk"))
-                .distinct();
-        return df.join(existingKeys, df.col(pkColumn).equalTo(existingKeys.col("_etl_pk")), "left")
-                .withColumn(NEW_KEY_FLAG,
-                        when(existingKeys.col("_etl_pk").isNotNull(), lit(false)).otherwise(lit(true)))
-                .drop(existingKeys.col("_etl_pk"));
+    public String getCode() {
+        return code;
+    }
+
+    public App getApp() {
+        return app;
+    }
+
+    protected void publishVspc(Dataset<Row> result) {
+        VspcPublisher.instance().publish(this, result);
     }
 
     protected Dataset<Row> addSk(Dataset<Row> mappedDfwc, String tableName, List<String> attributeCodes) {
