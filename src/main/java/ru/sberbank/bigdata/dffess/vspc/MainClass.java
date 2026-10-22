@@ -32,10 +32,10 @@ public class MainClass {
             Transformation addr = new AddrTransformation(app);
             Transformation addrh = new AddrHTransformation(app);
             Transformation chgdivh = new ChgDivHTransformation(app);
-            Transformation div = new DivTransformation(app);
-            Transformation divh = new DivHTransformation(app);
-            Transformation divtype = new DivTypeTransformation(app);
             Transformation divdivrelation = new DivDivRelationTransformation(app);
+            Transformation divh = new DivHTransformation(app);
+            Transformation div = new DivTransformation(app);
+            Transformation divtype = new DivTypeTransformation(app);
             Transformation terrdivtype = new TerrDivTypeTransformation(app);
             Transformation timezone = new TimeZoneTransformation(app);
 
