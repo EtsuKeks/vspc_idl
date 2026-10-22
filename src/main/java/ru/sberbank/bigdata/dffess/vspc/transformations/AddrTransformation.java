@@ -6,10 +6,10 @@ import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
 import ru.sberbank.bigdata.sl.rt.core.App;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static java.lang.String.format;
 import static org.apache.spark.sql.functions.coalesce;
 import static org.apache.spark.sql.functions.col;
 import static org.apache.spark.sql.functions.concat_ws;
@@ -18,9 +18,7 @@ import static org.apache.spark.sql.functions.max;
 import static org.apache.spark.sql.functions.when;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.ADDR;
-import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.ADDR_DS_CODE;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.CHG_DIVH;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DP_CODE;
 import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DATA_PRODUCT;
 import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.GAR_FIAS_IDL;
 import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.RDM_IDL_SPARK;
@@ -29,10 +27,9 @@ import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 public class AddrTransformation extends BaseTransformation {
 
     public static final String CODE = ADDR;
-    public static final String SETS = format("%s.%s", DP_CODE, ADDR_DS_CODE);
 
     public AddrTransformation(App app) {
-        super(app, CODE, SETS);
+        super(app, CODE);
     }
 
     @Override
@@ -240,28 +237,11 @@ public class AddrTransformation extends BaseTransformation {
                         max(col(ADDRESS_TYPE_CODE)).as(ADDRESS_TYPE_CODE)
                 ).distinct();
 
-        // Собственный PK хаба (addr_sk) — НАТУРАЛЬНЫЙ, строго как в 3.0: там essa initSk удалял @"addr"
-        // из атрибутов ССК, поэтому в skClient.map уходили ТОЛЬКО FK-атрибуты, а addr_sk оставался значением
-        // SELECT (getKey("|")). Воспроизводим то же самое: явный список FK-attributeCode (без собственного
-        // addr_sk) -> addr_sk становится суррогатом FK'ов, а собственный ключ материализуется натурально ниже.
-        List<String> fkAttributes = Arrays.asList(
-                "@rus_fed_subj",
-                "@cntry",
-                "@okato2",
-                "fias_code@addr"
+        List<String> attributes = new ArrayList<>(
+                Arrays.asList("@rus_fed_subj", "@cntry", "@okato2", "fias_code@addr", "@addr")
         );
-
-        // Онбординг сущности addr в ССК на INIT сохраняется (skInitOnLoad()=true -> skClient.init),
-        // чтобы сателлиты addr_h/legal_addr_sk продолжали переиспользовать суррогаты @addr.
-        Dataset<Row> result = addSk(addr, ADDR, fkAttributes);
-
-        // addr_sk — натуральный ключ (SID == getKey("|")), материализуется напрямую, НЕ через ССК
-        // (аналог эталона R3 DivDivRelation). Тип BIGINT кастует publisher по DDL, как в 3.0.
-        result = result.withColumn(ADDR_SK, col(SID)).drop(ADDR_SID);
-
-        publish(result)
-                .recordsetMasks(sets)
-                .launch();
+        Dataset<Row> result = addSk(addr, ADDR, attributes);
+        publishVspc(result);
     }
 
     public static Column getKey(String sep) {
@@ -279,9 +259,5 @@ public class AddrTransformation extends BaseTransformation {
                         coalesce(col(ADDR_OKTMO2_SID), lit("NULL").cast("string"))
                 )
         );
-    }
-
-    public static void main(String[] args) {
-        runApp(args, AddrTransformation::new);
     }
 }
