@@ -1,10 +1,5 @@
 package ru.sberbank.bigdata.dffess.vspc.constant;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-import static ru.sberbank.bigdata.sl.rt.core.Constants.TIMESTAMP_PATTERN;
-
 public class VspcConstant {
 
     public static final String DATA_PRODUCT = "vspc_idl";
@@ -18,10 +13,4 @@ public class VspcConstant {
     public static final String SRC_PROVIDER_SFSDIVISION_SUCCESSORS =
             "usl_vspc_idl_in." + TablesName.EBX_REP_M_SFS_0002_SFSDIVISION_SUCCESSORS;
     public static final String SRC_PROVIDER_RFCZONETIME = "usl_vspc_idl_in.ebx_rep_m_rfzonetime_0002_rfzonetime";
-
-    public static final DateTimeFormatter DF_TS = DateTimeFormatter.ofPattern(TIMESTAMP_PATTERN);
-
-    public static String getCtlValidFromStr() {
-        return LocalDateTime.now().format(DF_TS);
-    }
 }

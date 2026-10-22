@@ -21,10 +21,6 @@ public class Logger {
         return new LogMessage("", LogType.TECH_ERROR, title);
     }
 
-    public static LogMessage debug(String title) {
-        return new LogMessage("", LogType.TECH_DEBUG, title);
-    }
-
     /**
      * Штатный канал журналирования RT-FW (App.log -> rt-fw-logger / ТС Журналирование);
      * echo в log4j оставлен для stdout/YARN-логов.
@@ -54,10 +50,6 @@ public class Logger {
 
     public void logError(String title) {
         log(error(title));
-    }
-
-    public void logDebug(String title) {
-        log(debug(title));
     }
 
 }

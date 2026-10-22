@@ -44,11 +44,9 @@ public final class ColumnsName {
     // common
     public static final String ADDR_DP_CODE = "addr_dp_code";
     public static final String ADDR_SID = "addr_sid";
-    public static final String ADDR_SK = "addr_sk";
     public static final String DIRTY_FLAG = "dirty_flag";
     public static final String DIV_DP_CODE = "div_dp_code";
     public static final String DIV_SID = "div_sid";
-    public static final String DIV_SK = "div_sk";
 
     // ADDR
     public static final String ADDR_CITY_NAME = "city_name";
@@ -61,9 +59,7 @@ public final class ColumnsName {
     public static final String ADDR_LOCTY_NAME = "locty_name";
     public static final String ADDR_OKATO2_DP_CODE = "okato2_dp_code";
     public static final String ADDR_OKATO2_SID = "okato2_sid";
-
     public static final String ADDR_OKTMO2_SID = "oktmo2_sid";
-
     public static final String ADDR_REG_ADDR_NAME = "reg_addr_name";
     public static final String ADDR_REG_FED_SUBJ_DP_CODE = "rus_fed_subj_dp_code";
     public static final String ADDR_RUS_FED_SUBJ_SID = "rus_fed_subj_sid";
@@ -73,10 +69,7 @@ public final class ColumnsName {
     // ADDR_H
     public static final String ADDRH_OKATO2_DP_CODE = "address_okato2_dp_code";
     public static final String ADDRH_OKATO2_SID = "address_okato2_sid";
-    public static final String ADDRH_OKATO2_SK = "address_okato2_sk";
-
     public static final String ADDRH_OKTMO2_SID = "address_oktmo2_sid";
-    public static final String ADDRH_OKTMO2_SK = "address_oktmo2_sk";
     public static final String ADDRH_OKTMO2_DP_CODE = "address_oktmo2_dp_code";
 
     // DIV_
@@ -98,16 +91,13 @@ public final class ColumnsName {
     public static final String DIV_H_NAME = "div_name";
     public static final String DIV_FACT_ADDR_DP_CODE = "fact_addr_dp_code";
     public static final String DIV_FACT_ADDR_SID = "fact_addr_sid";
-    public static final String DIV_FACT_ADDR_SK = "fact_addr_sk";
     public static final String DIV_PAY_SYS_PRTCPNT_DP_CODE = "pay_sys_prtcpnt_dp_code";
     public static final String DIV_PAY_SYS_PRTCPNT_SID = "pay_sys_prtcpnt_sid";
-    public static final String DIV_PAY_SYS_PRTCPNT_SK = "pay_sys_prtcpnt_sk";
     public static final String DIV_DISABLED_ACCESS_EQUIPMENT = "disabled_access_equipment_flag";
 
     // DIV_TYPE
     public static final String DIV_TYPE_TERR_DIV_TYPE_DP_CODE = "div_type_terr_div_type_dp_code";
     public static final String DIV_TYPE_TERR_DIV_TYPE_SID = "div_type_terr_div_type_sid";
-    public static final String DIV_TYPE_TERR_DIV_TYPE_SK = "div_type_terr_div_type_sk";
 
     // TERR_DIV_TYPE
     public static final String DIV_TYPE_CODE = "div_type_code";
@@ -125,12 +115,9 @@ public final class ColumnsName {
 
     public static final String DIV_DIV_RELATION_DP_CODE = "div_div_relation_dp_code";
     public static final String DIV_DIV_RELATION_SID = "div_div_relation_sid";
-    public static final String DIV_DIV_RELATION_SK = "div_div_relation_sk";
     public static final String SOURCE_DIV_SID = "source_div_sid";
-    public static final String SOURCE_DIV_SK = "source_div_sk";
     public static final String SOURCE_DIV_DP_CODE = "source_div_dp_code";
     public static final String SUCCESSOR_DIV_SID = "successor_div_sid";
-    public static final String SUCCESSOR_DIV_SK = "successor_div_sk";
     public static final String SUCCESSOR_DIV_DP_CODE = "successor_div_dp_code";
 
     private ColumnsName() {
