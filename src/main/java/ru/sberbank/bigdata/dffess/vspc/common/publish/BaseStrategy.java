@@ -6,11 +6,16 @@ import org.apache.spark.sql.Row;
 import org.apache.spark.sql.expressions.Window;
 import org.apache.spark.sql.expressions.WindowSpec;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
+import ru.sberbank.bigdata.dffess.vspc.common.Logger;
 import ru.sberbank.bigdata.sl.rt.core.App;
 import ru.sberbank.bigdata.sl.rt.core.Transformation;
+import ru.sberbank.bigdata.sl.rt.core.exceptions.TransformationException;
+import ru.sberbank.bigdata.sl.rt.logger.core.LogMessage;
+import ru.sberbank.bigdata.sl.rt.logger.core.LogType;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -44,7 +49,9 @@ public abstract class BaseStrategy {
     }
 
     public final SnpDiff prepare(Dataset<Row> result) {
-        if (t.ctx().getLoadMode() == App.LoadMode.INITIAL) {
+        App.LoadMode mode = t.ctx().getLoadMode();
+        validateResultContract(result, mode);
+        if (mode == App.LoadMode.INITIAL) {
             return prepareInit(result);
         }
         return prepareIncr(result);
@@ -53,6 +60,29 @@ public abstract class BaseStrategy {
     protected abstract SnpDiff prepareInit(Dataset<Row> result);
 
     protected abstract SnpDiff prepareIncr(Dataset<Row> result);
+
+    protected List<String> requiredInputFields(App.LoadMode mode) {
+        List<String> required = new ArrayList<>(Arrays.asList(spec.pk));
+        if (spec.hasDeletedFlag) {
+            required.add(DELETED_FLAG);
+        }
+        return required;
+    }
+
+    private void validateResultContract(Dataset<Row> result, App.LoadMode mode) {
+        Set<String> present = Arrays.stream(result.columns()).map(String::toLowerCase).collect(toSet());
+        List<String> missing = requiredInputFields(mode).stream()
+                .filter(name -> !present.contains(name.toLowerCase()))
+                .collect(toList());
+        if (!missing.isEmpty()) {
+            String message = "Трансформация " + t.getClass().getSimpleName()
+                    + " не положила в результат обязательные поля " + missing
+                    + " (контракт стратегии " + getClass().getSimpleName()
+                    + ", режим " + mode + ", таблица " + spec.code + ")";
+            new Logger(app(), BaseStrategy.class).logError(message);
+            throw new TransformationException(new LogMessage("", LogType.TECH_ERROR, message));
+        }
+    }
 
     protected long loadingId() {
         return (long) t.ctx().getLoadingId();
