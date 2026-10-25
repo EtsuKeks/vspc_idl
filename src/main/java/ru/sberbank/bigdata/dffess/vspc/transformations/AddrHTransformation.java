@@ -13,7 +13,6 @@ import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.ADDRH;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.CHG_DIVH;
 import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.RDM_IDL_SPARK;
-import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.END_DT_FIELD_NAME;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.PLUS_INFINITY_DT;
 
@@ -68,8 +67,6 @@ public class AddrHTransformation extends BaseTransformation {
                 col(ADDR_SID).as(ADDR_SID),
                 lit(VspcConstant.DATA_PRODUCT).as(ADDR_DP_CODE),
                 col(ADDRESS_STANDARD_ADDRESS_TXT).as(ADDRESS_STANDARD_ADDRESS_TXT),
-                lit(false).as(DIRTY_FLAG),
-                lit(false).as(DELETED_FLAG),
 
                 when(col(ADDR_OKATO2_SID).isNotNull(), col(ADDR_OKATO2_SID)).as(ADDRH_OKATO2_SID),
                 when(col(ADDR_OKATO2_SID).isNotNull(), lit(RDM_IDL_SPARK)).as(ADDRH_OKATO2_DP_CODE),

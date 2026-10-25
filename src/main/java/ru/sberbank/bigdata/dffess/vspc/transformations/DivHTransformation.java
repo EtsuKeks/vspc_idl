@@ -11,7 +11,6 @@ import static org.apache.spark.sql.functions.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.*;
-import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.END_DT_FIELD_NAME;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.START_DT_FIELD_NAME;
 
@@ -65,8 +64,6 @@ public class DivHTransformation extends BaseTransformation {
 
                 col(DIV_DISABLED_ACCESS_EQUIPMENT).as(DIV_DISABLED_ACCESS_EQUIPMENT),
 
-                lit(false).as(DIRTY_FLAG),
-                lit(false).as(DELETED_FLAG),
                 col(START_DT_FIELD_NAME).as(START_DT_FIELD_NAME),
                 col(END_DT_FIELD_NAME).as(END_DT_FIELD_NAME)
         ).distinct();

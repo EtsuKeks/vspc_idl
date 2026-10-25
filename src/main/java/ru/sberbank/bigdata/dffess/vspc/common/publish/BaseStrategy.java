@@ -33,7 +33,6 @@ public abstract class BaseStrategy {
     public static final String RECORD_STATUS = "record_status";
     public static final String RN_COLUMN = "rn";
     public static final String PREV_STATE_OF_DEL = "prev_state_of_del";
-    private static final String DIRTY_FLAG = "dirty_flag";
     private static final Set<String> ADDITIONAL_FIELDS = new HashSet<>(Arrays.asList(
             RN_COLUMN, RECORD_STATUS, HASH_COLUMN, "string_hash",
             "another_del_flag", "another_ctl_loading", "another_ctl_validfrom", PREV_STATE_OF_DEL));
@@ -62,11 +61,7 @@ public abstract class BaseStrategy {
     protected abstract SnpDiff prepareIncr(Dataset<Row> result);
 
     protected List<String> requiredInputFields(App.LoadMode mode) {
-        List<String> required = new ArrayList<>(Arrays.asList(spec.pk));
-        if (spec.hasDeletedFlag) {
-            required.add(DELETED_FLAG);
-        }
-        return required;
+        return new ArrayList<>(Arrays.asList(spec.pk));
     }
 
     private void validateResultContract(Dataset<Row> result, App.LoadMode mode) {
@@ -165,15 +160,5 @@ public abstract class BaseStrategy {
 
     protected Column p1monthCol() {
         return date_format(col(END_DT_FIELD_NAME), "yyyyMM");
-    }
-
-    protected Dataset<Row> applyFlags(Dataset<Row> df) {
-        if (spec.dropDirtyFlag && hasColumn(df, DIRTY_FLAG)) {
-            df = df.drop(DIRTY_FLAG);
-        }
-        if (!spec.hasDeletedFlag && hasColumn(df, DELETED_FLAG)) {
-            df = df.drop(DELETED_FLAG);
-        }
-        return df;
     }
 }

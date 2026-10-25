@@ -64,7 +64,6 @@ public class DivDivRelationTransformation extends BaseTransformation {
                         col("successor_sid").as(SUCCESSOR_DIV_SID),
                         lit(DATA_PRODUCT).as(SUCCESSOR_DIV_DP_CODE),
 
-                        lit(false).as(DIRTY_FLAG),
                         lit(false).as(DELETED_FLAG)
 
                 ).distinct();
