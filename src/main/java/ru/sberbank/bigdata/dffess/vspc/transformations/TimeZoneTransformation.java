@@ -4,6 +4,7 @@ import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
 import ru.sberbank.bigdata.sl.rt.core.App;
+import ru.sberbank.bigdata.sl.rt.core.Recordset;
 
 import java.util.Arrays;
 
@@ -29,7 +30,7 @@ public class TimeZoneTransformation extends BaseTransformation {
                         lit(false).as(DELETED_FLAG),
                         when(col(ABBREVIATION).equalTo("USZ1"), "KALT").otherwise(col(ABBREVIATION)).as(SID),
                         when(col(ABBREVIATION).equalTo("USZ1"), "KALT").otherwise(col(ABBREVIATION)).as(TIME_ZONE_ABBR_CODE),
-                        col(CODE).as(TIME_ZONE_CODE),
+                        col(CODE).cast("string").as(TIME_ZONE_CODE),
                         col(TIMEDESIGNATION).as(TIME_ZONE_MSK_SHIFT_VAL),
                         col(NAME00).as(TIME_ZONE_NAME),
                         lit(DATA_PRODUCT).as(TIME_ZONE_DP_CODE),
@@ -39,7 +40,8 @@ public class TimeZoneTransformation extends BaseTransformation {
                 ).where(col(ABBREVIATION).isNotNull())
                 .distinct();
 
-        Dataset<Row> result = addSk(slice, TIMEZONE, Arrays.asList("@time_zone_rf"));
-        publishVspc(result);
+        Dataset<Row> result = addSk(slice, TIMEZONE, Arrays.asList("@time_zone_rf")).dropDuplicates("time_zone_rf_sk");
+        publish(result).recordsetMasks("usl_vspc_idl.time_zone_rf.hub").launch();
+        registerChangedSets(Recordset.recordsets(getApp(), "usl_vspc_idl.time_zone_rf.hub"));
     }
 }

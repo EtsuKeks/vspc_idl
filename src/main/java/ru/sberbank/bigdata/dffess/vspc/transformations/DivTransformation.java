@@ -4,6 +4,7 @@ import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
 import ru.sberbank.bigdata.sl.rt.core.App;
+import ru.sberbank.bigdata.sl.rt.core.Recordset;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -84,7 +85,8 @@ public class DivTransformation extends BaseTransformation {
         List<String> attributes = new ArrayList<>(
                 Arrays.asList("parent@div", "legal@addr", "div_time_zone@time_zone_rf", "@div")
         );
-        Dataset<Row> result = addSk(div, DIV, attributes);
-        publishVspc(result);
+        Dataset<Row> result = addSk(div, DIV, attributes).dropDuplicates("div_sk");
+        publish(result).recordsetMasks("usl_vspc_idl.div.hub").launch();
+        registerChangedSets(Recordset.recordsets(getApp(), "usl_vspc_idl.div.hub"));
     }
 }

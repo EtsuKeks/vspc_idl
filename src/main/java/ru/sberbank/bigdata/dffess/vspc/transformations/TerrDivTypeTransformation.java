@@ -4,6 +4,7 @@ import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
 import ru.sberbank.bigdata.sl.rt.core.App;
+import ru.sberbank.bigdata.sl.rt.core.Recordset;
 
 import java.util.Arrays;
 
@@ -36,7 +37,8 @@ public class TerrDivTypeTransformation extends BaseTransformation {
                         lit(false).as(DIRTY_FLAG)
                 ).distinct();
 
-        Dataset<Row> result = addSk(terrdivtype, TERRDIVTYPE, Arrays.asList("@terr_div_type"));
-        publishVspc(result);
+        Dataset<Row> result = addSk(terrdivtype, TERRDIVTYPE, Arrays.asList("@terr_div_type")).dropDuplicates("terr_div_type_sk");
+        publish(result).recordsetMasks("usl_vspc_idl.terr_div_type.hub").launch();
+        registerChangedSets(Recordset.recordsets(getApp(), "usl_vspc_idl.terr_div_type.hub"));
     }
 }
