@@ -3,9 +3,10 @@ package ru.sberbank.bigdata.dffess.vspc.transformations;
 import org.apache.spark.sql.Column;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
-import ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
+import ru.sberbank.bigdata.dffess.vspc.common.VspcLoadDate;
 import ru.sberbank.bigdata.sl.rt.core.App;
+import ru.sberbank.bigdata.sl.rt.core.Recordset;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,6 +15,7 @@ import java.util.List;
 import static org.apache.spark.sql.functions.coalesce;
 import static org.apache.spark.sql.functions.col;
 import static org.apache.spark.sql.functions.concat_ws;
+import static org.apache.spark.sql.functions.date_sub;
 import static org.apache.spark.sql.functions.lit;
 import static org.apache.spark.sql.functions.lower;
 import static org.apache.spark.sql.functions.trim;
@@ -24,7 +26,9 @@ import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.SRC_PROVIDER
 import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.SRC_PROVIDER_SFSDIVISION_SUCCESSORS;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.END_DT_FIELD_NAME;
+import static ru.sberbank.bigdata.sl.rt.core.Constants.MINUS_INFINITY_DT;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.PLUS_INFINITY_DT;
+import static ru.sberbank.bigdata.sl.rt.core.Constants.START_DT_FIELD_NAME;
 
 public class DivDivRelationTransformation extends BaseTransformation {
 
@@ -64,6 +68,7 @@ public class DivDivRelationTransformation extends BaseTransformation {
                         col("successor_sid").as(SUCCESSOR_DIV_SID),
                         lit(DATA_PRODUCT).as(SUCCESSOR_DIV_DP_CODE),
 
+                        lit(false).as(DIRTY_FLAG),
                         lit(false).as(DELETED_FLAG)
 
                 ).distinct();
@@ -73,7 +78,19 @@ public class DivDivRelationTransformation extends BaseTransformation {
         List<String> attributes = new ArrayList<>(Arrays.asList("source@div", "successor@div", "@div_div_relation"));
         Dataset<Row> result = addSk(divsuccessor, DIVDIVRELATION, attributes);
 
-        publishVspc(result);
+        // vspc-3.0 parity: start_dt историчной таблицы — в 3.0 её штамповал локальный лоадер
+        // DataLoaderLinkHistDiff (INIT: плоский to_date(lit(MIN_DATE))="1900-01-01", стр. 43+55-56;
+        // INCR: date_sub(ctl_validfrom_to_start_dt,1), стр. 45-46). Штатный RT-FW Publisher даты не
+        // создаёт — castToTargetStructure доливает отсутствующие колонки NULL (PublisherUtils.java:374-390),
+        // из-за чего PK [start_dt,div_div_relation_sk] не сходится и D2/DROPBAD shadow-калькулятора
+        // ненаблюдаемы. Якорь «день загрузки» = VspcLoadDate.sqlDate() (ОДНО значение на JVM) — тот же, что в
+        // закрывающих формулах shadow (end := loadDate-2 ≡ another_ctl_validfrom-2): стык [.., loadDate-2][loadDate-1, ..] без разрыва.
+        result = result.withColumn(START_DT_FIELD_NAME, getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT
+                                                        ? date_sub(lit(VspcLoadDate.sqlDate()), 1)
+                                                        : lit(MINUS_INFINITY_DT).cast("date"));
+
+        publish(result).recordsetMasks("usl_vspc_idl.div&div_relation.link").launch();
+        registerChangedSets(Recordset.recordsets(getApp(), "usl_vspc_idl.div&div_relation.link"));
     }
 
     public static Column getKey(String sep) {
