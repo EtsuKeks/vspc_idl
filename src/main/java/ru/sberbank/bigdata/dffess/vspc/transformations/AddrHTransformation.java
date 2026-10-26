@@ -3,8 +3,10 @@ package ru.sberbank.bigdata.dffess.vspc.transformations;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
+import ru.sberbank.bigdata.dffess.vspc.common.VspcLoadDate;
 import ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant;
 import ru.sberbank.bigdata.sl.rt.core.App;
+import ru.sberbank.bigdata.sl.rt.core.Recordset;
 
 import java.util.Arrays;
 
@@ -13,8 +15,11 @@ import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.ADDRH;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.CHG_DIVH;
 import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.RDM_IDL_SPARK;
+import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.END_DT_FIELD_NAME;
+import static ru.sberbank.bigdata.sl.rt.core.Constants.MINUS_INFINITY_DT;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.PLUS_INFINITY_DT;
+import static ru.sberbank.bigdata.sl.rt.core.Constants.START_DT_FIELD_NAME;
 
 public class AddrHTransformation extends BaseTransformation {
 
@@ -67,6 +72,8 @@ public class AddrHTransformation extends BaseTransformation {
                 col(ADDR_SID).as(ADDR_SID),
                 lit(VspcConstant.DATA_PRODUCT).as(ADDR_DP_CODE),
                 col(ADDRESS_STANDARD_ADDRESS_TXT).as(ADDRESS_STANDARD_ADDRESS_TXT),
+                lit(false).as(DIRTY_FLAG),
+                lit(false).as(DELETED_FLAG),
 
                 when(col(ADDR_OKATO2_SID).isNotNull(), col(ADDR_OKATO2_SID)).as(ADDRH_OKATO2_SID),
                 when(col(ADDR_OKATO2_SID).isNotNull(), lit(RDM_IDL_SPARK)).as(ADDRH_OKATO2_DP_CODE),
@@ -79,6 +86,18 @@ public class AddrHTransformation extends BaseTransformation {
 
         Dataset<Row> result = addSk(addrh, ADDRH, Arrays.asList("@addr", "address@okato2", "address@oktmo2"));
 
-        publishVspc(result);
+        // vspc-3.0 parity: start_dt историчной таблицы — в 3.0 её штамповал framework-лоадер
+        // DataLoaderHistDiff (INIT: плоский to_date(lit(MIN_DATE))="1900-01-01", стр. 30-38+133-154;
+        // INCR: date_sub(ctl_validfrom_to_start_dt,1), стр. 40-47). Штатный RT-FW Publisher даты не
+        // создаёт — castToTargetStructure доливает отсутствующие колонки NULL (PublisherUtils.java:374-390),
+        // из-за чего PK [addr_sk,start_dt] не сходится и D2/VANISH/DROPBAD shadow-калькулятора ненаблюдаемы.
+        // Якорь «день загрузки» = VspcLoadDate.sqlDate() (ОДНО значение на JVM) — тот же, что в закрывающих
+        // формулах shadow (end := loadDate-2 ≡ another_ctl_validfrom-2): стык [.., loadDate-2][loadDate-1, ..] без разрыва, как в 3.0.
+        result = result.withColumn(START_DT_FIELD_NAME, getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT
+                                                        ? date_sub(lit(VspcLoadDate.sqlDate()), 1)
+                                                        : lit(MINUS_INFINITY_DT).cast("date"));
+
+        publish(result).recordsetMasks("usl_vspc_idl.addr.sat=h").launch();
+        registerChangedSets(Recordset.recordsets(getApp(), "usl_vspc_idl.addr.sat=h"));
     }
 }
