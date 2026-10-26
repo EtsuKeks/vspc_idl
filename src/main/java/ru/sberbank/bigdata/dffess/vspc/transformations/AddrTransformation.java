@@ -5,6 +5,7 @@ import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
 import ru.sberbank.bigdata.sl.rt.core.App;
+import ru.sberbank.bigdata.sl.rt.core.Recordset;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -240,8 +241,9 @@ public class AddrTransformation extends BaseTransformation {
         List<String> attributes = new ArrayList<>(
                 Arrays.asList("@rus_fed_subj", "@cntry", "@okato2", "fias_code@addr", "@addr")
         );
-        Dataset<Row> result = addSk(addr, ADDR, attributes);
-        publishVspc(result);
+        Dataset<Row> result = addSk(addr, ADDR, attributes).dropDuplicates("addr_sk");
+        publish(result).recordsetMasks("usl_vspc_idl.addr.hub").launch();
+        registerChangedSets(Recordset.recordsets(getApp(), "usl_vspc_idl.addr.hub"));
     }
 
     public static Column getKey(String sep) {
