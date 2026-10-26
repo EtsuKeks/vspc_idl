@@ -14,6 +14,7 @@ import ru.sberbank.bigdata.sl.rt.core.App;
 import ru.sberbank.bigdata.sl.rt.core.Transformation;
 import ru.sberbank.bigdata.sl.rt.core.exceptions.AppException;
 import ru.sberbank.bigdata.sl.rt.logger.core.LogMessage;
+import ru.sberbank.bigdata.sl.rt.logger.core.LogType;
 import ru.sberbank.bigdata.sl.rt.util.RtfwLogger;
 import ru.sberbank.bigdata.sl.rt.validation.ApplicationParameters;
 
@@ -25,8 +26,10 @@ public class MainClass {
         try {
             App app = App.create("main", args).autoSparkSession(true).build();
 
-            if ("true".equals(app.ctx().getProperty(ApplicationParameters.DEBUG_SK_OFF.getParamName(), ""))) {
-                throw new IllegalStateException("Запуск без ССК запрещён: debug_sk_off=true");
+            String debugSkOff = app.ctx().getProperty(ApplicationParameters.DEBUG_SK_OFF.getParamName(), "");
+            if (!debugSkOff.isEmpty() && !"false".equalsIgnoreCase(debugSkOff)) {
+                RtfwLogger.log(new LogMessage("", LogType.TECH_WARN,
+                                  "ССК отключён параметром debug_sk_off=" + debugSkOff));
             }
 
             Transformation addr = new AddrTransformation(app);
