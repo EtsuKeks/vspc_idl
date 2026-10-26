@@ -60,10 +60,6 @@ public abstract class BaseStrategy {
 
     protected abstract SnpDiff prepareIncr(Dataset<Row> result);
 
-    protected List<String> requiredInputFields(App.LoadMode mode) {
-        return new ArrayList<>(Arrays.asList(spec.pk));
-    }
-
     private void validateResultContract(Dataset<Row> result, App.LoadMode mode) {
         Set<String> present = Arrays.stream(result.columns()).map(String::toLowerCase).collect(toSet());
         List<String> missing = requiredInputFields(mode).stream()
@@ -77,6 +73,20 @@ public abstract class BaseStrategy {
             new Logger(app(), BaseStrategy.class).logError(message);
             throw new TransformationException(new LogMessage("", LogType.TECH_ERROR, message));
         }
+    }
+
+    protected List<String> requiredInputFields(App.LoadMode mode) {
+        return new ArrayList<>(Arrays.asList(spec.pk));
+    }
+
+    protected Dataset<Row> withTechFields(Dataset<Row> df) {
+        if (!hasColumn(df, CTL_LOADING)) {
+            df = df.withColumn(CTL_LOADING, lit(loadingId()).cast("bigint"));
+        }
+        if (!hasColumn(df, CTL_VALIDFROM)) {
+            df = df.withColumn(CTL_VALIDFROM, lit(ctlValidFromNow()).cast("timestamp"));
+        }
+        return df;
     }
 
     protected long loadingId() {
@@ -105,16 +115,6 @@ public abstract class BaseStrategy {
 
     protected Dataset<Row> withRecordStatus(Dataset<Row> df, String status) {
         return df.withColumn(RECORD_STATUS, lit(status));
-    }
-
-    protected Dataset<Row> withTechFields(Dataset<Row> df) {
-        if (!hasColumn(df, CTL_LOADING)) {
-            df = df.withColumn(CTL_LOADING, lit(loadingId()).cast("bigint"));
-        }
-        if (!hasColumn(df, CTL_VALIDFROM)) {
-            df = df.withColumn(CTL_VALIDFROM, lit(ctlValidFromNow()).cast("timestamp"));
-        }
-        return df;
     }
 
     protected boolean hasColumn(Dataset<Row> df, String name) {
