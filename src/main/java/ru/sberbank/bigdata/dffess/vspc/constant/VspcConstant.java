@@ -3,7 +3,6 @@ package ru.sberbank.bigdata.dffess.vspc.constant;
 public class VspcConstant {
 
     public static final String DATA_PRODUCT = "vspc_idl";
-    public static final String MIN_BUSINESS_DT = "1900-01-01";
     public static final String RDM_IDL_SPARK = "rdm_idl_spark";
     public static final String GAR_FIAS_IDL = "gar_fias_idl";
 
