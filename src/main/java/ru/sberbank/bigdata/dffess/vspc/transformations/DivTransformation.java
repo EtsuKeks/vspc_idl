@@ -3,6 +3,7 @@ package ru.sberbank.bigdata.dffess.vspc.transformations;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
+import ru.sberbank.bigdata.dffess.vspc.common.PublisherMode;
 import ru.sberbank.bigdata.sl.rt.core.App;
 import ru.sberbank.bigdata.sl.rt.core.Recordset;
 
@@ -10,11 +11,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.apache.spark.sql.functions.*;
-import static org.apache.spark.sql.types.DataTypes.LongType;
+import static org.apache.spark.sql.functions.col;
+import static org.apache.spark.sql.functions.concat;
+import static org.apache.spark.sql.functions.lit;
+import static org.apache.spark.sql.functions.substring_index;
+import static org.apache.spark.sql.functions.when;
+import static org.apache.spark.sql.types.DataTypes.IntegerType;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
-import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.*;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.*;
+import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.CHG_DIVH;
+import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.DIV;
+import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DATA_PRODUCT;
+import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.RDM_IDL_SPARK;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 
 public class DivTransformation extends BaseTransformation {
@@ -22,7 +29,7 @@ public class DivTransformation extends BaseTransformation {
     public static final String CODE = DIV;
 
     public DivTransformation(App app) {
-        super(app, CODE);
+        super(app, CODE, "usl_vspc_idl.div.hub");
     }
 
     @Override
@@ -42,11 +49,14 @@ public class DivTransformation extends BaseTransformation {
                 when(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null)
                         .otherwise(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM)).as(DIV_FULL_REG_NUM),
 
+                // Регистрационный номер: "-" = не задан (NULL), иначе — сам номер. Порядковый номер
+                // (div_reg_ord) — последний кусок после "/", но у головной организации ("ПАО Сбербанк")
+                // берётся номер целиком: так же в 3.0 (DivTransformer.java:48-52).
                 when(col(FULLNAME).equalTo("ПАО Сбербанк"),
                         when(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null).otherwise(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM)))
                         .otherwise(
                                 when(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null)
-                                        .otherwise(substring_index(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM), "/", -1))).cast(LongType).as(DIV_REG_ORD),
+                                        .otherwise(substring_index(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM), "/", -1))).cast(IntegerType).as(DIV_REG_ORD),
 
                 when(col(ADDRESS_ADDRFACT_TIMEZONE).equalTo("USZ1"), "KALT")
                         .otherwise(col(ADDRESS_ADDRFACT_TIMEZONE)).as(DIV_TIME_ZONE_TIME_ZONE_SID),
@@ -86,7 +96,10 @@ public class DivTransformation extends BaseTransformation {
                 Arrays.asList("parent@div", "legal@addr", "div_time_zone@time_zone_rf", "@div")
         );
         Dataset<Row> result = addSk(div, DIV, attributes).dropDuplicates("div_sk");
-        publish(result).recordsetMasks("usl_vspc_idl.div.hub").launch();
+        publish(result)
+                .calculationMode(PublisherMode.sparkRebalance())
+                .recordsetMasks("usl_vspc_idl.div.hub")
+                .launch();
         registerChangedSets(Recordset.recordsets(getApp(), "usl_vspc_idl.div.hub"));
     }
 }

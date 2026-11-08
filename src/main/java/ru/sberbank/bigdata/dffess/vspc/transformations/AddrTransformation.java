@@ -4,6 +4,7 @@ import org.apache.spark.sql.Column;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
+import ru.sberbank.bigdata.dffess.vspc.common.PublisherMode;
 import ru.sberbank.bigdata.sl.rt.core.App;
 import ru.sberbank.bigdata.sl.rt.core.Recordset;
 
@@ -30,11 +31,13 @@ public class AddrTransformation extends BaseTransformation {
     public static final String CODE = ADDR;
 
     public AddrTransformation(App app) {
-        super(app, CODE);
+        super(app, CODE, "usl_vspc_idl.addr.hub");
     }
 
     @Override
     public void run() {
+        // Две ветви адреса — фактический и юридический, обе из chg_div_h, объединяются union+distinct
+        // (3.0: AddrTransformer.java:35, :157, :178 — тот же порядок).
         Dataset<Row> addr_raw = readTable(STG_SCHEMA, CHG_DIVH);
 
         Dataset<Row> addr_fact = addr_raw.select(
@@ -51,7 +54,9 @@ public class AddrTransformation extends BaseTransformation {
                 col(ADDRESS_ADDRFACT_ADDRSTREET_HOUSENUMBERS).as(ADDR_HOUSE_NUM),
                 col(ADDRESS_ADDRFACT_ADDRSTREET_STREETNAME).as(ADDR_STREET_NAME),
 
-                when(col(ADDRESS_COUNTRY).equalTo("РОССИЯ(RU)"), "643").when(col(ADDRESS_COUNTRY).equalTo("ИНДИЯ(IN)"), "356").otherwise(null).as(ADDR_CNTRY_SID),
+                when(col(ADDRESS_COUNTRY).equalTo("РОССИЯ(RU)"), "643")
+                        .when(col(ADDRESS_COUNTRY).equalTo("ИНДИЯ(IN)"), "356")
+                        .otherwise(null).as(ADDR_CNTRY_SID),
 
                 lit(null).as(ADDR_OKATO2_SID),
                 lit(null).as(ADDR_OKTMO2_SID),
@@ -242,10 +247,21 @@ public class AddrTransformation extends BaseTransformation {
                 Arrays.asList("@rus_fed_subj", "@cntry", "@okato2", "fias_code@addr", "@addr")
         );
         Dataset<Row> result = addSk(addr, ADDR, attributes).dropDuplicates("addr_sk");
-        publish(result).recordsetMasks("usl_vspc_idl.addr.hub").launch();
+        publish(result)
+                .calculationMode(PublisherMode.sparkRebalance())
+                .recordsetMasks("usl_vspc_idl.addr.hub")
+                .launch();
         registerChangedSets(Recordset.recordsets(getApp(), "usl_vspc_idl.addr.hub"));
     }
 
+    /**
+     * Канон ключа адреса: fias_code_durty | src_txt | okato2 | oktmo2.
+     *
+     * <p>Пустая часть заменяется строкой "NULL" (coalesce), а не остаётся NULL: concat_ws
+     * пропускает NULL-аргументы, и без подстановки части ключа сместились бы — ключ
+     * "a|NULL|c" совпал бы с "a|c". Если NULL-ы все четыре, ключ сам NULL — так же в 3.0
+     * (vspc_idl_old …/tables/addr/AddrTransformer.java:248-263).
+     */
     public static Column getKey(String sep) {
         return when(
                 col(ADDR_SRC_TXT).isNull()

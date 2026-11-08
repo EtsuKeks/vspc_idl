@@ -1,4 +1,4 @@
-﻿<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
@@ -152,15 +152,61 @@
                         </goals>
                         <configuration>
                             <filters>
+                                <!-- vspc-3.0 parity: классы замещены shadow-копиями из src/main/java/ru/sberbank/bigdata/sl/rt/publisher/strategy/{process/changes,publish,prepare,process}/ — см. temp/audit_default_publisher_fixmap.md, temp/accepted_risks_registry.md, temp/audit_v2/23_rewrite_scope_fix_research.md, temp/ctl_validfrom_contract/F_impl_report.md -->
+                                <filter>
+                                    <artifact>ru.sberbank.bigdata.sl.rt:rt-fw-publisher</artifact>
+                                    <excludes>
+                                        <!-- 5 классов заменяются shadow-копиями из
+                                             src/main/java/ru/sberbank/bigdata/sl/rt/publisher/strategy/{process/changes,publish,prepare,process}/,
+                                             восстанавливающими поведение 3.0. Исключение обязательно: иначе в fat-jar
+                                             окажутся две копии класса, и какая из них выиграет — зависит от порядка
+                                             артефактов в shade. Проверено сборкой: в fat-jar ровно одна копия каждого
+                                             из 5 классов, совпадающая побайтно с target/classes, и 0 дублей .class.
+                                             У PreparationStage/ProcessingStage внутренних классов нет
+                                             (в rt-fw-publisher:2.16.1 их нет) — $-варианты исключены на всякий случай.
+                                             Обоснование правок — в temp/audit_default_publisher_fixmap.md,
+                                             temp/accepted_risks_registry.md, temp/audit_v2/23_rewrite_scope_fix_research.md,
+                                             temp/ctl_validfrom_contract/F_impl_report.md (каталог temp/ не в git:
+                                             ссылки действуют только в рабочем дереве). -->
+                                        <exclude>ru/sberbank/bigdata/sl/rt/publisher/strategy/process/changes/HistoricalPeriodWithRewriteChangesCalculator.class</exclude>
+                                        <exclude>ru/sberbank/bigdata/sl/rt/publisher/strategy/process/changes/NonHistoricalChangesCalculator.class</exclude>
+                                        <exclude>ru/sberbank/bigdata/sl/rt/publisher/strategy/publish/PublicationStage.class</exclude>
+                                        <!-- Контракт ctl_validfrom: shadow-пара strategy/{prepare,process} (drop не стирает принесённый ctl_validfrom; enrichTechFieldsForInit = fill-if-absent). $-вариантов нет (проверено), исключены на всякий случай -->
+                                        <exclude>ru/sberbank/bigdata/sl/rt/publisher/strategy/prepare/PreparationStage.class</exclude>
+                                        <exclude>ru/sberbank/bigdata/sl/rt/publisher/strategy/prepare/PreparationStage$*.class</exclude>
+                                        <exclude>ru/sberbank/bigdata/sl/rt/publisher/strategy/process/ProcessingStage.class</exclude>
+                                        <exclude>ru/sberbank/bigdata/sl/rt/publisher/strategy/process/ProcessingStage$*.class</exclude>
+                                    </excludes>
+                                </filter>
+                                <!-- X2-N1: junit-транзитивы leak'нули в fat-jar из rt-fw-coordinator-3.16.0 (junit-jupiter-engine) и rt-fw-logger-2.20.0 (junit-platform-engine/junit-jupiter-api) без <scope>test</scope>; в рантайме не используются (никто из удерживаемых классов на них не ссылается). Резать только junit-семейство: reflections/javassist (rt/core/App, JavassistHelper), commons-jexl3 (MacrosCrossValidator), super-csv (coordinator CtlLogAgent/CtlCsvUtils/RecoverHelper), maven-artifact/plexus-utils (sk CommonServiceUtil) — используемы, НЕ вырезать. CR к RT-FW про потерянный scope — отдельно. -->
                                 <filter>
                                     <artifact>*:*</artifact>
                                     <excludes>
+                                        <exclude>org/junit/**</exclude>
+                                        <exclude>org/opentest4j/**</exclude>
+                                        <exclude>org/apiguardian/**</exclude>
+                                        <exclude>META-INF/versions/*/org/junit/**</exclude>
+                                        <exclude>META-INF/versions/*/org/opentest4j/**</exclude>
+                                        <exclude>META-INF/versions/*/org/apiguardian/**</exclude>
+                                        <exclude>META-INF/services/org.junit.platform.engine.TestEngine</exclude>
+                                        <exclude>META-INF/junit-jupiter-api.kotlin_module</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <!-- Подписи зависимостей после шейдинга невалидны: оставленные в jar
+                                             подписи делают его нечитаемым (SecurityException на этапе загрузки
+                                             подписанного jar-а). -->
                                         <exclude>META-INF/*.SF</exclude>
                                         <exclude>META-INF/*.DSA</exclude>
                                         <exclude>META-INF/*.RSA</exclude>
                                     </excludes>
                                 </filter>
                             </filters>
+                            <!-- Имя собираемого артефакта — контракт с vars_all.yml: devops_distributive_jar =
+                                 "vspc_idl-{{ build_version }}-jar-with-dependencies.jar", где build_version = D-02.104.001
+                                 совпадает с <version> этого pom. Сборка: mvn clean package -DskipTests. -->
                             <shadedArtifactAttached>true</shadedArtifactAttached>
                             <shadedClassifierName>jar-with-dependencies</shadedClassifierName>
                         </configuration>

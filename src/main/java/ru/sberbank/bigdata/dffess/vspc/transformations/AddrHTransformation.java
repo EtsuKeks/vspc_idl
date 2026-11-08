@@ -3,6 +3,7 @@ package ru.sberbank.bigdata.dffess.vspc.transformations;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
+import ru.sberbank.bigdata.dffess.vspc.common.PublisherMode;
 import ru.sberbank.bigdata.dffess.vspc.common.VspcLoadDate;
 import ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant;
 import ru.sberbank.bigdata.sl.rt.core.App;
@@ -10,7 +11,10 @@ import ru.sberbank.bigdata.sl.rt.core.Recordset;
 
 import java.util.Arrays;
 
-import static org.apache.spark.sql.functions.*;
+import static org.apache.spark.sql.functions.col;
+import static org.apache.spark.sql.functions.date_sub;
+import static org.apache.spark.sql.functions.lit;
+import static org.apache.spark.sql.functions.when;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.ADDRH;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.CHG_DIVH;
@@ -26,11 +30,13 @@ public class AddrHTransformation extends BaseTransformation {
     public static final String CODE = ADDRH;
 
     public AddrHTransformation(App app) {
-        super(app, CODE);
+        super(app, CODE, "usl_vspc_idl.addr.sat=h");
     }
 
     @Override
     public void run() {
+        // Две ветви адреса — фактический и юридический, обе из chg_div_h, объединяются union+distinct
+        // (3.0: AddrHTransformer.java:36, :48, :58 — тот же порядок).
         Dataset<Row> addr_raw = readTable(STG_SCHEMA, CHG_DIVH);
 
         Dataset<Row> addr_fact = addr_raw.select(
@@ -67,7 +73,7 @@ public class AddrHTransformation extends BaseTransformation {
 
         ).distinct();
 
-        Dataset<Row> addrh = addr.select(
+        Dataset<Row> addr_h = addr.select(
                 lit(PLUS_INFINITY_DT).cast("date").as(END_DT_FIELD_NAME),
                 col(ADDR_SID).as(ADDR_SID),
                 lit(VspcConstant.DATA_PRODUCT).as(ADDR_DP_CODE),
@@ -84,20 +90,30 @@ public class AddrHTransformation extends BaseTransformation {
                 lit(">non_stndrt").as(ADDRESS_TYPE_CODE)
         ).distinct();
 
-        Dataset<Row> result = addSk(addrh, ADDRH, Arrays.asList("@addr", "address@okato2", "address@oktmo2"));
+        // Дедуп по addr_sid не нужен: проекция addr_h (выше) не содержит fias_code, поэтому пары одного
+        // addr_sid, различающиеся только золотым fias_code (его нет в getKey), схлопываются .distinct()
+        // в самой проекции — как в 3.0 (AddrHTransformer.java:85). Явный window-дедуп был бы избыточен,
+        // а его orderBy(fias_code) не разрешается: в addr_h такой колонки нет => AnalysisException.
+        Dataset<Row> result = addSk(addr_h, ADDRH, Arrays.asList("@addr", "address@okato2", "address@oktmo2"));
 
         // vspc-3.0 parity: start_dt историчной таблицы — в 3.0 её штамповал framework-лоадер
-        // DataLoaderHistDiff (INIT: плоский to_date(lit(MIN_DATE))="1900-01-01", стр. 30-38+133-154;
-        // INCR: date_sub(ctl_validfrom_to_start_dt,1), стр. 40-47). Штатный RT-FW Publisher даты не
-        // создаёт — castToTargetStructure доливает отсутствующие колонки NULL (PublisherUtils.java:374-390),
-        // из-за чего PK [addr_sk,start_dt] не сходится и D2/VANISH/DROPBAD shadow-калькулятора ненаблюдаемы.
-        // Якорь «день загрузки» = VspcLoadDate.sqlDate() (ОДНО значение на JVM) — тот же, что в закрывающих
-        // формулах shadow (end := loadDate-2 ≡ another_ctl_validfrom-2): стык [.., loadDate-2][loadDate-1, ..] без разрыва, как в 3.0.
+        // DataLoaderHistDiff (essa-common-lib, …/essa/common/slave/loading/DataLoaderHistDiff.java:
+        // 41 — плоский to_date(lit(MIN_DATE))="1900-01-01" для INIT, 44 — date_sub(
+        // ctl_validfrom_to_start_dt,1) для INCR, 54-55 — withColumn(START_DT, startDt)).
+        // Штатный RT-FW Publisher даты не создаёт — castToTargetStructure доливает отсутствующие
+        // колонки NULL (vendor/rt-fw-publisher-2.16.1-src/…/PublisherUtils.java:374-387, доливка на
+        // :384), из-за чего PK [addr_sk,start_dt] не сходится и D2/VANISH/DROPBAD shadow-калькулятора
+        // ненаблюдаемы. Якорь «день загрузки» = VspcLoadDate.sqlDate() (ОДНО значение на JVM) — тот
+        // же, что в закрывающих формулах shadow (end := loadDate-2 ≡ another_ctl_validfrom-2):
+        // стык [.., loadDate-2][loadDate-1, ..] без разрыва, как в 3.0.
         result = result.withColumn(START_DT_FIELD_NAME, getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT
                                                         ? date_sub(lit(VspcLoadDate.sqlDate()), 1)
                                                         : lit(MINUS_INFINITY_DT).cast("date"));
 
-        publish(result).recordsetMasks("usl_vspc_idl.addr.sat=h").launch();
+        publish(result)
+                .calculationMode(PublisherMode.sparkRebalance())
+                .recordsetMasks("usl_vspc_idl.addr.sat=h")
+                .launch();
         registerChangedSets(Recordset.recordsets(getApp(), "usl_vspc_idl.addr.sat=h"));
     }
 }

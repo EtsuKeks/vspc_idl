@@ -49,14 +49,14 @@ workflows:
               #name: "{{ logical_env_prefix }}usl_gar_fias_idl"
               statisticId: 12
               profile: "{{ CTL_PROFILE_NAME_gar_fias_idl }}"
-              active: true
+              active: false
           - entity:
               # Входной data-продукт ЕСС usl.rdm_idl_spark IDL - Справочники во временном владении УКД, original ctl entity 801005231
               id: "801{{ logical_env_ctl_entity_logenv_number }}5231"
               #name: "{{ logical_env_prefix }}usl_rdm_idl_spark"
               statisticId: 12
               profile: "{{ CTL_PROFILE_NAME_rdm_idl_spark }}"
-              active: true
+              active: false
 
       params:
         - param:
@@ -136,9 +136,40 @@ workflows:
             name: spark_parameters
             prior_value: "{{ spark_parameters }}"
         - param:
-            # Признак (Y/пусто=N) отключения использования сервисов СК.
+            # Признак отключения использования сервисов СК.
+            # CTL RT-FW 3.16 допускает для этого параметра только true/false/пусто
+            # (PossibleValuesValidator, TERNARY_FLAG_VALUES), поэтому значения Y/D/ON_GF/OFF_TB
+            # из ESSA 3.0 валидатором не принимаются ⇒ режимы DISABLE/ON_GF/OFF_TB в 4.0
+            # недостижимы (см. BaseTransformation.resolveSkMode).
+            # Трактовка значений — как в 3.0 (CtlAdapterImpl.configureSkMode:142-157):
+            #   ""  (пусто) — сервисы СК вызываются;
+            #   "true"       — сервисы СК НЕ вызываются, ключи считаются локально (в 3.0 так же при Y);
+            #   "false"      — сервисы СК вызываются (в 3.0 «всё прочее» ⇒ вызываются).
             name: debug_sk_off
             prior_value: "{{ debug_sk_off }}"
+        - param:
+            # Режим "турбо" ССК. Читается кодом приложения (BaseTransformation.java:79-82).
+            # Пустое значение = "true" (ESSA 3.0: SkClientWrapper, default "true") — поведение 3.0.
+            name: turbo_boost
+            prior_value: ""
+        - param:
+            # Код экземпляра сервиса для ССК (входит в ключ реестра ССК, от него зависят выданные *_sk).
+            # Читается кодом приложения: BaseTransformation.java:91-105.
+            # Порядок получения значения в 4.0:
+            #   1) этот CTL-параметр (приоритет); 2) если пусто — app.ctx().getInstanceCode(),
+            #      т.е. RT-FW 3.16 сам выводит код экземпляра из CTL-имени потока
+            #      (WorkflowNameParser.parseInstance: часть после первого "__", нижний регистр).
+            # Значение приводится к нижнему регистру кодом; system-property "service_instance_code"
+            # выставляется только при непустом значении (ESSA 3.0: SkClientWrapper.java:52-54,
+            # guard StringUtils.isNotBlank).
+            # Значение по умолчанию "" — поведение 3.0 на этом развёртывании: имя потока CTL
+            # "USL_VSPC_IDL" не содержит "__", ESSA возвращала null и свойство не выставлялось
+            # (CtlAdapterImpl.configureInstanceCode). Непустое значение писать сюда только если
+            # стенду нужен свой код экземпляра; в 3.0 он брался из СЫРОГО имени потока, поэтому
+            # для потока USL_VSPC_IDL_INIT значение 3.0 было "usl_vspc_idl_init",
+            # а для USL_VSPC_IDL — "usl_vspc_idl".
+            name: service_instance_code
+            prior_value: ""
         - param:
             # Значение идентификатора загрузки, на состояние по завершению которой требуется откатить данные data-продукта после запуска загрузки данного потока
             name: rollback_loading_id
@@ -154,6 +185,10 @@ workflows:
         - param:
             name: sl.logger.kafka_topic
             prior_value: "{{ kafka_topic }}"
+        - param:
+            # Признак включения Yarn Killer. Ключ feature-toggle'а RT-FW = FEATUREMASK ("rtfw_feature_") + "yarn_killer_enabled".
+            name: rtfw_feature_yarn_killer_enabled
+            prior_value: "true"
       notifications:
         - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru","SLSNTWRKDE_ess@sberbank.ru" ] }
         - { status: "RUNNING", emails: [ "SLSNTWRKDE_ess@sberbank.ru" ] }
@@ -246,16 +281,59 @@ workflows:
             prior_value:  "false"
         - param:
             # Признак необходимости создавать difference data (то есть набор удалений и добавлений).
+            # ВНИМАНИЕ, семантика обратная ожидаемой: "false" -> diffClearedFlag=true (AppContext:153-157,
+            # loadMode==INITIAL) -> runInit: целевой diff ОЧИЩАЕТСЯ и не наполняется — это паритет 3.0
+            # (в 3.0 diff при INIT не пишется: SnpDataLoader:63-68, fillSnpAndDiff вызывается только в INCR).
+            # "true" -> runReinit: diff СОЗДАЁТСЯ за init_diff_depth_days -> расхождение состава целевых таблиц.
             name: init_diff_flag
+            prior_value: "false"
+        - param:
+            # Глубина окна diff при начальной загрузке (число дней назад от текущей даты).
+            # Читается только в ветке runReinit (PublisherImpl.java:268-269) — то есть при init_diff_flag=true.
+            # Влияет на состав целевых таблиц; при init_diff_flag=false не используется.
+            # Пустое значение = окно не сдвигается, глубина берётся из starting_business_date
+            # (PublisherImpl.java:573-582) — поведение 4.0 до правки.
+            name: init_diff_depth_days
             prior_value: ""
         - param:
             # Значения параметров Spark, которые можно передать в командную строку spark-submit.
             name: spark_parameters
             prior_value: "{{ spark_parameters }}"
         - param:
-            # Признак (Y/пусто=N) отключения использования сервисов СК.
+            # Признак отключения использования сервисов СК.
+            # CTL RT-FW 3.16 допускает для этого параметра только true/false/пусто
+            # (PossibleValuesValidator, TERNARY_FLAG_VALUES), поэтому значения Y/D/ON_GF/OFF_TB
+            # из ESSA 3.0 валидатором не принимаются ⇒ режимы DISABLE/ON_GF/OFF_TB в 4.0
+            # недостижимы (см. BaseTransformation.resolveSkMode).
+            # Трактовка значений — как в 3.0 (CtlAdapterImpl.configureSkMode:142-157):
+            #   ""  (пусто) — сервисы СК вызываются;
+            #   "true"       — сервисы СК НЕ вызываются, ключи считаются локально (в 3.0 так же при Y);
+            #   "false"      — сервисы СК вызываются (в 3.0 «всё прочее» ⇒ вызываются).
             name: debug_sk_off
             prior_value: "{{ debug_sk_off }}"
+        - param:
+            # Режим "турбо" ССК. Читается кодом приложения (BaseTransformation.java:79-82).
+            # Пустое значение = "true" (ESSA 3.0: SkClientWrapper, default "true") — поведение 3.0.
+            name: turbo_boost
+            prior_value: ""
+        - param:
+            # Код экземпляра сервиса для ССК (входит в ключ реестра ССК, от него зависят выданные *_sk).
+            # Читается кодом приложения: BaseTransformation.java:91-105.
+            # Порядок получения значения в 4.0:
+            #   1) этот CTL-параметр (приоритет); 2) если пусто — app.ctx().getInstanceCode(),
+            #      т.е. RT-FW 3.16 сам выводит код экземпляра из CTL-имени потока
+            #      (WorkflowNameParser.parseInstance: часть после первого "__", нижний регистр).
+            # Значение приводится к нижнему регистру кодом; system-property "service_instance_code"
+            # выставляется только при непустом значении (ESSA 3.0: SkClientWrapper.java:52-54,
+            # guard StringUtils.isNotBlank).
+            # Значение по умолчанию "" — поведение 3.0 на этом развёртывании: имя потока CTL
+            # "USL_VSPC_IDL" не содержит "__", ESSA возвращала null и свойство не выставлялось
+            # (CtlAdapterImpl.configureInstanceCode). Непустое значение писать сюда только если
+            # стенду нужен свой код экземпляра; в 3.0 он брался из СЫРОГО имени потока, поэтому
+            # для потока USL_VSPC_IDL_INIT значение 3.0 было "usl_vspc_idl_init",
+            # а для USL_VSPC_IDL — "usl_vspc_idl".
+            name: service_instance_code
+            prior_value: ""
         - param:
             # Значение идентификатора загрузки, на состояние по завершению которой требуется откатить данные data-продукта после запуска загрузки данного потока
             name: rollback_loading_id
@@ -271,6 +349,10 @@ workflows:
         - param:
             name: sl.logger.kafka_topic
             prior_value: "{{ kafka_topic }}"
+        - param:
+            # Признак включения Yarn Killer. Ключ feature-toggle'а RT-FW = FEATUREMASK ("rtfw_feature_") + "yarn_killer_enabled".
+            name: rtfw_feature_yarn_killer_enabled
+            prior_value: "true"
       notifications:
         - { status: "ERROR", emails: [ "2ls_fess_int@omega.sbrf.ru","OVShchitnikova@sberbank.ru","SLSNTWRKDE_ess@sberbank.ru" ] }
         - { status: "RUNNING", emails: [ "SLSNTWRKDE_ess@sberbank.ru" ] }

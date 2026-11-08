@@ -16,8 +16,11 @@ eval "$kinit_command" || eval "$kinit_command" || eval "$kinit_command"
 kinit -R
 
 #получаем ссылку на кеш тикета, который в дальнейшем будет передаваться в драйвер.
+# vspc-3.0 parity (FX9.3): имя файла кеша берём basename'ом — разбор не должен зависеть от числа
+# компонентов пути (было: ls <path> | awk -F/ '{print $3}' — ls печатает только basename, т.е.
+# без '/', поэтому $3 всегда пуст => KRB5CCNAME/RTFW_KERBEROS_TICKET_CACHE_FILE пустые => цепочка рвётся).
 user_ticket_cache_path=`klist |grep FILE: | awk -F: '{print $3}'`
-user_ticket_cache_file_name=`ls ${user_ticket_cache_path} | awk -F/ '{print $3}'`
+user_ticket_cache_file_name=`basename "${user_ticket_cache_path}"`
 echo $? user_ticket_cache_path=$user_ticket_cache_path
 
 export KRB5CCNAME=${user_ticket_cache_file_name}

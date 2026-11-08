@@ -2,73 +2,70 @@
   "wellCode" : "vspc",
   "productCtlEntityId" : "801005314",
   "cefss" : "CI04734132",
-  "lineage": [
+  "lineage" : [
     {
-      "providerProductAlias": "archive_rdm",
-      "providerDatasetCode": "usl_vspc_idl_in.ebx_rep_m_rfzonetime_0002_rfzonetime",
-      "consumerDatasetCode": "time_zone_rf.hub"
+      "providerProductAlias" : "archive_rdm",
+      "providerDatasetCode" : "usl_vspc_idl_in.ebx_rep_m_rfzonetime_0002_rfzonetime",
+      "consumerDatasetCode" : "time_zone_rf.hub"
     },
     {
-      "providerProductAlias": "archive_rdm",
-      "providerDatasetCode": "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision",
-      "consumerDatasetCode": "addr.sat=h"
+      "providerProductAlias" : "archive_rdm",
+      "providerDatasetCode" : "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision",
+      "consumerDatasetCode" : "addr.sat=h"
     },
     {
-      "providerProductAlias": "archive_rdm",
-      "providerDatasetCode": "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision",
-      "consumerDatasetCode": "addr.hub"
+      "providerProductAlias" : "archive_rdm",
+      "providerDatasetCode" : "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision",
+      "consumerDatasetCode" : "addr.hub"
     },
     {
-      "providerProductAlias": "archive_rdm",
-      "providerDatasetCode": "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision",
-      "consumerDatasetCode": "div.sat=h"
+      "providerProductAlias" : "archive_rdm",
+      "providerDatasetCode" : "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision",
+      "consumerDatasetCode" : "div.sat=h"
     },
     {
-      "providerProductAlias": "archive_rdm",
-      "providerDatasetCode": "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision",
-      "consumerDatasetCode": "div.hub"
+      "providerProductAlias" : "archive_rdm",
+      "providerDatasetCode" : "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision",
+      "consumerDatasetCode" : "div.hub"
     },
     {
-      "providerProductAlias": "archive_rdm",
-      "providerDatasetCode": "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision",
-      "consumerDatasetCode": "div&div_relation.link"
+      "providerProductAlias" : "archive_rdm",
+      "providerDatasetCode" : "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision",
+      "consumerDatasetCode" : "div&div_relation.link"
     },
     {
-      "providerProductAlias": "archive_rdm",
-      "providerDatasetCode": "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision_successors",
-      "consumerDatasetCode": "div&div_relation.link"
+      "providerProductAlias" : "archive_rdm",
+      "providerDatasetCode" : "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision_successors",
+      "consumerDatasetCode" : "div&div_relation.link"
     },
     {
-      "providerProductAlias": "archive_rdm",
-      "providerDatasetCode": "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision",
-      "consumerDatasetCode": "div.sat=type"
+      "providerProductAlias" : "archive_rdm",
+      "providerDatasetCode" : "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision",
+      "consumerDatasetCode" : "div.sat=type"
     },
     {
-      "providerProductAlias": "archive_rdm",
-      "providerDatasetCode": "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision",
-      "consumerDatasetCode": "terr_div_type.hub"
+      "providerProductAlias" : "archive_rdm",
+      "providerDatasetCode" : "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision",
+      "consumerDatasetCode" : "terr_div_type.hub"
     }],
-  "archiveProviderEntities": [
+  "archiveProviderEntities" : [
     {
-      "providerProductAlias": "archive_dummy",
-      "providerDatasetCode": "dummy.dual",
-      "diffCtlEntityId": 801005314
+      "providerProductAlias" : "archive_dummy",
+      "providerDatasetCode" : "dummy.dual",
+      "diffCtlEntityId" : 801005314
     },
     {
-      "providerProductAlias": "archive_rdm",
-      "providerDatasetCode": "usl_vspc_idl_in.ebx_rep_m_rfzonetime_0002_rfzonetime",
-
-      "diffCtlEntityId": 953008916
+      "providerProductAlias" : "archive_rdm",
+      "providerDatasetCode" : "usl_vspc_idl_in.ebx_rep_m_rfzonetime_0002_rfzonetime",
+      "diffCtlEntityId" : 953008916
     }, {
-      "providerProductAlias": "archive_rdm",
-      "providerDatasetCode": "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision",
-
-      "diffCtlEntityId": 953018846
+      "providerProductAlias" : "archive_rdm",
+      "providerDatasetCode" : "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision",
+      "diffCtlEntityId" : 953018846
     }, {
-      "providerProductAlias": "archive_rdm",
-      "providerDatasetCode": "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision_successors",
-
-      "diffCtlEntityId": 953018846
+      "providerProductAlias" : "archive_rdm",
+      "providerDatasetCode" : "usl_vspc_idl_in.ebx_rep_m_sfs_0002_sfsdivision_successors",
+      "diffCtlEntityId" : 953018846
     }],
   "uslProviderEntities" : [ {
     "providerProductAlias" : "usl_gar_fias_idl",
@@ -1538,7 +1535,7 @@
   }, {
     "alias" : "archive_rdm",
     "tables" : [ {
-      "databaseCode" : "usl_vspc_idl_in_snp_snp",
+      "databaseCode" : "usl_vspc_idl_in_snp",
       "layer" : "SNP",
       "tableCode" : "ebx_rep_m_rfzonetime_0002_rfzonetime",
       "datasets" : [ {
@@ -1550,7 +1547,7 @@
         "dataType" : "BIGINT"
       } ]
     }, {
-      "databaseCode" : "usl_vspc_idl_in_snp_snp",
+      "databaseCode" : "usl_vspc_idl_in_snp",
       "layer" : "SNP",
       "tableCode" : "ebx_rep_m_sfs_0002_sfsdivision",
       "datasets" : [ {
@@ -1562,7 +1559,7 @@
         "dataType" : "BIGINT"
       } ]
     }, {
-      "databaseCode" : "usl_vspc_idl_in_snp_snp",
+      "databaseCode" : "usl_vspc_idl_in_snp",
       "layer" : "SNP",
       "tableCode" : "ebx_rep_m_sfs_0002_sfsdivision_successors",
       "datasets" : [ {

@@ -10,6 +10,29 @@
 # GIT_BRANCH: release/4.0
 # DEVOPS_CONFIG: devops.json
 #
+# ---------------------------------------------------------------------------
+# AQE-флаги издателя — общее пояснение для всех стендов
+#
+# PublisherDao.java:406-409 (vendor/rt-fw-publisher-2.16.1-src; в сборку
+# подключается rt-fw-publisher:2.16.1 — см. mvn dependency:tree) открывает
+# ветку SPARK_REBALANCE только при spark.sql.adaptive.enabled=true И
+# spark.sql.adaptive.optimizeSkewsInRebalancePartitions.enabled=true.
+# Иначе издатель уходит в SALTING, и это видно лишь по косвенному признаку:
+# в логе вместо "алгоритм SALTING" (PublisherDao.java:220-222) печатается
+# PUB_054 "используется Spark hint 'rebalance'" (PublisherDao.java:316).
+# Режим SPARK_REBALANCE выставляет код: PublisherMode.sparkRebalance
+# (src/main/java/ru/sberbank/bigdata/dffess/vspc/common/PublisherMode.java),
+# подключаемый во всех 9 трансформациях.
+# В Spark 3.5.1 оба флага по умолчанию true (SQLConf: ADAPTIVE_EXECUTION_ENABLED
+# и ADAPTIVE_OPTIMIZE_SKEWS_IN_REBALANCE_PARTITIONS_ENABLED созданы с
+# createWithDefault(true)), поэтому явная запись нужна не для смены поведения
+# Spark, а чтобы значение не переопределил spark-defaults.conf окружения
+# стенда: --conf в командной строке spark-submit приоритетнее файла.
+# ---------------------------------------------------------------------------
+#
+# Порядок --conf единый для всех профилей; наборы ключей и значения описаны
+# в отчёте temp/synthetic_20261103/reports/P06_run_conf_polish_report.md.
+#
 
 vars: &commonVars
   logical_env_prefix: ""
@@ -53,7 +76,19 @@ vars: &commonVars
   CTL_PROFILE_NAME_gar_fias_idl: "{{ CTL_PROFILE_NAME }}"
   CTL_PROFILE_NAME_rdm_idl_spark: "{{ CTL_PROFILE_NAME }}"
   rtfw_log_level: "INFO"
-  # Глубина окна инкремента (число дней) — для соответствия release/3.0 (эталон 3051e47: max_increment_depth_days: 10).
+  # Глубина окна инкремента (число дней). Значение — как в release/3.0 (vars_all.yml:57 = 10).
+  # В release/3.0 этот CTL-параметр доходил до приложения, но НЕ читался: CtlAdapterImpl.java:59 ->
+  # AppConfiguration.java:85 -> TransformConfiguration.java:95 (только поле; вызовов
+  # getMaxIncrementDepthDays() в essa-common-lib нет) — параметр там инертен. Фактическое окно
+  # обновления 3.0 задаёт код: VspcConstant.DEPTH_DELTA = 40 (VspcConstant.java:12) ->
+  # getIncrCutOffSrcDate() = current_date()-40 (VspcTransformConfiguration.java:48,59,64).
+  # В release/4.0 (RT-FW 3.16.1) параметр читается (PublisherImpl.java:284-287) и задаёт
+  # startingBusinessDate = max(CTL starting_business_date, today - MIDD) (PublisherImpl.java:573-582),
+  # НО после FX2.5 и FX9.1 на состав строк целевых таблиц (8 snp + 8 diff) НЕ влияет:
+  #  - FX2.5 снял фильтр дельты по MIDD (HistoricalPeriodWithRewriteChangesCalculator, incrMinDt = inc);
+  #  - FX9.1 считает порог месячной зоны перезаписи от D-1 независимо от MIDD (override getSnpGeqFilters);
+  #  - чтение снапа не отсекается по бизнес-дате (override getMinBusinessDateUpdateFilter = lit(true)).
+  # Значение MIDD меняет только диагностическое сообщение PUB-117 (не содержимое целевых таблиц).
   max_increment_depth_days: 10
 
 stands:
@@ -62,9 +97,13 @@ stands:
     vars:
       <<: *commonVars
       cluster_name: "sklsdpfess"
-      spark_parameters_default: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=2G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=5 --conf spark.dynamicAllocation.maxExecutors=40 --conf spark.driver.memory=5G --conf 'spark.executor.extraJavaOptions=-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false' --conf 'spark.driver.extraJavaOptions=-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false'"
+      # AQE-флаги издателя: обязательны для режима SPARK_REBALANCE
+      # (ворота PublisherDao.java:406-409). Полное пояснение — в шапке файла.
+      spark_parameters_default: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.sql.adaptive.enabled=true --conf spark.sql.adaptive.optimizeSkewsInRebalancePartitions.enabled=true --conf spark.executor.memory=2G --conf spark.driver.memory=5G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=5 --conf spark.dynamicAllocation.maxExecutors=40 --conf 'spark.executor.extraJavaOptions=-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false' --conf 'spark.driver.extraJavaOptions=-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false'"
       spark_parameters: "{{ spark_parameters_default }}"
-      spark_parameters_init: "{{ spark_parameters_default }}"
+      # Потоки INIT и INCR получают ОДИН И ТОТ ЖЕ набор параметров: CTL-шаблон в обоих потоках
+      # читает spark_parameters (ctl_wait4replica_usl_vspc_idl_v021_fw_3.16.1.yaml:136-137 и
+      # :292-293) ⇒ отдельного набора для INIT нет и не предполагается.
       hadoop_default_fs_uri: "hdfs://FESS-DEV"
       user_name: "u_sklsdpfess_s_usl_t_vspc_idl"
       USER_NAME: "u_sklsdpfess_s_usl_t_vspc_idl"
@@ -78,9 +117,13 @@ stands:
     vars:
       <<: *commonVars
       cluster_name: "itbalsdpfess"
-      spark_parameters_default: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.executor.memory=1G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=2 --conf spark.dynamicAllocation.maxExecutors=10 --conf spark.driver.memory=1G --conf 'spark.executor.extraJavaOptions=-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false' --conf 'spark.driver.extraJavaOptions=-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false'"
+      # AQE-флаги издателя: обязательны для режима SPARK_REBALANCE
+      # (ворота PublisherDao.java:406-409). Полное пояснение — в шапке файла.
+      spark_parameters_default: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.sql.adaptive.enabled=true --conf spark.sql.adaptive.optimizeSkewsInRebalancePartitions.enabled=true --conf spark.executor.memory=1G --conf spark.driver.memory=1G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=2 --conf spark.dynamicAllocation.maxExecutors=10 --conf 'spark.executor.extraJavaOptions=-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false' --conf 'spark.driver.extraJavaOptions=-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false'"
       spark_parameters: "{{ spark_parameters_default }}"
-      spark_parameters_init: "{{ spark_parameters_default }}"
+      # Потоки INIT и INCR получают ОДИН И ТОТ ЖЕ набор параметров: CTL-шаблон в обоих потоках
+      # читает spark_parameters (ctl_wait4replica_usl_vspc_idl_v021_fw_3.16.1.yaml:136-137 и
+      # :292-293) ⇒ отдельного набора для INIT нет и не предполагается.
       hadoop_default_fs_uri: "hdfs://iftbalsdpfess"
       user_name: "u_itbalsdpfess_s_usl_t_vspc_idl"
       USER_NAME: "u_itbalsdpfess_s_usl_t_vspc_idl"
@@ -98,9 +141,12 @@ stands:
     vars:
       <<: *commonVars
       cluster_name: "utarnsdpfess"
-      spark_parameters_default: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.executor.memory=10G --conf spark.executor.cores=2 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=20G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=20G --conf spark.driver.memoryOverhead=10G --conf spark.executor.memoryOverhead=3G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=100 --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000 --conf 'spark.executor.extraJavaOptions=-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false' --conf 'spark.driver.extraJavaOptions=-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false'"
+      # AQE-флаги издателя: обязательны для режима SPARK_REBALANCE
+      # (ворота PublisherDao.java:406-409). Полное пояснение — в шапке файла.
+      spark_parameters_default: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.sql.adaptive.enabled=true --conf spark.sql.adaptive.optimizeSkewsInRebalancePartitions.enabled=true --conf spark.executor.cores=2 --conf spark.executor.memory=10G --conf spark.executor.memoryOverhead=3G --conf spark.driver.memory=20G --conf spark.driver.memoryOverhead=10G --conf spark.driver.maxResultSize=20G --conf spark.sql.shuffle.partitions=600 --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000 --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=100 --conf 'spark.executor.extraJavaOptions=-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false' --conf 'spark.driver.extraJavaOptions=-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false'"
       spark_parameters: "{{ spark_parameters_default }}"
-      spark_parameters_init: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.executor.memory=10G --conf spark.executor.cores=2 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=20G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=20G --conf spark.driver.memoryOverhead=10G --conf spark.executor.memoryOverhead=3G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=300 --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000 --conf 'spark.executor.extraJavaOptions=-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false' --conf 'spark.driver.extraJavaOptions=-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false'"
+      # spark.dynamicAllocation.maxExecutors (300 против 100) — набор ключей и порядок --conf те же.
+      # поэтому maxExecutors=300 до стенда не доезжает; потребителя этой переменной в репозитории нет.
       hadoop_default_fs_uri: "hdfs://utarnsdpfess"
       user_name: "u_utarnsdpfess_s_usl_t_vspc_idl"
       USER_NAME: "u_utarnsdpfess_s_usl_t_vspc_idl"
@@ -114,9 +160,12 @@ stands:
     vars:
       <<: *commonVars
       cluster_name: "arn6sdpfess"
-      spark_parameters_default: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.executor.memory=10G --conf spark.executor.cores=2 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=10G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=20G --conf spark.driver.memoryOverhead=5G --conf spark.executor.memoryOverhead=3G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=100 --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000 --conf 'spark.executor.extraJavaOptions=-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false' --conf 'spark.driver.extraJavaOptions=-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false'"
+      # AQE-флаги издателя: обязательны для режима SPARK_REBALANCE
+      # (ворота PublisherDao.java:406-409). Полное пояснение — в шапке файла.
+      spark_parameters_default: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.sql.adaptive.enabled=true --conf spark.sql.adaptive.optimizeSkewsInRebalancePartitions.enabled=true --conf spark.executor.cores=2 --conf spark.executor.memory=10G --conf spark.executor.memoryOverhead=3G --conf spark.driver.memory=10G --conf spark.driver.memoryOverhead=5G --conf spark.driver.maxResultSize=20G --conf spark.sql.shuffle.partitions=600 --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000 --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=100 --conf 'spark.executor.extraJavaOptions=-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false' --conf 'spark.driver.extraJavaOptions=-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false'"
       spark_parameters: "{{ spark_parameters_default }}"
-      spark_parameters_init: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.executor.memory=10G --conf spark.executor.cores=2 --conf spark.sql.shuffle.partitions=600 --conf spark.driver.memory=10G --conf spark.hadoop.metastore.catalog.default=spark --conf spark.shuffle.service.enabled=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.driver.maxResultSize=20G --conf spark.driver.memoryOverhead=5G --conf spark.executor.memoryOverhead=3G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=10 --conf spark.dynamicAllocation.maxExecutors=300 --conf spark.memory.fraction=0.6 --conf spark.network.timeout=800 --conf spark.yarn.am.waitTime=1000000 --conf 'spark.executor.extraJavaOptions=-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false' --conf 'spark.driver.extraJavaOptions=-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false'"
+      # spark.dynamicAllocation.maxExecutors (300 против 100) — набор ключей и порядок --conf те же.
+      # поэтому maxExecutors=300 до стенда не доезжает; потребителя этой переменной в репозитории нет.
       hadoop_default_fs_uri: "hdfs://arnsdpfess2"
       user_name: "u_arn6sdpfess_s_usl_t_vspc_idl"
       USER_NAME: "u_arn6sdpfess_s_usl_t_vspc_idl"

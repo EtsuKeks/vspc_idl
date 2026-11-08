@@ -4,13 +4,8 @@ import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
 import ru.sberbank.bigdata.sl.rt.core.App;
-import ru.sberbank.bigdata.sl.rt.core.exceptions.TransformationException;
-import ru.sberbank.bigdata.sl.rt.logger.core.LogMessage;
-import ru.sberbank.bigdata.sl.rt.logger.core.LogType;
 
-import static java.lang.String.format;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.CHG_DIVH;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.SRC_PROVIDER_SFSDIVISION;
 
 public class ChgDivHTransformation extends BaseTransformation {
 
@@ -25,24 +20,19 @@ public class ChgDivHTransformation extends BaseTransformation {
         Dataset<Row> preselect = app.getSparkSession().sql(getPreselectSQL(app.ctx().getLoadMode())).distinct();
         saveTable(preselect, STG_SCHEMA, CHG_DIVH);
 
-        // пустой результат при живой реплике-источнике — наш баг (слетевший преселект), а не правда
-        // источника: на INCR это тихий no-op, на INIT Publisher очистил бы target и diff безвозвратно.
-        Dataset<Row> transit = readTable(STG_SCHEMA, CHG_DIVH);
-        if (transit.isEmpty()) {
-            if (read(SRC_PROVIDER_SFSDIVISION).kap803Usl().snp().get().isEmpty()) {
-                // прав источник: реплики честно пусты — публикуем пустой транзит как раньше
-                logger.logInfo("chg_div_h: исходные реплики пусты — публикуется пустой результат");
-            } else {
-                boolean incr = getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT;
-                throw new TransformationException(new LogMessage("", LogType.TECH_ERROR,
-                        format("chg_div_h %s: преселект пуст при непустой реплике-источнике %s "
-                                        + "— вероятен сбой фильтров/чтения; публикация остановлена%s",
-                                incr ? "INCR" : "INIT", SRC_PROVIDER_SFSDIVISION,
-                                incr ? "" : " (без гварда INIT очистил бы target и diff безвозвратно)")));
-            }
-        }
+        // ESSA 3.0 (3.0 vspc_idl_old …/tables/chgdivh/ChgDivHTransformer.java:24-34): преселект
+        // пишется в stg безусловно, проверки на пустой результат нет — загрузка продолжается.
+        // 4.0 приводится к тому же поведению.
     }
 
+    /**
+     * Преселект chg_div_h — транзитная таблица для четырёх трансформаций
+     * (addr, addr_h, div, div_h — все читают STG_SCHEMA.CHG_DIVH).
+     *
+     * <p>Две ветки по режиму загрузки: INCR — текущий снимок источника, одна версия на ключ;
+     * INIT — цепочка версий из ebx-diff: версия пересобирается, если изменился хэш
+     * (lag(hash) &lt;&gt; hash), а end_dt считается как lead(start_dt)-1.
+     */
     public static String getPreselectSQL(App.LoadMode loadMode) {
         if (loadMode.equals(App.LoadMode.INCREMENT)) {
             return " SELECT  " +
