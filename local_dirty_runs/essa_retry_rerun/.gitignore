@@ -1,0 +1,5 @@
+# build, runs, exports
+target/
+# python bytecode and stray Derby logs
+__pycache__/
+derby.log

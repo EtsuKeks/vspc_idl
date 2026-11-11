@@ -152,6 +152,13 @@
                         </goals>
                         <configuration>
                             <filters>
+                                <!-- теневой ProcessingStage слоя совместимости (src/main/java/ru/sberbank/bigdata/sl/rt/publisher/strategy/process) вместо вендорского -->
+                                <filter>
+                                    <artifact>ru.sberbank.bigdata.sl.rt:rt-fw-publisher</artifact>
+                                    <excludes>
+                                        <exclude>ru/sberbank/bigdata/sl/rt/publisher/strategy/process/ProcessingStage.class</exclude>
+                                    </excludes>
+                                </filter>
                                 <filter>
                                     <artifact>*:*</artifact>
                                     <excludes>

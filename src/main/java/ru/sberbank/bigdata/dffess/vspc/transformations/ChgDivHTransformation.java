@@ -2,19 +2,29 @@ package ru.sberbank.bigdata.dffess.vspc.transformations;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
+import org.apache.spark.sql.types.StructType;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
 import ru.sberbank.bigdata.sl.rt.core.App;
-import ru.sberbank.bigdata.sl.rt.core.exceptions.TransformationException;
-import ru.sberbank.bigdata.sl.rt.logger.core.LogMessage;
-import ru.sberbank.bigdata.sl.rt.logger.core.LogType;
 
-import static java.lang.String.format;
+import static ru.sberbank.bigdata.dffess.vspc.compat.guard.PublishPreconditions.alignTypes;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.CHG_DIVH;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.SRC_PROVIDER_SFSDIVISION;
+import static ru.sberbank.bigdata.sl.rt.publisher.util.PublisherUtils.castDataset;
 
 public class ChgDivHTransformation extends BaseTransformation {
 
     public static final String CODE = CHG_DIVH;
+
+    // схема stg.chg_div_h по DDL: 3.0 приводил к ней insertInto (ChgDivHTransformer.java:30-32)
+    private static final StructType STG_SCHEMA_DDL = StructType.fromDDL("fulldivcode string, fullname string, "
+            + "shortdivcode string, closedate date, opendate date, headdivisioncode string, subbranch_code string, "
+            + "requisitesdivision_bic string, requisitesdivision_registrationnum string, address_locationaddress string, "
+            + "address_addrfact_fiascode string, address_addrfact_timezone string, serving_isdisabledequip boolean, "
+            + "gold_fias_code string, address_addrfact_postcode string, address_postcode string, "
+            + "address_addrfact_addrarea_areaname string, address_addrfact_addrplace_placename string, "
+            + "address_addrfact_addrcity_cityname string, address_addrfact_addrhouse_housenumbers string, "
+            + "address_addrfact_addrstreet_streetname string, address_country string, address_addrfact_okatocode string, "
+            + "address_addrfact_oktmocode string, address_subjectcode string, address_legaladdrdoc string, "
+            + "gold_okato string, gold_oktmo string, start_dt date, end_dt date");
 
     public ChgDivHTransformation(App app) {
         super(app, CODE);
@@ -22,25 +32,10 @@ public class ChgDivHTransformation extends BaseTransformation {
 
     @Override
     public void run() {
-        Dataset<Row> preselect = app.getSparkSession().sql(getPreselectSQL(app.ctx().getLoadMode())).distinct();
+        // DV-20 (E/slave/app/HiveWriter.java:10): тип, не приводимый ANSI store assignment к DDL, — отказ, как insertInto 3.0
+        Dataset<Row> preselect = castDataset(alignTypes(app.getSparkSession().sql(getPreselectSQL(app.ctx().getLoadMode())).distinct(),
+                STG_SCHEMA_DDL, STG_SCHEMA + "." + CHG_DIVH), STG_SCHEMA_DDL);
         saveTable(preselect, STG_SCHEMA, CHG_DIVH);
-
-        // пустой результат при живой реплике-источнике — наш баг (слетевший преселект), а не правда
-        // источника: на INCR это тихий no-op, на INIT Publisher очистил бы target и diff безвозвратно.
-        Dataset<Row> transit = readTable(STG_SCHEMA, CHG_DIVH);
-        if (transit.isEmpty()) {
-            if (read(SRC_PROVIDER_SFSDIVISION).kap803Usl().snp().get().isEmpty()) {
-                // прав источник: реплики честно пусты — публикуем пустой транзит как раньше
-                logger.logInfo("chg_div_h: исходные реплики пусты — публикуется пустой результат");
-            } else {
-                boolean incr = getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT;
-                throw new TransformationException(new LogMessage("", LogType.TECH_ERROR,
-                        format("chg_div_h %s: преселект пуст при непустой реплике-источнике %s "
-                                        + "— вероятен сбой фильтров/чтения; публикация остановлена%s",
-                                incr ? "INCR" : "INIT", SRC_PROVIDER_SFSDIVISION,
-                                incr ? "" : " (без гварда INIT очистил бы target и diff безвозвратно)")));
-            }
-        }
     }
 
     public static String getPreselectSQL(App.LoadMode loadMode) {

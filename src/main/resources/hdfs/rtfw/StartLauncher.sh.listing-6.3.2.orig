@@ -1,0 +1,56 @@
+#!/bin/bash
+loading_id=${1}
+user_principal=${2}
+ctl=${3}
+user_keytab_path=${4}
+devops_distributive_jar_local=${5}
+user_keytab_path_local=tmp.keytab
+
+export SPARK_HOME=/usr/sdp/current/spark3-client
+
+hdfs dfs -get ${user_keytab_path} ${user_keytab_path_local}
+kinit -kt ${user_keytab_path_local} ${user_principal} || kinit -kt ${user_keytab_path_local} ${user_principal} || kinit -kt ${user_keytab_path_local} ${user_principal}
+kinit -R
+
+# получаем ссылку на кеш тикета, который в дальнейшем будет передаваться в драйвер.
+user_ticket_cache_path=`klist |grep FILE: | awk -F: '{print $3}'`
+user_ticket_cache_file_name=`ls ${user_ticket_cache_path} | awk -F/ '{print $3}'`
+echo $? user_ticket_cache_path=$user_ticket_cache_path
+
+export RTFW_KERBEROS_TICKET_CACHE_FILE=${user_ticket_cache_file_name}
+
+# удаляем кейтаб файл
+rm ${user_keytab_path_local}
+
+export KRB5CCNAME=${user_ticket_cache_path}
+echo $? KRB5CCNAME=$KRB5CCNAME  # копируем user_ticket_cache_file в папку запуска приложения
+
+# пример получения тикетов для hbase, если в ДП используется ССК
+hdfs dfs -get ${path_to_kvno}/kvno_command.sh
+kvno_command=$(bash kvno_command.sh $KRB5CCNAME)
+$kvno_command
+
+cp ${user_ticket_cache_path} .
+
+export SPARK_SUBMIT_OPTS="$SPARK_SUBMIT_OPTS -Djava.security.krb5.conf=/etc/krb5.conf -Djavax.security.auth.useSubjectCredsOnly=false -Dsun.security.jgss.native=true"
+export HADOOP_OPTS="$HADOOP_OPTS -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false"
+export YARN_OPTS="$YARN_OPTS -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false"
+export HBASE_OPTS="$HBASE_OPTS -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false"
+
+# или заполняем значение переменной RTFW_KERBEROS_TICKET_CACHE_FILE
+export RTFW_KERBEROS_TICKET_CACHE_FILE=${user_ticket_cache_file_name}
+
+# запускаем приложение data-продукта
+java \
+-Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false \
+-classpath $CLASSPATH:/usr/sdp/current/hive-metastore/lib/*:${devops_distributive_jar_local} \
+# или заполняем значение java System property RTFW_KERBEROS_TICKET_CACHE_FILE \
+-DRTFW_KERBEROS_TICKET_CACHE_FILE=${user_ticket_cache_file_name} \
+ru.sberbank.bigdata.sl.rt.core.RtfwLauncher \
+${loading_id} \
+${ctl} \
+ru.sberbank.bigdata.sl.rt.Main
+
+java_main_status=$?
+echo Приложение data-продукта завершено со статусом $java_main_status
+exit $java_main_status

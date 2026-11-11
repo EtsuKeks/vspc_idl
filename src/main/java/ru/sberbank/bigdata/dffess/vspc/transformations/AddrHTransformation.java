@@ -26,7 +26,7 @@ public class AddrHTransformation extends BaseTransformation {
     public static final String CODE = ADDRH;
 
     public AddrHTransformation(App app) {
-        super(app, CODE);
+        super(app, CODE, "usl_vspc_idl.addr.sat=h");
     }
 
     @Override
@@ -91,13 +91,13 @@ public class AddrHTransformation extends BaseTransformation {
         // INCR: date_sub(ctl_validfrom_to_start_dt,1), стр. 40-47). Штатный RT-FW Publisher даты не
         // создаёт — castToTargetStructure доливает отсутствующие колонки NULL (PublisherUtils.java:374-390),
         // из-за чего PK [addr_sk,start_dt] не сходится и D2/VANISH/DROPBAD shadow-калькулятора ненаблюдаемы.
-        // Якорь «день загрузки» = VspcLoadDate.sqlDate() (ОДНО значение на JVM) — тот же, что в закрывающих
+        // Якорь «день загрузки» = VspcLoadDate.sqlDate() (дата шага трансформации) — тот же, что в закрывающих
         // формулах shadow (end := loadDate-2 ≡ another_ctl_validfrom-2): стык [.., loadDate-2][loadDate-1, ..] без разрыва, как в 3.0.
         result = result.withColumn(START_DT_FIELD_NAME, getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT
                                                         ? date_sub(lit(VspcLoadDate.sqlDate()), 1)
                                                         : lit(MINUS_INFINITY_DT).cast("date"));
 
-        publish(result).recordsetMasks("usl_vspc_idl.addr.sat=h").launch();
+        publishChecked(result, "usl_vspc_idl.addr.sat=h");
         registerChangedSets(Recordset.recordsets(getApp(), "usl_vspc_idl.addr.sat=h"));
     }
 }

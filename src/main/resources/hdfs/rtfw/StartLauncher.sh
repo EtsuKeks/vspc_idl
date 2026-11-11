@@ -1,49 +1,48 @@
 #!/bin/bash
+# Эталон: листинг инструкции RT-FW 3.16, п. 6.3.2 «при запуске через java или RtfwLauncher» (копия рядом: StartLauncher.sh.listing-6.3.2.orig).
+# Все отличия от эталона помечены «vspc Δn»; остальное совпадает с листингом построчно.
 loading_id=${1}
 user_principal=${2}
 ctl=${3}
 user_keytab_path=${4}
+# vspc Δ1: usl_vspc_idl.xml (как в 3.0) передаёт 8 аргументов: 5 = nameNode, 6 = каталог lib, 7 = имя jar, 8 = учётка
 app_jar=${5}${6}/${7}
 devops_distributive_jar_local=${7}
+user=${8}
 user_keytab_path_local=tmp.keytab
 
 export SPARK_HOME=/usr/sdp/current/spark3-client
+# vspc Δ8 (DV-38): свой кэш Kerberos на каждый запуск, как в 3.0 (vspc_idl_old StartLauncher.sh:22-23)
+export KRB5CCNAME=/tmp/krb5cc_${user}_$(uuidgen)
 
 hdfs dfs -get ${user_keytab_path} ${user_keytab_path_local}
-kinit_command="kinit -kt ${user_keytab_path_local} ${user_principal}"
-echo kinit_command : ${kinit_command}
-eval "$kinit_command" || eval "$kinit_command" || eval "$kinit_command"
+kinit -kt ${user_keytab_path_local} ${user_principal} || kinit -kt ${user_keytab_path_local} ${user_principal} || kinit -kt ${user_keytab_path_local} ${user_principal}
 kinit -R
 
-#получаем ссылку на кеш тикета, который в дальнейшем будет передаваться в драйвер.
+# получаем ссылку на кеш тикета, который в дальнейшем будет передаваться в драйвер.
 user_ticket_cache_path=`klist |grep FILE: | awk -F: '{print $3}'`
-user_ticket_cache_file_name=`ls ${user_ticket_cache_path} | awk -F/ '{print $3}'`
+# vspc Δ9 (DV-37): постоянное имя копии кэша, на него указывает KRB5CCNAME AM и executors в vars_all.yml, как в 3.0 (vspc_idl_old StartLauncher.sh:24,37)
+user_ticket_cache_file_name=rtfw_kerberos_ticket_cache_file
 echo $? user_ticket_cache_path=$user_ticket_cache_path
 
-export KRB5CCNAME=${user_ticket_cache_file_name}
-echo $? KRB5CCNAME=$KRB5CCNAME
 export RTFW_KERBEROS_TICKET_CACHE_FILE=${user_ticket_cache_file_name}
 
-cp ${user_ticket_cache_path} .
+export KRB5CCNAME=${user_ticket_cache_path}
+echo $? KRB5CCNAME=$KRB5CCNAME  # копируем user_ticket_cache_file в папку запуска приложения
 
-# for SK multi
-user=${8}
-instance_code=""
-# tgt_tgs_renew_h приходит из параметров CTL-потока (oozie экспортирует их в окружение shell-action)
-kvno_tgt_tgs_renew=${ssk_tgt_tgs_renew_h}
-echo "bash kvno_command.sh \"${KRB5CCNAME}\" \"$kinit_command\" \"$user\" \"$instance_code\" \"$sl_secman_host\" \"$kvno_tgt_tgs_renew\""
-# kvno_command.sh лежит в том же каталоге дистрибутива и локализуется oozie через <file> в usl_vspc_idl.xml
-bash kvno_command.sh "${KRB5CCNAME}" "$kinit_command" "$user" "$instance_code" "${sl_secman_host}" "${kvno_tgt_tgs_renew}"
+# пример получения тикетов для hbase, если в ДП используется ССК
+# vspc Δ2: kvno_command.sh — общий скрипт ESSA (как в 3.0): локализуется oozie через <file> в usl_vspc_idl.xml,
+#          принимает 6 аргументов и сам выполняет kvno (команду не печатает), при необходимости делает kinit по keytab
+bash kvno_command.sh "${KRB5CCNAME}" "kinit -kt ${user_keytab_path_local} ${user_principal}" "${user}" "" "${sl_secman_host}" "${ssk_tgt_tgs_renew_h}"
 
-cp ${user_ticket_cache_path} . 2>/dev/null || true
-
-#удаляем кейтаб файл (после всех использований: fallback-kinit внутри kvno_command)
+# удаляем кейтаб файл
+# vspc Δ3: перенесено ниже вызова kvno_command.sh — его запасной kinit читает keytab
 rm ${user_keytab_path_local}
 
-klist -c ${KRB5CCNAME}
+# vspc Δ9: копия под постоянным именем
+cp ${user_ticket_cache_path} ./${user_ticket_cache_file_name}
 
-# jar лежит в дистрибутиве в hdfs/lib (раскладка devops.json) — локализуем как в release/3.0
-echo "hdfs dfs -get ${app_jar} ${devops_distributive_jar_local}"
+# vspc Δ4: jar лежит в каталоге lib дистрибутива и не локализуется oozie — скачиваем, как в 3.0
 hdfs dfs -get ${app_jar} ${devops_distributive_jar_local}
 
 export SPARK_SUBMIT_OPTS="$SPARK_SUBMIT_OPTS -Djava.security.krb5.conf=/etc/krb5.conf -Djavax.security.auth.useSubjectCredsOnly=false -Dsun.security.jgss.native=true"
@@ -51,21 +50,24 @@ export HADOOP_OPTS="$HADOOP_OPTS -Dsun.security.jgss.native=true -Djavax.securit
 export YARN_OPTS="$YARN_OPTS -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false"
 export HBASE_OPTS="$HBASE_OPTS -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false"
 
-#вызываем запуск расчёта дата-продукта с двумя аргументами - loading_id, CTL URL.
-#Целевой способ запуска (инструкция RT-FW 6.3): JAR запускается как Java-приложение через
-#единую точку входа RtfwLauncher, который сам создаёт Spark-сессию из параметров CTL-потока
-#и авто-рассчитывает spark.yarn.access.hadoopFileSystems (см. раздел 6.3 инструкции).
-#Третий аргумент RtfwLauncher - main-класс data-продукта (Spark-точка входа, запускается как
-#единственный дочерний SpawnedApp). Параметры spark.*, требуемые для java-запуска
-#(KRB5CCNAME, zookeeper jaas, hadoopFileSystems), задаются в spark_parameters CTL-потока.
-java -Xmx2G -XX:MetaspaceSize=100M \
-  -Dsun.security.jgss.native=true \
-  -Djavax.security.auth.useSubjectCredsOnly=false \
-  -DRTFW_KERBEROS_TICKET_CACHE_FILE=${user_ticket_cache_file_name} \
-  -classpath /usr/sdp/current/spark3-client/jars/*:/usr/sdp/current/hive-metastore/lib/*:${devops_distributive_jar_local} \
-  ru.sberbank.bigdata.sl.rt.core.RtfwLauncher \
-  ${loading_id} ${ctl} ru.sberbank.bigdata.dffess.vspc.MainClass
+# или заполняем значение переменной RTFW_KERBEROS_TICKET_CACHE_FILE
+export RTFW_KERBEROS_TICKET_CACHE_FILE=${user_ticket_cache_file_name}
+
+# запускаем приложение data-продукта
+# или заполняем значение java System property RTFW_KERBEROS_TICKET_CACHE_FILE
+# vspc Δ5: строка-комментарий выше в листинге стояла внутри java-команды с переносом «\» и обрывала её
+# vspc Δ6: + $SPARK_HOME/jars/* (как в rt-fw-templater 3.16.1): RtfwLauncher запускает приложение через
+#          org.apache.spark.launcher.SparkLauncher, а Spark в jar витрины не входит (scope provided)
+# vspc Δ7: main-класс data-продукта vspc_idl вместо ru.sberbank.bigdata.sl.rt.Main (как предписывает п. 6.3.1)
+java \
+-Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false \
+-classpath $CLASSPATH:$SPARK_HOME/jars/*:/usr/sdp/current/hive-metastore/lib/*:${devops_distributive_jar_local} \
+-DRTFW_KERBEROS_TICKET_CACHE_FILE=${user_ticket_cache_file_name} \
+ru.sberbank.bigdata.sl.rt.core.RtfwLauncher \
+${loading_id} \
+${ctl} \
+ru.sberbank.bigdata.dffess.vspc.MainClass
 
 java_main_status=$?
-echo "data-продукт vspc_idl (RtfwLauncher) завершён со статусом $java_main_status"
+echo Приложение data-продукта завершено со статусом $java_main_status
 exit $java_main_status

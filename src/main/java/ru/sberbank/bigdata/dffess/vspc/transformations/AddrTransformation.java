@@ -30,7 +30,7 @@ public class AddrTransformation extends BaseTransformation {
     public static final String CODE = ADDR;
 
     public AddrTransformation(App app) {
-        super(app, CODE);
+        super(app, CODE, "usl_vspc_idl.addr.hub");
     }
 
     @Override
@@ -241,8 +241,8 @@ public class AddrTransformation extends BaseTransformation {
         List<String> attributes = new ArrayList<>(
                 Arrays.asList("@rus_fed_subj", "@cntry", "@okato2", "fias_code@addr", "@addr")
         );
-        Dataset<Row> result = addSk(addr, ADDR, attributes).dropDuplicates("addr_sk");
-        publish(result).recordsetMasks("usl_vspc_idl.addr.hub").launch();
+        Dataset<Row> result = addSk(addr, ADDR, attributes);
+        publishChecked(result, "usl_vspc_idl.addr.hub");
         registerChangedSets(Recordset.recordsets(getApp(), "usl_vspc_idl.addr.hub"));
     }
 

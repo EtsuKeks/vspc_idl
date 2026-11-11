@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.apache.spark.sql.functions.*;
+import static org.apache.spark.sql.types.DataTypes.IntegerType;
 import static org.apache.spark.sql.types.DataTypes.LongType;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.*;
@@ -22,7 +23,7 @@ public class DivTransformation extends BaseTransformation {
     public static final String CODE = DIV;
 
     public DivTransformation(App app) {
-        super(app, CODE);
+        super(app, CODE, "usl_vspc_idl.div.hub");
     }
 
     @Override
@@ -42,11 +43,12 @@ public class DivTransformation extends BaseTransformation {
                 when(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null)
                         .otherwise(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM)).as(DIV_FULL_REG_NUM),
 
+                // REG_ORD_LONG (O/tables/div/DivTransformer.java:52): cast(int), вне int32 -> NULL, затем bigint цели
                 when(col(FULLNAME).equalTo("ПАО Сбербанк"),
                         when(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null).otherwise(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM)))
                         .otherwise(
                                 when(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null)
-                                        .otherwise(substring_index(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM), "/", -1))).cast(LongType).as(DIV_REG_ORD),
+                                        .otherwise(substring_index(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM), "/", -1))).cast(IntegerType).cast(LongType).as(DIV_REG_ORD),
 
                 when(col(ADDRESS_ADDRFACT_TIMEZONE).equalTo("USZ1"), "KALT")
                         .otherwise(col(ADDRESS_ADDRFACT_TIMEZONE)).as(DIV_TIME_ZONE_TIME_ZONE_SID),
@@ -85,8 +87,8 @@ public class DivTransformation extends BaseTransformation {
         List<String> attributes = new ArrayList<>(
                 Arrays.asList("parent@div", "legal@addr", "div_time_zone@time_zone_rf", "@div")
         );
-        Dataset<Row> result = addSk(div, DIV, attributes).dropDuplicates("div_sk");
-        publish(result).recordsetMasks("usl_vspc_idl.div.hub").launch();
+        Dataset<Row> result = addSk(div, DIV, attributes);
+        publishChecked(result, "usl_vspc_idl.div.hub");
         registerChangedSets(Recordset.recordsets(getApp(), "usl_vspc_idl.div.hub"));
     }
 }

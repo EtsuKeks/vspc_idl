@@ -3,7 +3,9 @@ package ru.sberbank.bigdata.dffess.vspc.transformations;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
+import ru.sberbank.bigdata.dffess.vspc.common.VspcLoadDate;
 import ru.sberbank.bigdata.sl.rt.core.App;
+import ru.sberbank.bigdata.sl.rt.core.Recordset;
 
 import java.util.Arrays;
 
@@ -11,6 +13,7 @@ import static org.apache.spark.sql.functions.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.*;
+import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.END_DT_FIELD_NAME;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.START_DT_FIELD_NAME;
 
@@ -19,7 +22,7 @@ public class DivHTransformation extends BaseTransformation {
     public static final String CODE = DIVH;
 
     public DivHTransformation(App app) {
-        super(app, CODE);
+        super(app, CODE, "usl_vspc_idl.div.sat=h");
     }
 
     @Override
@@ -64,12 +67,20 @@ public class DivHTransformation extends BaseTransformation {
 
                 col(DIV_DISABLED_ACCESS_EQUIPMENT).as(DIV_DISABLED_ACCESS_EQUIPMENT),
 
+                lit(false).as(DIRTY_FLAG),
+                lit(false).as(DELETED_FLAG),
                 col(START_DT_FIELD_NAME).as(START_DT_FIELD_NAME),
                 col(END_DT_FIELD_NAME).as(END_DT_FIELD_NAME)
         ).distinct();
 
+        // 3.0 на INCR перезаписывал транзитный start_dt формулой ctl_validfrom-1 (DataLoaderHistMix.java:42,51)
+        if (getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT) {
+            divh = divh.withColumn(START_DT_FIELD_NAME, date_sub(lit(VspcLoadDate.sqlDate()), 1));
+        }
+
         Dataset<Row> result = addSk(divh, DIVH, Arrays.asList("@div", "@pay_sys_prtcpnt", "fact@addr"));
 
-        publishVspc(result);
+        publishChecked(result, "usl_vspc_idl.div.sat=h");
+        registerChangedSets(Recordset.recordsets(getApp(), "usl_vspc_idl.div.sat=h"));
     }
 }

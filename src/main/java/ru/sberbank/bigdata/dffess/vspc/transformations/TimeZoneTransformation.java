@@ -20,7 +20,7 @@ public class TimeZoneTransformation extends BaseTransformation {
     public static final String PU_CODE = TIMEZONE;
 
     public TimeZoneTransformation(App app) {
-        super(app, PU_CODE);
+        super(app, PU_CODE, "usl_vspc_idl.time_zone_rf.hub");
     }
 
     @Override
@@ -40,8 +40,8 @@ public class TimeZoneTransformation extends BaseTransformation {
                 ).where(col(ABBREVIATION).isNotNull())
                 .distinct();
 
-        Dataset<Row> result = addSk(slice, TIMEZONE, Arrays.asList("@time_zone_rf")).dropDuplicates("time_zone_rf_sk");
-        publish(result).recordsetMasks("usl_vspc_idl.time_zone_rf.hub").launch();
+        Dataset<Row> result = addSk(slice, TIMEZONE, Arrays.asList("@time_zone_rf"));
+        publishChecked(result, "usl_vspc_idl.time_zone_rf.hub");
         registerChangedSets(Recordset.recordsets(getApp(), "usl_vspc_idl.time_zone_rf.hub"));
     }
 }

@@ -1,0 +1,18 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>local.stand</groupId><artifactId>stand30</artifactId><version>1</version>
+  <properties><maven.compiler.source>8</maven.compiler.source><maven.compiler.target>8</maven.compiler.target>
+    <spark.version>3.5.1</spark.version><rt-fw-coordinator.version>3.12.0</rt-fw-coordinator.version><hadoop.version>3.3.4</hadoop.version>
+    <spark.scala.version>2.12</spark.scala.version><commons-lang3.version>3.12.0</commons-lang3.version><commons-text.version>1.10.0</commons-text.version>
+    <jackson.version>2.15.2</jackson.version><skclient.version>1.30.1</skclient.version></properties>
+  <dependencies>
+    <dependency><groupId>ru.sberbank.bigdata.essa.common</groupId><artifactId>essa-common-lib</artifactId><version>2.2.6-SNAPSHOT</version>
+      <exclusions><exclusion><groupId>org.apache.spark</groupId><artifactId>*</artifactId></exclusion><exclusion><groupId>org.apache.hadoop</groupId><artifactId>*</artifactId></exclusion>
+        <exclusion><groupId>org.apache.hbase</groupId><artifactId>*</artifactId></exclusion></exclusions></dependency>
+    <dependency><groupId>org.apache.spark</groupId><artifactId>spark-sql_2.12</artifactId><version>3.5.1</version></dependency>
+    <dependency><groupId>org.apache.spark</groupId><artifactId>spark-hive_2.12</artifactId><version>3.5.1</version></dependency>
+    <dependency><groupId>org.apache.spark</groupId><artifactId>spark-launcher_2.12</artifactId><version>3.5.1</version></dependency>
+    <dependency><groupId>org.apache.hadoop</groupId><artifactId>hadoop-client-minicluster</artifactId><version>3.3.4</version></dependency>
+    <dependency><groupId>org.apache.commons</groupId><artifactId>commons-lang3</artifactId><version>3.12.0</version></dependency>
+  </dependencies>
+</project>

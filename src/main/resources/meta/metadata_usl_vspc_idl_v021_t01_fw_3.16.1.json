@@ -1538,7 +1538,7 @@
   }, {
     "alias" : "archive_rdm",
     "tables" : [ {
-      "databaseCode" : "usl_vspc_idl_in_snp_snp",
+      "databaseCode" : "usl_vspc_idl_in_snp",
       "layer" : "SNP",
       "tableCode" : "ebx_rep_m_rfzonetime_0002_rfzonetime",
       "datasets" : [ {
@@ -1550,7 +1550,7 @@
         "dataType" : "BIGINT"
       } ]
     }, {
-      "databaseCode" : "usl_vspc_idl_in_snp_snp",
+      "databaseCode" : "usl_vspc_idl_in_snp",
       "layer" : "SNP",
       "tableCode" : "ebx_rep_m_sfs_0002_sfsdivision",
       "datasets" : [ {
@@ -1562,7 +1562,7 @@
         "dataType" : "BIGINT"
       } ]
     }, {
-      "databaseCode" : "usl_vspc_idl_in_snp_snp",
+      "databaseCode" : "usl_vspc_idl_in_snp",
       "layer" : "SNP",
       "tableCode" : "ebx_rep_m_sfs_0002_sfsdivision_successors",
       "datasets" : [ {
