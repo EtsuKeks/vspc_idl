@@ -1,0 +1,45 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+		  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                      http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+	<servers>
+		<server>
+			<id>central</id>
+			<username>${user.nexus3}</username>
+			<password>${password}</password>
+		</server>
+
+		<server>
+			<id>Nexus_CI_Snapshot</id>
+			<username>${user.nexus3}</username>
+			<password>${password}</password>
+		</server>
+		<server>
+			<id>Nexus_CI_Release</id>
+			<username>${user.nexus3}</username>
+			<password>${password}</password>
+		</server>
+
+		<server>
+			<id>maven-distr-dev</id>
+			<username>${user.nexus3}</username>
+			<password>${password}</password>
+		</server>
+		<server>
+			<id>maven-distr-release</id>
+			<username>${user.nexus3}</username>
+			<password>${password}</password>
+		</server>
+	</servers>
+
+	<mirrors>
+		<mirror>
+			<id>central</id>
+			<name>central</name>
+			<url>https://nexus-ci.delta.sbrf.ru/repository/public/</url>
+			<mirrorOf>central</mirrorOf>
+		</mirror>
+	</mirrors>
+
+</settings>
