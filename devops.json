@@ -1,0 +1,91 @@
+{
+  "version": "D-02.104.001",
+  "stand_name": "fess",
+  "build": "maven",
+  "block": "t",
+  "datamart_group": "idl",
+  "datamart_name": "vspc_idl",
+  "datamart_ansible_vars": "vars_all.yml",
+  "sq_pr_key": "vspc_idl",
+  "sq_pr_name": "vspc_idl",
+  "sq_scan_folder": "src",
+  "sq_binary_folder": "target",
+  "sq_options": "",
+  "sast_conf": "devsecops-config.yml",
+  "emails": "SLSNTWRKDE_ess@sberbank.ru TRuKarimullin@sberbank.ru",
+  "run_hive_script_sql": true,
+  "jira_task_release": "VSPCIDL-267",
+  "nexus3": {
+    "ci_it_service": "CI02619185",
+    "ci_as_fp": "CI04734132"
+  },
+  "maven": {
+    "pom_path": "pom.xml",
+    "set_path": "src/main/resources/devops/ci-settings.xml"
+  },
+
+  "ess": {
+    "meta": [
+      "usl/certification/cap_certification_usl.vspc_idl_v021_fw_3.9.6.json"
+    ],
+    "kkd-spod": [
+      "usl/certification/dq.vspc_idl.v021_fw_3.9.6.json"
+    ],
+    "well": "vspc"
+  },
+
+  "distrib_files": [
+    {
+      "source": "src/main/resources/ctl/*",
+      "destination": "ctl/"
+    },
+    {
+      "source": "src/main/resources/s2t/*",
+      "destination": "docs/s2t/"
+    },
+    {
+      "source": "src/main/resources/s2t/*",
+      "destination": "s2t/"
+    },
+    {
+      "source": "src/main/resources/docs/*",
+      "destination": "docs/"
+    },
+
+    {
+      "source": "src/main/resources/hdfs/*",
+      "destination": "hdfs/"
+    },
+    {
+      "source": "target/*-with-dependencies.jar",
+      "destination": "hdfs/lib/"
+    },
+    {
+      "source": "src/main/resources/usl/rrm/*",
+      "destination": "usl/rrm/"
+    },
+    {
+      "source": "src/main/resources/sql/*",
+      "destination": "sql/"
+    },
+    {
+      "source": "src/main/resources/usl/certification/*",
+      "destination": "usl/certification/"
+    },
+    {
+      "source": "src/main/resources/meta/*",
+      "destination": "meta/"
+    }
+  ],
+  "template_files": [
+    "usl/certification/dq.vspc_idl.v021_fw_3.9.6.json",
+    "sql/ddl/ddl.usl.vspc_idl.v021.model.9.47.0_fw_3.9.6.sql",
+    "sql/ddl/ddl.usl.vspc_idl.v021.model_stg.9.47.0_fw_3.9.6.sql.sql"
+  ],
+  "workflow_to_run_scenario" : [
+    {
+      "step": "step-1",
+      "workflows": ["USL_VSPC_IDL_INIT"]
+    }
+  ]
+}
