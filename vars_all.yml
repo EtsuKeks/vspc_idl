@@ -37,20 +37,15 @@ vars: &commonVars
   data_owner_name: "SN"
   org_lvl2_name: "СП.Дивизион \\\"Моделирование и исследование данных\\\""
   secman_cert_owner_email: "TRuKarimullin@sberbank.ru"
-  recover_flag: "false"
 
   archiveStat_FakeCardCode: "2"
   archiveProfile_FakeCardCode: "Default"
-
-  starting_business_date: ""
 
   kafka_topic: "log-CI02619185-CI02619185"
 
   CTL_PROFILE_NAME_gar_fias_idl: "{{ CTL_PROFILE_NAME }}"
   CTL_PROFILE_NAME_rdm_idl_spark: "{{ CTL_PROFILE_NAME }}"
   rtfw_log_level: "INFO"
-  # В 3.0 не действовал, в 4.0 на данные не влияет: зону перезаписи подменяет compat (PeriodRewriteCompatCalculator.getMinBusinessDateUpdateFilters).
-  max_increment_depth_days: 10
 
 stands:
   # DEV
