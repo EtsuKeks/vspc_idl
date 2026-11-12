@@ -1,0 +1,49 @@
+<workflow-app name="USL_VSPC_IDL:loading_id=${loading_id}:" xmlns="uri:oozie:workflow:0.5">
+    <global>
+        <configuration>
+            <property>
+                <name>mapred.job.queue.name</name>
+                <value>${yarn_queue}</value>
+            </property>
+            <property>
+                <name>mapreduce.map.memory.mb</name>
+                <value>16384</value>
+            </property>
+            <property>
+                <name>yarn.app.mapreduce.am.resource.mb</name>
+                <value>16384</value>
+            </property>
+        </configuration>
+    </global>
+
+    <start to="MAIN_ACTION"/>
+
+    <action name="MAIN_ACTION"  cred='howlauth'>
+        <shell xmlns="uri:oozie:shell-action:0.1">
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <exec>StartLauncher.sh</exec>
+            <argument>${loading_id}</argument>                   <!-- 1 -->
+            <argument>${wf:conf('user.name')}@${kerberos_realm}</argument>               <!-- 2 -->
+            <argument>${ctl_secure}</argument>                          <!-- 3 -->
+            <argument>${user_keytab_path}${wf:conf('user.name')}.keytab</argument>  		 <!-- 4 -->
+            <argument>${nameNode}</argument>  			 <!-- 5 -->
+            <argument>/oozie-app/t/idl/vspc_idl/lib</argument>  			 <!-- 6 -->
+            <argument>${devops_distributive_jar}</argument>	         <!-- 7 -->
+            <argument>${wf:conf('user.name')}</argument>        <!-- 8 -->
+            <env-var>sl_secman_host=${wf:conf('sl.secman.host')}</env-var> <!-- пробрасываем параметр sl.secman.host из 'профиля ctl' в StartLauncher.sh -->
+            <env-var>ssk_tgt_tgs_renew_h=${wf:conf('ssk_tgt_tgs_renew_h')}</env-var>
+            <file>StartLauncher.sh#StartLauncher.sh</file>
+            <file>kvno_command.sh#kvno_command.sh</file>
+        </shell>
+        <ok to="End"/>
+        <error to="Kill"/>
+    </action>
+
+    <kill name="Kill">
+        <message>Action failed, error message[${wf:errorMessage(wf:lastErrorNode())}]</message>
+    </kill>
+
+    <end name="End"/>
+
+</workflow-app>
