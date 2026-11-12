@@ -1,0 +1,55 @@
+package ru.sberbank.bigdata.dffess.vspc.common;
+
+import ru.sberbank.bigdata.sl.rt.core.App;
+import ru.sberbank.bigdata.sl.rt.logger.core.LogMessage;
+import ru.sberbank.bigdata.sl.rt.logger.core.LogType;
+
+public class Logger {
+    org.apache.log4j.Logger log4jLogger;
+    App app;
+
+    public Logger(App app, Class clazz) {
+        this.log4jLogger = org.apache.log4j.Logger.getLogger(clazz);
+        this.app = app;
+    }
+
+    public static LogMessage info(String title) {
+        return new LogMessage("", LogType.TECH_INFO, title);
+    }
+
+    public static LogMessage error(String title) {
+        return new LogMessage("", LogType.TECH_ERROR, title);
+    }
+
+    /**
+     * Штатный канал журналирования RT-FW (App.log -> rt-fw-logger / ТС Журналирование);
+     * echo в log4j оставлен для stdout/YARN-логов.
+     */
+    public void log(LogMessage message) {
+        if (app != null) {
+            app.log(message);
+        }
+        if (log4jLogger != null) {
+            String title = message.getTitle();
+            String messageSubtype = message.getSubTypeId();
+            if (LogType.TECH_INFO.getSubTypeId().equals(messageSubtype)) {
+                log4jLogger.info(title);
+            } else if (LogType.TECH_ERROR.getSubTypeId().equals(messageSubtype)) {
+                log4jLogger.error(title);
+            } else if (LogType.TECH_DEBUG.getSubTypeId().equals(messageSubtype)) {
+                log4jLogger.debug(title);
+            } else {
+                System.out.println(title);
+            }
+        }
+    }
+
+    public void logInfo(String title) {
+        log(info(title));
+    }
+
+    public void logError(String title) {
+        log(error(title));
+    }
+
+}

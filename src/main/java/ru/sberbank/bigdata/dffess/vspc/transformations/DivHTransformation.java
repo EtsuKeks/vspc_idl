@@ -26,6 +26,9 @@ public class DivHTransformation extends BaseTransformation {
 
     @Override
     public void run() {
+        // Дата загрузки этого шага.
+        VspcLoadDate.start();
+
         // В RT-FW чтение источников (read) и запись наборов (publish) идут по meta. chg_div_h — наша промежуточная таблица в stg,
         // в meta её нет, поэтому читаем её напрямую.
         Dataset<Row> div_raw = readTable(STG_SCHEMA, CHG_DIVH);

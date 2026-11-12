@@ -38,6 +38,9 @@ public class DivDivRelationTransformation extends BaseTransformation {
 
     @Override
     public void run() {
+        // Дата загрузки этого шага.
+        VspcLoadDate.start();
+
         Dataset<Row> successors = read(EBX_REP_M_SFS_0002_SFSDIVISION_SUCCESSORS).kap803Usl().snp().get();
         Dataset<Row> divisions = read(EBX_REP_M_SFS_0002_SFSDIVISION).kap803Usl().snp().get();
 

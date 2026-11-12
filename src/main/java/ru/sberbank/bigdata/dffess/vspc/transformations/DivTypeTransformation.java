@@ -36,6 +36,9 @@ public class DivTypeTransformation extends BaseTransformation {
 
     @Override
     public void run() {
+        // Дата загрузки этого шага.
+        VspcLoadDate.start();
+
         Dataset<Row> divtype = read(EBX_REP_M_SFS_0002_SFSDIVISION).kap803Usl().snp().get();
 
         divtype = divtype
