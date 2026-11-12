@@ -20,9 +20,8 @@ import static org.apache.spark.sql.functions.lower;
 import static org.apache.spark.sql.functions.trim;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.DIVDIVRELATION;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DATA_PRODUCT;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.SRC_PROVIDER_SFSDIVISION;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.SRC_PROVIDER_SFSDIVISION_SUCCESSORS;
+import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.EBX_REP_M_SFS_0002_SFSDIVISION;
+import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.EBX_REP_M_SFS_0002_SFSDIVISION_SUCCESSORS;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.END_DT_FIELD_NAME;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.MINUS_INFINITY_DT;
@@ -39,8 +38,8 @@ public class DivDivRelationTransformation extends BaseTransformation {
 
     @Override
     public void run() {
-        Dataset<Row> successors = read(SRC_PROVIDER_SFSDIVISION_SUCCESSORS).kap803Usl().snp().get();
-        Dataset<Row> divisions = read(SRC_PROVIDER_SFSDIVISION).kap803Usl().snp().get();
+        Dataset<Row> successors = read(EBX_REP_M_SFS_0002_SFSDIVISION_SUCCESSORS).kap803Usl().snp().get();
+        Dataset<Row> divisions = read(EBX_REP_M_SFS_0002_SFSDIVISION).kap803Usl().snp().get();
 
         Dataset<Row> sfsSource = divisions.select(col("id").as("sfs_source_id"), col("fulldivcode").as("source_sid"));
         Dataset<Row> sfsSuccessor = divisions.select(col("id").as("sfs_successor_id"), col("fulldivcode").as("successor_sid"));
@@ -59,13 +58,13 @@ public class DivDivRelationTransformation extends BaseTransformation {
                 .select(
                         getKey("|").as(SID),
 
-                        lit(DATA_PRODUCT).as(DIV_DIV_RELATION_DP_CODE),
+                        lit(SHORT_PRODUCT_CODE).as(DIV_DIV_RELATION_DP_CODE),
 
                         // *_sid — натуральный ключ из источника; addSk отдаёт его в ССК и заменяет на суррогатный *_sk подчищая *_sid после себя.
                         col("source_sid").as(SOURCE_DIV_SID),
-                        lit(DATA_PRODUCT).as(SOURCE_DIV_DP_CODE),
+                        lit(SHORT_PRODUCT_CODE).as(SOURCE_DIV_DP_CODE),
                         col("successor_sid").as(SUCCESSOR_DIV_SID),
-                        lit(DATA_PRODUCT).as(SUCCESSOR_DIV_DP_CODE),
+                        lit(SHORT_PRODUCT_CODE).as(SUCCESSOR_DIV_DP_CODE),
 
                         lit(false).as(DIRTY_FLAG),
                         lit(false).as(DELETED_FLAG)

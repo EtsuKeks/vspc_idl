@@ -10,9 +10,8 @@ import java.util.Arrays;
 import static org.apache.spark.sql.functions.col;
 import static org.apache.spark.sql.functions.lit;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
+import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.EBX_REP_M_SFS_0002_SFSDIVISION;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.TERRDIVTYPE;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DATA_PRODUCT;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.SRC_PROVIDER_SFSDIVISION;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 
 public class TerrDivTypeTransformation extends BaseTransformation {
@@ -25,12 +24,12 @@ public class TerrDivTypeTransformation extends BaseTransformation {
 
     @Override
     public void run() {
-        Dataset<Row> terrdivtype = read(SRC_PROVIDER_SFSDIVISION).kap803Usl().snp().get();
+        Dataset<Row> terrdivtype = read(EBX_REP_M_SFS_0002_SFSDIVISION).kap803Usl().snp().get();
         terrdivtype = terrdivtype
                 .select(
                         lit(false).as(DELETED_FLAG),
                         col(DIVISIONTYPE00).as(SID),
-                        lit(DATA_PRODUCT).as(TERR_DIV_TYPE_DP_CODE),
+                        lit(SHORT_PRODUCT_CODE).as(TERR_DIV_TYPE_DP_CODE),
                         col(DIVISIONTYPE00).as(DIV_TYPE_CODE),
 
                         // *_sid — натуральный ключ из источника; addSk отдаёт его в ССК и заменяет на суррогатный *_sk подчищая *_sid после себя.

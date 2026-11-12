@@ -19,8 +19,7 @@ import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.DIV_TYPE_TERR
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.DIV_TYPE_TERR_DIV_TYPE_SID;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.FULLDIVCODE;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.DIVTYPE;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DATA_PRODUCT;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.SRC_PROVIDER_SFSDIVISION;
+import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.EBX_REP_M_SFS_0002_SFSDIVISION;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.END_DT_FIELD_NAME;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.MINUS_INFINITY_DT;
@@ -37,7 +36,7 @@ public class DivTypeTransformation extends BaseTransformation {
 
     @Override
     public void run() {
-        Dataset<Row> divtype = read(SRC_PROVIDER_SFSDIVISION).kap803Usl().snp().get();
+        Dataset<Row> divtype = read(EBX_REP_M_SFS_0002_SFSDIVISION).kap803Usl().snp().get();
 
         divtype = divtype
                 .select(
@@ -45,9 +44,9 @@ public class DivTypeTransformation extends BaseTransformation {
 
                         // *_sid — натуральный ключ из источника; addSk отдаёт его в ССК и заменяет на суррогатный *_sk подчищая *_sid после себя.
                         col(FULLDIVCODE).as(DIV_SID),
-                        lit(DATA_PRODUCT).as(DIV_DP_CODE),
+                        lit(SHORT_PRODUCT_CODE).as(DIV_DP_CODE),
                         col(DIVISIONTYPE00).as(DIV_TYPE_TERR_DIV_TYPE_SID),
-                        lit(DATA_PRODUCT).as(DIV_TYPE_TERR_DIV_TYPE_DP_CODE),
+                        lit(SHORT_PRODUCT_CODE).as(DIV_TYPE_TERR_DIV_TYPE_DP_CODE),
                         lit(false).as(DIRTY_FLAG)
                 ).distinct();
 

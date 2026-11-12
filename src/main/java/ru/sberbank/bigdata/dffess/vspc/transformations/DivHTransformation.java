@@ -11,7 +11,6 @@ import java.util.Arrays;
 import static org.apache.spark.sql.functions.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.*;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.*;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.END_DT_FIELD_NAME;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.PLUS_INFINITY_DT;
@@ -61,14 +60,14 @@ public class DivHTransformation extends BaseTransformation {
                 col(DIV_CLOSEDATE).as(DIV_CLOSEDATE),
                 col(DIV_OPENDATE).as(DIV_OPENDATE),
                 col(DIV_CODE).as(DIV_CODE),
-                lit(DATA_PRODUCT).as(DIV_DP_CODE),
+                lit(SHORT_PRODUCT_CODE).as(DIV_DP_CODE),
 
                 when(col(DIV_PAY_SYS_PRTCPNT_SID).isNotNull(), col(DIV_PAY_SYS_PRTCPNT_SID)).otherwise(null).as(DIV_PAY_SYS_PRTCPNT_SID),
-                when(col(DIV_PAY_SYS_PRTCPNT_SID).isNotNull(), lit(RDM_IDL_SPARK)).otherwise(null).as(DIV_PAY_SYS_PRTCPNT_DP_CODE),
+                when(col(DIV_PAY_SYS_PRTCPNT_SID).isNotNull(), lit("rdm_idl_spark")).otherwise(null).as(DIV_PAY_SYS_PRTCPNT_DP_CODE),
 
 
                 when(col(ADDR_SRC_TXT).isNotNull(), AddrTransformation.getKey("|")).otherwise(null).as(DIV_FACT_ADDR_SID),
-                when(col(ADDR_SRC_TXT).isNotNull(), lit(DATA_PRODUCT)).otherwise(null).as(DIV_FACT_ADDR_DP_CODE),
+                when(col(ADDR_SRC_TXT).isNotNull(), lit(SHORT_PRODUCT_CODE)).otherwise(null).as(DIV_FACT_ADDR_DP_CODE),
 
                 col(DIV_DISABLED_ACCESS_EQUIPMENT).as(DIV_DISABLED_ACCESS_EQUIPMENT),
 

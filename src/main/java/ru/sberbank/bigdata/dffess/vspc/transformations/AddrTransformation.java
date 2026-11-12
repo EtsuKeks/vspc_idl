@@ -19,9 +19,6 @@ import static org.apache.spark.sql.functions.when;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.ADDR;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.CHG_DIVH;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DATA_PRODUCT;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.GAR_FIAS_IDL;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.RDM_IDL_SPARK;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 
 public class AddrTransformation extends BaseTransformation {
@@ -196,21 +193,21 @@ public class AddrTransformation extends BaseTransformation {
                 col(ADDR_FIAS_CODE).as(ADDR_FIAS_CODE),
                 col(ADDR_HOUSE_NUM).as(ADDR_HOUSE_NUM),
                 col(ADDR_STREET_NAME).as(ADDR_STREET_NAME),
-                lit(DATA_PRODUCT).as(ADDR_DP_CODE),
+                lit(SHORT_PRODUCT_CODE).as(ADDR_DP_CODE),
 
                 when(col(ADDR_RUS_FED_SUBJ_SID).isNotNull(), col(ADDR_RUS_FED_SUBJ_SID)).as(ADDR_RUS_FED_SUBJ_SID),
-                when(col(ADDR_RUS_FED_SUBJ_SID).isNotNull(), lit(RDM_IDL_SPARK)).as(ADDR_REG_FED_SUBJ_DP_CODE),
+                when(col(ADDR_RUS_FED_SUBJ_SID).isNotNull(), lit("rdm_idl_spark")).as(ADDR_REG_FED_SUBJ_DP_CODE),
 
                 when(col(ADDR_CNTRY_SID).isNotNull(), col(ADDR_CNTRY_SID)).as(ADDR_CNTRY_SID),
-                when(col(ADDR_CNTRY_SID).isNotNull(), lit(RDM_IDL_SPARK)).as(ADDR_CNTRY_DP_CODE),
+                when(col(ADDR_CNTRY_SID).isNotNull(), lit("rdm_idl_spark")).as(ADDR_CNTRY_DP_CODE),
 
                 col(ADDR_OKATO2_SID).as(ADDR_OKATO2_SID),
-                lit(RDM_IDL_SPARK).as(ADDR_OKATO2_DP_CODE),
+                lit("rdm_idl_spark").as(ADDR_OKATO2_DP_CODE),
                 lit(false).as(DIRTY_FLAG),
                 lit(false).as(DELETED_FLAG),
 
                 when(col(ADDR_FIAS_CODE).isNotNull(), col(ADDR_FIAS_CODE)).as(ADDRESS_FIASCODE_SID),
-                when(col(ADDR_FIAS_CODE).isNotNull(), lit(GAR_FIAS_IDL)).as(ADDRESS_FIASCODE_DP_CODE),
+                when(col(ADDR_FIAS_CODE).isNotNull(), lit("gar_fias_idl")).as(ADDRESS_FIASCODE_DP_CODE),
                 lit(">non_stndrt").as(ADDRESS_TYPE_CODE)
 
         ).distinct();

@@ -13,7 +13,6 @@ import static org.apache.spark.sql.functions.*;
 import static org.apache.spark.sql.types.DataTypes.IntegerType;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.*;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.*;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 
 public class DivTransformation extends BaseTransformation {
@@ -64,17 +63,17 @@ public class DivTransformation extends BaseTransformation {
                 lit(false).as(DELETED_FLAG),
                 col(SID).as(SID),
                 col(DIV_SID).as(DIV_SID),
-                lit(DATA_PRODUCT).as(DIV_DP_CODE),
+                lit(SHORT_PRODUCT_CODE).as(DIV_DP_CODE),
                 col(DIV_CODE).as(DIV_CODE),
                 col(DIV_SHORT_DIV_CODE).as(DIV_SHORT_DIV_CODE),
                 col(DIV_CLOSEDATE).as(DIV_CLOSEDATE),
                 col(DIV_OPENDATE).as(DIV_OPENDATE),
                 col(DIV_SUBBRANCH_CODE).as(DIV_SUBBRANCH_CODE),
                 col(DIV_PARENT_DIV_SID).as(DIV_PARENT_DIV_SID),
-                lit(DATA_PRODUCT).as(DIV_PARENT_DIV_DP_CODE),
+                lit(SHORT_PRODUCT_CODE).as(DIV_PARENT_DIV_DP_CODE),
 
                 when(col(ADDR_SRC_TXT).isNotNull(), AddrTransformation.getKey("|")).otherwise(null).as(DIV_LEGAL_ADDR_SID),
-                when(col(ADDR_SRC_TXT).isNotNull(), lit(DATA_PRODUCT)).otherwise(null).as(DIV_LEGAL_ADDR_DP_CODE),
+                when(col(ADDR_SRC_TXT).isNotNull(), lit(SHORT_PRODUCT_CODE)).otherwise(null).as(DIV_LEGAL_ADDR_DP_CODE),
 
                 lit(false).as(DIRTY_FLAG),
 
@@ -83,7 +82,7 @@ public class DivTransformation extends BaseTransformation {
                 col(DIV_REG_ORD).as(DIV_REG_ORD),
 
                 col(DIV_TIME_ZONE_TIME_ZONE_SID).as(DIV_TIME_ZONE_TIME_ZONE_SID),
-                lit(DATA_PRODUCT).as(DIV_TIME_ZONE_TIME_ZONE_DP_CODE)
+                lit(SHORT_PRODUCT_CODE).as(DIV_TIME_ZONE_TIME_ZONE_DP_CODE)
         ).distinct();
 
         List<String> attributes = new ArrayList<>(

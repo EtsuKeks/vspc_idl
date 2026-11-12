@@ -4,7 +4,6 @@ import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
 import ru.sberbank.bigdata.dffess.vspc.common.VspcLoadDate;
-import ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant;
 import ru.sberbank.bigdata.sl.rt.core.App;
 
 import java.util.Arrays;
@@ -13,7 +12,6 @@ import static org.apache.spark.sql.functions.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.ADDRH;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.CHG_DIVH;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.RDM_IDL_SPARK;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.END_DT_FIELD_NAME;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.MINUS_INFINITY_DT;
@@ -71,16 +69,16 @@ public class AddrHTransformation extends BaseTransformation {
 
         Dataset<Row> addrh = addr.select(
                 col(ADDR_SID).as(ADDR_SID),
-                lit(VspcConstant.DATA_PRODUCT).as(ADDR_DP_CODE),
+                lit(SHORT_PRODUCT_CODE).as(ADDR_DP_CODE),
                 col(ADDRESS_STANDARD_ADDRESS_TXT).as(ADDRESS_STANDARD_ADDRESS_TXT),
                 lit(false).as(DIRTY_FLAG),
                 lit(false).as(DELETED_FLAG),
 
                 when(col(ADDR_OKATO2_SID).isNotNull(), col(ADDR_OKATO2_SID)).as(ADDRH_OKATO2_SID),
-                when(col(ADDR_OKATO2_SID).isNotNull(), lit(RDM_IDL_SPARK)).as(ADDRH_OKATO2_DP_CODE),
+                when(col(ADDR_OKATO2_SID).isNotNull(), lit("rdm_idl_spark")).as(ADDRH_OKATO2_DP_CODE),
 
                 when(col(ADDR_OKTMO2_SID).isNotNull(), col(ADDR_OKTMO2_SID)).as(ADDRH_OKTMO2_SID),
-                when(col(ADDR_OKTMO2_SID).isNotNull(), lit(RDM_IDL_SPARK)).as(ADDRH_OKTMO2_DP_CODE),
+                when(col(ADDR_OKTMO2_SID).isNotNull(), lit("rdm_idl_spark")).as(ADDRH_OKTMO2_DP_CODE),
 
                 lit(">non_stndrt").as(ADDRESS_TYPE_CODE)
         ).distinct();
