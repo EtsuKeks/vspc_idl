@@ -57,9 +57,6 @@ public class DivDivRelationTransformation extends BaseTransformation {
 
         divsuccessor = divsuccessor
                 .select(
-                        // Технические колонки (ctl_loading, ctl_validfrom и др.) — не наши: RT-FW выбрасывает их из входа и ставит сам.
-                        // Даты версии end_dt и start_dt — наши: публикатор требует их во входе.
-                        lit(PLUS_INFINITY_DT).cast("date").as(END_DT_FIELD_NAME),
                         getKey("|").as(SID),
 
                         lit(DATA_PRODUCT).as(DIV_DIV_RELATION_DP_CODE),
@@ -80,11 +77,14 @@ public class DivDivRelationTransformation extends BaseTransformation {
         List<String> attributes = new ArrayList<>(Arrays.asList("source@div", "successor@div", "@div_div_relation"));
         Dataset<Row> result = addSk(divsuccessor, DIVDIVRELATION, attributes);
 
-        // start_dt — тоже наша колонка. Ради совместимости с ESSA-версией витрины заполняем его так же, как её загрузчик:
-        // INIT — 1900-01-01, INCR — день загрузки − 1.
-        result = result.withColumn(START_DT_FIELD_NAME, getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT
-                                                        ? date_sub(lit(VspcLoadDate.sqlDate()), 1)
-                                                        : lit(MINUS_INFINITY_DT).cast("date"));
+        // Технические колонки (ctl_loading, ctl_validfrom и др.) — не наши: RT-FW выбрасывает их из входа и ставит сам.
+        // Даты версии — наши: публикатор требует их во входе. Заполняем их так же, как загрузчик ESSA-версии витрины:
+        // start_dt: INIT — 1900-01-01, INCR — день загрузки − 1; end_dt — 9999-12-31 в обоих режимах.
+        result = result
+                .withColumn(START_DT_FIELD_NAME, getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT
+                        ? date_sub(lit(VspcLoadDate.sqlDate()), 1)
+                        : lit(MINUS_INFINITY_DT).cast("date"))
+                .withColumn(END_DT_FIELD_NAME, lit(PLUS_INFINITY_DT).cast("date"));
 
         // Просто вызвать publish нельзя даже с пропатченным RT-FW: до его патча публикатор молча выбросит колонку с другим типом
         // и сразу выйдет на пустом инкременте. Поэтому сначала приводим и проверяем типы и корректно обрабатываем пустой INCR в своем собственном методе.
