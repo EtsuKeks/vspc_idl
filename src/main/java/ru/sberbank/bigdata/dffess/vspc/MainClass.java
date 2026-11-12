@@ -45,7 +45,7 @@ public class MainClass {
             addr.addPredecessors(chgdivh);
 
             // Без этих рёбер (данных chg_div_h им не нужно) при падении ChgDivH они успеют опубликоваться под упавшей
-            // загрузкой: её legs в diff потребители не прочитают, а повтор их уже не даст — изменения потеряются.
+            // загрузкой: её строки diff потребители не прочитают, а повтор их уже не даст — изменения потеряются.
             timezone.addPredecessors(chgdivh);
             terrdivtype.addPredecessors(chgdivh);
 
