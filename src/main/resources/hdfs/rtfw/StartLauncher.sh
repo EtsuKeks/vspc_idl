@@ -31,10 +31,18 @@ export HADOOP_OPTS="$HADOOP_OPTS -Dsun.security.jgss.native=true -Djavax.securit
 export YARN_OPTS="$YARN_OPTS -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false"
 export HBASE_OPTS="$HBASE_OPTS -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false"
 
+# Собираем classpath: jar-ы Spark, jar-ы hive-metastore и classpath oozie — оба без log4j-jar-ов, затем наш jar.
+# log4j берётся только из Spark: так надёжнее — логгер RT-FW не подхватывает чужой log4j из hive-metastore,
+# на котором падал с NoSuchMethodError.
+hive_metastore_jars=$(ls /usr/sdp/current/hive-metastore/lib/*.jar | grep -v '/log4j-' | paste -sd: -)
+oozie_classpath=$(echo "$CLASSPATH" | tr ':' '\n' | grep -v '/log4j-[^/]*\.jar$' | paste -sd: -)
+launch_classpath="$SPARK_HOME/jars/*:${hive_metastore_jars}:${oozie_classpath}:${devops_distributive_jar_local}"
+echo "log4j в classpath запуска:"; echo "$launch_classpath" | tr ':' '\n' | grep -i log4j; ls $SPARK_HOME/jars | grep -i log4j
+
 # запускаем приложение data-продукта
 java \
 -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false \
--classpath $CLASSPATH:$SPARK_HOME/jars/*:/usr/sdp/current/hive-metastore/lib/*:${devops_distributive_jar_local} \
+-classpath "${launch_classpath}" \
 ru.sberbank.bigdata.sl.rt.core.RtfwLauncher \
 ${loading_id} \
 ${ctl} \
