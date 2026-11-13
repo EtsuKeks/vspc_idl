@@ -3,28 +3,28 @@ package ru.sberbank.bigdata.dffess.vspc.common;
 import java.time.LocalDate;
 
 /**
- * Единый анкер «даты загрузки» на JVM: ОДНО значение на прогон для обеих половин стыка версий —
- * start_dt новых версий (DivH/AddrH/DivType/DivDivRelation) и end_dt закрытия версий/исчезнувших
- * ключей в shadow-калькуляторе (HistoricalPeriodWithRewriteChangesCalculator). Статика, потому что
- * один JVM = одна загрузка (значение фиксируется при инициализации класса). Дата берётся по
- * JVM-default TZ — паритет с ESSA 3.0 (VspcConstant.getCtlValidFromStr() = LocalDateTime.now()),
- * а не по spark.sql.session.timeZone, как Spark-функция current_date().
+ * Дата загрузки шага. В ESSA-версии витрины у шага была одна дата на всё — и на расчёт, и на публикацию; у нас так же.
+ * Шаг ставит её при старте и дальше пользуется только ею. Если шаг упал, его дата больше никому не нужна:
+ * следующий шаг при старте поставит свою.
  */
 public final class VspcLoadDate {
 
-    /** Дата загрузки — фиксируется один раз при загрузке класса (на процесс/загрузку). */
-    private static final LocalDate LOAD_DATE = LocalDate.now();
+    private static final ThreadLocal<LocalDate> DATE = new ThreadLocal<>();
 
     private VspcLoadDate() {
     }
 
-    /** Дата загрузки как java.sql.Date: lit(...) даёт DateType — тип колонки не меняется. */
-    public static java.sql.Date sqlDate() {
-        return java.sql.Date.valueOf(LOAD_DATE);
+    /** Первая строка run() трансформации, которой нужна дата загрузки. */
+    public static void start() {
+        DATE.set(LocalDate.now());
     }
 
-    /** Дата загрузки в ISO-виде (yyyy-MM-dd) — для подстановки в SQL-строки. */
-    public static String isoDate() {
-        return LOAD_DATE.toString();
+    /** Дата как java.sql.Date: lit(...) даёт DateType — тип колонки не меняется. */
+    public static java.sql.Date sqlDate() {
+        LocalDate date = DATE.get();
+        if (date == null) {
+            throw new IllegalStateException("Дата загрузки не задана: VspcLoadDate.start() должен быть первой строкой run() трансформации");
+        }
+        return java.sql.Date.valueOf(date);
     }
 }

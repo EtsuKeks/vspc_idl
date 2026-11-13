@@ -1,16 +1,24 @@
-# Каталоги сборки и артефакты maven
-target/
-
-# Отчёты и рабочие артефакты кампании аудита (temp/synthetic_20261103/, temp/audit3_20261102/,
-# temp/fix_20261101/ и пр.). Каталог не в git: отчёты не переживут git clean — хранить копию
-# вне репозитория.
-temp/
-
-# Эталон RT-FW 2.16.1 (rt-fw-publisher и др.): не редактируется и не коммитится.
-vendor/
-
-# Рабочие копии-воркtree агентов
-.worktrees/
-
-# Служебный файл macOS
-.DS_Store
+*.iml
+*.ipr
+*.iws
+*.ids
+.idea/
+.idea
+metastore_db/
+/out/
+**/target/
+**/META-INF/context.xml
+*.log
+**/rebel.xml
+**/node_modules/
+**/frontend/version.txt
+metaide.properties
+model/**
+*.zip
+zeromq/**
+.vscode/
+.sberstack/*
+.sberstack
+.gigaide
+.gigaide/*
+.gigaide/

@@ -3,19 +3,14 @@ package ru.sberbank.bigdata.dffess.vspc.transformations;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
-import ru.sberbank.bigdata.dffess.vspc.common.PublisherMode;
 import ru.sberbank.bigdata.sl.rt.core.App;
-import ru.sberbank.bigdata.sl.rt.core.Recordset;
 
 import java.util.Arrays;
 
-import static org.apache.spark.sql.functions.col;
-import static org.apache.spark.sql.functions.lit;
-import static org.apache.spark.sql.functions.when;
+import static org.apache.spark.sql.functions.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
+import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.EBX_REP_M_RFZONETIME_0002_RFZONETIME;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.TIMEZONE;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DATA_PRODUCT;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.SRC_PROVIDER_RFCZONETIME;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 
 public class TimeZoneTransformation extends BaseTransformation {
@@ -28,28 +23,29 @@ public class TimeZoneTransformation extends BaseTransformation {
 
     @Override
     public void run() {
-        Dataset<Row> time_zone = read(SRC_PROVIDER_RFCZONETIME).kap803Usl().snp().get()
+        Dataset<Row> slice = read(EBX_REP_M_RFZONETIME_0002_RFZONETIME).kap803Usl().snp().get()
                 .select(
                         lit(false).as(DELETED_FLAG),
                         when(col(ABBREVIATION).equalTo("USZ1"), "KALT").otherwise(col(ABBREVIATION)).as(SID),
                         when(col(ABBREVIATION).equalTo("USZ1"), "KALT").otherwise(col(ABBREVIATION)).as(TIME_ZONE_ABBR_CODE),
-                        col(CODE).cast("string").as(TIME_ZONE_CODE),
+                        col(CODE).as(TIME_ZONE_CODE),
                         col(TIMEDESIGNATION).as(TIME_ZONE_MSK_SHIFT_VAL),
                         col(NAME00).as(TIME_ZONE_NAME),
-                        lit(DATA_PRODUCT).as(TIME_ZONE_DP_CODE),
+                        lit(SHORT_PRODUCT_CODE).as(TIME_ZONE_DP_CODE),
+
+                        // *_sid — натуральный ключ из источника; addSk отдаёт его в ССК и заменяет на суррогатный *_sk подчищая *_sid после себя.
                         when(col(ABBREVIATION).equalTo("USZ1"), "KALT").otherwise(col(ABBREVIATION)).as(TIME_ZONE_SID),
+
                         col(UTCFORMAT).as(TIME_ZONE_WRLD_SHIFT_VAL),
                         lit(false).as(DIRTY_FLAG)
                 ).where(col(ABBREVIATION).isNotNull())
                 .distinct();
 
-        // Аббревиатура USZ1 переводится в KALT — так же в 3.0 (TimeZoneTransformer.java:32,33,38);
-        // отражение повторяется трижды, потому что SID, abbr_code и sid берут одно и то же значение.
-        Dataset<Row> result = addSk(time_zone, TIMEZONE, Arrays.asList("@time_zone_rf")).dropDuplicates("time_zone_rf_sk");
-        publish(result)
-                .calculationMode(PublisherMode.sparkRebalance())
-                .recordsetMasks("usl_vspc_idl.time_zone_rf.hub")
-                .launch();
-        registerChangedSets(Recordset.recordsets(getApp(), "usl_vspc_idl.time_zone_rf.hub"));
+        Dataset<Row> result = addSk(slice, TIMEZONE, Arrays.asList("@time_zone_rf"));
+
+        // Просто вызвать publish нельзя даже с пропатченным RT-FW: до его патча публикатор молча выбросит колонку с другим типом
+        // и сразу выйдет на пустом инкременте. Поэтому сначала приводим и проверяем типы и корректно обрабатываем пустой INCR в своем собственном методе.
+        // Там же вдобавок публикуем статистики в CTL: помечаем набор изменённым, и по этой пометке RT-FW их публикует.
+        publishChecked(result);
     }
 }

@@ -4,10 +4,8 @@ import org.apache.spark.sql.Column;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
-import ru.sberbank.bigdata.dffess.vspc.common.PublisherMode;
 import ru.sberbank.bigdata.dffess.vspc.common.VspcLoadDate;
 import ru.sberbank.bigdata.sl.rt.core.App;
-import ru.sberbank.bigdata.sl.rt.core.Recordset;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,9 +20,8 @@ import static org.apache.spark.sql.functions.lower;
 import static org.apache.spark.sql.functions.trim;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.DIVDIVRELATION;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DATA_PRODUCT;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.SRC_PROVIDER_SFSDIVISION;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.SRC_PROVIDER_SFSDIVISION_SUCCESSORS;
+import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.EBX_REP_M_SFS_0002_SFSDIVISION;
+import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.EBX_REP_M_SFS_0002_SFSDIVISION_SUCCESSORS;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.END_DT_FIELD_NAME;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.MINUS_INFINITY_DT;
@@ -41,73 +38,62 @@ public class DivDivRelationTransformation extends BaseTransformation {
 
     @Override
     public void run() {
-        Dataset<Row> successors = read(SRC_PROVIDER_SFSDIVISION_SUCCESSORS).kap803Usl().snp().get();
-        Dataset<Row> divisions = read(SRC_PROVIDER_SFSDIVISION).kap803Usl().snp().get();
+        // Дата загрузки этого шага.
+        VspcLoadDate.start();
 
-        Dataset<Row> sfs_source = divisions.select(col("id").as("sfs_source_id"), col("fulldivcode").as("source_sid"));
-        Dataset<Row> sfs_successor = divisions.select(col("id").as("sfs_successor_id"), col("fulldivcode").as("successor_sid"));
+        Dataset<Row> successors = read(EBX_REP_M_SFS_0002_SFSDIVISION_SUCCESSORS).kap803Usl().snp().get();
+        Dataset<Row> divisions = read(EBX_REP_M_SFS_0002_SFSDIVISION).kap803Usl().snp().get();
 
-        Dataset<Row> div_successor = successors
+        Dataset<Row> sfsSource = divisions.select(col("id").as("sfs_source_id"), col("fulldivcode").as("source_sid"));
+        Dataset<Row> sfsSuccessor = divisions.select(col("id").as("sfs_successor_id"), col("fulldivcode").as("successor_sid"));
+
+        Dataset<Row> divsuccessor = successors
                 .select(col("id").as("source_id"),
                         col("successors_id_successor"),
                         col("successors_successorstype"))
-                .join(sfs_source, col("source_id").equalTo(col("sfs_source_id")), "left")
-                .join(sfs_successor, col("successors_id_successor").equalTo(col("sfs_successor_id")), "left")
+                .join(sfsSource, col("source_id").equalTo(col("sfs_source_id")), "left")
+                .join(sfsSuccessor, col("successors_id_successor").equalTo(col("sfs_successor_id")), "left")
                 .where(trim(lower(col("successors_successorstype"))).equalTo(lit("правопреемник")))
                 .select("source_id", "source_sid", "successor_sid")
                 .distinct();
 
-        div_successor = div_successor
+        divsuccessor = divsuccessor
                 .select(
-                        lit(PLUS_INFINITY_DT).cast("date").as(END_DT_FIELD_NAME),
                         getKey("|").as(SID),
 
-                        lit(DATA_PRODUCT).as(DIV_DIV_RELATION_DP_CODE),
+                        lit(SHORT_PRODUCT_CODE).as(DIV_DIV_RELATION_DP_CODE),
 
+                        // *_sid — натуральный ключ из источника; addSk отдаёт его в ССК и заменяет на суррогатный *_sk подчищая *_sid после себя.
                         col("source_sid").as(SOURCE_DIV_SID),
-                        lit(DATA_PRODUCT).as(SOURCE_DIV_DP_CODE),
+                        lit(SHORT_PRODUCT_CODE).as(SOURCE_DIV_DP_CODE),
                         col("successor_sid").as(SUCCESSOR_DIV_SID),
-                        lit(DATA_PRODUCT).as(SUCCESSOR_DIV_DP_CODE),
+                        lit(SHORT_PRODUCT_CODE).as(SUCCESSOR_DIV_DP_CODE),
 
                         lit(false).as(DIRTY_FLAG),
                         lit(false).as(DELETED_FLAG)
 
                 ).distinct();
 
-        div_successor = div_successor.withColumn(DIV_DIV_RELATION_SID, col(SID));
+        divsuccessor = divsuccessor.withColumn(DIV_DIV_RELATION_SID, col(SID));
 
         List<String> attributes = new ArrayList<>(Arrays.asList("source@div", "successor@div", "@div_div_relation"));
-        Dataset<Row> result = addSk(div_successor, DIVDIVRELATION, attributes);
+        Dataset<Row> result = addSk(divsuccessor, DIVDIVRELATION, attributes);
 
-        // vspc-3.0 parity: start_dt историчной таблицы — в 3.0 её штамповал локальный лоадер
-        // DataLoaderLinkHistDiff (3.0 vspc_idl_old …/impl/loader/DataLoaderLinkHistDiff.java:
-        // 43 — плоский to_date(lit(MIN_DATE))="1900-01-01" для INIT, 46 — date_sub(
-        // ctl_validfrom_to_start_dt,1) для INCR, 55-56 — withColumn(START_DT, startDt)).
-        // Штатный RT-FW Publisher даты не создаёт — castToTargetStructure доливает отсутствующие
-        // колонки NULL (vendor/rt-fw-publisher-2.16.1-src/…/PublisherUtils.java:374-387, доливка на
-        // :384), из-за чего PK [start_dt,div_div_relation_sk] не сходится и D2/DROPBAD
-        // shadow-калькулятора ненаблюдаемы. Якорь «день загрузки» = VspcLoadDate.sqlDate()
-        // (ОДНО значение на JVM) — тот же, что в закрывающих формулах shadow
-        // (end := loadDate-2 ≡ another_ctl_validfrom-2): стык [.., loadDate-2][loadDate-1, ..] без разрыва.
-        result = result.withColumn(START_DT_FIELD_NAME, getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT
-                                                        ? date_sub(lit(VspcLoadDate.sqlDate()), 1)
-                                                        : lit(MINUS_INFINITY_DT).cast("date"));
+        // Технические колонки (ctl_loading, ctl_validfrom и др.) — не наши: RT-FW выбрасывает их из входа и ставит сам.
+        // Даты версии — наши: публикатор требует их во входе. Заполняем их так же, как загрузчик ESSA-версии витрины:
+        // start_dt: INIT — 1900-01-01, INCR — день загрузки − 1; end_dt — 9999-12-31 в обоих режимах.
+        result = result
+                .withColumn(START_DT_FIELD_NAME, getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT
+                        ? date_sub(lit(VspcLoadDate.sqlDate()), 1)
+                        : lit(MINUS_INFINITY_DT).cast("date"))
+                .withColumn(END_DT_FIELD_NAME, lit(PLUS_INFINITY_DT).cast("date"));
 
-        publish(result)
-                .calculationMode(PublisherMode.sparkRebalance())
-                .recordsetMasks("usl_vspc_idl.div&div_relation.link")
-                .launch();
-        registerChangedSets(Recordset.recordsets(getApp(), "usl_vspc_idl.div&div_relation.link"));
+        // Просто вызвать publish нельзя даже с пропатченным RT-FW: до его патча публикатор молча выбросит колонку с другим типом
+        // и сразу выйдет на пустом инкременте. Поэтому сначала приводим и проверяем типы и корректно обрабатываем пустой INCR в своем собственном методе.
+        // Там же вдобавок публикуем статистики в CTL: помечаем набор изменённым, и по этой пометке RT-FW их публикует.
+        publishChecked(result);
     }
 
-    /**
-     * Канон ключа связи: source_sid | successor_sid.
-     *
-     * <p>Пустая часть заменяется строкой "NULL" (coalesce), а не остаётся NULL: concat_ws
-     * пропускает NULL-аргументы, и без подстановки части ключа сместились бы — ключ
-     * "a|NULL" совпал бы с "a". Так же в 3.0 (vspc_idl_old
-     * …/tables/divdivrelation/DivDivRelationTransformer.java:74-78).
-     */
     public static Column getKey(String sep) {
         return concat_ws(sep,
                 coalesce(col("source_sid"), lit("NULL").cast("string")),

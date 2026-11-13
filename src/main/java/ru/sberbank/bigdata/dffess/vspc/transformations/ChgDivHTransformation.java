@@ -1,9 +1,15 @@
 package ru.sberbank.bigdata.dffess.vspc.transformations;
 
+import org.apache.spark.sql.Column;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SaveMode;
+import org.apache.spark.sql.SparkSession;
+import org.apache.spark.sql.functions;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
 import ru.sberbank.bigdata.sl.rt.core.App;
+
+import java.util.Arrays;
 
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.CHG_DIVH;
 
@@ -17,22 +23,15 @@ public class ChgDivHTransformation extends BaseTransformation {
 
     @Override
     public void run() {
-        Dataset<Row> preselect = app.getSparkSession().sql(getPreselectSQL(app.ctx().getLoadMode())).distinct();
-        saveTable(preselect, STG_SCHEMA, CHG_DIVH);
+        SparkSession spark = app.getSparkSession();
+        String table = STG_SCHEMA + "." + CHG_DIVH;
+        Dataset<Row> preselect = spark.sql(getPreselectSQL(app.ctx().getLoadMode())).distinct();
 
-        // ESSA 3.0 (3.0 vspc_idl_old …/tables/chgdivh/ChgDivHTransformer.java:24-34): преселект
-        // пишется в stg безусловно, проверки на пустой результат нет — загрузка продолжается.
-        // 4.0 приводится к тому же поведению.
+        // Пишем, как в ESSA-версии витрины.
+        Column[] tableColumns = Arrays.stream(spark.table(table).columns()).map(functions::col).toArray(Column[]::new);
+        preselect.select(tableColumns).write().mode(SaveMode.Overwrite).insertInto(table);
     }
 
-    /**
-     * Преселект chg_div_h — транзитная таблица для четырёх трансформаций
-     * (addr, addr_h, div, div_h — все читают STG_SCHEMA.CHG_DIVH).
-     *
-     * <p>Две ветки по режиму загрузки: INCR — текущий снимок источника, одна версия на ключ;
-     * INIT — цепочка версий из ebx-diff: версия пересобирается, если изменился хэш
-     * (lag(hash) &lt;&gt; hash), а end_dt считается как lead(start_dt)-1.
-     */
     public static String getPreselectSQL(App.LoadMode loadMode) {
         if (loadMode.equals(App.LoadMode.INCREMENT)) {
             return " SELECT  " +

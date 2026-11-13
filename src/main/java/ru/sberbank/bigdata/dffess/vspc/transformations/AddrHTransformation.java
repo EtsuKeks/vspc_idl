@@ -3,22 +3,15 @@ package ru.sberbank.bigdata.dffess.vspc.transformations;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
-import ru.sberbank.bigdata.dffess.vspc.common.PublisherMode;
 import ru.sberbank.bigdata.dffess.vspc.common.VspcLoadDate;
-import ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant;
 import ru.sberbank.bigdata.sl.rt.core.App;
-import ru.sberbank.bigdata.sl.rt.core.Recordset;
 
 import java.util.Arrays;
 
-import static org.apache.spark.sql.functions.col;
-import static org.apache.spark.sql.functions.date_sub;
-import static org.apache.spark.sql.functions.lit;
-import static org.apache.spark.sql.functions.when;
+import static org.apache.spark.sql.functions.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.ADDRH;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.CHG_DIVH;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.RDM_IDL_SPARK;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.END_DT_FIELD_NAME;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.MINUS_INFINITY_DT;
@@ -35,8 +28,11 @@ public class AddrHTransformation extends BaseTransformation {
 
     @Override
     public void run() {
-        // Две ветви адреса — фактический и юридический, обе из chg_div_h, объединяются union+distinct
-        // (3.0: AddrHTransformer.java:36, :48, :58 — тот же порядок).
+        // Дата загрузки этого шага.
+        VspcLoadDate.start();
+
+        // В RT-FW чтение источников (read) и запись наборов (publish) идут по meta. chg_div_h — наша промежуточная таблица в stg,
+        // в meta её нет, поэтому читаем её напрямую.
         Dataset<Row> addr_raw = readTable(STG_SCHEMA, CHG_DIVH);
 
         Dataset<Row> addr_fact = addr_raw.select(
@@ -46,6 +42,7 @@ public class AddrHTransformation extends BaseTransformation {
                 lit(null).as(ADDR_FIAS_CODE),
                 lit(null).as(ADDRESS_FIASCODE_DURTY),
 
+                // *_sid — натуральный ключ из источника; addSk отдаёт его в ССК и заменяет на суррогатный *_sk подчищая *_sid после себя.
                 lit(null).as(ADDR_OKATO2_SID),
                 lit(null).as(ADDR_OKTMO2_SID)
 
@@ -73,47 +70,36 @@ public class AddrHTransformation extends BaseTransformation {
 
         ).distinct();
 
-        Dataset<Row> addr_h = addr.select(
-                lit(PLUS_INFINITY_DT).cast("date").as(END_DT_FIELD_NAME),
+        Dataset<Row> addrh = addr.select(
                 col(ADDR_SID).as(ADDR_SID),
-                lit(VspcConstant.DATA_PRODUCT).as(ADDR_DP_CODE),
+                lit(SHORT_PRODUCT_CODE).as(ADDR_DP_CODE),
                 col(ADDRESS_STANDARD_ADDRESS_TXT).as(ADDRESS_STANDARD_ADDRESS_TXT),
                 lit(false).as(DIRTY_FLAG),
                 lit(false).as(DELETED_FLAG),
 
                 when(col(ADDR_OKATO2_SID).isNotNull(), col(ADDR_OKATO2_SID)).as(ADDRH_OKATO2_SID),
-                when(col(ADDR_OKATO2_SID).isNotNull(), lit(RDM_IDL_SPARK)).as(ADDRH_OKATO2_DP_CODE),
+                when(col(ADDR_OKATO2_SID).isNotNull(), lit("rdm_idl_spark")).as(ADDRH_OKATO2_DP_CODE),
 
                 when(col(ADDR_OKTMO2_SID).isNotNull(), col(ADDR_OKTMO2_SID)).as(ADDRH_OKTMO2_SID),
-                when(col(ADDR_OKTMO2_SID).isNotNull(), lit(RDM_IDL_SPARK)).as(ADDRH_OKTMO2_DP_CODE),
+                when(col(ADDR_OKTMO2_SID).isNotNull(), lit("rdm_idl_spark")).as(ADDRH_OKTMO2_DP_CODE),
 
                 lit(">non_stndrt").as(ADDRESS_TYPE_CODE)
         ).distinct();
 
-        // Дедуп по addr_sid не нужен: проекция addr_h (выше) не содержит fias_code, поэтому пары одного
-        // addr_sid, различающиеся только золотым fias_code (его нет в getKey), схлопываются .distinct()
-        // в самой проекции — как в 3.0 (AddrHTransformer.java:85). Явный window-дедуп был бы избыточен,
-        // а его orderBy(fias_code) не разрешается: в addr_h такой колонки нет => AnalysisException.
-        Dataset<Row> result = addSk(addr_h, ADDRH, Arrays.asList("@addr", "address@okato2", "address@oktmo2"));
+        Dataset<Row> result = addSk(addrh, ADDRH, Arrays.asList("@addr", "address@okato2", "address@oktmo2"));
 
-        // vspc-3.0 parity: start_dt историчной таблицы — в 3.0 её штамповал framework-лоадер
-        // DataLoaderHistDiff (essa-common-lib, …/essa/common/slave/loading/DataLoaderHistDiff.java:
-        // 41 — плоский to_date(lit(MIN_DATE))="1900-01-01" для INIT, 44 — date_sub(
-        // ctl_validfrom_to_start_dt,1) для INCR, 54-55 — withColumn(START_DT, startDt)).
-        // Штатный RT-FW Publisher даты не создаёт — castToTargetStructure доливает отсутствующие
-        // колонки NULL (vendor/rt-fw-publisher-2.16.1-src/…/PublisherUtils.java:374-387, доливка на
-        // :384), из-за чего PK [addr_sk,start_dt] не сходится и D2/VANISH/DROPBAD shadow-калькулятора
-        // ненаблюдаемы. Якорь «день загрузки» = VspcLoadDate.sqlDate() (ОДНО значение на JVM) — тот
-        // же, что в закрывающих формулах shadow (end := loadDate-2 ≡ another_ctl_validfrom-2):
-        // стык [.., loadDate-2][loadDate-1, ..] без разрыва, как в 3.0.
-        result = result.withColumn(START_DT_FIELD_NAME, getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT
-                                                        ? date_sub(lit(VspcLoadDate.sqlDate()), 1)
-                                                        : lit(MINUS_INFINITY_DT).cast("date"));
+        // Технические колонки (ctl_loading, ctl_validfrom и др.) — не наши: RT-FW выбрасывает их из входа и ставит сам.
+        // Даты версии — наши: публикатор требует их во входе. Заполняем их так же, как загрузчик ESSA-версии витрины:
+        // start_dt: INIT — 1900-01-01, INCR — день загрузки − 1; end_dt — 9999-12-31 в обоих режимах.
+        result = result
+                .withColumn(START_DT_FIELD_NAME, getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT
+                        ? date_sub(lit(VspcLoadDate.sqlDate()), 1)
+                        : lit(MINUS_INFINITY_DT).cast("date"))
+                .withColumn(END_DT_FIELD_NAME, lit(PLUS_INFINITY_DT).cast("date"));
 
-        publish(result)
-                .calculationMode(PublisherMode.sparkRebalance())
-                .recordsetMasks("usl_vspc_idl.addr.sat=h")
-                .launch();
-        registerChangedSets(Recordset.recordsets(getApp(), "usl_vspc_idl.addr.sat=h"));
+        // Просто вызвать publish нельзя даже с пропатченным RT-FW: до его патча публикатор молча выбросит колонку с другим типом
+        // и сразу выйдет на пустом инкременте. Поэтому сначала приводим и проверяем типы и корректно обрабатываем пустой INCR в своем собственном методе.
+        // Там же вдобавок публикуем статистики в CTL: помечаем набор изменённым, и по этой пометке RT-FW их публикует.
+        publishChecked(result);
     }
 }

@@ -3,25 +3,16 @@ package ru.sberbank.bigdata.dffess.vspc.transformations;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
-import ru.sberbank.bigdata.dffess.vspc.common.PublisherMode;
 import ru.sberbank.bigdata.sl.rt.core.App;
-import ru.sberbank.bigdata.sl.rt.core.Recordset;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.apache.spark.sql.functions.col;
-import static org.apache.spark.sql.functions.concat;
-import static org.apache.spark.sql.functions.lit;
-import static org.apache.spark.sql.functions.substring_index;
-import static org.apache.spark.sql.functions.when;
+import static org.apache.spark.sql.functions.*;
 import static org.apache.spark.sql.types.DataTypes.IntegerType;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
-import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.CHG_DIVH;
-import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.DIV;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DATA_PRODUCT;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.RDM_IDL_SPARK;
+import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.*;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 
 public class DivTransformation extends BaseTransformation {
@@ -34,10 +25,13 @@ public class DivTransformation extends BaseTransformation {
 
     @Override
     public void run() {
+        // В RT-FW чтение источников (read) и запись наборов (publish) идут по meta. chg_div_h — наша промежуточная таблица в stg,
+        // в meta её нет, поэтому читаем её напрямую.
         Dataset<Row> div_raw = readTable(STG_SCHEMA, CHG_DIVH);
 
         div_raw = div_raw.select(
                 col(FULLDIVCODE).as(SID),
+                // *_sid — натуральный ключ из источника; addSk отдаёт его в ССК и заменяет на суррогатный *_sk подчищая *_sid после себя.
                 col(FULLDIVCODE).as(DIV_SID),
                 col(FULLDIVCODE).as(DIV_CODE),
                 col(SHORTDIVCODE).as(DIV_SHORT_DIV_CODE),
@@ -49,9 +43,6 @@ public class DivTransformation extends BaseTransformation {
                 when(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null)
                         .otherwise(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM)).as(DIV_FULL_REG_NUM),
 
-                // Регистрационный номер: "-" = не задан (NULL), иначе — сам номер. Порядковый номер
-                // (div_reg_ord) — последний кусок после "/", но у головной организации ("ПАО Сбербанк")
-                // берётся номер целиком: так же в 3.0 (DivTransformer.java:48-52).
                 when(col(FULLNAME).equalTo("ПАО Сбербанк"),
                         when(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM).equalTo("-"), null).otherwise(col(DIV_REQUISITEDIVISION_REGISTRATIONNUM)))
                         .otherwise(
@@ -72,34 +63,36 @@ public class DivTransformation extends BaseTransformation {
                 lit(false).as(DELETED_FLAG),
                 col(SID).as(SID),
                 col(DIV_SID).as(DIV_SID),
-                lit(DATA_PRODUCT).as(DIV_DP_CODE),
+                lit(SHORT_PRODUCT_CODE).as(DIV_DP_CODE),
                 col(DIV_CODE).as(DIV_CODE),
                 col(DIV_SHORT_DIV_CODE).as(DIV_SHORT_DIV_CODE),
                 col(DIV_CLOSEDATE).as(DIV_CLOSEDATE),
                 col(DIV_OPENDATE).as(DIV_OPENDATE),
                 col(DIV_SUBBRANCH_CODE).as(DIV_SUBBRANCH_CODE),
                 col(DIV_PARENT_DIV_SID).as(DIV_PARENT_DIV_SID),
-                lit(DATA_PRODUCT).as(DIV_PARENT_DIV_DP_CODE),
+                lit(SHORT_PRODUCT_CODE).as(DIV_PARENT_DIV_DP_CODE),
 
                 when(col(ADDR_SRC_TXT).isNotNull(), AddrTransformation.getKey("|")).otherwise(null).as(DIV_LEGAL_ADDR_SID),
-                when(col(ADDR_SRC_TXT).isNotNull(), lit(DATA_PRODUCT)).otherwise(null).as(DIV_LEGAL_ADDR_DP_CODE),
+                when(col(ADDR_SRC_TXT).isNotNull(), lit(SHORT_PRODUCT_CODE)).otherwise(null).as(DIV_LEGAL_ADDR_DP_CODE),
 
                 lit(false).as(DIRTY_FLAG),
 
                 col(DIV_FULL_REG_NUM).as(DIV_FULL_REG_NUM),
+
                 col(DIV_REG_ORD).as(DIV_REG_ORD),
+
                 col(DIV_TIME_ZONE_TIME_ZONE_SID).as(DIV_TIME_ZONE_TIME_ZONE_SID),
-                lit(DATA_PRODUCT).as(DIV_TIME_ZONE_TIME_ZONE_DP_CODE)
+                lit(SHORT_PRODUCT_CODE).as(DIV_TIME_ZONE_TIME_ZONE_DP_CODE)
         ).distinct();
 
         List<String> attributes = new ArrayList<>(
                 Arrays.asList("parent@div", "legal@addr", "div_time_zone@time_zone_rf", "@div")
         );
-        Dataset<Row> result = addSk(div, DIV, attributes).dropDuplicates("div_sk");
-        publish(result)
-                .calculationMode(PublisherMode.sparkRebalance())
-                .recordsetMasks("usl_vspc_idl.div.hub")
-                .launch();
-        registerChangedSets(Recordset.recordsets(getApp(), "usl_vspc_idl.div.hub"));
+        Dataset<Row> result = addSk(div, DIV, attributes);
+
+        // Просто вызвать publish нельзя даже с пропатченным RT-FW: до его патча публикатор молча выбросит колонку с другим типом
+        // и сразу выйдет на пустом инкременте. Поэтому сначала приводим и проверяем типы и корректно обрабатываем пустой INCR в своем собственном методе.
+        // Там же вдобавок публикуем статистики в CTL: помечаем набор изменённым, и по этой пометке RT-FW их публикует.
+        publishChecked(result);
     }
 }

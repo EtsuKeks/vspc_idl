@@ -4,9 +4,7 @@ import org.apache.spark.sql.Column;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
-import ru.sberbank.bigdata.dffess.vspc.common.PublisherMode;
 import ru.sberbank.bigdata.sl.rt.core.App;
-import ru.sberbank.bigdata.sl.rt.core.Recordset;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,9 +19,6 @@ import static org.apache.spark.sql.functions.when;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.*;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.ADDR;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.CHG_DIVH;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.DATA_PRODUCT;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.GAR_FIAS_IDL;
-import static ru.sberbank.bigdata.dffess.vspc.constant.VspcConstant.RDM_IDL_SPARK;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 
 public class AddrTransformation extends BaseTransformation {
@@ -36,8 +31,8 @@ public class AddrTransformation extends BaseTransformation {
 
     @Override
     public void run() {
-        // Две ветви адреса — фактический и юридический, обе из chg_div_h, объединяются union+distinct
-        // (3.0: AddrTransformer.java:35, :157, :178 — тот же порядок).
+        // В RT-FW чтение источников (read) и запись наборов (publish) идут по meta. chg_div_h — наша промежуточная таблица в stg,
+        // в meta её нет, поэтому читаем её напрямую.
         Dataset<Row> addr_raw = readTable(STG_SCHEMA, CHG_DIVH);
 
         Dataset<Row> addr_fact = addr_raw.select(
@@ -54,9 +49,8 @@ public class AddrTransformation extends BaseTransformation {
                 col(ADDRESS_ADDRFACT_ADDRSTREET_HOUSENUMBERS).as(ADDR_HOUSE_NUM),
                 col(ADDRESS_ADDRFACT_ADDRSTREET_STREETNAME).as(ADDR_STREET_NAME),
 
-                when(col(ADDRESS_COUNTRY).equalTo("РОССИЯ(RU)"), "643")
-                        .when(col(ADDRESS_COUNTRY).equalTo("ИНДИЯ(IN)"), "356")
-                        .otherwise(null).as(ADDR_CNTRY_SID),
+                // *_sid — натуральный ключ из источника; addSk отдаёт его в ССК и заменяет на суррогатный *_sk подчищая *_sid после себя.
+                when(col(ADDRESS_COUNTRY).equalTo("РОССИЯ(RU)"), "643").when(col(ADDRESS_COUNTRY).equalTo("ИНДИЯ(IN)"), "356").otherwise(null).as(ADDR_CNTRY_SID),
 
                 lit(null).as(ADDR_OKATO2_SID),
                 lit(null).as(ADDR_OKTMO2_SID),
@@ -199,21 +193,21 @@ public class AddrTransformation extends BaseTransformation {
                 col(ADDR_FIAS_CODE).as(ADDR_FIAS_CODE),
                 col(ADDR_HOUSE_NUM).as(ADDR_HOUSE_NUM),
                 col(ADDR_STREET_NAME).as(ADDR_STREET_NAME),
-                lit(DATA_PRODUCT).as(ADDR_DP_CODE),
+                lit(SHORT_PRODUCT_CODE).as(ADDR_DP_CODE),
 
                 when(col(ADDR_RUS_FED_SUBJ_SID).isNotNull(), col(ADDR_RUS_FED_SUBJ_SID)).as(ADDR_RUS_FED_SUBJ_SID),
-                when(col(ADDR_RUS_FED_SUBJ_SID).isNotNull(), lit(RDM_IDL_SPARK)).as(ADDR_REG_FED_SUBJ_DP_CODE),
+                when(col(ADDR_RUS_FED_SUBJ_SID).isNotNull(), lit("rdm_idl_spark")).as(ADDR_REG_FED_SUBJ_DP_CODE),
 
                 when(col(ADDR_CNTRY_SID).isNotNull(), col(ADDR_CNTRY_SID)).as(ADDR_CNTRY_SID),
-                when(col(ADDR_CNTRY_SID).isNotNull(), lit(RDM_IDL_SPARK)).as(ADDR_CNTRY_DP_CODE),
+                when(col(ADDR_CNTRY_SID).isNotNull(), lit("rdm_idl_spark")).as(ADDR_CNTRY_DP_CODE),
 
                 col(ADDR_OKATO2_SID).as(ADDR_OKATO2_SID),
-                lit(RDM_IDL_SPARK).as(ADDR_OKATO2_DP_CODE),
+                lit("rdm_idl_spark").as(ADDR_OKATO2_DP_CODE),
                 lit(false).as(DIRTY_FLAG),
                 lit(false).as(DELETED_FLAG),
 
                 when(col(ADDR_FIAS_CODE).isNotNull(), col(ADDR_FIAS_CODE)).as(ADDRESS_FIASCODE_SID),
-                when(col(ADDR_FIAS_CODE).isNotNull(), lit(GAR_FIAS_IDL)).as(ADDRESS_FIASCODE_DP_CODE),
+                when(col(ADDR_FIAS_CODE).isNotNull(), lit("gar_fias_idl")).as(ADDRESS_FIASCODE_DP_CODE),
                 lit(">non_stndrt").as(ADDRESS_TYPE_CODE)
 
         ).distinct();
@@ -246,22 +240,14 @@ public class AddrTransformation extends BaseTransformation {
         List<String> attributes = new ArrayList<>(
                 Arrays.asList("@rus_fed_subj", "@cntry", "@okato2", "fias_code@addr", "@addr")
         );
-        Dataset<Row> result = addSk(addr, ADDR, attributes).dropDuplicates("addr_sk");
-        publish(result)
-                .calculationMode(PublisherMode.sparkRebalance())
-                .recordsetMasks("usl_vspc_idl.addr.hub")
-                .launch();
-        registerChangedSets(Recordset.recordsets(getApp(), "usl_vspc_idl.addr.hub"));
+        Dataset<Row> result = addSk(addr, ADDR, attributes);
+
+        // Просто вызвать publish нельзя даже с пропатченным RT-FW: до его патча публикатор молча выбросит колонку с другим типом
+        // и сразу выйдет на пустом инкременте. Поэтому сначала приводим и проверяем типы и корректно обрабатываем пустой INCR в своем собственном методе.
+        // Там же вдобавок публикуем статистики в CTL: помечаем набор изменённым, и по этой пометке RT-FW их публикует.
+        publishChecked(result);
     }
 
-    /**
-     * Канон ключа адреса: fias_code_durty | src_txt | okato2 | oktmo2.
-     *
-     * <p>Пустая часть заменяется строкой "NULL" (coalesce), а не остаётся NULL: concat_ws
-     * пропускает NULL-аргументы, и без подстановки части ключа сместились бы — ключ
-     * "a|NULL|c" совпал бы с "a|c". Если NULL-ы все четыре, ключ сам NULL — так же в 3.0
-     * (vspc_idl_old …/tables/addr/AddrTransformer.java:248-263).
-     */
     public static Column getKey(String sep) {
         return when(
                 col(ADDR_SRC_TXT).isNull()
