@@ -32,9 +32,11 @@ export YARN_OPTS="$YARN_OPTS -Dsun.security.jgss.native=true -Djavax.security.au
 export HBASE_OPTS="$HBASE_OPTS -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false"
 
 # запускаем приложение data-продукта
+# Сначала jar-ы Spark, потом $CLASSPATH oozie-действия: с $CLASSPATH впереди на деве подхватывался более старый
+# log4j-core, и RT-FW-логгер падал с NoSuchMethodError Configurator.setLevel(Logger, Level).
 java \
 -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false \
--classpath $CLASSPATH:$SPARK_HOME/jars/*:/usr/sdp/current/hive-metastore/lib/*:${devops_distributive_jar_local} \
+-classpath $SPARK_HOME/jars/*:/usr/sdp/current/hive-metastore/lib/*:$CLASSPATH:${devops_distributive_jar_local} \
 ru.sberbank.bigdata.sl.rt.core.RtfwLauncher \
 ${loading_id} \
 ${ctl} \
