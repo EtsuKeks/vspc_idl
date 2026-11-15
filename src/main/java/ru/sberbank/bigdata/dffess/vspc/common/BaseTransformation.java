@@ -5,6 +5,7 @@ import org.apache.spark.sql.types.DataTypes;
 import ru.sberbank.bigdata.dffess.vspc.compat.CompatHooks;
 import ru.sberbank.bigdata.dffess.vspc.compat.CompatTables;
 import ru.sberbank.bigdata.dffess.vspc.compat.guard.PublishPreconditions;
+import ru.sberbank.bigdata.dffess.vspc.constant.EssaLoaders;
 import ru.sberbank.bigdata.sl.rt.core.App;
 import ru.sberbank.bigdata.sl.rt.core.AppContext;
 import ru.sberbank.bigdata.sl.rt.core.Recordset;
@@ -14,8 +15,6 @@ import ru.sberbank.bigdata.sl.rt.logger.core.LogMessage;
 import ru.sberbank.bigdata.sl.rt.logger.core.LogType;
 import ru.sberbank.bigdata.sl.rt.publisher.CalculationMode;
 import ru.sberbank.bigdata.sl.rt.publisher.CalculationModes;
-import ru.sberbank.bigdata.sl.rt.publisher.PublisherDao;
-import ru.sberbank.bigdata.sl.rt.publisher.dto.TableInfo;
 import ru.sberbank.bigdata.sl.rt.validation.ApplicationParameters;
 import ru.sberbank.bigdata.sl.sk.AppEnv;
 import ru.sberbank.bigdata.sl.sk.SkCommonException;
@@ -29,25 +28,22 @@ import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 import static org.apache.spark.sql.functions.*;
 import static ru.sberbank.bigdata.sl.rt.publisher.util.PublisherUtils.getDatabaseLocationPath;
-import static ru.sberbank.bigdata.sl.rt.publisher.util.PublisherUtils.scalaSeq;
 
 public abstract class BaseTransformation extends Transformation {
     public static final String SID = "sid";
     protected static String SHORT_PRODUCT_CODE;
     public static String STGTMP_SCHEMA;
     public static String STG_SCHEMA;
-    public static String SNP_SCHEMA;
-    public static String DIFF_SCHEMA;
     public static final String SOURCE_SK_SUFFIX = "_sid";
     public static final String TARGET_SK_SUFFIX = "_sk";
     protected App app;
     protected String code;
     private SkClient skClient;
 
-    // debug_sk_off флаг: считаются ли ключи локально.
+    // debug_sk_off флаг: считаются ли ключи локально
     private final boolean skOff;
 
-    // Маски наборов из конструктора: по ним RT-FW строит граф и учёт в CTL, publishChecked публикует в тот же набор.
+    // Маски наборов из конструктора: по ним RT-FW строит граф и учёт в CTL, publishChecked публикует в тот же набор
     private final String[] publishMasks;
 
     protected BaseTransformation(App app, String code, String... sets) {
@@ -59,11 +55,13 @@ public abstract class BaseTransformation extends Transformation {
         skOff = Boolean.parseBoolean(ctlParam(ApplicationParameters.DEBUG_SK_OFF.getParamName(), "false", "true", "false"));
 
         // Клиент ССК берёт настройки из системных свойств — ставим их, как ESSA-версия витрины. По сути это поведение самого
-        // клиента: те же допустимые значения и те же умолчания, что он подставил бы сам, если свойство не задано. Кроме turbo_boost.
+        // клиента: те же допустимые значения и те же умолчания, что он подставил бы сам, если свойство не задано.
+        // Кроме turbo_boost - о нем ниже.
         setSkProperty(AppEnv.SERVICE_DATA_PRODUCT_CODE, app.ctx().getShortProductCode());
         setSkProperty(ClientEnv.SERVICE_INIT_GREENFIELD, ctlParam("sk_greenfield", "false", "true", "false"));
-        // turbo_boost: у клиента по умолчанию internal, у ESSA-версии — true: уже выданные ключи и своих, и чужих продуктов
-        // ищутся прямо в HBase, а не через сервис ССК. Новые ключи в любом случае выдаёт сервис.
+
+        // turbo_boost: у клиента по умолчанию internal, у ESSA-версии — true: уже выданные ключи и своих, и чужих 
+        // продуктов ищутся прямо в HBase, а не через сервис ССК. Новые ключи в любом случае выдаёт сервис.
         setSkProperty(ClientEnv.TURBO_BOOST, ctlParam("turbo_boost", "true", "true", "false", "internal"));
         setSkProperty(AppEnv.LOG_ENV, app.ctx().getLogEnv());
         setSkProperty(AppEnv.SERVICE_INSTANCE_CODE, ctlParam("service_instance_code", app.ctx().getInstanceCode()));
@@ -74,8 +72,6 @@ public abstract class BaseTransformation extends Transformation {
         String logEnvPrefix = context.getLogEnv().isEmpty() ? "" : context.getLogEnv() + "_";
         STGTMP_SCHEMA = "usl_" + logEnvPrefix + SHORT_PRODUCT_CODE + "_stgtmp";
         STG_SCHEMA = "usl_" + logEnvPrefix + SHORT_PRODUCT_CODE + "_stg";
-        SNP_SCHEMA = "usl_" + logEnvPrefix + SHORT_PRODUCT_CODE + "_snp";
-        DIFF_SCHEMA = "usl_" + logEnvPrefix + SHORT_PRODUCT_CODE + "_diff";
     }
 
     // Системное свойство для клиента ССК; пустое значение не ставим.
@@ -98,23 +94,35 @@ public abstract class BaseTransformation extends Transformation {
         return value;
     }
 
-    // Публикация витрины в набор из конструктора: вендорский merge-путь с поправками compat.guard.PublishPreconditions. */
     protected final void publishChecked(Dataset<Row> result) {
         if (publishMasks.length != 1) {
             throw new TransformationException(new LogMessage("", LogType.TECH_ERROR, format(
-                    "Трансформация %s должна объявить в конструкторе ровно один набор", code, publishMasks.length)));
+                    "Трансформация %s должна объявить в конструкторе ровно один набор", code)));
         }
         String mask = publishMasks[0];
-        CompatTables.Table table = CompatTables.register(app, mask);
+
+        // Описание таблицы для поправок ESSA кладём в общий реестр по имени таблицы: внутри публикации RT-FW передаёт
+        // нашим вставкам только имя таблицы, и они достают описание оттуда.
+        CompatTables.Table table = CompatTables.register(app, mask, EssaLoaders.BY_TRANSFORMATION.get(code));
         SparkSession spark = app.getSparkSession();
-        // вендор читает вход дважды (isEmpty и запись в stgtmp)
-        Dataset<Row> ds = CompatHooks.emptyIncrMarker(PublishPreconditions.alignTypes(result, table.snpTable(), spark).persist(),
-                table, app.ctx(), spark);
+
+        // emptyIncrMarker: на пустом INCR публикатор RT-FW сразу выходит, а ESSA и тогда меняла данные (закрывала версии div_type,
+        // чинила группы дублей ключа). Если в таблице есть что менять — вместо пустого входа строка-маркер; наши правки её уберут.
+        // persist — чтобы проверка на пустоту здесь и в RT-FW не пересчитывала трансформацию заново перед записью.
+        Dataset<Row> ds = CompatHooks.emptyIncrMarker(
+            PublishPreconditions.alignTypes(result, table.snpTable(), spark).persist(), table, app.ctx(), spark);
+
         try {
-            PublishPreconditions.keepLegs(DIFF_SCHEMA, table.code(), STG_SCHEMA, app.ctx(), spark, () -> publish(ds)
-                    .calculationMode(sparkRebalance())
-                    .recordsetMasks(mask)
-                    .launch());
+            // Тут внутри идет штатная публикация RT-FW с нашими ESSA-поправками к расчёту изменений и слиянию (теневой ProcessingStage).
+            // calculationMode — как RT-FW раскладывает строки по файлам перед каждой своей записью (stgtmp, snp, diff); на данные
+            // не влияет, только на время и размер файлов. HARD — единственный режим RT-FW, выбор только в способе (Approach):
+            // по умолчанию SALTING — перед записью persist + count и статистика плана, т.е. лишний полный проход по данным;
+            // SPARK_REBALANCE — просто hint("rebalance"), раскладывает сам Spark при записи. Срабатывает, только если включены
+            // spark.sql.adaptive.enabled и spark.sql.adaptive.optimizeSkewsInRebalancePartitions.enabled (vars_all.yml),
+            // иначе RT-FW молча вернётся к SALTING.
+            publish(ds).calculationMode(new CalculationMode(CalculationModes.HARD)
+                                            .withApproach(CalculationMode.Approach.SPARK_REBALANCE)
+            ).recordsetMasks(mask).launch();
         } finally {
             ds.unpersist();
         }
@@ -126,7 +134,7 @@ public abstract class BaseTransformation extends Transformation {
     }
 
     protected Dataset<Row> readTable(String targetSchema, String targetTable) {
-        return ru.sberbank.bigdata.sl.rt.publisher.util.PublisherUtils.readTable(app.getSparkSession(), targetSchema, targetTable);
+        return app.getSparkSession().table(targetSchema + "." + targetTable);
     }
 
     public App getApp() {
@@ -134,93 +142,71 @@ public abstract class BaseTransformation extends Transformation {
     }
 
     protected Dataset<Row> addSk(Dataset<Row> mappedDfwc, String tableName, List<String> attributeCodes) {
-        List<String> skColumns = getColumnsFromAttributes(attributeCodes);
+        // Ищем все ключевые колонки в таблице: @div -> div_sid; fact@addr -> fact_addr_sid.
+        List<String> skColumns = attributeCodes.stream().map(code -> {
+            String replacement = code.startsWith("@") ? "" : "_";
+            return format("%s%s", code.replace("@", replacement), SOURCE_SK_SUFFIX);
+        }).collect(toList());
+
         try {
             String normalizedTable = tableName.trim().toLowerCase();
-            // 3.0 SkClientWrapper.java:99-100, 215-227: OFF — xxhash64(натуральный ключ) без ССК
             if (skOff) {
                 Dataset<Row> local = mappedDfwc;
                 for (String cn : skColumns) {
                     String skCol = cn.replace(SOURCE_SK_SUFFIX, TARGET_SK_SUFFIX);
                     local = local.withColumn(skCol, xxhash64(col(cn)).cast(DataTypes.LongType)).drop(cn);
                 }
-                app.log(new LogMessage("", LogType.TECH_INFO, format("СК для %s посчитаны локально (ССК отключён)", normalizedTable)));
+                app.log(new LogMessage(
+                    "", LogType.TECH_INFO, format("СК для %s посчитаны локально (ССК отключён)", normalizedTable)));
                 return local;
             }
 
-            // 3.0: натуральный ключ уходит в ССК как есть; черновик с постоянным именем
+            // ESSA: натуральный ключ уходит в ССК как есть; черновик с постоянным именем
             Dataset<Row> frozen = readFrozenDraft(normalizedTable + "_mapped", mappedDfwc);
-            // 3.0 SkClientWrapper.java:128-149: на INIT init красит свой ключ, map — только чужие
-            Dataset<Row> resDataSet;
-            if (!frozen.isEmpty()
-                    && app.ctx().getLoadMode() != App.LoadMode.INCREMENT
-                    && attributeCodes.contains("@" + normalizedTable)) {
-                Dataset<Row> painted = initRegistry(frozen, normalizedTable);
-                List<String> fkAttributeCodes = attributeCodes.stream()
-                        .filter(code -> !("@" + normalizedTable).equals(code))
-                        .collect(toList());
-                resDataSet = runSkGen(normalizedTable, painted, fkAttributeCodes, attributeCodes);
-            } else {
-                resDataSet = runSkGen(normalizedTable, frozen, attributeCodes, attributeCodes);
+            try {
+                // В INIT режиме метод init красит свой ключ, map — только чужие
+                Dataset<Row> resDataSet;
+                if (!frozen.isEmpty()
+                        && app.ctx().getLoadMode() != App.LoadMode.INCREMENT
+                        && attributeCodes.contains("@" + normalizedTable)) {
+                    Dataset<Row> painted = getSkClient().init(normalizedTable, frozen).get(0);
+                    List<String> fkAttributeCodes = attributeCodes.stream()
+                            .filter(code -> !("@" + normalizedTable).equals(code))
+                            .collect(toList());
+                    resDataSet = getSkClient().map(painted, fkAttributeCodes);
+                } else {
+                    // На пустом входе map в сервис не ходит: сам добавляет пустые колонки *_sk.
+                    resDataSet = getSkClient().map(frozen, attributeCodes);
+                }
+
+                // map добавляет *_sk рядом с *_sid: исходные *_sid убираем, ключи приводим к long.
+                for (String cn : skColumns) {
+                    String skCol = cn.replace(SOURCE_SK_SUFFIX, TARGET_SK_SUFFIX);
+                    resDataSet = resDataSet.withColumn(skCol, col(skCol).cast(DataTypes.LongType)).drop(cn);
+                }
+                return resDataSet;
+            } finally {
+                // init и map свои проходы по черновику уже сделали (или упали) — освобождаем память.
+                frozen.unpersist();
             }
-            for (String cn : skColumns) {
-                String skCol = cn.replace(SOURCE_SK_SUFFIX, TARGET_SK_SUFFIX);
-                resDataSet = resDataSet.withColumn(skCol, col(skCol).cast(DataTypes.LongType));
-            }
-            return resDataSet;
-        } catch (SkClientException e) {
-            app.log(new LogMessage("", LogType.TECH_ERROR, "Провал интеграции с ССК: " + e.getMessage()));
-            throw new TransformationException(new LogMessage("", LogType.TECH_ERROR, "Провал интеграции с ССК"));
+        } catch (SkClientException | SkCommonException e) {
+            // RT-FW пишет сообщение исключения в журнал и в CTL, но без причины — поэтому причина в тексте.
+            throw new TransformationException(new LogMessage(
+                "", LogType.TECH_ERROR, "Провал интеграции с ССК: " + e.getMessage()), e);
         }
     }
 
-    private Dataset<Row> initRegistry(Dataset<Row> frozenFrame, String normalizedTable) throws SkClientException {
-        try {
-            return getSkClient().init(normalizedTable, frozenFrame).get(0);
-        } catch (SkCommonException e) {
-            throw new SkClientException(e.getMessage(), e);
-        }
-    }
-
-    /** Черновик для ССК в stgtmp (в 3.0 — forsk_<t>): таблицы в DDL нет, поэтому пишем писателем RT-FW (создаёт таблицу) тем же режимом, что публикация, и читаем обратно. */
+    // Черновик для ССК в stgtmp: фиксируем вход, чтобы init/map читали одни и те же строки, а не
+    // пересчитывали трансформацию. path делает таблицу внешней, hint("rebalance") — раскладка по файлам, как у RT-FW 
+    // при публикации.
     private Dataset<Row> readFrozenDraft(String draftTable, Dataset<Row> dataset) {
         SparkSession spark = app.getSparkSession();
-        TableInfo ti = new TableInfo(STGTMP_SCHEMA, draftTable, getDatabaseLocationPath(spark, STGTMP_SCHEMA));
-        PublisherDao dao = new PublisherDao(spark, sparkRebalance());
-        dao.writeTable(ti, scalaSeq(Collections.<String>emptyList()), dataset);
-        return dao.readTable(ti).cache();
-    }
-
-    private Dataset<Row> runSkGen(String tableName,
-                                  Dataset<Row> df,
-                                  List<String> mapAttributeCodes,
-                                  List<String> attributeCodes) throws SkClientException {
-        if (df.isEmpty()) {
-            app.log(new LogMessage("", LogType.TECH_INFO, "EmptyTable - " + tableName));
-            for (String cn : getColumnsFromAttributes(attributeCodes)) {
-                df = df.withColumnRenamed(cn, cn.replace(SOURCE_SK_SUFFIX, TARGET_SK_SUFFIX));
-            }
-            return df;
-        }
-        return getSkClient().map(df, mapAttributeCodes)
-                .drop(getColumnsFromAttributes(attributeCodes).toArray(new String[0]));
-    }
-
-    private List<String> getColumnsFromAttributes(List<String> attributeCodes) {
-        return attributeCodes.stream().map(code -> {
-            String replacement = code.startsWith("@") ? "" : "_";
-            return format("%s%s", code.replace("@", replacement), SOURCE_SK_SUFFIX);
-        }).collect(toList());
-    }
-
-    /**
-     * Как раскладывать строки по файлам перед записью — на данные не влияет. По умолчанию RT-FW делает лишний проход по данным
-     * (persist + count) и собирает статистику по всем таблицам плана; подсказка rebalance отдаёт это Spark (AQE), без лишних проходов.
-     * Работает, только если в сессии включены spark.sql.adaptive.enabled и spark.sql.adaptive.optimizeSkewsInRebalancePartitions.enabled
-     * (заданы в vars_all.yml), иначе RT-FW молча вернётся к своему способу. Новый объект на вызов: withApproach меняет сам объект.
-     */
-    private static CalculationMode sparkRebalance() {
-        return new CalculationMode(CalculationModes.HARD).withApproach(CalculationMode.Approach.SPARK_REBALANCE);
+        String table = STGTMP_SCHEMA + "." + draftTable;
+        dataset.hint("rebalance").write().mode(SaveMode.Overwrite)
+                .option("path", getDatabaseLocationPath(spark, STGTMP_SCHEMA) + "/" + draftTable)
+                .format("parquet")
+                .saveAsTable(table);
+        return spark.table(table).persist();
     }
 
     private SkClient getSkClient() {
