@@ -1,16 +1,21 @@
 package ru.sberbank.bigdata.dffess.vspc.transformations;
 
+import org.apache.spark.sql.Column;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SparkSession;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
 import ru.sberbank.bigdata.dffess.vspc.common.LoadDate;
+import ru.sberbank.bigdata.dffess.vspc.compat.CompatTables;
 import ru.sberbank.bigdata.sl.rt.core.App;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.apache.spark.sql.functions.col;
 import static org.apache.spark.sql.functions.date_sub;
 import static org.apache.spark.sql.functions.lit;
+import static ru.sberbank.bigdata.dffess.vspc.compat.CompatSupport.cols;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.DIRTY_FLAG;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.DIVISIONTYPE00;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.DIV_DP_CODE;
@@ -25,6 +30,7 @@ import static ru.sberbank.bigdata.sl.rt.core.Constants.END_DT_FIELD_NAME;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.MINUS_INFINITY_DT;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.PLUS_INFINITY_DT;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.START_DT_FIELD_NAME;
+import static ru.sberbank.bigdata.sl.rt.publisher.util.PublisherUtils.scalaSeq;
 
 public class DivTypeTransformation extends BaseTransformation {
 
@@ -64,9 +70,33 @@ public class DivTypeTransformation extends BaseTransformation {
                         : lit(MINUS_INFINITY_DT).cast("date"))
                 .withColumn(END_DT_FIELD_NAME, lit(PLUS_INFINITY_DT).cast("date"));
 
-        // Просто вызвать publish нельзя даже с пропатченным RT-FW: до его патча публикатор молча выбросит колонку с другим типом
-        // и сразу выйдет на пустом инкременте. Поэтому сначала приводим и проверяем типы и корректно обрабатываем пустой INCR в своем собственном методе.
+        // INCR: открытые версии ключей, которых нет в сегодняшнем срезе, закрываем днём загрузки − 1, как ESSA
+        // (на пустом источнике — все). Добавляем во вход их закрытые копии: по ним RT-FW даёт ровно (R,U)+(U,U), 
+        // как ESSA. Без этого добавления закрытия не произойдет.
+        // Вход фиксируем: по result ищем пропавшие ключи и его же публикуем, ключи ССК второй раз не считаются с persist.
+        CompatTables.Table table = compatTable();
+        SparkSession spark = app.getSparkSession();
+        Dataset<Row> source = getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT ? result.persist() : result;
+        if (getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT) {
+            List<String> bk = table.entityKey();
+            Dataset<Row> gone = spark.table(table.snpTable())
+                .filter(col(table.partitionColumn()).equalTo(lit(table.openPartition())))
+                .join(source.select(cols(bk)), scalaSeq(bk), "left_anti")
+                .withColumn(END_DT_FIELD_NAME, date_sub(lit(LoadDate.sqlDate()), 1));
+            // deleted_flag и dirty_flag в snp div_type нет — в копии, как во всём входе, false.
+            List<String> snpCols = Arrays.asList(gone.columns());
+            result = source.unionByName(gone.select(Arrays.stream(source.columns())
+                    .map(c -> snpCols.contains(c) ? col(c) : lit(false).as(c)).toArray(Column[]::new)));
+        }
+
+        // Просто вызвать publish нельзя даже с пропатченным RT-FW: до его патча публикатор молча выбросит колонку с другим типом.
+        // Поэтому сначала приводим и проверяем типы и ключи версии в своем собственном методе.
         // Там же вдобавок публикуем статистики в CTL: помечаем набор изменённым, и по этой пометке RT-FW их публикует.
-        publishChecked(result);
+        try {
+            publishChecked(result);
+        } finally {
+            // Только после снимаем persist - result уже доехал, старый result который персистили при этом - в source
+            source.unpersist();
+        }
     }
 }
