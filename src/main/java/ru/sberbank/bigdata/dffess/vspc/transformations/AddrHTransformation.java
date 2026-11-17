@@ -3,7 +3,7 @@ package ru.sberbank.bigdata.dffess.vspc.transformations;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
-import ru.sberbank.bigdata.dffess.vspc.common.VspcLoadDate;
+import ru.sberbank.bigdata.dffess.vspc.common.LoadDate;
 import ru.sberbank.bigdata.sl.rt.core.App;
 
 import java.util.Arrays;
@@ -29,7 +29,7 @@ public class AddrHTransformation extends BaseTransformation {
     @Override
     public void run() {
         // Дата загрузки этого шага.
-        VspcLoadDate.start();
+        LoadDate.start();
 
         // В RT-FW чтение источников (read) и запись наборов (publish) идут по meta. chg_div_h — наша промежуточная таблица в stg,
         // в meta её нет, поэтому читаем её напрямую.
@@ -93,7 +93,7 @@ public class AddrHTransformation extends BaseTransformation {
         // start_dt: INIT — 1900-01-01, INCR — день загрузки − 1; end_dt — 9999-12-31 в обоих режимах.
         result = result
                 .withColumn(START_DT_FIELD_NAME, getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT
-                        ? date_sub(lit(VspcLoadDate.sqlDate()), 1)
+                        ? date_sub(lit(LoadDate.sqlDate()), 1)
                         : lit(MINUS_INFINITY_DT).cast("date"))
                 .withColumn(END_DT_FIELD_NAME, lit(PLUS_INFINITY_DT).cast("date"));
 

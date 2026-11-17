@@ -3,7 +3,7 @@ package ru.sberbank.bigdata.dffess.vspc.transformations;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
-import ru.sberbank.bigdata.dffess.vspc.common.VspcLoadDate;
+import ru.sberbank.bigdata.dffess.vspc.common.LoadDate;
 import ru.sberbank.bigdata.sl.rt.core.App;
 
 import java.util.Arrays;
@@ -27,7 +27,7 @@ public class DivHTransformation extends BaseTransformation {
     @Override
     public void run() {
         // Дата загрузки этого шага.
-        VspcLoadDate.start();
+        LoadDate.start();
 
         // В RT-FW чтение источников (read) и запись наборов (publish) идут по meta. chg_div_h — наша промежуточная таблица в stg,
         // в meta её нет, поэтому читаем её напрямую.
@@ -83,7 +83,7 @@ public class DivHTransformation extends BaseTransformation {
         // Даты версии заполняем так же, как загрузчик ESSA-версии витрины: INIT — история как пришла из chg_div_h,
         // INCR — start_dt = день загрузки − 1, end_dt = 9999-12-31.
         if (getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT) {
-            divh = divh.withColumn(START_DT_FIELD_NAME, date_sub(lit(VspcLoadDate.sqlDate()), 1))
+            divh = divh.withColumn(START_DT_FIELD_NAME, date_sub(lit(LoadDate.sqlDate()), 1))
                     .withColumn(END_DT_FIELD_NAME, lit(PLUS_INFINITY_DT).cast("date"));
         }
 

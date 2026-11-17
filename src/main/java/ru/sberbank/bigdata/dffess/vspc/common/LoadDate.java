@@ -7,11 +7,11 @@ import java.time.LocalDate;
  * Шаг ставит её при старте и дальше пользуется только ею. Если шаг упал, его дата больше никому не нужна:
  * следующий шаг при старте поставит свою.
  */
-public final class VspcLoadDate {
+public final class LoadDate {
 
     private static final ThreadLocal<LocalDate> DATE = new ThreadLocal<>();
 
-    private VspcLoadDate() {
+    private LoadDate() {
     }
 
     /** Первая строка run() трансформации, которой нужна дата загрузки. */
@@ -23,7 +23,7 @@ public final class VspcLoadDate {
     public static java.sql.Date sqlDate() {
         LocalDate date = DATE.get();
         if (date == null) {
-            throw new IllegalStateException("Дата загрузки не задана: VspcLoadDate.start() должен быть первой строкой run() трансформации");
+            throw new IllegalStateException("Дата загрузки не задана: LoadDate.start() должен быть первой строкой run() трансформации");
         }
         return java.sql.Date.valueOf(date);
     }
