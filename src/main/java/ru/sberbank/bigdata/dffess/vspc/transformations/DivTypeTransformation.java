@@ -31,10 +31,14 @@ import static ru.sberbank.bigdata.sl.rt.core.Constants.MINUS_INFINITY_DT;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.PLUS_INFINITY_DT;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.START_DT_FIELD_NAME;
 import static ru.sberbank.bigdata.sl.rt.publisher.util.PublisherUtils.scalaSeq;
+import static ru.sberbank.bigdata.sl.rt.publisher.util.PublisherUtils.writeToExternalTableAutoPath;
 
 public class DivTypeTransformation extends BaseTransformation {
 
     public static final String CODE = DIVTYPE;
+
+    // Временная таблица входа в stgtmp на INCR, для сохранения результата - чтобы не пришлось ходить в ССК дважды.
+    private static final String SOURCE_TABLE = "tmp_" + DIVTYPE;
 
     public DivTypeTransformation(App app) {
         super(app, CODE, "usl_vspc_idl.div.sat=type");
@@ -73,11 +77,13 @@ public class DivTypeTransformation extends BaseTransformation {
         // INCR: открытые версии ключей, которых нет в сегодняшнем срезе, закрываем днём загрузки − 1, как ESSA
         // (на пустом источнике — все). Добавляем во вход их закрытые копии: по ним RT-FW даёт ровно (R,U)+(U,U), 
         // как ESSA. Без этого добавления закрытия не произойдет.
-        // Вход фиксируем: по result ищем пропавшие ключи и его же публикуем, ключи ССК второй раз не считаются с persist.
         CompatTables.Table table = compatTable();
         SparkSession spark = app.getSparkSession();
-        Dataset<Row> source = getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT ? result.persist() : result;
         if (getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT) {
+            // Вход фиксируем во временной таблице stgtmp, как в ESSA-версии: по нему ищем пропавшие ключи
+            // и его же публикуем — ключи ССК при этом считаются один раз.
+            writeToExternalTableAutoPath(spark, result, STGTMP_SCHEMA, SOURCE_TABLE);
+            Dataset<Row> source = spark.table(STGTMP_SCHEMA + "." + SOURCE_TABLE);
             List<String> bk = table.entityKey();
             Dataset<Row> gone = spark.table(table.snpTable())
                 .filter(col(table.partitionColumn()).equalTo(lit(table.openPartition())))
@@ -92,11 +98,6 @@ public class DivTypeTransformation extends BaseTransformation {
         // Просто вызвать publish нельзя даже с пропатченным RT-FW: до его патча публикатор молча выбросит колонку с другим типом.
         // Поэтому сначала приводим и проверяем типы и ключи версии в своем собственном методе.
         // Там же вдобавок публикуем статистики в CTL: помечаем набор изменённым, и по этой пометке RT-FW их публикует.
-        try {
-            publishChecked(result);
-        } finally {
-            // Только после снимаем persist - result уже доехал, старый result который персистили при этом - в source
-            source.unpersist();
-        }
+        publishChecked(result);
     }
 }
