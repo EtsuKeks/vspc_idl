@@ -22,7 +22,7 @@ import static org.apache.spark.sql.types.DataTypes.TimestampType;
 import static ru.sberbank.bigdata.dffess.vspc.compat.CompatTables.*;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.*;
 
-// Методы, которые вызывают вставки VSPC-COMPAT в нашем теневом ProcessingStage RT-FW.
+// Методы, которые вызывают вставки COMPAT в нашем теневом ProcessingStage RT-FW.
 public final class CompatHooks {
 
     // Обёрнутый калькулятор изменений каждой стадии — для её merge: runIncr вызывает оба у одного ProcessingStage,

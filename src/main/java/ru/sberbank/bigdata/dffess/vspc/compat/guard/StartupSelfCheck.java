@@ -38,7 +38,7 @@ public final class StartupSelfCheck {
         String ps = location(ProcessingStage.class);
         if (ps == null || !ps.equals(location(CompatHooks.class))) {
             throw new TransformationException(new LogMessage("", LogType.TECH_ERROR, String.format(
-                "ProcessingStage загружен из %s, а не из %s: вендорский класс без VSPC-COMPAT "
+                "ProcessingStage загружен из %s, а не из %s: вендорский класс без COMPAT "
                 + "снимает слой совместимости с ESSA", ps, location(CompatHooks.class))));
         }
     }
@@ -79,7 +79,7 @@ public final class StartupSelfCheck {
         if (!expected.equals(actual)) {
             throw new TransformationException(new LogMessage("", LogType.TECH_ERROR, String.format(
                     "%s версии %s, а поправки ESSA проверены на %s. Перед сменой версии: перенести вставки "
-                    + "VSPC-COMPAT в новый вендорский ProcessingStage, сверить поля калькуляторов, которые читает "
+                    + "COMPAT в новый вендорский ProcessingStage, сверить поля калькуляторов, которые читает "
                     + "CompatHooks, прогнать локальный стенд и обновить версию в StartupSelfCheck",
                     artifact, actual, expected)));
         }

@@ -70,9 +70,9 @@ public class ProcessingStage implements ProcessingStep {
                 .withColumn(CTL_VALIDFROM, lit(DateTimeFormatter.ofPattern(TIMESTAMP_PATTERN)
                         .format(LocalDateTime.now())).cast(DataTypes.TimestampType))
                 .withColumn(CTL_LOADING, lit(loadingId).cast(DataTypes.LongType));
-        // VSPC-COMPAT begin: div_h ctl_validfrom := start_dt
+        // COMPAT begin: div_h ctl_validfrom := start_dt
         this.dataset = ru.sberbank.bigdata.dffess.vspc.compat.CompatHooks.enrichInit(this.dataset, tableInfoFactory);
-        // VSPC-COMPAT end
+        // COMPAT end
         return this;
     }
 
@@ -122,10 +122,10 @@ public class ProcessingStage implements ProcessingStep {
 
     @Override
     public ProcessingStep calculateDiff(ChangesCalculator changesCalculator, SchemaName schemaName) {
-        // VSPC-COMPAT begin: декоратор калькулятора, до фильтра зоны чтения
+        // COMPAT begin: декоратор калькулятора, до фильтра зоны чтения
         changesCalculator = ru.sberbank.bigdata.dffess.vspc.compat.CompatHooks.wrapChanges(this, changesCalculator,
                 dao, tableInfoFactory);
-        // VSPC-COMPAT end
+        // COMPAT end
         TableInfo snpTableInfo = tableInfoFactory.createTableInfo(schemaName);
 
         // publisher−08.2 -	чтение только тех секций таблиц-приемников, данные в которых должны быть изменены:
@@ -147,9 +147,9 @@ public class ProcessingStage implements ProcessingStep {
 
     @Override
     public ProcessingStep calculateMergedSnp(SchemaName targetSchemaName, MergeCalculator mergeCalculator) {
-        // VSPC-COMPAT begin: декоратор merge той же стадии
+        // COMPAT begin: декоратор merge той же стадии
         mergeCalculator = ru.sberbank.bigdata.dffess.vspc.compat.CompatHooks.wrapMerge(this, mergeCalculator);
-        // VSPC-COMPAT end
+        // COMPAT end
         this.dataset = mergeCalculator.calculate(oldSnp, changes, tableInfoFactory, dao, targetSchemaName, partitionSpecs);
         return this;
     }
