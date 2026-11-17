@@ -1,8 +1,9 @@
 package ru.sberbank.bigdata.dffess.vspc.common;
 
 import org.apache.spark.sql.*;
+import org.apache.spark.sql.expressions.Window;
+import org.apache.spark.sql.expressions.WindowSpec;
 import org.apache.spark.sql.types.DataTypes;
-import ru.sberbank.bigdata.dffess.vspc.compat.CompatHooks;
 import ru.sberbank.bigdata.dffess.vspc.compat.CompatTables;
 import ru.sberbank.bigdata.dffess.vspc.compat.guard.PublishPreconditions;
 import ru.sberbank.bigdata.dffess.vspc.constant.EssaLoaders;
@@ -39,6 +40,9 @@ public abstract class BaseTransformation extends Transformation {
     protected App app;
     protected String code;
     private SkClient skClient;
+
+    // Служебная колонка проверки ключа версии в publishChecked: номер строки внутри ключа.
+    private static final String KEY_RN = "_vspc_key_rn";
 
     // debug_sk_off флаг: считаются ли ключи локально
     private final boolean skOff;
@@ -95,22 +99,25 @@ public abstract class BaseTransformation extends Transformation {
     }
 
     protected final void publishChecked(Dataset<Row> result) {
-        if (publishMasks.length != 1) {
-            throw new TransformationException(new LogMessage("", LogType.TECH_ERROR, format(
-                    "Трансформация %s должна объявить в конструкторе ровно один набор", code)));
-        }
-        String mask = publishMasks[0];
+        String mask = publishMask();
 
         // Описание таблицы для поправок ESSA кладём в общий реестр по имени таблицы: внутри публикации RT-FW передаёт
         // нашим вставкам только имя таблицы, и они достают описание оттуда.
-        CompatTables.Table table = CompatTables.register(app, mask, EssaLoaders.BY_TRANSFORMATION.get(code));
+        CompatTables.Table table = compatTable();
         SparkSession spark = app.getSparkSession();
 
-        // emptyIncrMarker: на пустом INCR публикатор RT-FW сразу выходит, а ESSA и тогда меняла данные (закрывала версии div_type,
-        // чинила группы дублей ключа). Если в таблице есть что менять — вместо пустого входа строка-маркер; наши правки её уберут.
-        // persist — чтобы проверка на пустоту здесь и в RT-FW не пересчитывала трансформацию заново перед записью.
-        Dataset<Row> ds = CompatHooks.emptyIncrMarker(
-            PublishPreconditions.alignTypes(result, table.snpTable(), spark).persist(), table, app.ctx(), spark);
+        // Ключ версии во входе RT-FW должен быть заполнен и уникален. Строки с пустой колонкой ключа отбрасываем, из
+        // строк с одним ключом оставляем первую: порядок внутри ключа — по хэшу всей строки,
+        // чтобы выбор не зависел от порядка строк во входе. persist — чтобы проверка на пустоту в RT-FW и сама
+        // публикация не пересчитывали трансформацию дважды.
+        Dataset<Row> aligned = PublishPreconditions.alignTypes(result, table.snpTable(), spark);
+        Column[] key = table.versionKey().stream().map(functions::col).toArray(Column[]::new);
+        Column[] vals = Arrays.stream(aligned.columns())
+                              .map(c -> coalesce(col(c).cast("string"), lit(""))).toArray(Column[]::new);
+        WindowSpec w = Window.partitionBy(key).orderBy(xxhash64(vals));
+        Column nullKey = Arrays.stream(key).map(Column::isNull).reduce(Column::or).get();
+        Dataset<Row> marked = aligned.withColumn(KEY_RN, row_number().over(w)).persist();
+        Dataset<Row> ds = marked.filter(not(nullKey).and(col(KEY_RN).equalTo(1))).drop(KEY_RN);
 
         try {
             // Тут внутри идет штатная публикация RT-FW с нашими ESSA-поправками к расчёту изменений и слиянию (теневой ProcessingStage).
@@ -124,13 +131,27 @@ public abstract class BaseTransformation extends Transformation {
                                             .withApproach(CalculationMode.Approach.SPARK_REBALANCE)
             ).recordsetMasks(mask).launch();
         } finally {
-            ds.unpersist();
+            marked.unpersist();
         }
 
         // RT-FW ведёт в CTL статистики не только по продукту, но и по каждому набору — в его собственной сущности; при первом
         // запуске на RT-FW эти сущности он создаёт сам. Статистику 2 на продукт он публикует, только если хотя бы один набор
         // помечен изменённым, — поэтому проще всего пометить набор, как того требует RT-FW. Для единообразия помечаем все наборы.
         registerChangedSets(Recordset.recordsets(app, mask));
+    }
+
+    // Единственный набор из конструктора: в него публикует publishChecked.
+    private String publishMask() {
+        if (publishMasks.length != 1) {
+            throw new TransformationException(new LogMessage("", LogType.TECH_ERROR, 
+                format("Трансформация %s должна объявить в конструкторе ровно один набор", code)));
+        }
+        return publishMasks[0];
+    }
+
+    // Описание публикуемой таблицы для наших ESSA-поправок: имя snp, ключ версии, партиции.
+    protected final CompatTables.Table compatTable() {
+        return CompatTables.register(app, publishMask(), EssaLoaders.BY_TRANSFORMATION.get(code));
     }
 
     protected Dataset<Row> readTable(String targetSchema, String targetTable) {
