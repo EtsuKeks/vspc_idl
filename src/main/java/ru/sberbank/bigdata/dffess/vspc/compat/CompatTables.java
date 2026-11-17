@@ -85,12 +85,6 @@ public final class CompatTables {
             return key;
         }
 
-        // Ключ сущности заполнен целиком. Строки с NULL в ключе RT-FW не сопоставит (join не null-safe),
-        // а ESSA считала их одной группой — поэтому поправки обрабатывают их отдельно.
-        public Column entityKeyNotNull() {
-            return entityKey().stream().map(c -> col(c).isNotNull()).reduce(Column::and).get();
-        }
-
         // Только у исторической таблицы: колонка партиции по end_dt (p1month обычно).
         public String partitionColumn() {
             requirePeriod();
