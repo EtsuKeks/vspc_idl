@@ -16,6 +16,7 @@ import static org.apache.spark.sql.functions.col;
 import static org.apache.spark.sql.functions.date_sub;
 import static org.apache.spark.sql.functions.lit;
 import static ru.sberbank.bigdata.dffess.vspc.compat.CompatSupport.cols;
+import static ru.sberbank.bigdata.dffess.vspc.compat.CompatSupport.oneOpenPerKey;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.DIRTY_FLAG;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.DIVISIONTYPE00;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.DIV_DP_CODE;
@@ -85,8 +86,9 @@ public class DivTypeTransformation extends BaseTransformation {
             writeToExternalTableAutoPath(spark, result, STGTMP_SCHEMA, SOURCE_TABLE);
             Dataset<Row> source = spark.table(STGTMP_SCHEMA + "." + SOURCE_TABLE);
             List<String> bk = table.entityKey();
-            Dataset<Row> gone = spark.table(table.snpTable())
-                .filter(col(table.partitionColumn()).equalTo(lit(table.openPartition())))
+            // Открытые версии — по одной на ключ, той же, что выберет калькулятор (oneOpenPerKey).
+            Dataset<Row> gone = oneOpenPerKey(table, spark.table(table.snpTable())
+                .filter(col(table.partitionColumn()).equalTo(lit(table.openPartition()))))
                 .join(source.select(cols(bk)), scalaSeq(bk), "left_anti")
                 .withColumn(END_DT_FIELD_NAME, date_sub(lit(LoadDate.sqlDate()), 1));
             // deleted_flag и dirty_flag в snp div_type нет — в копии, как во всём входе, false.
