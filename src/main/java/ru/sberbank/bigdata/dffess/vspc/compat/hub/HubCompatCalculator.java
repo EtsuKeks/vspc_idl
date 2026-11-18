@@ -14,7 +14,7 @@ import static ru.sberbank.bigdata.dffess.vspc.compat.CompatSupport.*;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.*;
 import static ru.sberbank.bigdata.sl.rt.publisher.util.PublisherUtils.*;
 
-// Обёртка над калькулятором изменений RT-FW, мы даём ему снимок с одной строкой на ключ и у строк (U,U) возвращаем\
+// Обёртка над калькулятором изменений RT-FW, мы даём ему снимок с одной строкой на ключ и у строк (U,U) возвращаем
 // старый ctl_validfrom, как в ESSA.
 public final class HubCompatCalculator implements ChangesCalculator {
 
