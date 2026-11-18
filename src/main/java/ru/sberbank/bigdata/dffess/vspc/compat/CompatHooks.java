@@ -60,7 +60,6 @@ public final class CompatHooks {
             wrapped = new PeriodRewriteCompatCalculator(cc, t, dao, tif);
         } else if (cc != null && cc.getClass() == NonHistoricalChangesCalculator.class && !t.isPeriod()) {
             requireFalse(cc, cc.getClass(), "fullSlice");
-            requireFalse(cc, cc.getClass(), "physicalDeletion");
             wrapped = new HubCompatCalculator(cc, t);
         } else {
             throw new TransformationException(new LogMessage("", LogType.TECH_ERROR, 
