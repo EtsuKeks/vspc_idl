@@ -25,9 +25,9 @@ import static ru.sberbank.bigdata.sl.rt.core.Constants.*;
 // Методы, которые вызывают вставки COMPAT в нашем теневом ProcessingStage RT-FW.
 public final class CompatHooks {
 
-    // Обёрнутый калькулятор изменений каждой стадии — для её merge: runIncr вызывает оба у одного ProcessingStage,
-    // а обёртке merge нужно то, что посчитал калькулятор изменений.
-    private static final Map<Object, ChangesCalculator> BY_STAGE = Collections.synchronizedMap(new WeakHashMap<>());
+    // Описание таблицы каждой стадии — для её merge: runIncr вызывает calculateDiff и merge у одного ProcessingStage,
+    // а в merge описание таблицы иначе не получить.
+    private static final Map<Object, Table> BY_STAGE = Collections.synchronizedMap(new WeakHashMap<>());
 
     private CompatHooks() {
     }
@@ -57,22 +57,18 @@ public final class CompatHooks {
             // Проверяем что диапазон партиций — по умолчанию.
             requireValue(cc, cc.getClass(), "sectioningDMin", MINUS_INFINITY_DT);
             requireValue(cc, cc.getClass(), "sectioningDMax", PLUS_INFINITY_DT);
-            wrapped = new PeriodRewriteCompatCalculator(cc, t, loadingId(cc), dao, tif);
+            wrapped = new PeriodRewriteCompatCalculator(cc, t, dao, tif);
         } else if (cc != null && cc.getClass() == NonHistoricalChangesCalculator.class && !t.isPeriod()) {
             requireFalse(cc, cc.getClass(), "fullSlice");
             requireFalse(cc, cc.getClass(), "physicalDeletion");
-            wrapped = new HubCompatCalculator(cc, t, loadingId(cc), dao, tif);
+            wrapped = new HubCompatCalculator(cc, t);
         } else {
             throw new TransformationException(new LogMessage("", LogType.TECH_ERROR, 
                 "Калькулятор изменений " + (cc == null ? "null" : cc.getClass().getName()) + " для " + t.code()
                 + " (" + t.kind() + "): поправки ESSA для него не объявлены"));
         }
-        BY_STAGE.put(stage, wrapped);
+        BY_STAGE.put(stage, t);
         return wrapped;
-    }
-
-    private static int loadingId(ChangesCalculator cc) {
-        return (Integer) readField(cc, AbstractChangesCalculator.class, "loadingId");
     }
 
     // Флаг режима в калькуляторе RT-FW должен быть выключен, иначе — ошибка.
@@ -105,14 +101,8 @@ public final class CompatHooks {
         }
     }
 
-    // Подменяем merge RT-FW обёрткой и передаём ей то, что посчитал калькулятор изменений той же стадии.
+    // Подменяем merge RT-FW обёрткой с описанием таблицы той же стадии.
     public static MergeCalculator wrapMerge(Object stage, MergeCalculator mc) {
-        ChangesCalculator cc = BY_STAGE.remove(stage);
-        if (cc instanceof HubCompatCalculator) {
-            HubCompatCalculator hub = (HubCompatCalculator) cc;
-            return new MergeCompatCalculator(mc, hub.table(), hub.winKeys(), hub.winSnp());
-        }
-        PeriodRewriteCompatCalculator period = (PeriodRewriteCompatCalculator) cc;
-        return new MergeCompatCalculator(mc, period.table(), period.winKeys(), period.winSnp());
+        return new MergeCompatCalculator(mc, BY_STAGE.remove(stage));
     }
 }
