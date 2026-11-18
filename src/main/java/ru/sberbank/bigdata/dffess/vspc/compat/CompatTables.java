@@ -38,8 +38,7 @@ public final class CompatTables {
 
     // Загрузчик, которым ESSA грузила таблицу. Какой у какой таблицы — в constant/EssaLoaders.
     public enum EssaLoader {
-        HUB_DIFF(Kind.HUB), HIST_DIFF(Kind.PERIOD), HIST_MIX(Kind.PERIOD),
-        HIST_SNP(Kind.PERIOD), LINK_HIST_DIFF(Kind.PERIOD);
+        HUB_DIFF(Kind.HUB), HIST_DIFF(Kind.PERIOD), HIST_MIX(Kind.PERIOD), HIST_SNP(Kind.PERIOD);
 
         private final Kind kind;
 
@@ -101,15 +100,10 @@ public final class CompatTables {
 
         // В какую партицию RT-FW положит строку с данной end_dt, например: "2026-10-15" → "202610".
         public String partitionOf(String endDt) {
+            requirePeriod();
             Dataset<Row> row = SparkSession.active().range(1)
                     .select(lit(endDt).cast(DataTypes.DateType).as(END_DT_FIELD_NAME));
-            return withPartition(row).first().getAs(partitionColumn);
-        }
-
-        // Пересчитать колонку партиции из end_dt тем же кодом, что у RT-FW, — после того как поменяли end_dt (закрытие версии).
-        public Dataset<Row> withPartition(Dataset<Row> ds) {
-            requirePeriod();
-            return sectionBy(ds, Collections.singletonMap(partitionColumn, partition));
+            return sectionBy(row, Collections.singletonMap(partitionColumn, partition)).first().getAs(partitionColumn);
         }
 
         public boolean histSnp() { return loader == EssaLoader.HIST_SNP; }

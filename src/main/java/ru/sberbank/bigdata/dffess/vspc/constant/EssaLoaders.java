@@ -25,7 +25,9 @@ public final class EssaLoaders {
         m.put(ADDRH, EssaLoader.HIST_DIFF);
         m.put(DIVH, EssaLoader.HIST_MIX);
         m.put(DIVTYPE, EssaLoader.HIST_SNP);
-        m.put(DIVDIVRELATION, EssaLoader.LINK_HIST_DIFF);
+
+        // в ESSA-версии DataLoaderLinkHistDiff — для поправок то же, что HistDiff
+        m.put(DIVDIVRELATION, EssaLoader.HIST_DIFF);
         BY_TRANSFORMATION = Collections.unmodifiableMap(m);
     }
 
