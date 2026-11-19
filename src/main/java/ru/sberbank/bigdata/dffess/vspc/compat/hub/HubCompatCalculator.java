@@ -2,9 +2,7 @@ package ru.sberbank.bigdata.dffess.vspc.compat.hub;
 
 import org.apache.spark.sql.*;
 import ru.sberbank.bigdata.dffess.vspc.compat.CompatTables;
-import ru.sberbank.bigdata.sl.rt.publisher.PublisherDao;
 import ru.sberbank.bigdata.sl.rt.publisher.dto.SnapshotChanges;
-import ru.sberbank.bigdata.sl.rt.publisher.dto.TableInfoFactory;
 import ru.sberbank.bigdata.sl.rt.publisher.strategy.process.changes.ChangesCalculator;
 
 import java.util.*;
@@ -22,15 +20,10 @@ public final class HubCompatCalculator implements ChangesCalculator {
 
     private final ChangesCalculator delegate;
     private final CompatTables.Table table;
-    private final PublisherDao dao;
-    private final TableInfoFactory tif;
 
-    public HubCompatCalculator(ChangesCalculator delegate, CompatTables.Table table, PublisherDao dao,
-                               TableInfoFactory tif) {
+    public HubCompatCalculator(ChangesCalculator delegate, CompatTables.Table table) {
         this.delegate = delegate;
         this.table = table;
-        this.dao = dao;
-        this.tif = tif;
     }
 
     @Override
@@ -45,8 +38,7 @@ public final class HubCompatCalculator implements ChangesCalculator {
 
     @Override
     public SnapshotChanges calculate(Dataset<Row> incr, Dataset<Row> snpAll, List<Map<String, String>> specs) {
-        // Одна строка на ключ.
-        Dataset<Row> snp = land(dao, tif, specs, "_compat_snp", oneOpenPerKey(table, snpAll));
+        Dataset<Row> snp = onePerKey(snpAll, table.entityKey(), Collections.emptyList(), desc(CTL_LOADING));
         SnapshotChanges out = delegate.calculate(incr, snp, specs);
         return new SnapshotChanges(out.getInserts(), undoValidFrom(out.getUpdates(), snp), out.getDeletes());
     }
