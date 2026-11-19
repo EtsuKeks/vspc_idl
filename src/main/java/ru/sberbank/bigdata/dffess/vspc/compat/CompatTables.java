@@ -48,6 +48,7 @@ public final class CompatTables {
     public static final class Table {
         private final String code;              // div_type
         private final String snpTable;          // usl_vspc_idl_snp.div_type
+        private final String tmpSchema;         // схема наших промежуточных таблиц: usl_vspc_idl_stgtmp
         private final EssaLoader loader;        // HIST_SNP
         private final List<String> versionKey;  // ключ версии: [div_sk, start_dt]
         private final String partitionColumn;   // партиция по end_dt: p1month, но бывают и p100day и пр.; у хаба null
@@ -57,10 +58,11 @@ public final class CompatTables {
                                                 // null, если loader != HIST_SNP
         private final String cacheDraft;        // его черновик этой загрузки: usl_vspc_idl_stgtmp.loader_cache_div_type
 
-        private Table(String code, String snpTable, EssaLoader loader, List<String> versionKey,
+        private Table(String code, String snpTable, String tmpSchema, EssaLoader loader, List<String> versionKey,
                         String partitionColumn, Partition partition, String cacheTable, String cacheDraft) {
             this.code = code;
             this.snpTable = snpTable;
+            this.tmpSchema = tmpSchema;
             this.loader = loader;
             this.versionKey = versionKey;
             this.partitionColumn = partitionColumn;
@@ -75,6 +77,10 @@ public final class CompatTables {
 
         public String code() { return code; }
         public String snpTable() { return snpTable; }
+
+        // Полное имя таблицы в stgtmp по суффиксу:
+        // tmpTable("_compat_open_snp") -> usl_vspc_idl_stgtmp.div_type_compat_open_snp.
+        public String tmpTable(String suffix) { return tmpSchema + "." + code + suffix; }
         public Kind kind() { return loader.kind; }
         public boolean isPeriod() { return loader.kind == Kind.PERIOD; }
 
@@ -152,6 +158,7 @@ public final class CompatTables {
         // Имя таблицы и партиции — из meta тем же классом, что у публикатора RT-FW.
         EntityInfo ei = new EntityInfo(app.ctx().getLogEnv(), MergeMode.WITH_REWRITE, meta);
         String snpTable = new TableInfoFactory(ei).createTableInfo(SchemaName.SNP).getQualifiedTableName();
+        String tmpSchema = new TableInfoFactory(ei).createTableInfo(SchemaName.STGTMP).getDatabaseName();
         Map<String, Partition> partitions = ei.getDerivedPartitioningFields();
 
         // Партиции. ESSA-поправки проверены на двух раскладках: у исторической таблицы одна партиция по дате end_dt
@@ -185,8 +192,9 @@ public final class CompatTables {
             cacheDraft = tif.createTableInfo(SchemaName.STGTMP).getDatabaseName() + "." + cacheName;
         }
 
-        Table t = new Table(code, snpTable, loader, Collections.unmodifiableList(new ArrayList<>(ei.getPkFields())),
-                partitionColumn, partition, cacheTable, cacheDraft);
+        Table t = new Table(code, snpTable, tmpSchema, loader,
+            Collections.unmodifiableList(new ArrayList<>(ei.getPkFields())), partitionColumn, partition, cacheTable,
+                cacheDraft);
         BY_CODE.put(code, t);
         return t;
     }
