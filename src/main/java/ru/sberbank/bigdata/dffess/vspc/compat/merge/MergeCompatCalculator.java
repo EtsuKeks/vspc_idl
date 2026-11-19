@@ -34,8 +34,8 @@ public final class MergeCompatCalculator implements MergeCalculator {
     public Dataset<Row> calculate(Dataset<Row> oldSnp, SnapshotChanges changes, TableInfoFactory tableInfoFactory,
                             PublisherDao dao, SchemaName targetSchemaName, List<Map<String, String>> partitionSpecs) {
         if (!table.isPeriod()) {
-            // Хаб: одна строка на ключ — тем же onePerKey с теми же параметрами, что в HubCompatCalculator. oldSnp тот
-            // же, что получил калькулятор, выбор детерминирован — строки те же, с которыми он считал изменения.
+            // За аргументами onePerKey см. комментарий к HubCompatCalculator.calculate - мы должны быть согласованы с 
+            // своем вызове, чтобы корректно передать результат hub калькулятора в merge стадию, и сами ситуации похожи.
             return delegate.calculate(onePerKey(oldSnp, table.entityKey(), Collections.emptyList(), desc(CTL_LOADING)),
                 changes, tableInfoFactory, dao, targetSchemaName, partitionSpecs);
         }
