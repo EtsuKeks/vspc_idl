@@ -10,13 +10,15 @@ import ru.sberbank.bigdata.dffess.vspc.compat.CompatTables;
 import ru.sberbank.bigdata.sl.rt.core.App;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.apache.spark.sql.functions.col;
 import static org.apache.spark.sql.functions.date_sub;
+import static org.apache.spark.sql.functions.desc;
 import static org.apache.spark.sql.functions.lit;
 import static ru.sberbank.bigdata.dffess.vspc.compat.CompatSupport.cols;
-import static ru.sberbank.bigdata.dffess.vspc.compat.CompatSupport.oneOpenPerKey;
+import static ru.sberbank.bigdata.dffess.vspc.compat.CompatSupport.onePerKey;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.DIRTY_FLAG;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.DIVISIONTYPE00;
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.DIV_DP_CODE;
@@ -26,6 +28,7 @@ import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.DIV_TYPE_TERR
 import static ru.sberbank.bigdata.dffess.vspc.constant.ColumnsName.FULLDIVCODE;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.DIVTYPE;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.EBX_REP_M_SFS_0002_SFSDIVISION;
+import static ru.sberbank.bigdata.sl.rt.core.Constants.CTL_LOADING;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.DELETED_FLAG;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.END_DT_FIELD_NAME;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.MINUS_INFINITY_DT;
@@ -84,9 +87,10 @@ public class DivTypeTransformation extends BaseTransformation {
             Dataset<Row> source = writeWorkTable(STGTMP_SCHEMA, "tmp_" + DIVTYPE, result);
             List<String> bk = table.entityKey();
 
-            // Открытые версии — по одной на ключ, той же, что выберет калькулятор (oneOpenPerKey).
-            Dataset<Row> gone = oneOpenPerKey(table, spark.table(table.snpTable())
-                .filter(col(table.partitionColumn()).equalTo(lit(table.openPartition()))))
+            // Открытые версии — по одной на ключ, той же, что выберет калькулятор (onePerKey).
+            Dataset<Row> gone = onePerKey(spark.table(table.snpTable())
+                    .filter(col(table.partitionColumn()).equalTo(lit(table.openPartition()))),
+                    bk, Collections.emptyList(), desc(CTL_LOADING))
                 .join(source.select(cols(bk)), scalaSeq(bk), "left_anti")
                 .withColumn(END_DT_FIELD_NAME, date_sub(lit(LoadDate.sqlDate()), 1));
 
