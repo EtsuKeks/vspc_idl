@@ -1,8 +1,6 @@
 package ru.sberbank.bigdata.dffess.vspc.common;
 
 import org.apache.spark.sql.*;
-import org.apache.spark.sql.expressions.Window;
-import org.apache.spark.sql.expressions.WindowSpec;
 import org.apache.spark.sql.types.DataTypes;
 import ru.sberbank.bigdata.dffess.vspc.compat.period.LoaderCache;
 import ru.sberbank.bigdata.dffess.vspc.compat.CompatTables;
@@ -29,6 +27,7 @@ import static java.util.stream.Collectors.toList;
 import static org.apache.spark.sql.functions.*;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.START_DT_FIELD_NAME;
 import static ru.sberbank.bigdata.dffess.vspc.compat.CompatSupport.PUBLISH_MODE;
+import static ru.sberbank.bigdata.dffess.vspc.compat.CompatSupport.onePerKey;
 import static ru.sberbank.bigdata.dffess.vspc.compat.CompatSupport.writeWorkTable;
 
 public abstract class BaseTransformation extends Transformation {
@@ -41,9 +40,6 @@ public abstract class BaseTransformation extends Transformation {
     protected App app;
     protected String code;
     private SkClient skClient;
-
-    // Служебная колонка проверки ключа версии в publishChecked: номер строки внутри ключа.
-    private static final String KEY_RN = "_vspc_key_rn";
 
     // debug_sk_off флаг: считаются ли ключи локально
     private final boolean skOff;
@@ -120,19 +116,13 @@ public abstract class BaseTransformation extends Transformation {
         Dataset<Row> aligned = PublishPreconditions.alignTypes(result, table.snpTable());
         Column[] key = table.versionKey().stream().map(functions::col).toArray(Column[]::new);
 
-        // Ключ версии во входе RT-FW должен быть заполнен и уникален, а также набор строк должен быть лишен дубликатов 
-        // независящим от дня образом (подаваться могут изо дня в день одни и те же строки на вход, и если start_dt
-        // оставить он спутает нам хэш в какой то момент - при этом, ctl_validfrom например сюда не доезжает: только
-        // бизнес-колонки и start_dt/end_dt - так что работаем только с start_dt). Для этого сначала строки с пустой
-        // колонкой ключа отбрасываем. Потом убираем из хэшируемых колонок start_dt, и сравниваем дубли по хэшу строк.
-        // Также, заменяем NULL на "\u0000": иначе xxhash64 пропускает NULL ((NULL,'a') и ('a',NULL) дали бы один хэш)
-        Column[] attrs = Arrays.stream(aligned.columns())
-            .filter(c -> !START_DT_FIELD_NAME.equals(c))
-            .map(c -> coalesce(col(c).cast("string"), lit("\u0000"))).toArray(Column[]::new);
-        WindowSpec w = Window.partitionBy(key).orderBy(xxhash64(attrs));
+        // RT-FW нужен заполненный и уникальный ключ версии: строки с пустым ключом отбрасываем, из дублей оставляем по
+        // одной строке на версию. Группируем по ключу версии (с start_dt — иначе слиплись бы версии истории), а
+        // выбираем строку по хэшу без start_dt: он у строк версии один, но меняется каждый день (дата загрузки − 1), и
+        // с ним победитель одних и тех же дублей менялся бы от загрузки к загрузке.
         Column nullKey = Arrays.stream(key).map(Column::isNull).reduce(Column::or).get();
-        Dataset<Row> marked = aligned.withColumn(KEY_RN, row_number().over(w));
-        Dataset<Row> ds = marked.filter(not(nullKey).and(col(KEY_RN).equalTo(1))).drop(KEY_RN);
+        Dataset<Row> ds = onePerKey(aligned.filter(not(nullKey)), table.versionKey(),
+            Collections.singletonList(START_DT_FIELD_NAME));
         if (app.ctx().getLoadMode() == App.LoadMode.INCREMENT) {
             // Только INCR: RT-FW читает вход дважды — проверка на пустоту в самом начале публикации и запись в stgtmp
             // (на INIT проверки нет). Поэтому записываем в stg (не кэшируем: кэш может быть вытеснен или исполнитель
