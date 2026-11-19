@@ -86,11 +86,13 @@ public class DivTypeTransformation extends BaseTransformation {
             writeToExternalTableAutoPath(spark, result, STGTMP_SCHEMA, SOURCE_TABLE);
             Dataset<Row> source = spark.table(STGTMP_SCHEMA + "." + SOURCE_TABLE);
             List<String> bk = table.entityKey();
+
             // Открытые версии — по одной на ключ, той же, что выберет калькулятор (oneOpenPerKey).
             Dataset<Row> gone = oneOpenPerKey(table, spark.table(table.snpTable())
                 .filter(col(table.partitionColumn()).equalTo(lit(table.openPartition()))))
                 .join(source.select(cols(bk)), scalaSeq(bk), "left_anti")
                 .withColumn(END_DT_FIELD_NAME, date_sub(lit(LoadDate.sqlDate()), 1));
+
             // deleted_flag и dirty_flag в snp div_type нет — в копии, как во всём входе, false.
             List<String> snpCols = Arrays.asList(gone.columns());
             result = source.unionByName(gone.select(Arrays.stream(source.columns())
