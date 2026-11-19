@@ -17,8 +17,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.apache.spark.sql.functions.*;
-import static ru.sberbank.bigdata.sl.rt.core.Constants.CTL_ACTION;
-import static ru.sberbank.bigdata.sl.rt.core.Constants.CTL_DO;
 import static ru.sberbank.bigdata.sl.rt.publisher.util.PublisherUtils.getDatabaseLocationPath;
 import static ru.sberbank.bigdata.sl.rt.publisher.util.PublisherUtils.scalaSeq;
 
@@ -29,6 +27,10 @@ public final class CompatSupport {
 
     // Открытые версии снимка, по одной на ключ: пишет калькулятор изменений стадии, читает её же merge.
     public static final String OPEN_SNP = "_compat_open_snp";
+
+    // Служебная колонка этой таблицы у исторических таблиц: хэш строки (PeriodRewriteCompatCalculator.rowHash). Перед
+    // передачей в RT-FW и в merge её надо убрать (drop) — они ждут ровно колонки таргета.
+    public static final String ROW_HASH = "_compat_h";
 
     private CompatSupport() {
     }
@@ -58,15 +60,6 @@ public final class CompatSupport {
     public static Dataset<Row> writeWorkTable(String qualifiedTable, Dataset<Row> ds) {
         int dot = qualifiedTable.indexOf('.');
         return writeWorkTable(qualifiedTable.substring(0, dot), qualifiedTable.substring(dot + 1), ds);
-    }
-
-    public static Column isLeg(String ctlDo, String ctlAction) {
-        return col(CTL_DO).equalTo(lit(ctlDo)).and(col(CTL_ACTION).equalTo(lit(ctlAction)));
-    }
-
-    // Join по списку ключей переносит ключи в начало — возвращаем исходный порядок колонок левой таблицы.
-    public static Dataset<Row> join(Dataset<Row> left, Dataset<Row> right, List<String> keys, String type) {
-        return left.join(right, scalaSeq(keys), type).select(cols(Arrays.asList(left.columns())));
     }
 
     // Одна строка на ключ key, остальные строки ключа отбрасываются. Порядок внутри ключа — сначала first (если
