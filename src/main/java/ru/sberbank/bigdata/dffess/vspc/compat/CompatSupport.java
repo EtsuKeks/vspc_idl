@@ -42,9 +42,10 @@ public final class CompatSupport {
     public static final CalculationMode PUBLISH_MODE =
         new CalculationMode(CalculationModes.HARD).withApproach(CalculationMode.Approach.SPARK_REBALANCE);
 
-    // Staging таблица, которая пересобирается целиком на каждой загрузке (черновики, кэш закрытий, chg_div_h), —
-    // тем же способом, что RT-FW пишет свои временные таблицы: раскладка режимом публикации, затем таблица с данными
-    // создаётся заново (старая удаляется вместе с файлами) в папке схемы. Возвращает чтение записанного.
+    // Staging таблица, которая пересобирается целиком на каждой загрузке (черновики, кэш закрытий, подготовленный
+    // срез источника — на примере vspc_idl: chg_div_h), — тем же способом, что RT-FW пишет свои временные таблицы:
+    // раскладка режимом публикации, затем таблица с данными создаётся заново (старая удаляется вместе с файлами) в
+    // папке схемы. Возвращает чтение записанного.
     public static Dataset<Row> writeWorkTable(String database, String table, Dataset<Row> ds) {
         SparkSession spark = SparkSession.active();
         PublisherDao dao = new PublisherDao(spark, PUBLISH_MODE);
