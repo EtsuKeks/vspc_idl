@@ -3,7 +3,6 @@ package ru.sberbank.bigdata.dffess.vspc.transformations;
 import org.apache.spark.sql.Column;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
-import org.apache.spark.sql.SaveMode;
 import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.functions;
 import ru.sberbank.bigdata.dffess.vspc.common.BaseTransformation;
@@ -11,6 +10,8 @@ import ru.sberbank.bigdata.sl.rt.core.App;
 
 import java.util.Arrays;
 
+import static ru.sberbank.bigdata.dffess.vspc.compat.CompatSupport.writeWorkTable;
+import static ru.sberbank.bigdata.dffess.vspc.compat.guard.PublishPreconditions.alignTypes;
 import static ru.sberbank.bigdata.dffess.vspc.constant.TablesName.CHG_DIVH;
 
 public class ChgDivHTransformation extends BaseTransformation {
@@ -27,9 +28,13 @@ public class ChgDivHTransformation extends BaseTransformation {
         String table = STG_SCHEMA + "." + CHG_DIVH;
         Dataset<Row> preselect = spark.sql(getPreselectSQL(app.ctx().getLoadMode())).distinct();
 
-        // Пишем, как в ESSA-версии витрины.
+        // chg_div_h — рабочая таблица: пересобирается целиком на каждой загрузке, без партиций и истории, поэтому
+        // пишем как все рабочие таблицы — способом RT-FW. alignTypes добавлен, хоть таблица и рабочая, ради fail fast:
+        // здесь в витрину входят данные источника, и смена типа в источнике должна ронять загрузку сразу, на первом
+        // шаге (как в ESSA-версии), а не расходиться молча неявными приведениями в остальных таблицах или всплывать\
+        // позже при публикации.
         Column[] tableColumns = Arrays.stream(spark.table(table).columns()).map(functions::col).toArray(Column[]::new);
-        preselect.select(tableColumns).write().mode(SaveMode.Overwrite).insertInto(table);
+        writeWorkTable(STG_SCHEMA, CHG_DIVH, alignTypes(preselect.select(tableColumns), table, spark));
     }
 
     public static String getPreselectSQL(App.LoadMode loadMode) {
