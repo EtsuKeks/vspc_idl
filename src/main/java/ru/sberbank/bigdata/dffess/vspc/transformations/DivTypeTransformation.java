@@ -87,7 +87,10 @@ public class DivTypeTransformation extends BaseTransformation {
             Dataset<Row> source = writeWorkTable(STGTMP_SCHEMA, "tmp_" + DIVTYPE, result);
             List<String> bk = table.entityKey();
 
-            // Открытые версии — по одной на ключ, той же, что выберет калькулятор (onePerKey).
+            // Открытые версии — по одной на ключ, той же, что выберет калькулятор (onePerKey). Важно, что берется в
+            // качестве колонки группировки именно div_sk без start_dt, потому что нужна ровно одна текущая версия на
+            // подразделение, иначе начнутся проблемы с тем что все остальные отфильтровывают ровно одну строку из
+            // записанных таблиц.
             Dataset<Row> gone = onePerKey(spark.table(table.snpTable())
                 .filter(col(table.partitionColumn()).equalTo(lit(table.openPartition()))), bk,
                     Collections.emptyList(), desc(CTL_LOADING))
