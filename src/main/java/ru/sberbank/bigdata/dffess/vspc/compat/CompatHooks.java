@@ -6,7 +6,6 @@ import ru.sberbank.bigdata.dffess.vspc.compat.CompatTables.Table;
 import ru.sberbank.bigdata.dffess.vspc.compat.hub.HubCompatCalculator;
 import ru.sberbank.bigdata.dffess.vspc.compat.merge.MergeCompatCalculator;
 import ru.sberbank.bigdata.dffess.vspc.compat.period.PeriodRewriteCompatCalculator;
-import ru.sberbank.bigdata.sl.rt.publisher.PublisherDao;
 import ru.sberbank.bigdata.sl.rt.publisher.dto.*;
 import ru.sberbank.bigdata.sl.rt.publisher.strategy.process.changes.*;
 import ru.sberbank.bigdata.sl.rt.publisher.strategy.process.merge.*;
@@ -41,7 +40,7 @@ public final class CompatHooks {
 
     // Подменяем калькулятор изменений RT-FW нашей обёрткой. ESSA-поправки написаны под конкретные классы RT-FW и режим
     // INCR: другой класс или включённый режим вне нашего проверенного пути — ошибка, а не публикация без поправок.
-    public static ChangesCalculator wrapChanges(Object stage, ChangesCalculator cc, PublisherDao dao, TableInfoFactory tif) {
+    public static ChangesCalculator wrapChanges(Object stage, ChangesCalculator cc, TableInfoFactory tif) {
         Table t = byCode(tif.createTableInfo(SchemaName.SNP).getTableName());
         ChangesCalculator wrapped;
         if (cc != null && cc.getClass() == HistoricalPeriodWithRewriteChangesCalculator.class && t.isPeriod()) {
@@ -62,14 +61,14 @@ public final class CompatHooks {
             // Проверяем что диапазон партиций — по умолчанию.
             requireValue(cc, cc.getClass(), "sectioningDMin", MINUS_INFINITY_DT);
             requireValue(cc, cc.getClass(), "sectioningDMax", PLUS_INFINITY_DT);
-            wrapped = new PeriodRewriteCompatCalculator(cc, t, dao, tif);
+            wrapped = new PeriodRewriteCompatCalculator(cc, t);
         } else if (cc != null && cc.getClass() == NonHistoricalChangesCalculator.class && !t.isPeriod()) {
             // fullSlice — тот же режим WITH_REWRITE_FULL_SLICE, что и у исторических таблиц (у хаба RT-FW зовёт его
             // NONE_FULL_SLICE): удалёнными помечаются все ключи хаба, которых нет во входе, а ESSA их
             // не трогала. physicalDeletion отдельно не проверяем: RT-FW включает его только вместе с fullSlice, его
             // ловит эта проверка.
             requireFalse(cc, cc.getClass(), "fullSlice");
-            wrapped = new HubCompatCalculator(cc, t, dao, tif);
+            wrapped = new HubCompatCalculator(cc, t);
         } else {
             throw new TransformationException(new LogMessage("", LogType.TECH_ERROR, 
                 "Калькулятор изменений " + (cc == null ? "null" : cc.getClass().getName()) + " для " + t.code()
