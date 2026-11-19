@@ -87,10 +87,12 @@ public class DivTypeTransformation extends BaseTransformation {
             Dataset<Row> source = writeWorkTable(STGTMP_SCHEMA, "tmp_" + DIVTYPE, result);
             List<String> bk = table.entityKey();
 
-            // Открытые версии — по одной на ключ, той же, что выберет калькулятор (onePerKey). Важно, что берется в
-            // качестве колонки группировки именно div_sk без start_dt, потому что нужна ровно одна текущая версия на
-            // подразделение, иначе начнутся проблемы с тем что все остальные отфильтровывают ровно одну строку из
-            // записанных таблиц.
+            // Открытые версии — по одной на ключ, той же, что выберет калькулятор изменений
+            // (PeriodRewriteCompatCalculator): вызовы onePerKey должны совпадать. За аргументами
+            // Collections.emptyList() и desc(CTL_LOADING) см. комментарий к HubCompatCalculator.calculate — ситуация
+            // та же. Группируем по div_sk без start_dt, хотя таблица историческая: берём только открытую партицию, а в
+            // ней у подразделения должна быть ровно одна текущая версия — несколько открытых строк с любыми start_dt
+            // это мусор от ESSA-версии, а не разные версии.
             Dataset<Row> gone = onePerKey(spark.table(table.snpTable())
                 .filter(col(table.partitionColumn()).equalTo(lit(table.openPartition()))), bk,
                     Collections.emptyList(), desc(CTL_LOADING))
