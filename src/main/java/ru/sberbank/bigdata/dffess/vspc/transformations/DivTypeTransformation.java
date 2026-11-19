@@ -38,9 +38,6 @@ public class DivTypeTransformation extends BaseTransformation {
 
     public static final String CODE = DIVTYPE;
 
-    // Временная таблица входа в stgtmp на INCR, для сохранения результата - чтобы не пришлось ходить в ССК дважды.
-    private static final String SOURCE_TABLE = "tmp_" + DIVTYPE;
-
     public DivTypeTransformation(App app) {
         super(app, CODE, "usl_vspc_idl.div.sat=type");
     }
@@ -84,7 +81,7 @@ public class DivTypeTransformation extends BaseTransformation {
             // Вход фиксируем во временной таблице stgtmp, как в ESSA-версии: по нему ищем пропавшие ключи
             // и его же публикуем — ключи ССК при этом считаются один раз. Пишем как все рабочие таблицы — способом
             // RT-FW.
-            Dataset<Row> source = writeWorkTable(STGTMP_SCHEMA, SOURCE_TABLE, result);
+            Dataset<Row> source = writeWorkTable(STGTMP_SCHEMA, "tmp_" + DIVTYPE, result);
             List<String> bk = table.entityKey();
 
             // Открытые версии — по одной на ключ, той же, что выберет калькулятор (oneOpenPerKey).
