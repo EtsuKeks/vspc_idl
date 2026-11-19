@@ -40,31 +40,40 @@ public final class CompatHooks {
     }
 
     // Подменяем калькулятор изменений RT-FW нашей обёрткой. ESSA-поправки написаны под конкретные классы RT-FW и режим
-    // INCR: другой класс или включённый режим вне этого пути — ошибка, а не публикация без поправок.
+    // INCR: другой класс или включённый режим вне нашего проверенного пути — ошибка, а не публикация без поправок.
     public static ChangesCalculator wrapChanges(Object stage, ChangesCalculator cc, PublisherDao dao, TableInfoFactory tif) {
         Table t = byCode(tif.createTableInfo(SchemaName.SNP).getTableName());
         ChangesCalculator wrapped;
         if (cc != null && cc.getClass() == HistoricalPeriodWithRewriteChangesCalculator.class && t.isPeriod()) {
             // Режимы калькулятора, которые меняют расчёт изменений, должны быть выключены: поправки ESSA написаны и
             // проверены только для обычного INCR. fullSlice — режим WITH_REWRITE_FULL_SLICE (закрывает все ключи,
-            // которых нет во входе), reInit — пересборка на INIT при init_diff_flag, collapsePeriods — склейка
-            // одинаковых версий.
+            // которых нет во входе; пересборка на INIT при init_diff_flag тоже идёт с ним - не проверяем reInit
+            // отдельно), collapsePeriods — склейка одинаковых версий.
             // Родитель — package-private AbstractHistoricalWithRewriteChangesCalculator, напрямую на него не сослаться.
             Class<?> rewriteBase = cc.getClass().getSuperclass();
             requireFalse(cc, rewriteBase, "fullSlice");
-            requireFalse(cc, rewriteBase, "reInit");
             requireFalse(cc, cc.getClass(), "collapsePeriods");
+
+            // starting_business_date / max_increment_depth_days (из CTL) не заданы: зону чтения мы подменяем своей, но
+            // по этой дате RT-FW ещё и обрезает вход — start_dt закрытых копий наших таблиц подтянулся бы к ней, и 
+            // вместо закрытия вышла бы новая версия.
+            requireEmpty(cc, AbstractHistoricalChangesCalculator.class, "startingBusinessDate");
+
             // Проверяем что диапазон партиций — по умолчанию.
             requireValue(cc, cc.getClass(), "sectioningDMin", MINUS_INFINITY_DT);
             requireValue(cc, cc.getClass(), "sectioningDMax", PLUS_INFINITY_DT);
             wrapped = new PeriodRewriteCompatCalculator(cc, t, dao, tif);
         } else if (cc != null && cc.getClass() == NonHistoricalChangesCalculator.class && !t.isPeriod()) {
+            // fullSlice — тот же режим WITH_REWRITE_FULL_SLICE, что и у исторических таблиц (у хаба RT-FW зовёт его
+            // NONE_FULL_SLICE): удалёнными помечаются все ключи хаба, которых нет во входе, а ESSA их
+            // не трогала. physicalDeletion отдельно не проверяем: RT-FW включает его только вместе с fullSlice, его
+            // ловит эта проверка.
             requireFalse(cc, cc.getClass(), "fullSlice");
             wrapped = new HubCompatCalculator(cc, t, dao, tif);
         } else {
             throw new TransformationException(new LogMessage("", LogType.TECH_ERROR, 
                 "Калькулятор изменений " + (cc == null ? "null" : cc.getClass().getName()) + " для " + t.code()
-                + " (" + t.kind() + "): поправки ESSA для него не объявлены"));
+                + " (" + t.kind() + "): ESSA-поправки не применимы"));
         }
         BY_STAGE.put(stage, t);
         return wrapped;
@@ -75,7 +84,7 @@ public final class CompatHooks {
         if (!Boolean.FALSE.equals(readField(target, declaring, field))) {
             throw new TransformationException(new LogMessage("", LogType.TECH_ERROR,
                 "Калькулятор " + target.getClass().getSimpleName() + ": " + field
-                + " != false — режим вне INCR merge-пути, ESSA-поправки не применимы"));
+                + " != false, ESSA-поправки не применимы"));
         }
     }
 
@@ -85,7 +94,17 @@ public final class CompatHooks {
         if (!expected.equals(actual)) {
             throw new TransformationException(new LogMessage("", LogType.TECH_ERROR,
                 "Калькулятор " + target.getClass().getSimpleName() + ": " + field + " = " + actual + ", ожидалось "
-                + expected + " — ESSA-поправки для такой настройки не применимы"));
+                + expected + " — ESSA-поправки не применимы"));
+        }
+    }
+
+    // Строковая настройка калькулятора RT-FW должна быть не задана (null или пусто), иначе — ошибка.
+    private static void requireEmpty(Object target, Class<?> declaring, String field) {
+        Object actual = readField(target, declaring, field);
+        if (actual != null && !actual.toString().isEmpty()) {
+            throw new TransformationException(new LogMessage("", LogType.TECH_ERROR,
+                "Калькулятор " + target.getClass().getSimpleName() + ": " + field + " = " + actual
+                + " — ESSA-поправки не применимы"));
         }
     }
 
