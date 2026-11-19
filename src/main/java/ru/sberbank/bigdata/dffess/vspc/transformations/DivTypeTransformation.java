@@ -32,7 +32,7 @@ import static ru.sberbank.bigdata.sl.rt.core.Constants.MINUS_INFINITY_DT;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.PLUS_INFINITY_DT;
 import static ru.sberbank.bigdata.sl.rt.core.Constants.START_DT_FIELD_NAME;
 import static ru.sberbank.bigdata.sl.rt.publisher.util.PublisherUtils.scalaSeq;
-import static ru.sberbank.bigdata.sl.rt.publisher.util.PublisherUtils.writeToExternalTableAutoPath;
+import static ru.sberbank.bigdata.dffess.vspc.compat.CompatSupport.writeWorkTable;
 
 public class DivTypeTransformation extends BaseTransformation {
 
@@ -82,9 +82,9 @@ public class DivTypeTransformation extends BaseTransformation {
         SparkSession spark = app.getSparkSession();
         if (getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT) {
             // Вход фиксируем во временной таблице stgtmp, как в ESSA-версии: по нему ищем пропавшие ключи
-            // и его же публикуем — ключи ССК при этом считаются один раз.
-            writeToExternalTableAutoPath(spark, result, STGTMP_SCHEMA, SOURCE_TABLE);
-            Dataset<Row> source = spark.table(STGTMP_SCHEMA + "." + SOURCE_TABLE);
+            // и его же публикуем — ключи ССК при этом считаются один раз. Пишем как все рабочие таблицы — способом
+            // RT-FW.
+            Dataset<Row> source = writeWorkTable(STGTMP_SCHEMA, SOURCE_TABLE, result);
             List<String> bk = table.entityKey();
 
             // Открытые версии — по одной на ключ, той же, что выберет калькулятор (oneOpenPerKey).
