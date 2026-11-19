@@ -31,7 +31,7 @@ public class ChgDivHTransformation extends BaseTransformation {
         // chg_div_h — рабочая таблица: пересобирается целиком на каждой загрузке, без партиций и истории, поэтому
         // пишем как все рабочие таблицы — способом RT-FW. alignTypes добавлен, хоть таблица и рабочая, ради fail fast:
         // здесь в витрину входят данные источника, и смена типа в источнике должна ронять загрузку сразу, на первом
-        // шаге (как в ESSA-версии), а не расходиться молча неявными приведениями в остальных таблицах или всплывать\
+        // шаге (как в ESSA-версии), а не расходиться молча неявными приведениями в остальных таблицах или всплывать
         // позже при публикации.
         Column[] tableColumns = Arrays.stream(spark.table(table).columns()).map(functions::col).toArray(Column[]::new);
         writeWorkTable(STG_SCHEMA, CHG_DIVH, alignTypes(preselect.select(tableColumns), table));
