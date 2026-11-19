@@ -22,7 +22,8 @@ public final class PublishPreconditions {
 
     // Тип колонки входа отличается от типа в snp — приводим с проверками ANSI, как insertInto в ESSA. Если так     
     // привести нельзя — отказ: ESSA на такой записи падала, а RT-FW записал бы NULL.
-    public static Dataset<Row> alignTypes(Dataset<Row> ds, String snpTable, SparkSession spark) {
+    public static Dataset<Row> alignTypes(Dataset<Row> ds, String snpTable) {
+        SparkSession spark = SparkSession.active();
         spark.catalog().refreshTable(snpTable);
         StructType target = spark.table(snpTable).schema();
 
