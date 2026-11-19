@@ -52,7 +52,7 @@ public final class HubCompatCalculator implements ChangesCalculator {
     // RT-FW ставит ctl_validfrom = now() всем строкам diff. В ESSA (U,U) — старая версия из snp со своим ctl_validfrom:
     // возвращаем его из snp.
     private Dataset<Row> undoValidFrom(Dataset<Row> stamped, Dataset<Row> snp) {
-        Column uu = isLeg(CTL_DO_UNDO, CTL_ACTION_UPDATE);
+        Column uu = col(CTL_DO).equalTo(lit(CTL_DO_UNDO)).and(col(CTL_ACTION).equalTo(lit(CTL_ACTION_UPDATE)));
         Column[] sel = Arrays.stream(stamped.columns())
             .map(c -> CTL_VALIDFROM.equals(c) ? col(OLD_VF).as(CTL_VALIDFROM) : col(c)).toArray(Column[]::new);
         Dataset<Row> undoFixed = stamped.filter(uu)
