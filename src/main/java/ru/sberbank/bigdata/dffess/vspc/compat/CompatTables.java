@@ -112,7 +112,7 @@ public final class CompatTables {
         public String partitionOf(String endDt) {
             requirePeriod();
             Dataset<Row> row = SparkSession.active().range(1)
-                    .select(lit(endDt).cast(DataTypes.DateType).as(END_DT_FIELD_NAME));
+                .select(lit(endDt).cast(DataTypes.DateType).as(END_DT_FIELD_NAME));
             return sectionBy(row, Collections.singletonMap(partitionColumn, partition)).first().getAs(partitionColumn);
         }
 
@@ -139,7 +139,7 @@ public final class CompatTables {
     public static Table register(App app, String mask, EssaLoader loader) {
         // Таблица набора в meta — так же, как её находит публикатор RT-FW.
         ru.sberbank.bigdata.sl.rt.metadata.domain.Table meta =
-                TablePairInfo.fromConsumerList(app.ctx().metadata2().getConsumers(mask)).getSnpTable();
+            TablePairInfo.fromConsumerList(app.ctx().metadata2().getConsumers(mask)).getSnpTable();
         String code = meta.getTableCode();
 
         // Наш загрузчик ESSA объявлен и того же типа, что таблица в meta.
@@ -152,7 +152,7 @@ public final class CompatTables {
                     : meta.getHistoryType() == HistType.NONE ? Kind.HUB : null;
         if (kind != loader.kind) {
             throw new TransformationException(new LogMessage("", LogType.TECH_ERROR,
-                    code + ": тип истории в meta " + meta.getHistoryType() + ", а загрузчик ESSA " + loader));
+                code + ": тип истории в meta " + meta.getHistoryType() + ", а загрузчик ESSA " + loader));
         }
 
         // Имя таблицы и партиции — из meta тем же классом, что у публикатора RT-FW.

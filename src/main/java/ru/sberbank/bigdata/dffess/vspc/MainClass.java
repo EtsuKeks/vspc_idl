@@ -26,8 +26,8 @@ public class MainClass {
         try {
             // под RtfwLauncher (StartLauncher.sh) терминальное приложение — лаунчер
             App app = App.create("main", args)
-                    .terminator(System.getenv(RTFW_SPAWNED_APP_CODE_ENV) == null)
-                    .autoSparkSession(true).build();
+                .terminator(System.getenv(RTFW_SPAWNED_APP_CODE_ENV) == null)
+                .autoSparkSession(true).build();
             StartupSelfCheck.verifyOrDie(app);
             // как ESSA: новые партиции регистрировать без обхода файлов всех партиций при recoverPartitions - так быстрее при большом числе партиций, пишущихся за многие ctl_loading-и.
             app.getSparkSession().conf().set("spark.sql.hive.gatherFastStats", "false");

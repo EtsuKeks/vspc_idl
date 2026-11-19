@@ -24,22 +24,22 @@ public class TimeZoneTransformation extends BaseTransformation {
     @Override
     public void run() {
         Dataset<Row> slice = read(EBX_REP_M_RFZONETIME_0002_RFZONETIME).kap803Usl().snp().get()
-                .select(
-                        lit(false).as(DELETED_FLAG),
-                        when(col(ABBREVIATION).equalTo("USZ1"), "KALT").otherwise(col(ABBREVIATION)).as(SID),
-                        when(col(ABBREVIATION).equalTo("USZ1"), "KALT").otherwise(col(ABBREVIATION)).as(TIME_ZONE_ABBR_CODE),
-                        col(CODE).as(TIME_ZONE_CODE),
-                        col(TIMEDESIGNATION).as(TIME_ZONE_MSK_SHIFT_VAL),
-                        col(NAME00).as(TIME_ZONE_NAME),
-                        lit(SHORT_PRODUCT_CODE).as(TIME_ZONE_DP_CODE),
+            .select(
+                lit(false).as(DELETED_FLAG),
+                when(col(ABBREVIATION).equalTo("USZ1"), "KALT").otherwise(col(ABBREVIATION)).as(SID),
+                when(col(ABBREVIATION).equalTo("USZ1"), "KALT").otherwise(col(ABBREVIATION)).as(TIME_ZONE_ABBR_CODE),
+                col(CODE).as(TIME_ZONE_CODE),
+                col(TIMEDESIGNATION).as(TIME_ZONE_MSK_SHIFT_VAL),
+                col(NAME00).as(TIME_ZONE_NAME),
+                lit(SHORT_PRODUCT_CODE).as(TIME_ZONE_DP_CODE),
 
-                        // *_sid — натуральный ключ из источника; addSk отдаёт его в ССК и заменяет на суррогатный *_sk подчищая *_sid после себя.
-                        when(col(ABBREVIATION).equalTo("USZ1"), "KALT").otherwise(col(ABBREVIATION)).as(TIME_ZONE_SID),
+                // *_sid — натуральный ключ из источника; addSk отдаёт его в ССК и заменяет на суррогатный *_sk подчищая *_sid после себя.
+                when(col(ABBREVIATION).equalTo("USZ1"), "KALT").otherwise(col(ABBREVIATION)).as(TIME_ZONE_SID),
 
-                        col(UTCFORMAT).as(TIME_ZONE_WRLD_SHIFT_VAL),
-                        lit(false).as(DIRTY_FLAG)
-                ).where(col(ABBREVIATION).isNotNull())
-                .distinct();
+                col(UTCFORMAT).as(TIME_ZONE_WRLD_SHIFT_VAL),
+                lit(false).as(DIRTY_FLAG)
+            ).where(col(ABBREVIATION).isNotNull())
+            .distinct();
 
         Dataset<Row> result = addSk(slice, TIMEZONE, Arrays.asList("@time_zone_rf"));
 

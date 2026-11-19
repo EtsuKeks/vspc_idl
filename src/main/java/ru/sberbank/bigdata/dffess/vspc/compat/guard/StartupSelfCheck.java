@@ -78,10 +78,10 @@ public final class StartupSelfCheck {
         }
         if (!expected.equals(actual)) {
             throw new TransformationException(new LogMessage("", LogType.TECH_ERROR, String.format(
-                    "%s версии %s, а поправки ESSA проверены на %s. Перед сменой версии: перенести вставки "
-                    + "COMPAT в новый вендорский ProcessingStage, сверить поля калькуляторов, которые читает "
-                    + "CompatHooks, прогнать локальный стенд и обновить версию в StartupSelfCheck",
-                    artifact, actual, expected)));
+                "%s версии %s, а поправки ESSA проверены на %s. Перед сменой версии: перенести вставки "
+                + "COMPAT в новый вендорский ProcessingStage, сверить поля калькуляторов, которые читает "
+                + "CompatHooks, прогнать локальный стенд и обновить версию в StartupSelfCheck",
+                artifact, actual, expected)));
         }
     }
 }

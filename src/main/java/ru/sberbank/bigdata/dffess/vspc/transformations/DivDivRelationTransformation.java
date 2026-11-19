@@ -48,31 +48,31 @@ public class DivDivRelationTransformation extends BaseTransformation {
         Dataset<Row> sfsSuccessor = divisions.select(col("id").as("sfs_successor_id"), col("fulldivcode").as("successor_sid"));
 
         Dataset<Row> divsuccessor = successors
-                .select(col("id").as("source_id"),
-                        col("successors_id_successor"),
-                        col("successors_successorstype"))
-                .join(sfsSource, col("source_id").equalTo(col("sfs_source_id")), "left")
-                .join(sfsSuccessor, col("successors_id_successor").equalTo(col("sfs_successor_id")), "left")
-                .where(trim(lower(col("successors_successorstype"))).equalTo(lit("правопреемник")))
-                .select("source_id", "source_sid", "successor_sid")
-                .distinct();
+            .select(col("id").as("source_id"),
+                col("successors_id_successor"),
+                col("successors_successorstype"))
+            .join(sfsSource, col("source_id").equalTo(col("sfs_source_id")), "left")
+            .join(sfsSuccessor, col("successors_id_successor").equalTo(col("sfs_successor_id")), "left")
+            .where(trim(lower(col("successors_successorstype"))).equalTo(lit("правопреемник")))
+            .select("source_id", "source_sid", "successor_sid")
+            .distinct();
 
         divsuccessor = divsuccessor
-                .select(
-                        getKey("|").as(SID),
+            .select(
+                getKey("|").as(SID),
 
-                        lit(SHORT_PRODUCT_CODE).as(DIV_DIV_RELATION_DP_CODE),
+                lit(SHORT_PRODUCT_CODE).as(DIV_DIV_RELATION_DP_CODE),
 
-                        // *_sid — натуральный ключ из источника; addSk отдаёт его в ССК и заменяет на суррогатный *_sk подчищая *_sid после себя.
-                        col("source_sid").as(SOURCE_DIV_SID),
-                        lit(SHORT_PRODUCT_CODE).as(SOURCE_DIV_DP_CODE),
-                        col("successor_sid").as(SUCCESSOR_DIV_SID),
-                        lit(SHORT_PRODUCT_CODE).as(SUCCESSOR_DIV_DP_CODE),
+                // *_sid — натуральный ключ из источника; addSk отдаёт его в ССК и заменяет на суррогатный *_sk подчищая *_sid после себя.
+                col("source_sid").as(SOURCE_DIV_SID),
+                lit(SHORT_PRODUCT_CODE).as(SOURCE_DIV_DP_CODE),
+                col("successor_sid").as(SUCCESSOR_DIV_SID),
+                lit(SHORT_PRODUCT_CODE).as(SUCCESSOR_DIV_DP_CODE),
 
-                        lit(false).as(DIRTY_FLAG),
-                        lit(false).as(DELETED_FLAG)
+                lit(false).as(DIRTY_FLAG),
+                lit(false).as(DELETED_FLAG)
 
-                ).distinct();
+            ).distinct();
 
         divsuccessor = divsuccessor.withColumn(DIV_DIV_RELATION_SID, col(SID));
 
@@ -83,10 +83,10 @@ public class DivDivRelationTransformation extends BaseTransformation {
         // Даты версии — наши: публикатор требует их во входе. Заполняем их так же, как загрузчик ESSA-версии витрины:
         // start_dt: INIT — 1900-01-01, INCR — день загрузки − 1; end_dt — 9999-12-31 в обоих режимах.
         result = result
-                .withColumn(START_DT_FIELD_NAME, getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT
-                        ? date_sub(lit(LoadDate.sqlDate()), 1)
-                        : lit(MINUS_INFINITY_DT).cast("date"))
-                .withColumn(END_DT_FIELD_NAME, lit(PLUS_INFINITY_DT).cast("date"));
+            .withColumn(START_DT_FIELD_NAME, getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT
+                                             ? date_sub(lit(LoadDate.sqlDate()), 1)
+                                             : lit(MINUS_INFINITY_DT).cast("date"))
+            .withColumn(END_DT_FIELD_NAME, lit(PLUS_INFINITY_DT).cast("date"));
 
         // Просто вызвать publish нельзя даже с пропатченным RT-FW: до его патча публикатор молча выбросит колонку с другим типом
         // и сразу выйдет на пустом инкременте. Поэтому сначала приводим и проверяем типы и корректно обрабатываем пустой INCR в своем собственном методе.
@@ -96,8 +96,8 @@ public class DivDivRelationTransformation extends BaseTransformation {
 
     public static Column getKey(String sep) {
         return concat_ws(sep,
-                coalesce(col("source_sid"), lit("NULL").cast("string")),
-                coalesce(col("successor_sid"), lit("NULL").cast("string"))
+            coalesce(col("source_sid"), lit("NULL").cast("string")),
+            coalesce(col("successor_sid"), lit("NULL").cast("string"))
         );
     }
 }

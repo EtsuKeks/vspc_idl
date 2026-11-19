@@ -26,17 +26,17 @@ public class TerrDivTypeTransformation extends BaseTransformation {
     public void run() {
         Dataset<Row> terrdivtype = read(EBX_REP_M_SFS_0002_SFSDIVISION).kap803Usl().snp().get();
         terrdivtype = terrdivtype
-                .select(
-                        lit(false).as(DELETED_FLAG),
-                        col(DIVISIONTYPE00).as(SID),
-                        lit(SHORT_PRODUCT_CODE).as(TERR_DIV_TYPE_DP_CODE),
-                        col(DIVISIONTYPE00).as(DIV_TYPE_CODE),
+            .select(
+                lit(false).as(DELETED_FLAG),
+                col(DIVISIONTYPE00).as(SID),
+                lit(SHORT_PRODUCT_CODE).as(TERR_DIV_TYPE_DP_CODE),
+                col(DIVISIONTYPE00).as(DIV_TYPE_CODE),
 
-                        // *_sid — натуральный ключ из источника; addSk отдаёт его в ССК и заменяет на суррогатный *_sk подчищая *_sid после себя.
-                        col(DIVISIONTYPE00).as(TERR_DIV_TYPE_SID),
+                // *_sid — натуральный ключ из источника; addSk отдаёт его в ССК и заменяет на суррогатный *_sk подчищая *_sid после себя.
+                col(DIVISIONTYPE00).as(TERR_DIV_TYPE_SID),
 
-                        lit(false).as(DIRTY_FLAG)
-                ).distinct();
+                lit(false).as(DIRTY_FLAG)
+            ).distinct();
 
         Dataset<Row> result = addSk(terrdivtype, TERRDIVTYPE, Arrays.asList("@terr_div_type"));
 

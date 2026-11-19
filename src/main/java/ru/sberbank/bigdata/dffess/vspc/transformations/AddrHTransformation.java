@@ -36,54 +36,54 @@ public class AddrHTransformation extends BaseTransformation {
         Dataset<Row> addr_raw = readTable(STG_SCHEMA, CHG_DIVH);
 
         Dataset<Row> addr_fact = addr_raw.select(
-                col(ADDRESS_LOCATIONADDRESS).as(ADDR_SRC_TXT),
-                col(ADDRESS_LOCATIONADDRESS).as(ADDRESS_STANDARD_ADDRESS_TXT),
+            col(ADDRESS_LOCATIONADDRESS).as(ADDR_SRC_TXT),
+            col(ADDRESS_LOCATIONADDRESS).as(ADDRESS_STANDARD_ADDRESS_TXT),
 
-                lit(null).as(ADDR_FIAS_CODE),
-                lit(null).as(ADDRESS_FIASCODE_DURTY),
+            lit(null).as(ADDR_FIAS_CODE),
+            lit(null).as(ADDRESS_FIASCODE_DURTY),
 
-                // *_sid — натуральный ключ из источника; addSk отдаёт его в ССК и заменяет на суррогатный *_sk подчищая *_sid после себя.
-                lit(null).as(ADDR_OKATO2_SID),
-                lit(null).as(ADDR_OKTMO2_SID)
+            // *_sid — натуральный ключ из источника; addSk отдаёт его в ССК и заменяет на суррогатный *_sk подчищая *_sid после себя.
+            lit(null).as(ADDR_OKATO2_SID),
+            lit(null).as(ADDR_OKTMO2_SID)
 
         ).where(col(ADDRESS_LOCATIONADDRESS).isNotNull());
 
         Dataset<Row> addr_legal = addr_raw.select(
-                col(ADDRESS_LEGAL_LOCATIONADDRESS).as(ADDR_SRC_TXT),
-                col(ADDRESS_LEGAL_LOCATIONADDRESS).as(ADDRESS_STANDARD_ADDRESS_TXT),
-                col("gold_fias_code").as(ADDR_FIAS_CODE),
-                col("address_addrfact_fiascode").as(ADDRESS_FIASCODE_DURTY),
-                col("gold_okato").as(ADDR_OKATO2_SID),
-                col("gold_oktmo").as(ADDR_OKTMO2_SID)
+            col(ADDRESS_LEGAL_LOCATIONADDRESS).as(ADDR_SRC_TXT),
+            col(ADDRESS_LEGAL_LOCATIONADDRESS).as(ADDRESS_STANDARD_ADDRESS_TXT),
+            col("gold_fias_code").as(ADDR_FIAS_CODE),
+            col("address_addrfact_fiascode").as(ADDRESS_FIASCODE_DURTY),
+            col("gold_okato").as(ADDR_OKATO2_SID),
+            col("gold_oktmo").as(ADDR_OKTMO2_SID)
 
         ).where(col(ADDRESS_LEGAL_LOCATIONADDRESS).isNotNull());
 
         Dataset<Row> addr = addr_fact.union(addr_legal).distinct();
 
         addr = addr.select(
-                AddrTransformation.getKey("|").as(ADDR_SID),
+            AddrTransformation.getKey("|").as(ADDR_SID),
 
-                col(ADDRESS_STANDARD_ADDRESS_TXT).as(ADDRESS_STANDARD_ADDRESS_TXT),
-                col(ADDR_FIAS_CODE).as(ADDR_FIAS_CODE),
-                col(ADDR_OKATO2_SID).as(ADDR_OKATO2_SID),
-                col(ADDR_OKTMO2_SID).as(ADDR_OKTMO2_SID)
+            col(ADDRESS_STANDARD_ADDRESS_TXT).as(ADDRESS_STANDARD_ADDRESS_TXT),
+            col(ADDR_FIAS_CODE).as(ADDR_FIAS_CODE),
+            col(ADDR_OKATO2_SID).as(ADDR_OKATO2_SID),
+            col(ADDR_OKTMO2_SID).as(ADDR_OKTMO2_SID)
 
         ).distinct();
 
         Dataset<Row> addrh = addr.select(
-                col(ADDR_SID).as(ADDR_SID),
-                lit(SHORT_PRODUCT_CODE).as(ADDR_DP_CODE),
-                col(ADDRESS_STANDARD_ADDRESS_TXT).as(ADDRESS_STANDARD_ADDRESS_TXT),
-                lit(false).as(DIRTY_FLAG),
-                lit(false).as(DELETED_FLAG),
+            col(ADDR_SID).as(ADDR_SID),
+            lit(SHORT_PRODUCT_CODE).as(ADDR_DP_CODE),
+            col(ADDRESS_STANDARD_ADDRESS_TXT).as(ADDRESS_STANDARD_ADDRESS_TXT),
+            lit(false).as(DIRTY_FLAG),
+            lit(false).as(DELETED_FLAG),
 
-                when(col(ADDR_OKATO2_SID).isNotNull(), col(ADDR_OKATO2_SID)).as(ADDRH_OKATO2_SID),
-                when(col(ADDR_OKATO2_SID).isNotNull(), lit("rdm_idl_spark")).as(ADDRH_OKATO2_DP_CODE),
+            when(col(ADDR_OKATO2_SID).isNotNull(), col(ADDR_OKATO2_SID)).as(ADDRH_OKATO2_SID),
+            when(col(ADDR_OKATO2_SID).isNotNull(), lit("rdm_idl_spark")).as(ADDRH_OKATO2_DP_CODE),
 
-                when(col(ADDR_OKTMO2_SID).isNotNull(), col(ADDR_OKTMO2_SID)).as(ADDRH_OKTMO2_SID),
-                when(col(ADDR_OKTMO2_SID).isNotNull(), lit("rdm_idl_spark")).as(ADDRH_OKTMO2_DP_CODE),
+            when(col(ADDR_OKTMO2_SID).isNotNull(), col(ADDR_OKTMO2_SID)).as(ADDRH_OKTMO2_SID),
+            when(col(ADDR_OKTMO2_SID).isNotNull(), lit("rdm_idl_spark")).as(ADDRH_OKTMO2_DP_CODE),
 
-                lit(">non_stndrt").as(ADDRESS_TYPE_CODE)
+            lit(">non_stndrt").as(ADDRESS_TYPE_CODE)
         ).distinct();
 
         Dataset<Row> result = addSk(addrh, ADDRH, Arrays.asList("@addr", "address@okato2", "address@oktmo2"));
@@ -92,10 +92,10 @@ public class AddrHTransformation extends BaseTransformation {
         // Даты версии — наши: публикатор требует их во входе. Заполняем их так же, как загрузчик ESSA-версии витрины:
         // start_dt: INIT — 1900-01-01, INCR — день загрузки − 1; end_dt — 9999-12-31 в обоих режимах.
         result = result
-                .withColumn(START_DT_FIELD_NAME, getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT
-                        ? date_sub(lit(LoadDate.sqlDate()), 1)
-                        : lit(MINUS_INFINITY_DT).cast("date"))
-                .withColumn(END_DT_FIELD_NAME, lit(PLUS_INFINITY_DT).cast("date"));
+            .withColumn(START_DT_FIELD_NAME, getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT
+                                             ? date_sub(lit(LoadDate.sqlDate()), 1)
+                                             : lit(MINUS_INFINITY_DT).cast("date"))
+            .withColumn(END_DT_FIELD_NAME, lit(PLUS_INFINITY_DT).cast("date"));
 
         // Просто вызвать publish нельзя даже с пропатченным RT-FW: до его патча публикатор молча выбросит колонку с другим типом
         // и сразу выйдет на пустом инкременте. Поэтому сначала приводим и проверяем типы и корректно обрабатываем пустой INCR в своем собственном методе.

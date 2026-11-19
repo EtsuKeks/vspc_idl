@@ -53,16 +53,16 @@ public class DivTypeTransformation extends BaseTransformation {
         Dataset<Row> divtype = read(EBX_REP_M_SFS_0002_SFSDIVISION).kap803Usl().snp().get();
 
         divtype = divtype
-                .select(
-                        lit(false).as(DELETED_FLAG),
+            .select(
+                lit(false).as(DELETED_FLAG),
 
-                        // *_sid — натуральный ключ из источника; addSk отдаёт его в ССК и заменяет на суррогатный *_sk подчищая *_sid после себя.
-                        col(FULLDIVCODE).as(DIV_SID),
-                        lit(SHORT_PRODUCT_CODE).as(DIV_DP_CODE),
-                        col(DIVISIONTYPE00).as(DIV_TYPE_TERR_DIV_TYPE_SID),
-                        lit(SHORT_PRODUCT_CODE).as(DIV_TYPE_TERR_DIV_TYPE_DP_CODE),
-                        lit(false).as(DIRTY_FLAG)
-                ).distinct();
+                // *_sid — натуральный ключ из источника; addSk отдаёт его в ССК и заменяет на суррогатный *_sk подчищая *_sid после себя.
+                col(FULLDIVCODE).as(DIV_SID),
+                lit(SHORT_PRODUCT_CODE).as(DIV_DP_CODE),
+                col(DIVISIONTYPE00).as(DIV_TYPE_TERR_DIV_TYPE_SID),
+                lit(SHORT_PRODUCT_CODE).as(DIV_TYPE_TERR_DIV_TYPE_DP_CODE),
+                lit(false).as(DIRTY_FLAG)
+            ).distinct();
 
         Dataset<Row> result = addSk(divtype, DIVTYPE, Arrays.asList("@div", "div_type@terr_div_type"));
 
@@ -70,10 +70,10 @@ public class DivTypeTransformation extends BaseTransformation {
         // Даты версии — наши: публикатор требует их во входе. Заполняем их так же, как загрузчик ESSA-версии витрины:
         // start_dt: INIT — 1900-01-01, INCR — день загрузки − 1; end_dt — 9999-12-31 в обоих режимах.
         result = result
-                .withColumn(START_DT_FIELD_NAME, getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT
-                        ? date_sub(lit(LoadDate.sqlDate()), 1)
-                        : lit(MINUS_INFINITY_DT).cast("date"))
-                .withColumn(END_DT_FIELD_NAME, lit(PLUS_INFINITY_DT).cast("date"));
+            .withColumn(START_DT_FIELD_NAME, getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT
+                                             ? date_sub(lit(LoadDate.sqlDate()), 1)
+                                             : lit(MINUS_INFINITY_DT).cast("date"))
+            .withColumn(END_DT_FIELD_NAME, lit(PLUS_INFINITY_DT).cast("date"));
 
         // INCR: открытые версии ключей, которых нет в сегодняшнем срезе, закрываем днём загрузки − 1, как ESSA
         // (на пустом источнике — все). Добавляем во вход их закрытые копии: по ним RT-FW даёт ровно (R,U)+(U,U), 
@@ -89,15 +89,15 @@ public class DivTypeTransformation extends BaseTransformation {
 
             // Открытые версии — по одной на ключ, той же, что выберет калькулятор (onePerKey).
             Dataset<Row> gone = onePerKey(spark.table(table.snpTable())
-                    .filter(col(table.partitionColumn()).equalTo(lit(table.openPartition()))),
-                    bk, Collections.emptyList(), desc(CTL_LOADING))
+                .filter(col(table.partitionColumn()).equalTo(lit(table.openPartition()))), bk,
+                    Collections.emptyList(), desc(CTL_LOADING))
                 .join(source.select(cols(bk)), scalaSeq(bk), "left_anti")
                 .withColumn(END_DT_FIELD_NAME, date_sub(lit(LoadDate.sqlDate()), 1));
 
             // deleted_flag и dirty_flag в snp div_type нет — в копии, как во всём входе, false.
             List<String> snpCols = Arrays.asList(gone.columns());
             result = source.unionByName(gone.select(Arrays.stream(source.columns())
-                    .map(c -> snpCols.contains(c) ? col(c) : lit(false).as(c)).toArray(Column[]::new)));
+                .map(c -> snpCols.contains(c) ? col(c) : lit(false).as(c)).toArray(Column[]::new)));
         }
 
         // Просто вызвать publish нельзя даже с пропатченным RT-FW: до его патча публикатор молча выбросит колонку с другим типом.
