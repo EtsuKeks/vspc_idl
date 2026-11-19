@@ -24,7 +24,7 @@ public class ChgDivHTransformation extends BaseTransformation {
 
     @Override
     public void run() {
-        SparkSession spark = app.getSparkSession();
+        SparkSession spark = SparkSession.active();
         String table = STG_SCHEMA + "." + CHG_DIVH;
         Dataset<Row> preselect = spark.sql(getPreselectSQL(app.ctx().getLoadMode())).distinct();
 
@@ -34,7 +34,7 @@ public class ChgDivHTransformation extends BaseTransformation {
         // шаге (как в ESSA-версии), а не расходиться молча неявными приведениями в остальных таблицах или всплывать\
         // позже при публикации.
         Column[] tableColumns = Arrays.stream(spark.table(table).columns()).map(functions::col).toArray(Column[]::new);
-        writeWorkTable(STG_SCHEMA, CHG_DIVH, alignTypes(preselect.select(tableColumns), table, spark));
+        writeWorkTable(STG_SCHEMA, CHG_DIVH, alignTypes(preselect.select(tableColumns), table));
     }
 
     public static String getPreselectSQL(App.LoadMode loadMode) {

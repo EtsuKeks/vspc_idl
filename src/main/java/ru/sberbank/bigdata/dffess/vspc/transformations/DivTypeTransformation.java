@@ -79,7 +79,7 @@ public class DivTypeTransformation extends BaseTransformation {
         // (на пустом источнике — все). Добавляем во вход их закрытые копии: по ним RT-FW даёт ровно (R,U)+(U,U), 
         // как ESSA. Без этого добавления закрытия не произойдет.
         CompatTables.Table table = compatTable();
-        SparkSession spark = app.getSparkSession();
+        SparkSession spark = SparkSession.active();
         if (getApp().ctx().getLoadMode() == App.LoadMode.INCREMENT) {
             // Вход фиксируем во временной таблице stgtmp, как в ESSA-версии: по нему ищем пропавшие ключи
             // и его же публикуем — ключи ССК при этом считаются один раз. Пишем как все рабочие таблицы — способом
