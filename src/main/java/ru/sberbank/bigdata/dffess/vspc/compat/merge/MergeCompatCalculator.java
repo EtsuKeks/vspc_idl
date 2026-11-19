@@ -45,7 +45,7 @@ public final class MergeCompatCalculator implements MergeCalculator {
         //    что эти соседки вообще-то закрыты. Поэтому докладываем их из aside уже после всех дел.
         // 3. Работа идёт только с очищенными открытыми, грязных открытых просто нет: пользуемся благами калькулятора
         //    и забираем таблицу, им любезно оставленную.
-        Dataset<Row> snp = SparkSession.active().table(table.tmpTable(OPEN_SNP));
+        Dataset<Row> snp = SparkSession.active().table(table.tmpTable(OPEN_SNP)).drop(ROW_HASH);
         Column open = col(table.partitionColumn()).equalTo(lit(table.openPartition()));
         Column future = col(table.partitionColumn()).gt(lit(table.partitionOf(LoadDate.sqlDate().toString())));
         Dataset<Row> closed = oldSnp.filter(not(open).and(not(future)));
