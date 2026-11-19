@@ -38,6 +38,12 @@ public final class HubCompatCalculator implements ChangesCalculator {
 
     @Override
     public SnapshotChanges calculate(Dataset<Row> incr, Dataset<Row> snpAll, List<Map<String, String>> specs) {
+        // Расставить аргументы нетривиальная задача - см. publishChecked.
+        // - Collections.emptyList() - потому что снимок записан и его значения статичны, а значит стохастично на
+        // сравнение хэшей не повлияют.
+        // - desc(CTL_LOADING) - потому что очевидно более свежие строки нас интересуют больше всего всегда (в
+        // publishChecked такого поля просто нет).
+        // - table.entityKey() - потому что таблица хабовая: никакого start_dt у неё нет, ключ сущности и есть её PK.
         Dataset<Row> snp = onePerKey(snpAll, table.entityKey(), Collections.emptyList(), desc(CTL_LOADING));
         SnapshotChanges out = delegate.calculate(incr, snp, specs);
         return new SnapshotChanges(out.getInserts(), undoValidFrom(out.getUpdates(), snp), out.getDeletes());
