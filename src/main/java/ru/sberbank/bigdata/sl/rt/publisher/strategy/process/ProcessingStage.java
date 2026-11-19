@@ -124,7 +124,7 @@ public class ProcessingStage implements ProcessingStep {
     public ProcessingStep calculateDiff(ChangesCalculator changesCalculator, SchemaName schemaName) {
         // COMPAT begin: декоратор калькулятора, до фильтра зоны чтения
         changesCalculator = ru.sberbank.bigdata.dffess.vspc.compat.CompatHooks.wrapChanges(this, changesCalculator,
-                dao, tableInfoFactory);
+            tableInfoFactory);
         // COMPAT end
         TableInfo snpTableInfo = tableInfoFactory.createTableInfo(schemaName);
 
