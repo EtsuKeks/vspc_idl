@@ -83,13 +83,11 @@ workflows:
             # E-mail владельца сертификата data-продукта. Требуется для формирования тела запроса к SecMan при получении сертификата из хранилища типа SberCA.
             name: secman_cert_owner_email
             prior_value: "{{ secman_cert_owner_email }}"
-{% if secman_sberca_role is defined %}
         - param:
             # Роль SecMan, по которой выпускается сертификат data-продукта. Задаётся только на стендах, где политика
             # ТУЗ выдана на роль, отличную от общей настройки стенда (переменная secman_sberca_role в vars_all.yml).
             name: sl.secman.sberca_role
             prior_value: "{{ secman_sberca_role }}"
-{% endif %}
         - param:
             # Код очереди Yarn, в которой запускаются Spark-приложения data-продукта.
             name: yarn_queue
@@ -182,13 +180,11 @@ workflows:
             # E-mail владельца сертификата data-продукта. Требуется для формирования тела запроса к SecMan при получении сертификата из хранилища типа SberCA.
             name: secman_cert_owner_email
             prior_value: "{{ secman_cert_owner_email }}"
-{% if secman_sberca_role is defined %}
         - param:
             # Роль SecMan, по которой выпускается сертификат data-продукта. Задаётся только на стендах, где политика
             # ТУЗ выдана на роль, отличную от общей настройки стенда (переменная secman_sberca_role в vars_all.yml).
             name: sl.secman.sberca_role
             prior_value: "{{ secman_sberca_role }}"
-{% endif %}
         - param:
             # Код очереди Yarn, в которой запускаются Spark-приложения data-продукта.
             name: yarn_queue

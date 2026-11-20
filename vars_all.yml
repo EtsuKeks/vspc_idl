@@ -37,6 +37,7 @@ vars: &commonVars
   data_owner_name: "SN"
   org_lvl2_name: "СП.Дивизион \\\"Моделирование и исследование данных\\\""
   secman_cert_owner_email: "TRuKarimullin@sberbank.ru"
+  secman_sberca_role: "client_3y_AS_rsa"
 
   archiveStat_FakeCardCode: "2"
   archiveProfile_FakeCardCode: "Default"
@@ -66,7 +67,7 @@ stands:
     vars:
       <<: *commonVars
       cluster_name: "itbalsdpfess"
-      # На ИФТ политика ТУЗ в SecMan выдана на годовую роль; на остальных стендах действует общая настройка стенда.
+      # На ИФТ политика ТУЗ в SecMan выдана на годовую роль; на остальных стендах — общее значение (3 года).
       secman_sberca_role: "client_1y_AS_rsa"
       spark_parameters: "--conf spark.sql.legacy.parquet.int96RebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.int96RebaseModeInWrite=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInRead=CORRECTED --conf spark.sql.legacy.parquet.datetimeRebaseModeInWrite=CORRECTED --conf spark.shuffle.service.enabled=true --conf spark.hadoop.metastore.catalog.default=spark --conf spark.sql.catalogImplementation=hive --conf spark.hadoop.hive.mapred.supports.subdirectories=true --conf spark.hadoop.mapred.input.dir.recursive=true --conf spark.hadoop.mapreduce.input.fileinputformat.input.dir.recursive=true --conf spark.hadoop.hive.supports.subdirectories=true --conf spark.hadoop.hive.input.dir.recursive=true --conf spark.sql.parquet.writeLegacyFormat=true --conf spark.sql.parquet.compression.codec=gzip --conf spark.sql.adaptive.enabled=true --conf spark.sql.adaptive.optimizeSkewsInRebalancePartitions.enabled=true --conf spark.executor.memory=1G --conf spark.dynamicAllocation.enabled=true --conf spark.dynamicAllocation.minExecutors=2 --conf spark.dynamicAllocation.maxExecutors=30 --conf spark.driver.memory=2G --conf 'spark.executor.extraJavaOptions=-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false' --conf 'spark.driver.extraJavaOptions=-Djava.security.auth.login.config=/etc/zookeeper/conf/zookeeper_client_jaas.conf -Dsun.security.jgss.native=true -Djavax.security.auth.useSubjectCredsOnly=false' --conf spark.executorEnv.KRB5CCNAME=rtfw_kerberos_ticket_cache_file --conf spark.yarn.appMasterEnv.KRB5CCNAME=rtfw_kerberos_ticket_cache_file"
       hadoop_default_fs_uri: "hdfs://iftbalsdpfess"
