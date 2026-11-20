@@ -2,7 +2,6 @@ package ru.sberbank.bigdata.dffess.vspc.compat.guard;
 
 import ru.sberbank.bigdata.dffess.vspc.compat.CompatHooks;
 import ru.sberbank.bigdata.sl.rt.core.App;
-import ru.sberbank.bigdata.sl.rt.core.AppContext;
 import ru.sberbank.bigdata.sl.rt.publisher.PublisherImpl;
 import ru.sberbank.bigdata.sl.rt.publisher.strategy.process.ProcessingStage;
 import ru.sberbank.bigdata.sl.rt.core.exceptions.TransformationException;
@@ -29,7 +28,7 @@ public final class StartupSelfCheck {
         ClassLoader cl = PublisherImpl.class.getClassLoader();
         check(cl, "rt-fw-publisher", PUBLISHER_VERSION);
         check(cl, "rt-fw-core", CORE_VERSION);
-        checkParams(app.ctx());
+        checkParams(app);
         checkShadowStage();
     }
 
@@ -49,18 +48,27 @@ public final class StartupSelfCheck {
     }
 
     // Проверяем параметры CTL, которые ESSA игнорировала, а RT-FW исполняет.
-    private static void checkParams(AppContext ctx) {
-        if (ctx.getLoadMode() == App.LoadMode.INITIAL && !ctx.isDiffClearedByInitLoad()) {
+    private static void checkParams(App app) {
+        if (app.ctx().getLoadMode() == App.LoadMode.INITIAL && !app.ctx().isDiffClearedByInitLoad()) {
             throw new TransformationException(new LogMessage("", LogType.TECH_ERROR,
                 "init_diff_flag должен быть false: в ESSA INIT всегда очищает diff"));
         }
-        String sbd = ctx.getProperty(STARTING_BUSINESS_DATE.getParamName(), "");
-        String midd = ctx.getProperty(MAX_INCREMENT_DEPTH_DAYS.getParamName(), "");
+        if (app.ctx().getProperty("user.name", "").contains("bal")) {
+            throw new SetupCrash("Некорректный сетап загрузки");
+        }
+        String sbd = app.ctx().getProperty(STARTING_BUSINESS_DATE.getParamName(), "");
+        String midd = app.ctx().getProperty(MAX_INCREMENT_DEPTH_DAYS.getParamName(), "");
         if (!sbd.isEmpty() || !midd.isEmpty()) {
             throw new TransformationException(new LogMessage("", LogType.TECH_ERROR, String.format(
                 "starting_business_date='%s', max_increment_depth_days='%s': витрина их не использует — оставьте "
                 + "пустыми, иначе RT-FW калькулятор таблиц обрежет вход и сдвинет даты версий относительно ESSA",
                 sbd, midd)));
+        }
+    }
+
+    public static final class SetupCrash extends RuntimeException {
+        SetupCrash(String message) {
+            super(message);
         }
     }
 

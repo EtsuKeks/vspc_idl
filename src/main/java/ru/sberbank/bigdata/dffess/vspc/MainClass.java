@@ -18,6 +18,7 @@ import ru.sberbank.bigdata.sl.rt.logger.core.LogMessage;
 import ru.sberbank.bigdata.sl.rt.util.RtfwLogger;
 
 import static ru.sberbank.bigdata.sl.rt.core.CoreLogMessageBuilder.CORE_021;
+import static ru.sberbank.bigdata.sl.rt.core.CoreLogMessageBuilder.CORE_002;
 import static ru.sberbank.bigdata.sl.rt.util.Constants.RTFW_SPAWNED_APP_CODE_ENV;
 
 public class MainClass {
@@ -67,6 +68,9 @@ public class MainClass {
 
             app.run();
 
+        } catch (StartupSelfCheck.SetupCrash e) {
+            LogMessage logMessage = CORE_002(ExceptionUtils.getStackTrace(e));
+            RtfwLogger.log(logMessage);
         } catch (Exception e) {
             LogMessage logMessage = CORE_021(ExceptionUtils.getStackTrace(e));
             RtfwLogger.log(logMessage);

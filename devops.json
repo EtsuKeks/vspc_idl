@@ -10,7 +10,7 @@
   "sq_pr_name": "vspc_idl",
   "sq_scan_folder": "src",
   "sq_binary_folder": "target",
-  "sq_options": "-Dsonar.cpd.exclusions=**/sql/dml/**",
+  "sq_options": "",
   "sast_conf": "devsecops-config.yml",
   "emails": "SLSNTWRKDE_ess@sberbank.ru TRuKarimullin@sberbank.ru",
   "run_hive_script_sql": true,
